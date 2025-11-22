@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 :root {
+  scroll-behavior: smooth;
   /* Summer (Yellowish/Orange) */
   --background: radial-gradient(circle at 15% 15%, rgba(255, 190, 0, 0.35), transparent 50%), #fff8e7;
   --foreground: #0f172a;
@@ -20,26 +21,26 @@
 }
 
 [data-theme="summer"] {
-  /* Explicit Summer Theme */
-  --background: radial-gradient(circle at 15% 15%, rgba(180, 83, 9, 0.85), transparent 80%), #fcd34d;
-  /* Darker Amber (700) for gradient */
-  --foreground: #1a1a1a;
-  --muted: #404040;
-  /* Darker for better contrast */
-  --accent: #d97706;
-  --accent-soft: rgba(217, 119, 6, 0.2);
+  /* Explicit Summer Theme - Mid-tone (Reverted) */
+  --background: radial-gradient(circle at 15% 15%, rgba(255, 255, 255, 0.5), transparent 60%), #f59e0b;
+  /* Amber 500 */
+  --foreground: #000000;
+  --muted: #1f2937;
+  --accent: #f59e0b;
+  /* Amber 500 (Matches Base) */
+  --accent-soft: rgba(245, 158, 11, 0.2);
   --console-accent: #059669;
-  --card: rgba(255, 255, 255, 0.92);
-  --border: rgba(217, 119, 6, 0.5);
-  /* Increased opacity */
-  --panel: rgba(255, 255, 255, 0.86);
-  --grain: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 248, 231, 0.9));
-  --scrollbar-track: #ffefc0;
-  --scrollbar-thumb: #d97706;
-  --footer-bg: rgba(251, 191, 36, 0.15);
+  --card: rgba(255, 255, 255, 0.85);
+  --border: rgba(245, 158, 11, 0.3);
+  --panel: rgba(255, 255, 255, 0.8);
+  --grain: linear-gradient(135deg, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.1));
+  --scrollbar-track: #fbbf24;
+  --scrollbar-thumb: #f59e0b;
+  /* Amber 500 */
+  --footer-bg: rgba(255, 255, 255, 0.15);
+  /* More transparent */
   /* Summer Glass */
-  --stroke-color: rgba(0, 0, 0, 0.3);
-  /* Increased visibility */
+  --stroke-color: rgba(0, 0, 0, 0.4);
 }
 
 [data-theme="autumn"] {
@@ -81,26 +82,25 @@
 }
 
 [data-theme="spring"] {
-  /* Crystal Color: #ffb7c5 (Pink) -> Background: Green Gradient + Pink Base */
-  --background: radial-gradient(circle at 15% 15%, rgba(22, 163, 74, 0.85), transparent 80%), #f9a8d4;
-  /* Green 600 Gradient on Pink Base */
-  --foreground: #1a1a1a;
-  --muted: #4b5563;
-  /* Darker for better contrast */
+  /* Explicit Spring Theme - Pink (Reverted) */
+  --background: radial-gradient(circle at 15% 15%, rgba(255, 255, 255, 0.4), transparent 80%), #ec4899;
+  /* Pink 500 */
+  --foreground: #000000;
+  --muted: #1f2937;
   --accent: #ec4899;
+  /* Pink 500 (Matches Base) */
   --accent-soft: rgba(236, 72, 153, 0.2);
-  --console-accent: #db2777;
-  --card: rgba(255, 255, 255, 0.92);
-  --border: rgba(236, 72, 153, 0.5);
-  /* Increased opacity */
-  --panel: rgba(255, 250, 252, 0.95);
-  --grain: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 240, 245, 0.9));
-  --scrollbar-track: #fff0f5;
+  --console-accent: #be185d;
+  --card: rgba(255, 255, 255, 0.85);
+  --border: rgba(236, 72, 153, 0.3);
+  --panel: rgba(255, 255, 255, 0.8);
+  --grain: linear-gradient(135deg, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.1));
+  --scrollbar-track: #fbcfe8;
   --scrollbar-thumb: #ec4899;
-  --footer-bg: rgba(236, 72, 153, 0.15);
+  /* Pink 500 */
+  --footer-bg: rgba(255, 255, 255, 0.15);
   /* Spring Glass */
-  --stroke-color: rgba(0, 0, 0, 0.3);
-  /* Increased visibility */
+  --stroke-color: rgba(0, 0, 0, 0.4);
 }
 
 @theme inline {

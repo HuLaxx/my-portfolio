@@ -28,7 +28,7 @@ const ProjectRow = ({ project, index, caseStudy }) => {
         )}
 
         <div className="relative z-10 grid grid-cols-1 items-start gap-6 md:grid-cols-12">
-          <div className="col-span-2 font-mono text-xs uppercase tracking-[0.22em] text-gray-500">
+          <div className="col-span-2 font-mono text-xs uppercase tracking-[0.22em] text-white/50">
             {project.year}
           </div>
 
@@ -37,14 +37,14 @@ const ProjectRow = ({ project, index, caseStudy }) => {
               {project.client}
             </h3>
             {summary && (
-              <p className="text-gray-400 max-w-xl">
+              <p className="text-white/70 max-w-xl">
                 {summary}
               </p>
             )}
           </div>
 
           <div className="col-span-3 flex flex-col items-start gap-3 md:items-end">
-            <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-gray-400">
+            <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/60">
               {role}
             </span>
 
@@ -60,7 +60,7 @@ const ProjectRow = ({ project, index, caseStudy }) => {
                     />
                   ))}
                 </div>
-                <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-gray-500 font-mono">
+                <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-white/50 font-mono">
                   {Object.entries(project.languages).map(([lang, pct], i) => (
                     <div key={lang} className="flex items-center gap-1.5">
                       <div className="w-2 h-2 rounded-full" style={{ backgroundColor: ['#3178c6', '#f1e05a', '#e34c26', '#563d7c'][i % 4] }} />
@@ -92,14 +92,14 @@ export const Work = ({ projects, caseStudies = [] }) => (
       <RevealOnScroll>
         <div className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.3em] text-gray-500">
+            <p className="font-mono text-xs uppercase tracking-[0.3em] text-white/50">
               Selected collaborations
             </p>
             <h2 className="display-heading text-4xl font-semibold tracking-tight text-white md:text-7xl">
               Work built for<br className="hidden md:block" /> leading teams
             </h2>
           </div>
-          <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-gray-500 md:text-right">
+          <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-white/50 md:text-right">
             Edge-first builds, cinematic polish
           </span>
         </div>

@@ -36,14 +36,14 @@ export const AnimatedGradient = () => {
                 case 'spring':
                     return {
                         bg: '#fff0f5',
-                        colors: ['#ff69b4', '#ffc0cb', '#ff1493', '#ffb7c5'],
-                        opacity: 0.15
+                        colors: ['#db2777', '#ec4899', '#be185d', '#f472b6'], // Darker, more saturated pinks
+                        opacity: 0.95
                     };
                 case 'summer':
                     return {
                         bg: '#fff8e7',
                         colors: ['#ffbe00', '#ffd700', '#ff8c00', '#ffa500'],
-                        opacity: 0.18
+                        opacity: 0.48
                     };
                 case 'autumn':
                     return {
@@ -77,22 +77,39 @@ export const AnimatedGradient = () => {
             ctx.fillStyle = bg;
             ctx.fillRect(0, 0, w, h);
 
-            time += 0.003;
+            time += 0.002; // Slower for smoother animation
 
-            // Create multiple animated gradient blobs
-            for (let i = 0; i < 4; i++) {
-                const x = w * (0.2 + i * 0.25) + Math.sin(time + i) * 100;
-                const y = h * (0.3 + Math.sin(time * 0.5 + i * 2) * 0.2) - scrollOffset * (0.5 + i * 0.1);
-                const radius = Math.min(w, h) * (0.35 + Math.sin(time * 0.7 + i) * 0.15);
+            // Use multiply blend for light themes (summer/spring) for better visibility
+            const isLightTheme = season === 'summer' || season === 'spring';
+            ctx.globalCompositeOperation = isLightTheme ? 'multiply' : 'screen';
+            ctx.filter = 'blur(40px)'; // Reduced from 60px for less overwhelming effect
+
+            // Create many smaller gradient blobs that are well-distributed (11 circles - 75% of previous)
+            for (let i = 0; i < 11; i++) {
+                // Use different prime numbers and offsets for pseudo-random but deterministic spread
+                // Add slow-changing offsets for dynamic positioning
+                const xSeed = ((i * 37) % 100 / 100) + Math.sin(time * 0.3 + i * 0.5) * 0.1;
+                const ySeed = ((i * 53) % 100 / 100) + Math.cos(time * 0.25 + i * 0.7) * 0.1;
+
+                const x = w * (0.05 + xSeed * 0.9) + Math.sin(time * 0.7 + i * 0.8) * 60;
+                const y = h * (0.05 + ySeed * 0.9 + Math.sin(time * 0.5 + i * 1.1) * 0.1) - scrollOffset * (0.3 + i * 0.03);
+                const radius = Math.min(w, h) * (0.12 + Math.sin(time * 0.6 + i * 0.6) * 0.04); // Smaller radius
 
                 const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
-                gradient.addColorStop(0, colors[i] + Math.floor(opacity * 255).toString(16).padStart(2, '0'));
-                gradient.addColorStop(0.5, colors[i] + '10');
-                gradient.addColorStop(1, colors[i] + '00');
+                const colorIndex = i % colors.length;
+                const alpha = Math.floor(opacity * 255).toString(16).padStart(2, '0');
+
+                gradient.addColorStop(0, colors[colorIndex] + alpha);
+                gradient.addColorStop(0.5, colors[colorIndex] + '30');
+                gradient.addColorStop(1, colors[colorIndex] + '00');
 
                 ctx.fillStyle = gradient;
                 ctx.fillRect(0, 0, w, h);
             }
+
+            // Reset blending and filter
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.filter = 'none';
 
             rafId.current = requestAnimationFrame(animate);
         };

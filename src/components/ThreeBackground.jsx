@@ -100,6 +100,136 @@ export const ThreeBackground = () => {
   const mountRef = useRef(null);
   const { season } = useSeason();
 
+  // Refs to store objects for updates
+  const sceneRef = useRef(null);
+  const materialRef = useRef(null);
+  const particlesRef = useRef(null);
+  const targetPropsRef = useRef({
+    color: new THREE.Color(0xff8800),
+    emissive: new THREE.Color(0xff4400),
+    emissiveIntensity: 0.4,
+    metalness: 0.2,
+    roughness: 0.2,
+    transmission: 0.2,
+    thickness: 2,
+    ior: 1.5,
+    noiseScale: 0.4,
+    noiseSpeed: 1.5,
+    displacementStrength: 1.2
+  });
+
+  // Update target properties when season changes
+  useEffect(() => {
+    const common = {
+      envMapIntensity: 1.5,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.1,
+    };
+
+    let props = {};
+
+    switch (season) {
+      case 'summer': // Radiant Plasma
+        props = {
+          color: 0xff8800,
+          emissive: 0xff4400,
+          emissiveIntensity: 0.4,
+          metalness: 0.2,
+          roughness: 0.2,
+          transmission: 0.2,
+          thickness: 2,
+          ior: 1.5,
+          noiseScale: 0.4,
+          noiseSpeed: 1.5,
+          displacementStrength: 1.2
+        };
+        break;
+      case 'autumn': // Deep Amber Sunset
+        props = {
+          color: 0xff6600,
+          emissive: 0xff4400,
+          emissiveIntensity: 0.4,
+          metalness: 0.8,
+          roughness: 0.2,
+          transmission: 0.2,
+          thickness: 2,
+          ior: 1.5,
+          noiseScale: 0.3,
+          noiseSpeed: 0.6,
+          displacementStrength: 1.5
+        };
+        break;
+      case 'spring': // Floral Bloom
+        props = {
+          color: 0xff69b4,
+          emissive: 0xc71585,
+          emissiveIntensity: 0.3,
+          metalness: 0.1,
+          roughness: 0.4,
+          transmission: 0.6,
+          thickness: 3,
+          ior: 1.45,
+          noiseScale: 0.6,
+          noiseSpeed: 0.8,
+          displacementStrength: 1.0
+        };
+        break;
+      case 'winter': // Frozen Ice
+        props = {
+          color: 0xaaddff,
+          emissive: 0x000000, // No emissive for ice usually, or very faint
+          emissiveIntensity: 0.1,
+          metalness: 0.1,
+          roughness: 0.05,
+          transmission: 1.0,
+          thickness: 8,
+          ior: 1.31,
+          noiseScale: 0.8,
+          noiseSpeed: 1.0,
+          displacementStrength: 0.8
+        };
+        break;
+      case 'rainy': // Refractive Water
+        props = {
+          color: 0x88ccff,
+          emissive: 0x000000,
+          emissiveIntensity: 0.1,
+          metalness: 0.1,
+          roughness: 0.05,
+          transmission: 1.0,
+          thickness: 5,
+          ior: 1.33,
+          noiseScale: 0.8,
+          noiseSpeed: 1.0,
+          displacementStrength: 0.8
+        };
+        break;
+      default:
+        props = {
+          color: 0xff8800,
+          emissive: 0xff4400,
+          emissiveIntensity: 0.4,
+          metalness: 0.2,
+          roughness: 0.2,
+          transmission: 0.2,
+          thickness: 2,
+          ior: 1.5,
+          noiseScale: 0.5,
+          noiseSpeed: 1.0,
+          displacementStrength: 1.0
+        };
+    }
+
+    // Update target ref
+    targetPropsRef.current = {
+      ...targetPropsRef.current,
+      ...props,
+      color: new THREE.Color(props.color),
+      emissive: new THREE.Color(props.emissive)
+    };
+
+  }, [season]);
+
   useEffect(() => {
     const mount = mountRef.current;
     if (!mount) return;
@@ -109,6 +239,8 @@ export const ThreeBackground = () => {
 
     // Scene Setup
     const scene = new THREE.Scene();
+    sceneRef.current = scene;
+
     const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
     camera.position.set(0, 0, 25);
 
@@ -125,7 +257,7 @@ export const ThreeBackground = () => {
     renderer.toneMappingExposure = 1.0;
     mount.appendChild(renderer.domElement);
 
-    // Lighting - High Contrast Studio Setup
+    // Lighting
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
     scene.add(ambientLight);
 
@@ -142,95 +274,41 @@ export const ThreeBackground = () => {
     fillLight.position.set(0, -10, 5);
     scene.add(fillLight);
 
-    // The "Digital Soul" - A high-res morphing sphere
-    const geometry = new THREE.IcosahedronGeometry(6, performanceMode ? 10 : 20); // High detail for smooth deformation
-    const originalPositions = geometry.attributes.position.array.slice(); // Store original positions
+    // The "Digital Soul"
+    const geometry = new THREE.IcosahedronGeometry(6, performanceMode ? 10 : 20);
+    const originalPositions = geometry.attributes.position.array.slice();
 
-    // Material Configuration per Season
-    const getMaterial = (s) => {
-      const common = {
-        envMapIntensity: 1.5,
-        clearcoat: 1.0,
-        clearcoatRoughness: 0.1,
-      };
+    // Initial Material
+    const material = new THREE.MeshPhysicalMaterial({
+      envMapIntensity: 1.5,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.1,
+      color: targetPropsRef.current.color,
+      emissive: targetPropsRef.current.emissive,
+      emissiveIntensity: targetPropsRef.current.emissiveIntensity,
+      metalness: targetPropsRef.current.metalness,
+      roughness: targetPropsRef.current.roughness,
+      transmission: targetPropsRef.current.transmission,
+      thickness: targetPropsRef.current.thickness,
+      ior: targetPropsRef.current.ior
+    });
+    materialRef.current = material;
 
-      switch (s) {
-        case 'summer': // Radiant Plasma
-          return new THREE.MeshPhysicalMaterial({
-            ...common,
-            color: 0xff8800,
-            emissive: 0xff4400,
-            emissiveIntensity: 0.4,
-            metalness: 0.2,
-            roughness: 0.2,
-            transmission: 0.2,
-            thickness: 2,
-          });
-        case 'autumn': // Deep Amber Sunset
-          return new THREE.MeshPhysicalMaterial({
-            ...common,
-            color: 0xff6600, // Vibrant Deep Orange
-            metalness: 0.8,
-            roughness: 0.2, // Smooth and shiny
-            emissive: 0xff4400, // Warm Glow
-            emissiveIntensity: 0.4,
-            clearcoat: 1.0,
-            clearcoatRoughness: 0.1,
-          });
-        case 'spring': // Floral Bloom (Soft, Organic)
-          return new THREE.MeshPhysicalMaterial({
-            ...common,
-            color: 0xff69b4, // Darker Pink (HotPink)
-            emissive: 0xc71585, // Darker Emissive (MediumVioletRed)
-            emissiveIntensity: 0.3, // Slightly increased intensity
-            metalness: 0.1,
-            roughness: 0.4, // Softer, petal-like
-            transmission: 0.6, // Semi-translucent
-            thickness: 3,
-            ior: 1.45,
-          });
-        case 'winter': // Frozen Ice (Lighter)
-          return new THREE.MeshPhysicalMaterial({
-            ...common,
-            color: 0xaaddff, // Pale Icy Blue (lighter)
-            metalness: 0.1,
-            roughness: 0.05, // Smooth ice
-            transmission: 1.0, // Fully transparent ice/glass
-            thickness: 8,
-            ior: 1.31, // Ice IOR
-            dispersion: 0.2, // Chromatic effect
-          });
-        case 'rainy': // Refractive Water
-          return new THREE.MeshPhysicalMaterial({
-            ...common,
-            color: 0x88ccff,
-            metalness: 0.1,
-            roughness: 0.05,
-            transmission: 1.0, // Glass
-            thickness: 5,
-            ior: 1.33,
-          });
-        default:
-          return new THREE.MeshPhysicalMaterial(common);
-      }
-    };
-
-    const material = getMaterial(season);
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
-    // Ambient Particle System (Background Dust/Stars)
-    const particleCount = 2000;
+    // Ambient Particle System
+    const particleCount = 2100; // Reduced to 70% from 3000
     const particleGeometry = new THREE.BufferGeometry();
     const particlePositionsArray = new Float32Array(particleCount * 3);
     const particleOriginalPositions = new Float32Array(particleCount * 3);
     const particleColors = new Float32Array(particleCount * 3);
     const particleBlinkOffsets = new Float32Array(particleCount);
 
-    const baseColor = new THREE.Color(material.color);
+    const baseParticleColor = targetPropsRef.current.particleColor || targetPropsRef.current.color;
 
     for (let i = 0; i < particleCount; i++) {
-      const r = 15 + Math.random() * 30; // Spread out further from center
+      const r = 15 + Math.random() * 30;
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.acos(2 * Math.random() - 1);
 
@@ -246,10 +324,9 @@ export const ThreeBackground = () => {
       particleOriginalPositions[i * 3 + 1] = y;
       particleOriginalPositions[i * 3 + 2] = z;
 
-      // Init colors
-      particleColors[i * 3] = baseColor.r;
-      particleColors[i * 3 + 1] = baseColor.g;
-      particleColors[i * 3 + 2] = baseColor.b;
+      particleColors[i * 3] = baseParticleColor.r;
+      particleColors[i * 3 + 1] = baseParticleColor.g;
+      particleColors[i * 3 + 2] = baseParticleColor.b;
 
       particleBlinkOffsets[i] = Math.random() * Math.PI * 2;
     }
@@ -258,25 +335,22 @@ export const ThreeBackground = () => {
     particleGeometry.setAttribute('color', new THREE.BufferAttribute(particleColors, 3));
 
     const particleMaterial = new THREE.PointsMaterial({
-      vertexColors: true, // Enable twinkling
-      size: 0.15,
+      vertexColors: true,
+      size: 0.2, // Increased from 0.15 for better visibility
       transparent: true,
-      opacity: 0.6,
+      opacity: 0.75, // Increased from 0.6
       blending: THREE.AdditiveBlending,
       sizeAttenuation: true
     });
+    particlesRef.current = particleMaterial;
 
     const particles = new THREE.Points(particleGeometry, particleMaterial);
     scene.add(particles);
 
-    // Noise Generator
     const simplex = new SimplexNoise();
 
-    // Interaction State
     let mouseX = 0;
     let mouseY = 0;
-    let targetRotationX = 0;
-    let targetRotationY = 0;
     let scrollY = 0;
 
     const onMouseMove = (e) => {
@@ -296,126 +370,84 @@ export const ThreeBackground = () => {
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    // Animation Loop
     const clock = new THREE.Clock();
+
+    // Current animation state for smooth transitions
+    const currentProps = { ...targetPropsRef.current };
 
     const animate = () => {
       const time = clock.getElapsedTime();
+      const delta = 0.05; // Lerp speed
+
+      // SMOOTH TRANSITION LOGIC
+      const target = targetPropsRef.current;
+
+      // Lerp Colors
+      material.color.lerp(target.color, delta);
+      material.emissive.lerp(target.emissive, delta);
+
+      // Lerp Numbers
+      material.emissiveIntensity += (target.emissiveIntensity - material.emissiveIntensity) * delta;
+      material.metalness += (target.metalness - material.metalness) * delta;
+      material.roughness += (target.roughness - material.roughness) * delta;
+      material.transmission += (target.transmission - material.transmission) * delta;
+      material.thickness += (target.thickness - material.thickness) * delta;
+      material.ior += (target.ior - material.ior) * delta;
+
+      // Lerp Noise Params
+      currentProps.noiseScale += (target.noiseScale - currentProps.noiseScale) * delta;
+      currentProps.noiseSpeed += (target.noiseSpeed - currentProps.noiseSpeed) * delta;
+      currentProps.displacementStrength += (target.displacementStrength - currentProps.displacementStrength) * delta;
 
       if (!performanceMode) {
-        // Calculate cursor position in world space once per frame
         const vector = new THREE.Vector3(mouseX, mouseY, 0.5);
         vector.unproject(camera);
         const dir = vector.sub(camera.position).normalize();
         const distance = -camera.position.z / dir.z;
         const cursorPos = camera.position.clone().add(dir.multiplyScalar(distance));
 
-        // 1. Morphing Logic
         const positions = mesh.geometry.attributes.position;
         const count = positions.count;
-
-        // Season-specific deformation parameters
-        let noiseScale, noiseSpeed, displacementStrength;
-
-        switch (season) {
-          case 'summer': // Fast, bubbling
-            noiseScale = 0.4;
-            noiseSpeed = 1.5;
-            displacementStrength = 1.2;
-            break;
-          case 'autumn': // Slow, flowing liquid
-            noiseScale = 0.3;
-            noiseSpeed = 0.6;
-            displacementStrength = 1.5;
-            break;
-          case 'spring': // Gentle, blooming
-            noiseScale = 0.6;
-            noiseSpeed = 0.8;
-            displacementStrength = 1.0;
-            break;
-          case 'rainy': // Ripples
-            noiseScale = 0.8;
-            noiseSpeed = 1.0;
-            displacementStrength = 0.8;
-            break;
-          case 'winter': // Now using Rainy settings (Ripples)
-            noiseScale = 0.8;
-            noiseSpeed = 1.0;
-            displacementStrength = 0.8;
-            break;
-          default:
-            noiseScale = 0.5;
-            noiseSpeed = 1.0;
-            displacementStrength = 1.0;
-        }
 
         for (let i = 0; i < count; i++) {
           const ox = originalPositions[i * 3];
           const oy = originalPositions[i * 3 + 1];
           const oz = originalPositions[i * 3 + 2];
 
-          // Calculate noise value
           const n = simplex.noise(
-            ox * noiseScale + time * noiseSpeed * 0.2,
-            oy * noiseScale + time * noiseSpeed * 0.3,
-            oz * noiseScale + time * noiseSpeed * 0.2
+            ox * currentProps.noiseScale + time * currentProps.noiseSpeed * 0.2,
+            oy * currentProps.noiseScale + time * currentProps.noiseSpeed * 0.3,
+            oz * currentProps.noiseScale + time * currentProps.noiseSpeed * 0.2
           );
 
-          let deformation = n * displacementStrength;
+          let deformation = n * currentProps.displacementStrength;
           let px = ox, py = oy, pz = oz;
 
-          // Season-specific shape modifications
-          if (season === 'winter') {
-            // Winter now uses the EXACT Rainy logic (Ripples/Water)
-            // Medium frequency ripple noise
-            deformation = n * displacementStrength;
+          // Apply deformation (simplified for smooth transition, using generic spherical + noise)
+          // We can't easily switch logic branches (if/else) smoothly, so we stick to a versatile noise deformation
+          // that varies by parameters (scale/speed/strength)
 
-            const len = Math.sqrt(ox * ox + oy * oy + oz * oz);
-            const nx = ox / len;
-            const ny = oy / len;
-            const nz = oz / len;
+          // Exception: Spring petal logic is distinct. We can blend it in?
+          // For simplicity and smoothness, we'll stick to the noise deformation which looks great for all if tuned right.
+          // If we really need the petal shape, we'd need a 'petalFactor' to lerp.
+          // Let's stick to the high-quality noise deformation for now to ensure smoothness.
 
-            px = ox + nx * deformation;
-            py = oy + ny * deformation;
-            pz = oz + nz * deformation;
-          } else if (season === 'spring') {
-            // Floral Bloom Logic
-            const petal = Math.sin(ox * 0.5 + time) * Math.cos(oy * 0.5 + time);
-            deformation = (n + petal * 0.5) * displacementStrength;
+          const len = Math.sqrt(ox * ox + oy * oy + oz * oz);
+          const nx = ox / len;
+          const ny = oy / len;
+          const nz = oz / len;
 
-            const len = Math.sqrt(ox * ox + oy * oy + oz * oz);
-            const nx = ox / len;
-            const ny = oy / len;
-            const nz = oz / len;
+          px = ox + nx * deformation;
+          py = oy + ny * deformation;
+          pz = oz + nz * deformation;
 
-            px = ox + nx * deformation;
-            py = oy + ny * deformation;
-            pz = oz + nz * deformation;
-          } else {
-            // Standard spherical deformation for others
-            const len = Math.sqrt(ox * ox + oy * oy + oz * oz);
-            const nx = ox / len;
-            const ny = oy / len;
-            const nz = oz / len;
-
-            px = ox + nx * deformation;
-            py = oy + ny * deformation;
-            pz = oz + nz * deformation;
-          }
-
-          // DISINTEGRATION EFFECT ON SCROLL (Optimized)
+          // DISINTEGRATION EFFECT ON SCROLL
           const scrollProgress = scrollY;
 
           if (scrollProgress > 0.001) {
-            // Gradual Disintegration over 90% of scroll
-            // Spans almost entire page to "take long"
             const progress = Math.min((scrollProgress - 0.001) / 0.9, 1.0);
-
-            // Power 1.5: Starts slow, speeds up later
-            // Keeps the "breaking" animation visible for longer
             const ease = Math.pow(progress, 1.5);
 
-            // Noise-based gaps
             const noiseVal = simplex.noise(
               originalPositions[i * 3] * 0.5,
               originalPositions[i * 3 + 1] * 0.5,
@@ -423,10 +455,7 @@ export const ThreeBackground = () => {
             );
 
             const gapFactor = (noiseVal + 1) * 0.5;
-
-            // Max distance increased to 25.0 to blend with ambient cloud
             const distance = ease * 25.0;
-
             const disperseStrength = distance * (gapFactor + 0.2);
 
             const seed = i;
@@ -438,10 +467,8 @@ export const ThreeBackground = () => {
             py += (randY - 0.5) * disperseStrength;
             pz += (randZ - 0.5) * disperseStrength;
 
-            // BLENDING: Add floating motion to broken pieces
-            // As it disintegrates (ease increases), pieces start floating like dust
             if (ease > 0.1) {
-              const floatStrength = ease * 1.5; // Increases as it breaks
+              const floatStrength = ease * 1.5;
               const floatX = Math.sin(time * 0.5 + originalPositions[i * 3]) * floatStrength;
               const floatY = Math.cos(time * 0.3 + originalPositions[i * 3 + 1]) * floatStrength;
               const floatZ = Math.sin(time * 0.4 + originalPositions[i * 3 + 2]) * floatStrength;
@@ -469,18 +496,12 @@ export const ThreeBackground = () => {
 
           let px, py, pz;
 
-          // STREAM EFFECT: "Deploy particles in direction of mouse"
-          // A subset of particles will stream from the surrounding dust to cursor
-          if (i % 50 === 0) { // 2% of particles
-            // Cycle 0 to 1
-            const speed = 0.15; // Slower speed
+          if (i % 25 === 0) { // Stream - Increased from every 50th to every 25th particle
+            const speed = 0.12; // Slightly slower for smoother detachment
             const offset = i * 0.01;
             let t = (time * speed + offset) % 1;
+            t = t * t * (3 - 2 * t); // Smooth hermite interpolation
 
-            // Smooth easing for t
-            t = t * t * (3 - 2 * t);
-
-            // Start: From the DUST LAYER (Radius ~8.0)
             const len = Math.sqrt(ox * ox + oy * oy + oz * oz);
             const shellRadius = 8.0;
             let startScale = 1.0;
@@ -490,25 +511,16 @@ export const ThreeBackground = () => {
             const startY = oy * startScale;
             const startZ = oz * startScale;
 
-            // End: Cursor Position
-
-            // Interpolate
             px = startX + (cursorPos.x - startX) * t;
             py = startY + (cursorPos.y - startY) * t;
             pz = startZ + (cursorPos.z - startZ) * t;
 
-            // Add "floating" noise to the stream so it's not a straight line
-            const noiseFreq = 2.0;
-            const noiseAmp = 1.5 * Math.sin(t * Math.PI); // Max noise in middle of path
-
+            const noiseAmp = 1.2 * Math.sin(t * Math.PI); // Reduced noise
             px += Math.sin(time * 2.0 + i) * noiseAmp;
             py += Math.cos(time * 1.5 + i) * noiseAmp;
             pz += Math.sin(time * 2.2 + i) * noiseAmp;
 
-          } else {
-            // Normal Ambient Behavior
-
-            // Gentle float
+          } else { // Ambient
             const floatSpeed = 0.2;
             const floatX = Math.sin(time * floatSpeed + ox) * 0.5;
             const floatY = Math.cos(time * floatSpeed + oy) * 0.5;
@@ -518,50 +530,36 @@ export const ThreeBackground = () => {
             py = oy + floatY;
             pz = oz + floatZ;
 
-            // DUST LAYER FORMATION
-            // 1. Enforce minimum gap (Crystal is ~2-3, so gap at 5.5)
-            // 2. Concentrate particles into a "Shell" at radius ~8.0
-
             const currentLen = Math.sqrt(px * px + py * py + pz * pz);
             const gapRadius = 5.5;
             const shellTarget = 8.0;
 
             if (currentLen < gapRadius && currentLen > 0.001) {
-              // Push out from center if too close
               const pushFactor = gapRadius / currentLen;
               px *= pushFactor;
               py *= pushFactor;
               pz *= pushFactor;
             } else if (currentLen < 20.0 && currentLen > gapRadius) {
-              // Pull towards shell radius (8.0) to create a dense layer
-              // Gentle spring force towards 8.0
               const distToShell = shellTarget - currentLen;
-              const pullFactor = 0.05; // Strength of shell formation
-
+              const pullFactor = 0.05;
               const dirX = px / currentLen;
               const dirY = py / currentLen;
               const dirZ = pz / currentLen;
-
               px += dirX * distToShell * pullFactor;
               py += dirY * distToShell * pullFactor;
               pz += dirZ * distToShell * pullFactor;
             }
 
-            // Disperse on scroll (move away from center)
             if (scrollY > 0.001) {
               const progress = Math.min((scrollY - 0.001) / 0.9, 1.0);
               const ease = Math.pow(progress, 1.5);
-
               const seed = i;
               const rand = ((seed * 12.9898) % 1);
               const disperseFactor = ease * (10.0 + rand * 20.0);
-
-              // Direction vector from center
               const len2 = Math.sqrt(px * px + py * py + pz * pz);
               const dx = px / len2;
               const dy = py / len2;
               const dz = pz / len2;
-
               px += dx * disperseFactor;
               py += dy * disperseFactor;
               pz += dz * disperseFactor;
@@ -573,20 +571,19 @@ export const ThreeBackground = () => {
           const blink = Math.sin(time * 3.0 + particleBlinkOffsets[i]);
           const brightness = 0.4 + (blink * 0.5 + 0.5) * 0.6;
 
-          pColors.setXYZ(i,
-            baseColor.r * brightness,
-            baseColor.g * brightness,
-            baseColor.b * brightness
-          );
+          // Lerp particle colors too
+          const r = THREE.MathUtils.lerp(pColors.getX(i), target.color.r * brightness, delta);
+          const g = THREE.MathUtils.lerp(pColors.getY(i), target.color.g * brightness, delta);
+          const b = THREE.MathUtils.lerp(pColors.getZ(i), target.color.b * brightness, delta);
+
+          pColors.setXYZ(i, r, g, b);
         }
         pPositions.needsUpdate = true;
         pColors.needsUpdate = true;
 
-        // 3. Smooth Rotation
         mesh.rotation.y = time * 0.1;
         mesh.rotation.x = Math.sin(time * 0.2) * 0.1;
 
-        // Wave-like floating motion on scroll
         const scrollProgress = scrollY;
         const waveY = Math.sin(scrollProgress * Math.PI * 2 + time * 0.5) * 2;
         const waveX = Math.cos(scrollProgress * Math.PI * 1.5 + time * 0.3) * 1.5;
@@ -594,25 +591,21 @@ export const ThreeBackground = () => {
         mesh.position.x += (waveX - mesh.position.x) * 0.05;
         mesh.position.y += (waveY - scrollProgress * 8 - mesh.position.y) * 0.05;
 
-        // Reduced zoom range (25 -> 11) to limit max zoom at end
         const targetZ = 25 - scrollProgress * 14 + Math.sin(scrollProgress * Math.PI) * 5;
         camera.position.z += (targetZ - camera.position.z) * 0.08;
 
-        // Dynamic scale with pulse effect
-        const pulseScale = 1 + Math.sin(time * 2) * 0.05; // Gentle breathing
-        const scrollScale = 1 + scrollProgress * 0.5; // Grows on scroll
+        const pulseScale = 1 + Math.sin(time * 2) * 0.05;
+        const scrollScale = 1 + scrollProgress * 0.5;
         const targetScale = pulseScale * scrollScale;
 
         mesh.scale.x += (targetScale - mesh.scale.x) * 0.05;
         mesh.scale.y += (targetScale - mesh.scale.y) * 0.05;
         mesh.scale.z += (targetScale - mesh.scale.z) * 0.05;
 
-        // Multi-axis cinematic rotation on scroll
-        mesh.rotation.z += scrollProgress * 0.002; // Gentle Z tumble
-        mesh.rotation.x += Math.sin(scrollProgress * Math.PI) * 0.001; // X wave
-        mesh.rotation.y += time * 0.05; // Continuous Y spin
+        mesh.rotation.z += scrollProgress * 0.002;
+        mesh.rotation.x += Math.sin(scrollProgress * Math.PI) * 0.001;
+        mesh.rotation.y += time * 0.05;
 
-        // Opacity fade effect at extreme scroll
         if (scrollProgress > 0.8) {
           const opacity = Math.max(0.3, 1 - (scrollProgress - 0.8) * 2);
           renderer.domElement.style.opacity = opacity;
@@ -628,7 +621,6 @@ export const ThreeBackground = () => {
     animate();
 
     return () => {
-      // Cleanup
       renderer.dispose();
       geometry.dispose();
       material.dispose();
@@ -638,7 +630,7 @@ export const ThreeBackground = () => {
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('scroll', onScroll);
     };
-  }, [season]);
+  }, []); // Run once!
 
   return (
     <div

@@ -7,7 +7,7 @@ import { MobileMenu } from "./MobileMenu";
 import { useSeason } from "./SeasonContext";
 
 const navLinks = [
-  { label: "ABOUT", href: "#about" },
+  { label: "ABOUT", href: "#hero" },
   { label: "EDUCATION", href: "#education" },
   { label: "EXPERIENCE", href: "#experience" },
   { label: "WORK", href: "#work" },
@@ -72,7 +72,6 @@ export const Navbar = () => {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  scroll={false}
                   className={`group relative block px-2 py-1 text-[11px] font-semibold tracking-[0.3em] uppercase transition-all duration-500 ${activeSection === link.href
                     ? "text-[var(--accent)]"
                     : "text-[var(--muted)] hover:text-[var(--foreground)]"
