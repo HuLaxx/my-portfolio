@@ -21,7 +21,7 @@ export const Hero = ({ resume }) => {
         <RevealOnScroll delay={200}>
           <h1 className="display-heading mb-10 text-6xl font-semibold leading-[0.88] tracking-tight text-[var(--foreground)] md:text-9xl lg:text-[10rem]">
             RAHUL <br />
-            <span className="text-stroke opacity-90">KHANKE</span>
+            <span className="text-stroke opacity-100 text-[var(--foreground)]/10">KHANKE</span>
           </h1>
         </RevealOnScroll>
 

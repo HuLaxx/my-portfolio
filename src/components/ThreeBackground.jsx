@@ -180,9 +180,9 @@ export const ThreeBackground = () => {
         case 'spring': // Floral Bloom (Soft, Organic)
           return new THREE.MeshPhysicalMaterial({
             ...common,
-            color: 0xffb7c5, // Cherry Blossom Pink
-            emissive: 0xff69b4,
-            emissiveIntensity: 0.2,
+            color: 0xff69b4, // Darker Pink (HotPink)
+            emissive: 0xc71585, // Darker Emissive (MediumVioletRed)
+            emissiveIntensity: 0.3, // Slightly increased intensity
             metalness: 0.1,
             roughness: 0.4, // Softer, petal-like
             transmission: 0.6, // Semi-translucent
@@ -219,6 +219,56 @@ export const ThreeBackground = () => {
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
+    // Ambient Particle System (Background Dust/Stars)
+    const particleCount = 2000;
+    const particleGeometry = new THREE.BufferGeometry();
+    const particlePositionsArray = new Float32Array(particleCount * 3);
+    const particleOriginalPositions = new Float32Array(particleCount * 3);
+    const particleColors = new Float32Array(particleCount * 3);
+    const particleBlinkOffsets = new Float32Array(particleCount);
+
+    const baseColor = new THREE.Color(material.color);
+
+    for (let i = 0; i < particleCount; i++) {
+      const r = 15 + Math.random() * 30; // Spread out further from center
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+
+      const x = r * Math.sin(phi) * Math.cos(theta);
+      const y = r * Math.sin(phi) * Math.sin(theta);
+      const z = r * Math.cos(phi);
+
+      particlePositionsArray[i * 3] = x;
+      particlePositionsArray[i * 3 + 1] = y;
+      particlePositionsArray[i * 3 + 2] = z;
+
+      particleOriginalPositions[i * 3] = x;
+      particleOriginalPositions[i * 3 + 1] = y;
+      particleOriginalPositions[i * 3 + 2] = z;
+
+      // Init colors
+      particleColors[i * 3] = baseColor.r;
+      particleColors[i * 3 + 1] = baseColor.g;
+      particleColors[i * 3 + 2] = baseColor.b;
+
+      particleBlinkOffsets[i] = Math.random() * Math.PI * 2;
+    }
+
+    particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositionsArray, 3));
+    particleGeometry.setAttribute('color', new THREE.BufferAttribute(particleColors, 3));
+
+    const particleMaterial = new THREE.PointsMaterial({
+      vertexColors: true, // Enable twinkling
+      size: 0.15,
+      transparent: true,
+      opacity: 0.6,
+      blending: THREE.AdditiveBlending,
+      sizeAttenuation: true
+    });
+
+    const particles = new THREE.Points(particleGeometry, particleMaterial);
+    scene.add(particles);
+
     // Noise Generator
     const simplex = new SimplexNoise();
 
@@ -253,6 +303,13 @@ export const ThreeBackground = () => {
       const time = clock.getElapsedTime();
 
       if (!performanceMode) {
+        // Calculate cursor position in world space once per frame
+        const vector = new THREE.Vector3(mouseX, mouseY, 0.5);
+        vector.unproject(camera);
+        const dir = vector.sub(camera.position).normalize();
+        const distance = -camera.position.z / dir.z;
+        const cursorPos = camera.position.clone().add(dir.multiplyScalar(distance));
+
         // 1. Morphing Logic
         const positions = mesh.geometry.attributes.position;
         const count = positions.count;
@@ -349,62 +406,196 @@ export const ThreeBackground = () => {
           // DISINTEGRATION EFFECT ON SCROLL (Optimized)
           const scrollProgress = scrollY;
 
-          if (scrollProgress > 0.1) {
-            // Calculate dispersion strength (starts at 10% scroll for early effect)
-            const disperseFactor = (scrollProgress - 0.1) / 0.9; // 0 to 1 range
+          if (scrollProgress > 0.001) {
+            // Gradual Disintegration over 90% of scroll
+            // Spans almost entire page to "take long"
+            const progress = Math.min((scrollProgress - 0.001) / 0.9, 1.0);
 
-            // Simplified random offset (less calculations)
-            // Use vertex index for consistent randomness without expensive trig in loop
+            // Power 1.5: Starts slow, speeds up later
+            // Keeps the "breaking" animation visible for longer
+            const ease = Math.pow(progress, 1.5);
+
+            // Noise-based gaps
+            const noiseVal = simplex.noise(
+              originalPositions[i * 3] * 0.5,
+              originalPositions[i * 3 + 1] * 0.5,
+              originalPositions[i * 3 + 2] * 0.5
+            );
+
+            const gapFactor = (noiseVal + 1) * 0.5;
+
+            // Max distance increased to 25.0 to blend with ambient cloud
+            const distance = ease * 25.0;
+
+            const disperseStrength = distance * (gapFactor + 0.2);
+
             const seed = i;
             const randX = ((seed * 12.9898) % 1);
             const randY = ((seed * 78.233) % 1);
             const randZ = ((seed * 45.164) % 1);
 
-            // Disperse vertices outward with randomness
-            const disperseStrength = disperseFactor * disperseFactor * 12; // Quadratic easing
             px += (randX - 0.5) * disperseStrength;
             py += (randY - 0.5) * disperseStrength;
             pz += (randZ - 0.5) * disperseStrength;
+
+            // BLENDING: Add floating motion to broken pieces
+            // As it disintegrates (ease increases), pieces start floating like dust
+            if (ease > 0.1) {
+              const floatStrength = ease * 1.5; // Increases as it breaks
+              const floatX = Math.sin(time * 0.5 + originalPositions[i * 3]) * floatStrength;
+              const floatY = Math.cos(time * 0.3 + originalPositions[i * 3 + 1]) * floatStrength;
+              const floatZ = Math.sin(time * 0.4 + originalPositions[i * 3 + 2]) * floatStrength;
+
+              px += floatX;
+              py += floatY;
+              pz += floatZ;
+            }
           }
 
           positions.setXYZ(i, px, py, pz);
         }
 
         mesh.geometry.attributes.position.needsUpdate = true;
-        mesh.geometry.computeVertexNormals(); // Essential for lighting updates
+        mesh.geometry.computeVertexNormals();
 
-        // 2. Smooth Cursor Parallax Movement
-        const targetX = mouseX * 3; // Horizontal parallax
-        const targetY = mouseY * 3; // Vertical parallax
+        // Update Ambient Particles
+        const pPositions = particles.geometry.attributes.position;
+        const pColors = particles.geometry.attributes.color;
 
-        // Smooth position interpolation
-        mesh.position.x += (targetX - mesh.position.x) * 0.05;
-        mesh.position.y += (targetY - mesh.position.y) * 0.05;
+        for (let i = 0; i < particleCount; i++) {
+          const ox = particleOriginalPositions[i * 3];
+          const oy = particleOriginalPositions[i * 3 + 1];
+          const oz = particleOriginalPositions[i * 3 + 2];
 
-        // 3. Smooth Rotation with Cursor
-        targetRotationY = mouseX * 0.3 + time * 0.15;
-        targetRotationX = mouseY * 0.3;
+          let px, py, pz;
 
-        // Smooth interpolation
-        mesh.rotation.y += (targetRotationY - mesh.rotation.y) * 0.05;
-        mesh.rotation.x += (targetRotationX - mesh.rotation.x) * 0.05;
+          // STREAM EFFECT: "Deploy particles in direction of mouse"
+          // A subset of particles will stream from the surrounding dust to cursor
+          if (i % 50 === 0) { // 2% of particles
+            // Cycle 0 to 1
+            const speed = 0.15; // Slower speed
+            const offset = i * 0.01;
+            let t = (time * speed + offset) % 1;
 
-        // 4. Advanced Cinematic Scroll Effects
-        const scrollProgress = scrollY;
+            // Smooth easing for t
+            t = t * t * (3 - 2 * t);
+
+            // Start: From the DUST LAYER (Radius ~8.0)
+            const len = Math.sqrt(ox * ox + oy * oy + oz * oz);
+            const shellRadius = 8.0;
+            let startScale = 1.0;
+            if (len > 0.001) startScale = shellRadius / len;
+
+            const startX = ox * startScale;
+            const startY = oy * startScale;
+            const startZ = oz * startScale;
+
+            // End: Cursor Position
+
+            // Interpolate
+            px = startX + (cursorPos.x - startX) * t;
+            py = startY + (cursorPos.y - startY) * t;
+            pz = startZ + (cursorPos.z - startZ) * t;
+
+            // Add "floating" noise to the stream so it's not a straight line
+            const noiseFreq = 2.0;
+            const noiseAmp = 1.5 * Math.sin(t * Math.PI); // Max noise in middle of path
+
+            px += Math.sin(time * 2.0 + i) * noiseAmp;
+            py += Math.cos(time * 1.5 + i) * noiseAmp;
+            pz += Math.sin(time * 2.2 + i) * noiseAmp;
+
+          } else {
+            // Normal Ambient Behavior
+
+            // Gentle float
+            const floatSpeed = 0.2;
+            const floatX = Math.sin(time * floatSpeed + ox) * 0.5;
+            const floatY = Math.cos(time * floatSpeed + oy) * 0.5;
+            const floatZ = Math.sin(time * floatSpeed + oz) * 0.5;
+
+            px = ox + floatX;
+            py = oy + floatY;
+            pz = oz + floatZ;
+
+            // DUST LAYER FORMATION
+            // 1. Enforce minimum gap (Crystal is ~2-3, so gap at 5.5)
+            // 2. Concentrate particles into a "Shell" at radius ~8.0
+
+            const currentLen = Math.sqrt(px * px + py * py + pz * pz);
+            const gapRadius = 5.5;
+            const shellTarget = 8.0;
+
+            if (currentLen < gapRadius && currentLen > 0.001) {
+              // Push out from center if too close
+              const pushFactor = gapRadius / currentLen;
+              px *= pushFactor;
+              py *= pushFactor;
+              pz *= pushFactor;
+            } else if (currentLen < 20.0 && currentLen > gapRadius) {
+              // Pull towards shell radius (8.0) to create a dense layer
+              // Gentle spring force towards 8.0
+              const distToShell = shellTarget - currentLen;
+              const pullFactor = 0.05; // Strength of shell formation
+
+              const dirX = px / currentLen;
+              const dirY = py / currentLen;
+              const dirZ = pz / currentLen;
+
+              px += dirX * distToShell * pullFactor;
+              py += dirY * distToShell * pullFactor;
+              pz += dirZ * distToShell * pullFactor;
+            }
+
+            // Disperse on scroll (move away from center)
+            if (scrollY > 0.001) {
+              const progress = Math.min((scrollY - 0.001) / 0.9, 1.0);
+              const ease = Math.pow(progress, 1.5);
+
+              const seed = i;
+              const rand = ((seed * 12.9898) % 1);
+              const disperseFactor = ease * (10.0 + rand * 20.0);
+
+              // Direction vector from center
+              const len2 = Math.sqrt(px * px + py * py + pz * pz);
+              const dx = px / len2;
+              const dy = py / len2;
+              const dz = pz / len2;
+
+              px += dx * disperseFactor;
+              py += dy * disperseFactor;
+              pz += dz * disperseFactor;
+            }
+          }
+
+          pPositions.setXYZ(i, px, py, pz);
+
+          const blink = Math.sin(time * 3.0 + particleBlinkOffsets[i]);
+          const brightness = 0.4 + (blink * 0.5 + 0.5) * 0.6;
+
+          pColors.setXYZ(i,
+            baseColor.r * brightness,
+            baseColor.g * brightness,
+            baseColor.b * brightness
+          );
+        }
+        pPositions.needsUpdate = true;
+        pColors.needsUpdate = true;
+
+        // 3. Smooth Rotation
+        mesh.rotation.y = time * 0.1;
+        mesh.rotation.x = Math.sin(time * 0.2) * 0.1;
 
         // Wave-like floating motion on scroll
+        const scrollProgress = scrollY;
         const waveY = Math.sin(scrollProgress * Math.PI * 2 + time * 0.5) * 2;
         const waveX = Math.cos(scrollProgress * Math.PI * 1.5 + time * 0.3) * 1.5;
 
-        // Combine cursor parallax with scroll wave
-        const finalTargetX = mouseX * 3 + waveX;
-        const finalTargetY = mouseY * 3 + waveY - scrollProgress * 8; // Move up/down
+        mesh.position.x += (waveX - mesh.position.x) * 0.05;
+        mesh.position.y += (waveY - scrollProgress * 8 - mesh.position.y) * 0.05;
 
-        mesh.position.x += (finalTargetX - mesh.position.x) * 0.05;
-        mesh.position.y += (finalTargetY - mesh.position.y) * 0.05;
-
-        // Dynamic depth - crystal moves in Z-axis with easing
-        const targetZ = 25 - scrollProgress * 20 + Math.sin(scrollProgress * Math.PI) * 5;
+        // Reduced zoom range (25 -> 11) to limit max zoom at end
+        const targetZ = 25 - scrollProgress * 14 + Math.sin(scrollProgress * Math.PI) * 5;
         camera.position.z += (targetZ - camera.position.z) * 0.08;
 
         // Dynamic scale with pulse effect
@@ -423,7 +614,8 @@ export const ThreeBackground = () => {
 
         // Opacity fade effect at extreme scroll
         if (scrollProgress > 0.8) {
-          renderer.domElement.style.opacity = Math.max(0.3, 1 - (scrollProgress - 0.8) * 2);
+          const opacity = Math.max(0.3, 1 - (scrollProgress - 0.8) * 2);
+          renderer.domElement.style.opacity = opacity;
         } else {
           renderer.domElement.style.opacity = 1;
         }
@@ -440,6 +632,8 @@ export const ThreeBackground = () => {
       renderer.dispose();
       geometry.dispose();
       material.dispose();
+      particleGeometry.dispose();
+      particleMaterial.dispose();
       if (mount) mount.innerHTML = '';
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('scroll', onScroll);

@@ -133,20 +133,20 @@ const SignatureLogo = () => {
   const [langIndex, setLangIndex] = useState(0);
 
   const languages = [
-    { text: "RAHUL       KHANKE", lang: "en" }, // English
-    { text: "ラフル       カンケ", lang: "ja" }, // Japanese
-    { text: "राहुल       खान्के", lang: "hi" }, // Hindi
-    { text: "РАХУЛ       ХАНКЕ", lang: "ru" }, // Russian
-    { text: "راہول       کھانکے", lang: "ur" }, // Urdu
-    { text: "라훌       칸케", lang: "ko" }, // Korean
-    { text: "拉胡尔       坎克", lang: "zh" }, // Chinese
-    { text: "ΡΑΧΟΥΛ       ΧΑΝΚΕ", lang: "el" }, // Greek
+    { first: "RAHUL", last: "KHANKE", lang: "en" },
+    { first: "ラフル", last: "カンケ", lang: "ja" },
+    { first: "राहुल", last: "खान्के", lang: "hi" },
+    { first: "РАХУЛ", last: "ХАНКЕ", lang: "ru" },
+    { first: "راہول", last: "کھانکے", lang: "ur" },
+    { first: "라훌", last: "칸케", lang: "ko" },
+    { first: "拉胡尔", last: "坎克", lang: "zh" },
+    { first: "ΡΑΧΟΥΛ", last: "ΧΑΝΚΕ", lang: "el" },
   ];
 
   useEffect(() => {
     const interval = setInterval(() => {
       setLangIndex((prev) => (prev + 1) % languages.length);
-    }, 3000); // Slower interval (3s)
+    }, 5000); // Slower interval (5s)
 
     return () => clearInterval(interval);
   }, []);
@@ -159,16 +159,21 @@ const SignatureLogo = () => {
     >
       <div className="relative h-8 w-48 overflow-hidden">
         <AnimatePresence mode="popLayout">
-          <motion.span
+          <motion.div
             key={languages[langIndex].lang}
             initial={{ x: -15, opacity: 0, filter: "blur(4px)" }}
             animate={{ x: 0, opacity: 1, filter: "blur(0px)" }}
             exit={{ x: 15, opacity: 0, filter: "blur(4px)" }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} // Smooth ease
-            className="absolute left-0 top-1/2 -translate-y-1/2 font-display text-xl font-bold tracking-tighter text-[var(--foreground)] whitespace-nowrap"
+            transition={{ duration: 2.0, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute left-0 top-1/2 -translate-y-1/2 flex items-center gap-3 whitespace-nowrap"
           >
-            {languages[langIndex].text}
-          </motion.span>
+            <span className="font-display text-xl font-bold tracking-tighter text-[var(--foreground)]">
+              {languages[langIndex].first}
+            </span>
+            <span className="font-display text-xl font-bold tracking-tighter text-[var(--foreground)]">
+              {languages[langIndex].last}
+            </span>
+          </motion.div>
         </AnimatePresence>
       </div>
     </Link>

@@ -20,7 +20,7 @@ export default async function Home() {
       <ScrollProgress />
       <Navbar />
 
-      <main className="relative z-10 mx-auto w-full max-w-7xl px-4 md:px-12 flex flex-col gap-24 md:gap-32">
+      <main className="relative z-10 mx-auto w-full max-w-7xl px-4 md:px-12 flex flex-col gap-24 md:gap-32 [mask-image:linear-gradient(to_bottom,transparent_0%,black_100px)]">
         <Hero resume={content.resume} />
         <About resume={content.resume} />
         <Education resume={content.resume} />
