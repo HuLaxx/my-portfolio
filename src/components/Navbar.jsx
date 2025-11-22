@@ -66,8 +66,8 @@ export const Navbar = () => {
         <SignatureLogo />
 
         {/* Desktop Navigation */}
-        <div className="hidden items-center gap-12 md:flex">
-          <ul className="flex gap-8" role="menubar">
+        <div className="hidden items-center gap-6 md:flex">
+          <ul className="flex gap-5" role="menubar">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <Link
@@ -86,7 +86,7 @@ export const Navbar = () => {
             ))}
           </ul>
 
-          <div className="pl-8 border-l border-white/10 flex items-center gap-6">
+          <div className="pl-6 border-l border-white/10 flex items-center gap-4">
             <SocialIcon
               href="https://linkedin.com"
               label="LinkedIn"
@@ -127,15 +127,50 @@ export const Navbar = () => {
   );
 };
 
-const SignatureLogo = () => (
-  <Link href="/" className="group relative z-50" aria-label="Home">
-    <div className="flex flex-col leading-none">
-      <span className="font-display text-2xl font-bold tracking-tighter text-[var(--foreground)]">
-        RAHUL
-      </span>
-      <span className="text-[9px] font-medium tracking-[0.4em] opacity-80 group-hover:tracking-[0.5em] transition-all duration-500 text-[var(--muted)]">
-        VISHWAKARMA
-      </span>
-    </div>
-  </Link>
-);
+import { AnimatePresence, motion } from "framer-motion";
+
+const SignatureLogo = () => {
+  const [langIndex, setLangIndex] = useState(0);
+
+  const languages = [
+    { text: "RAHUL       KHANKE", lang: "en" }, // English
+    { text: "ラフル       カンケ", lang: "ja" }, // Japanese
+    { text: "राहुल       खान्के", lang: "hi" }, // Hindi
+    { text: "РАХУЛ       ХАНКЕ", lang: "ru" }, // Russian
+    { text: "راہول       کھانکے", lang: "ur" }, // Urdu
+    { text: "라훌       칸케", lang: "ko" }, // Korean
+    { text: "拉胡尔       坎克", lang: "zh" }, // Chinese
+    { text: "ΡΑΧΟΥΛ       ΧΑΝΚΕ", lang: "el" }, // Greek
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLangIndex((prev) => (prev + 1) % languages.length);
+    }, 3000); // Slower interval (3s)
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <Link
+      href="/"
+      className="group relative z-50 flex items-center"
+      aria-label="Home"
+    >
+      <div className="relative h-8 w-48 overflow-hidden">
+        <AnimatePresence mode="popLayout">
+          <motion.span
+            key={languages[langIndex].lang}
+            initial={{ x: -15, opacity: 0, filter: "blur(4px)" }}
+            animate={{ x: 0, opacity: 1, filter: "blur(0px)" }}
+            exit={{ x: 15, opacity: 0, filter: "blur(4px)" }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} // Smooth ease
+            className="absolute left-0 top-1/2 -translate-y-1/2 font-display text-xl font-bold tracking-tighter text-[var(--foreground)] whitespace-nowrap"
+          >
+            {languages[langIndex].text}
+          </motion.span>
+        </AnimatePresence>
+      </div>
+    </Link>
+  );
+};

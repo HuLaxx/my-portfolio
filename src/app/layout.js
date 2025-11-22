@@ -1,17 +1,17 @@
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
-import { Bodoni_Moda, Space_Grotesk, Geist_Mono } from "next/font/google";
+import { Orbitron, Space_Grotesk, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { SeasonProvider } from "@/components/SeasonContext";
 import { AnimatedGradient } from "@/components/AnimatedGradient";
 import { ThreeBackground } from "@/components/ThreeBackground";
 
-const display = Bodoni_Moda({
+const display = Orbitron({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800", "900"],
   display: "swap",
 });
 

@@ -16,6 +16,7 @@
   --scrollbar-thumb: #e6a54b;
   --footer-bg: rgba(255, 255, 255, 0.5);
   /* Light Summer Glass */
+  --stroke-color: rgba(0, 0, 0, 0.2);
 }
 
 [data-theme="summer"] {
@@ -35,6 +36,7 @@
   --scrollbar-thumb: #d97706;
   --footer-bg: rgba(251, 191, 36, 0.15);
   /* Summer Glass */
+  --stroke-color: rgba(0, 0, 0, 0.2);
 }
 
 [data-theme="autumn"] {
@@ -53,6 +55,7 @@
   --scrollbar-thumb: #fbbf24;
   --footer-bg: rgba(25, 15, 5, 0.6);
   /* Autumn Glass */
+  --stroke-color: rgba(255, 255, 255, 0.2);
 }
 
 [data-theme="winter"] {
@@ -71,6 +74,7 @@
   --scrollbar-thumb: #7dd3fc;
   --footer-bg: rgba(2, 4, 20, 0.6);
   /* Winter Glass */
+  --stroke-color: rgba(255, 255, 255, 0.2);
 }
 
 [data-theme="spring"] {
@@ -90,6 +94,7 @@
   --scrollbar-thumb: #ec4899;
   --footer-bg: rgba(236, 72, 153, 0.15);
   /* Spring Glass */
+  --stroke-color: rgba(0, 0, 0, 0.2);
 }
 
 @theme inline {
@@ -218,7 +223,7 @@ a {
 }
 
 .text-stroke {
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+  -webkit-text-stroke: 1px var(--stroke-color);
   color: transparent;
 }
 
