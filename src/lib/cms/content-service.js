@@ -1,7 +1,7 @@
 import { cache } from "react";
 import { z } from "zod";
 
-import { fallbackProjects, fallbackResume, fallbackStackComparisons, fallbackCaseStudies } from "@/data/fallbackContent";
+import { fallbackProjects, fallbackResume, fallbackStackComparisons, fallbackCaseStudies, fallbackRoles } from "@/data/fallbackContent";
 import { getSanityClient, hasSanityConfig } from "./client";
 import { projectsQuery, resumeQuery, stackBlocksQuery } from "./queries";
 
@@ -31,6 +31,7 @@ const fallbackContent = {
   resume: fallbackResume,
   stackComparisons: fallbackStackComparisons,
   caseStudies: fallbackCaseStudies,
+  roles: fallbackRoles,
 };
 
 export const getPortfolioContent = cache(async () => {

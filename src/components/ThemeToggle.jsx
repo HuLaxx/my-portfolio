@@ -14,13 +14,13 @@ export const ThemeToggle = () => {
   const { season, setSeason } = useSeason();
 
   return (
-    <div className="flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--panel)]/70 px-1.5 py-1 backdrop-blur-md shadow-[0_10px_30px_rgba(0,0,0,0.18)]">
+    <div className="flex flex-wrap justify-center items-center gap-1 md:gap-2 rounded-xl md:rounded-full border border-[var(--border)] bg-[var(--panel)]/70 px-2 py-2 md:px-1.5 md:py-1 backdrop-blur-md shadow-[0_10px_30px_rgba(0,0,0,0.18)] max-w-[300px] md:max-w-none">
       {seasons.map((t) => (
         <button
           key={t.id}
           onClick={() => setSeason(t.id)}
           className={clsx(
-            "rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] transition-all duration-300",
+            "rounded-full px-2 py-1 md:px-2.5 text-[9px] md:text-[10px] font-semibold uppercase tracking-[0.12em] transition-all duration-300 flex-1 md:flex-none text-center",
             season === t.id
               ? "bg-[var(--accent)] text-[var(--background)] shadow-[0_6px_18px_rgba(0,0,0,0.22)]"
               : "text-gray-400 hover:text-white"

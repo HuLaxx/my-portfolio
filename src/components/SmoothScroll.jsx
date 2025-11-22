@@ -19,30 +19,8 @@ export const SmoothScroll = ({ children }) => {
             syncTouchLerp: 0.1,
         });
 
-        // Add snap behavior
-        lenis.on('scroll', ({ scroll }) => {
-            // Detect when scroll stops and snap to nearest section
-            clearTimeout(lenis.snapTimeout);
-            lenis.snapTimeout = setTimeout(() => {
-                const sections = document.querySelectorAll('section, footer');
-                let closest = null;
-                let closestDistance = Infinity;
-
-                sections.forEach(section => {
-                    const rect = section.getBoundingClientRect();
-                    const distance = Math.abs(rect.top);
-
-                    if (distance < closestDistance) {
-                        closestDistance = distance;
-                        closest = section;
-                    }
-                });
-
-                if (closest && closestDistance > 5) {
-                    closest.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            }, 100);
-        });
+        // Snap behavior removed
+        // lenis.on('scroll', ({ scroll }) => { ... });
 
         function raf(time) {
             lenis.raf(time);

@@ -37,7 +37,7 @@ const ProjectRow = ({ project, index, caseStudy }) => {
               {project.client}
             </h3>
             {summary && (
-              <p className="max-w-2xl text-sm text-gray-200 md:text-base">
+              <p className="text-gray-400 max-w-xl">
                 {summary}
               </p>
             )}
@@ -47,6 +47,30 @@ const ProjectRow = ({ project, index, caseStudy }) => {
             <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-gray-400">
               {role}
             </span>
+
+            {/* GitHub-style Language Bar */}
+            {project.languages && (
+              <div className="w-full max-w-[200px] mb-2">
+                <div className="flex h-1.5 w-full overflow-hidden rounded-full bg-white/5 mb-1">
+                  {Object.entries(project.languages).map(([lang, pct], i) => (
+                    <div
+                      key={lang}
+                      style={{ width: `${pct}%`, backgroundColor: ['#3178c6', '#f1e05a', '#e34c26', '#563d7c'][i % 4] }}
+                      className="h-full"
+                    />
+                  ))}
+                </div>
+                <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-gray-500 font-mono">
+                  {Object.entries(project.languages).map(([lang, pct], i) => (
+                    <div key={lang} className="flex items-center gap-1.5">
+                      <div className="w-2 h-2 rounded-full" style={{ backgroundColor: ['#3178c6', '#f1e05a', '#e34c26', '#563d7c'][i % 4] }} />
+                      <span>{lang} {pct}%</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {project.slug && (
               <span className="inline-flex items-center gap-2 text-sm font-semibold text-white/80 transition-all duration-500 group-hover:text-white">
                 View case

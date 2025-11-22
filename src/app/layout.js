@@ -6,6 +6,7 @@ import "./globals.css";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { SeasonProvider } from "@/components/SeasonContext";
 import { AnimatedGradient } from "@/components/AnimatedGradient";
+import { ThreeBackground } from "@/components/ThreeBackground";
 
 const display = Bodoni_Moda({
   variable: "--font-display",
@@ -87,6 +88,7 @@ export default function RootLayout({ children }) {
       >
         <SeasonProvider>
           <AnimatedGradient />
+          <ThreeBackground />
           <SmoothScroll>
             <div className="film-grain" />
             {children}

@@ -2,19 +2,19 @@ export const fallbackProjects = [
   {
     year: "2025",
     client: "Vogue Scandinavia",
-    role: "IMMERSIVE EXPERIENCE",
+    role: "Data Scientist",
     slug: "vogue-scandinavia",
   },
   {
     year: "2024",
     client: "SpaceX / Starship",
-    role: "REAL-TIME SIMULATION",
+    role: "Data Engineer",
     slug: "spacex-starship",
   },
   {
     year: "2024",
     client: "Nike Lab",
-    role: "COMMERCE + MOTION",
+    role: "AI/ML Engineer",
     slug: "nike-lab",
   },
   { year: "2023", client: "MoMA NYC", role: "DIGITAL ARCHIVE" },
@@ -22,31 +22,58 @@ export const fallbackProjects = [
 ];
 
 export const fallbackResume = {
-  label: "CREATIVE DEVELOPER & DESIGNER",
-  title: "DIGITAL CRAFTSMAN",
+  label: "DATA SCIENTIST & AI ENGINEER",
+  title: "RAHUL VISHWAKARMA",
   summary:
-    "Building immersive web experiences that blend WebGL, AI copilots, and bleeding-edge interaction patterns. Every build is vetted for edge performance and narrative impact.",
+    "Specializing in building robust data pipelines, training state-of-the-art ML models, and deploying scalable AI solutions. Passionate about turning complex data into actionable insights.",
   neuralSummary:
-    "Ask about stack choices, specific case studies, or how AI copilots support delivery.",
+    "Ask about my experience with LLMs, RAG architectures, or data engineering pipelines.",
+  studies: [
+    {
+      institution: "University Name",
+      degree: "Master of Science in Data Science",
+      year: "2023",
+      dissertation: "Optimizing Large Language Models for Edge Devices",
+      modules: ["Advanced Machine Learning", "Big Data Architecture", "Deep Learning", "Statistical Methods", "Data Ethics"]
+    },
+    {
+      institution: "University Name",
+      degree: "Bachelor of Computer Science",
+      year: "2021",
+      dissertation: "Real-time Object Detection in Autonomous Systems",
+      modules: ["Algorithms & Data Structures", "Database Systems", "Software Engineering", "Linear Algebra", "Calculus"]
+    },
+  ],
+  experience: [
+    {
+      company: "Tech Company A",
+      role: "Senior Data Scientist",
+      period: "2023 - Present",
+      description: "Leading the NLP research team, developing RAG systems for enterprise clients.",
+    },
+    {
+      company: "Tech Company B",
+      role: "Data Engineer",
+      period: "2021 - 2023",
+      description: "Built real-time data streaming pipelines using Kafka and Spark.",
+    },
+  ],
   knowledgeBase: `
-    RESUME DATA FOR ALEXANDER:
-    - Role: Senior Creative Developer & UI/UX Designer.
-    - Location: London, UK (Open to Remote).
-    - Core Stack: Next.js 15 (App Router), React 19, Vue 3 + Vite (for smaller apps and design system work), Three.js/WebGL, Tailwind CSS 4, LangChain/Vercel AI SDK, Sanity.
-    - Experience: 5+ Years shipping campaigns with Vogue, Nike, Polestar, MoMA.
-    - Vue Experience: Built lightweight marketing sites and internal dashboards with Vue 3 + Vite + Pinia; ported components from React to Vue; integrated Three.js canvases inside Vue single-file components; set up Storybook + design tokens for Vue component libraries.
-    - Key Strengths: Immersive art direction, shader performance tuning, AI integrations, and design systems leadership.
-    - Transferable Skills: Component-driven design, perf budgeting (LCP/FID), edge deployments (Vercel/Cloudflare), analytics/observability, and collaborating with design/PM for narrative-led builds.
-
+    RESUME DATA FOR RAHUL:
+    - Role: Data Scientist, Data Engineer, AI/ML Engineer.
+    - Location: [Location] (Open to Remote).
+    - Core Stack: Python, PyTorch, TensorFlow, SQL, AWS/GCP, Docker, Kubernetes, Next.js (for demos).
+    - Experience: Building RAG systems, Data Pipelines, ML Model Deployment.
+    
     PROJECT DEEP DIVES:
-    1. Vogue Scandinavia: Fully immersive 3D runway using edge-ready Three.js scenes, authored custom SSAO pass to keep 60 FPS on iPad Pro.
-    2. SpaceX Starship Sim: Browser physics sandbox with GPU particles rendered via instancing + Web Workers. Hooked telemetry feed to Vercel Edge Config.
-    3. Nike Lab: Headless commerce experience with React Server Components, streaming product narrators, and 40% faster LCP.
+    1. Vogue Scandinavia (Data Scientist Role): Analyzed user engagement data to optimize content delivery.
+    2. SpaceX Starship (Data Engineer Role): Processed telemetry data streams for real-time visualization.
+    3. Nike Lab (AI/ML Engineer Role): Developed computer vision models for product interaction.
 
-    CONTACT & RATES:
-    - Email: hello@alexander.dev
-    - Availability: Booking Q2 2025.
-    - Typical engagement: $10k+ immersive launches or embedded leadership retainers.
+    CONTACT:
+    - LinkedIn: [LINKEDIN_URL]
+    - GitHub: [GITHUB_URL]
+    - Kaggle: [KAGGLE_URL]
   `,
 };
 
@@ -113,6 +140,11 @@ export const fallbackCaseStudies = [
       { label: "Time to render lookbook", value: "3.5s" },
       { label: "Engagement lift", value: "+42%" },
     ],
+    languages: {
+      "JavaScript": 45,
+      "GLSL": 30,
+      "Python": 25
+    },
     process: [
       {
         title: "Narrative prototyping",
@@ -173,6 +205,11 @@ export const fallbackCaseStudies = [
       { label: "Latency to HUD", value: "280ms" },
       { label: "AI Q&A accuracy", value: "92%" },
     ],
+    languages: {
+      "Python": 50,
+      "C++": 30,
+      "JavaScript": 20
+    },
     process: [
       {
         title: "Telemetry sandbox",
@@ -226,6 +263,11 @@ export const fallbackCaseStudies = [
       { label: "Largest contentful paint", value: "1.4s" },
       { label: "Pose-to-product delay", value: "320ms" },
     ],
+    languages: {
+      "Python": 40,
+      "TypeScript": 40,
+      "GLSL": 20
+    },
     process: [
       {
         title: "Gesture + pose prototyping",
@@ -257,3 +299,39 @@ export const fallbackCaseStudies = [
     tech: ["Next.js 15", "React Server Components", "Three.js", "Sanity", "LangChain"],
   },
 ];
+
+export const fallbackRoles = {
+  "data-scientist": {
+    title: "Data Scientist",
+    description: "Uncovering hidden patterns in complex datasets to drive strategic decision-making.",
+    skills: ["Python", "Pandas", "Scikit-learn", "TensorFlow", "SQL", "Data Visualization", "Statistical Analysis"],
+    projects: ["vogue-scandinavia", "nike-lab"], // Linking to existing projects for now
+    stats: [
+      { label: "Models Deployed", value: "50+" },
+      { label: "Data Processed", value: "10PB+" },
+      { label: "Accuracy Lift", value: "35%" },
+    ]
+  },
+  "data-engineer": {
+    title: "Data Engineer",
+    description: "Architecting scalable data pipelines and infrastructure for real-time analytics.",
+    skills: ["Apache Spark", "Kafka", "AWS Glue", "Airflow", "Docker", "Kubernetes", "Snowflake"],
+    projects: ["spacex-starship"],
+    stats: [
+      { label: "Pipelines Built", value: "100+" },
+      { label: "Uptime", value: "99.99%" },
+      { label: "Latency Reduced", value: "400ms" },
+    ]
+  },
+  "ai-ml-engineer": {
+    title: "AI/ML Engineer",
+    description: "Building and deploying state-of-the-art machine learning models for production environments.",
+    skills: ["PyTorch", "Hugging Face", "LLMs", "RAG", "MLOps", "FastAPI", "Computer Vision"],
+    projects: ["nike-lab", "spacex-starship"],
+    stats: [
+      { label: "LLMs Fine-tuned", value: "15+" },
+      { label: "Inference Speed", value: "<50ms" },
+      { label: "Users Served", value: "1M+" },
+    ]
+  }
+};
