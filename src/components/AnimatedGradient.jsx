@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { useSeason } from './SeasonContext';
+import { lerpColor } from '../utils/colorUtils';
 
 export const AnimatedGradient = () => {
     const canvasRef = useRef(null);
@@ -9,17 +10,31 @@ export const AnimatedGradient = () => {
     const scrollY = useRef(0);
     const rafId = useRef(null);
 
+    // Store current state for smooth transitions
+    const currentState = useRef({
+        bg: '#fff8e7',
+        colors: ['#ffbe00', '#ffd700', '#ff8c00', '#ffa500'],
+        opacity: 0.48
+    });
+
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
 
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d', { alpha: false }); // Optimize for no transparency if possible, but we need it for some effects? Actually we fill rect so alpha: false might be okay if we fill bg.
+        // Wait, we need transparency for the canvas itself if it sits on top of something? 
+        // The component returns a canvas that is fixed. It seems it acts as a background.
+        // Let's stick to default context but optimize drawing.
+
         let time = 0;
 
-        // Set canvas size
+        // Set canvas size - REDUCED RESOLUTION
         const resizeCanvas = () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            const scale = 0.5; // 50% resolution
+            canvas.width = window.innerWidth * scale;
+            canvas.height = window.innerHeight * scale;
+            // We don't scale the context, we just draw smaller. 
+            // CSS handles the stretching.
         };
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
@@ -30,13 +45,13 @@ export const AnimatedGradient = () => {
         };
         window.addEventListener('scroll', handleScroll, { passive: true });
 
-        // Get colors based on season
-        const getSeasonColors = (s) => {
+        // Get target colors based on season
+        const getTargetColors = (s) => {
             switch (s) {
                 case 'spring':
                     return {
                         bg: '#fff0f5',
-                        colors: ['#db2777', '#ec4899', '#be185d', '#f472b6'], // Darker, more saturated pinks
+                        colors: ['#db2777', '#ec4899', '#be185d', '#f472b6'],
                         opacity: 0.95
                     };
                 case 'summer':
@@ -68,48 +83,63 @@ export const AnimatedGradient = () => {
 
         // Animation loop
         const animate = () => {
-            const { bg, colors, opacity } = getSeasonColors(season);
+            const target = getTargetColors(season);
+            const current = currentState.current;
+            const lerpSpeed = 0.02; // Slow smooth transition
+
+            // Lerp background
+            current.bg = lerpColor(current.bg, target.bg, lerpSpeed);
+
+            // Lerp opacity
+            current.opacity += (target.opacity - current.opacity) * lerpSpeed;
+
+            // Lerp palette colors
+            current.colors = current.colors.map((c, i) => {
+                if (target.colors[i]) {
+                    return lerpColor(c, target.colors[i], lerpSpeed);
+                }
+                return c;
+            });
+
             const w = canvas.width;
             const h = canvas.height;
-            const scrollOffset = scrollY.current * 0.3;
+            const scrollOffset = scrollY.current * 0.3 * 0.5; // Adjust for scale
 
             // Clear with background color
-            ctx.fillStyle = bg;
+            ctx.fillStyle = current.bg;
             ctx.fillRect(0, 0, w, h);
 
-            time += 0.002; // Slower for smoother animation
+            time += 0.002;
 
             // Use multiply blend for light themes (summer/spring) for better visibility
-            const isLightTheme = season === 'summer' || season === 'spring';
-            ctx.globalCompositeOperation = isLightTheme ? 'multiply' : 'screen';
-            ctx.filter = 'blur(40px)'; // Reduced from 60px for less overwhelming effect
+            // We can transition this too? Or just switch? Switching might be abrupt.
+            // Let's stick to simple logic: if target is light, use multiply.
+            const isTargetLight = season === 'summer' || season === 'spring';
+            ctx.globalCompositeOperation = isTargetLight ? 'multiply' : 'screen';
 
-            // Create many smaller gradient blobs that are well-distributed (11 circles - 75% of previous)
+            // REMOVED ctx.filter = 'blur(40px)' - Handled by CSS
+
             for (let i = 0; i < 11; i++) {
-                // Use different prime numbers and offsets for pseudo-random but deterministic spread
-                // Add slow-changing offsets for dynamic positioning
                 const xSeed = ((i * 37) % 100 / 100) + Math.sin(time * 0.3 + i * 0.5) * 0.1;
                 const ySeed = ((i * 53) % 100 / 100) + Math.cos(time * 0.25 + i * 0.7) * 0.1;
 
-                const x = w * (0.05 + xSeed * 0.9) + Math.sin(time * 0.7 + i * 0.8) * 60;
+                const x = w * (0.05 + xSeed * 0.9) + Math.sin(time * 0.7 + i * 0.8) * 60 * 0.5; // Scale down movement
                 const y = h * (0.05 + ySeed * 0.9 + Math.sin(time * 0.5 + i * 1.1) * 0.1) - scrollOffset * (0.3 + i * 0.03);
-                const radius = Math.min(w, h) * (0.12 + Math.sin(time * 0.6 + i * 0.6) * 0.04); // Smaller radius
+                const radius = Math.min(w, h) * (0.12 + Math.sin(time * 0.6 + i * 0.6) * 0.04);
 
                 const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
-                const colorIndex = i % colors.length;
-                const alpha = Math.floor(opacity * 255).toString(16).padStart(2, '0');
+                const colorIndex = i % current.colors.length;
+                const alpha = Math.floor(current.opacity * 255).toString(16).padStart(2, '0');
 
-                gradient.addColorStop(0, colors[colorIndex] + alpha);
-                gradient.addColorStop(0.5, colors[colorIndex] + '30');
-                gradient.addColorStop(1, colors[colorIndex] + '00');
+                gradient.addColorStop(0, current.colors[colorIndex] + alpha);
+                gradient.addColorStop(0.5, current.colors[colorIndex] + '30');
+                gradient.addColorStop(1, current.colors[colorIndex] + '00');
 
                 ctx.fillStyle = gradient;
                 ctx.fillRect(0, 0, w, h);
             }
 
-            // Reset blending and filter
             ctx.globalCompositeOperation = 'source-over';
-            ctx.filter = 'none';
 
             rafId.current = requestAnimationFrame(animate);
         };
@@ -128,8 +158,9 @@ export const AnimatedGradient = () => {
     return (
         <canvas
             ref={canvasRef}
-            className="fixed top-0 left-0 w-full h-full pointer-events-none"
+            className="fixed top-0 left-0 w-full h-full pointer-events-none blur-[40px] will-change-transform translate-z-0"
             style={{ zIndex: 0 }}
         />
     );
 };
+

@@ -246,13 +246,13 @@ export const ThreeBackground = () => {
 
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
-      antialias: true,
+      antialias: false, // OPTIMIZATION: Disabled antialias
       powerPreference: "high-performance",
       stencil: false,
       depth: true
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // OPTIMIZATION: Cap pixelRatio at 1.5
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.0;
     mount.appendChild(renderer.domElement);
@@ -275,7 +275,7 @@ export const ThreeBackground = () => {
     scene.add(fillLight);
 
     // The "Digital Soul"
-    const geometry = new THREE.IcosahedronGeometry(6, performanceMode ? 10 : 20);
+    const geometry = new THREE.IcosahedronGeometry(6, performanceMode ? 8 : 12); // OPTIMIZATION: Reduced detail from 20 to 12
     const originalPositions = geometry.attributes.position.array.slice();
 
     // Initial Material
@@ -298,7 +298,7 @@ export const ThreeBackground = () => {
     scene.add(mesh);
 
     // Ambient Particle System
-    const particleCount = 2100; // Reduced to 70% from 3000
+    const particleCount = 1600; // OPTIMIZATION: Reduced from 2100 to 1600
     const particleGeometry = new THREE.BufferGeometry();
     const particlePositionsArray = new Float32Array(particleCount * 3);
     const particleOriginalPositions = new Float32Array(particleCount * 3);
@@ -377,7 +377,7 @@ export const ThreeBackground = () => {
 
     const animate = () => {
       const time = clock.getElapsedTime();
-      const delta = 0.05; // Lerp speed
+      const delta = 0.02; // Slower lerp for smoother transitions
 
       // SMOOTH TRANSITION LOGIC
       const target = targetPropsRef.current;
