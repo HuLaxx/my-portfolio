@@ -59,16 +59,16 @@ export const stripExtensionAttrs = `
 `;
 
 export const metadata = {
-  title: "Alexander - Creative Developer",
+  title: "Rahul Khanke",
   description:
-    "Next.js 15 + React 19 portfolio showcasing immersive WebGL work, AI copilots, and market-ready delivery workflows.",
-  metadataBase: new URL("https://alexander.dev"),
+    "Next.js 15 + React 19 portfolio showcasing data science projects, ML models, and AI engineering work.",
+  metadataBase: new URL("https://rahulkhanke.dev"),
   openGraph: {
-    title: "Alexander - Creative Developer",
+    title: "Rahul Khanke",
     description:
-      "Immersive experiences with WebGL, AI copilots, and server actions built on an edge-first stack.",
-    url: "https://alexander.dev",
-    siteName: "Alexander Portfolio",
+      "Building robust data pipelines, training state-of-the-art ML models, and deploying scalable AI solutions.",
+    url: "https://rahulkhanke.dev",
+    siteName: "Rahul Khanke Portfolio",
   },
 };
 
