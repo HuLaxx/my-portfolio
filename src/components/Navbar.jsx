@@ -10,7 +10,6 @@ const navLinks = [
   { label: "ABOUT", href: "#hero" },
   { label: "EDUCATION", href: "#education" },
   { label: "EXPERIENCE", href: "#experience" },
-  { label: "WORK", href: "#work" },
   { label: "CONTACT", href: "#contact" },
 ];
 
@@ -66,25 +65,32 @@ export const Navbar = () => {
         <SignatureLogo />
 
         {/* Desktop Navigation */}
-        <div className="hidden items-center gap-6 md:flex">
-          <ul className="flex gap-5" role="menubar">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className={`group relative block px-2 py-1 text-[11px] font-semibold tracking-[0.3em] uppercase transition-all duration-500 ${activeSection === link.href
-                    ? "text-[var(--accent)]"
-                    : "text-[var(--muted)] hover:text-[var(--foreground)]"
-                    }`}
-                  aria-current={activeSection === link.href ? "page" : undefined}
-                >
-                  {link.label}
-                  <span className={`absolute inset-x-0 -bottom-1 h-px scale-x-0 bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent transition-transform duration-500 group-hover:scale-x-100 ${activeSection === link.href ? "scale-x-100" : ""}`} />
-                </Link>
-              </li>
-            ))}
-          </ul>
+        <div className="hidden lg:flex lg:flex-1 items-center justify-between gap-6">
+          {/* Center block: nav links */}
+          <div className="flex-1 flex justify-center">
+            <ul
+              className="grid grid-cols-2 gap-x-8 gap-y-1 xl:flex xl:gap-5"
+              role="menubar"
+            >
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className={`group relative block px-2 py-1 text-[11px] font-semibold tracking-[0.3em] uppercase transition-all duration-500 ${activeSection === link.href
+                      ? "text-[var(--accent)]"
+                      : "text-[var(--muted)] hover:text-[var(--foreground)]"
+                      }`}
+                    aria-current={activeSection === link.href ? "page" : undefined}
+                  >
+                    {link.label}
+                    <span className={`absolute inset-x-0 -bottom-1 h-px scale-x-0 bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent transition-transform duration-500 group-hover:scale-x-100 ${activeSection === link.href ? "scale-x-100" : ""}`} />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
+          {/* Right block: socials + theme toggle */}
           <div className="pl-6 border-l border-white/10 flex items-center gap-4">
             <SocialIcon
               href="https://linkedin.com"
@@ -107,7 +113,7 @@ export const Navbar = () => {
 
         {/* Mobile Menu Toggle */}
         <button
-          className="md:hidden p-2 text-[var(--foreground)]"
+          className="lg:hidden p-2 text-[var(--foreground)]"
           onClick={() => setMobileMenuOpen(true)}
           aria-label="Menu"
         >
