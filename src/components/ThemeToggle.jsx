@@ -16,16 +16,17 @@ export const ThemeToggle = () => {
   return (
     <div
       className={`
-        grid grid-cols-2 items-center justify-center
-        gap-1 md:gap-2
-        rounded-xl md:rounded-full
+        inline-grid grid-cols-2
+        items-center
+        gap-x-4 gap-y-2
+        rounded-full
         border border-[var(--border)]
         bg-[var(--panel)]/70
-        px-2 py-2 md:px-1.5 md:py-1
+        px-4 py-3
+        max-w-[380px]
         backdrop-blur-md
         shadow-[0_10px_30px_rgba(0,0,0,0.18)]
-        max-w-[260px]
-        xl:max-w-none xl:flex xl:flex-nowrap
+        xl:flex xl:flex-nowrap xl:max-w-none xl:px-1.5 xl:py-1 xl:gap-2
       `}
     >
       {seasons.map((t) => (
@@ -34,14 +35,16 @@ export const ThemeToggle = () => {
           onClick={() => setSeason(t.id)}
           className={clsx(
             `
-            rounded-full px-2 py-1 md:px-2.5
-            text-[9px] md:text-[10px]
+            rounded-full
+            px-3 py-1.5
+            text-[10px]
             font-semibold uppercase tracking-[0.12em]
             transition-all duration-300
-            flex-1 xl:flex-none text-center
+            text-center
+            xl:flex-none
             `,
             season === t.id
-              ? "bg-[var(--accent)] text-[var(--background)] shadow-[0_6px_18px_rgba(0,0,0,0.22)]"
+              ? "bg-[var(--accent)] text-[var(--background)] shadow-[0_4px_12px_rgba(0,0,0,0.25)]"
               : "text-gray-400 hover:text-white"
           )}
           aria-pressed={season === t.id}
