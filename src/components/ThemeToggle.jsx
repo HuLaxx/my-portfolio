@@ -16,7 +16,7 @@ export const ThemeToggle = () => {
   return (
     <div
       className={`
-        flex flex-wrap items-center justify-center
+        grid grid-cols-2 items-center justify-center
         gap-1 md:gap-2
         rounded-xl md:rounded-full
         border border-[var(--border)]
@@ -25,7 +25,7 @@ export const ThemeToggle = () => {
         backdrop-blur-md
         shadow-[0_10px_30px_rgba(0,0,0,0.18)]
         max-w-[260px]
-        xl:max-w-none xl:flex-nowrap
+        xl:max-w-none xl:flex xl:flex-nowrap
       `}
     >
       {seasons.map((t) => (

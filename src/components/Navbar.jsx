@@ -65,9 +65,9 @@ export const Navbar = () => {
         <SignatureLogo />
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex lg:flex-1 items-center justify-between gap-6">
+        <div className="hidden lg:flex lg:flex-1 items-center justify-end gap-6">
           {/* Center block: nav links */}
-          <div className="flex-1 flex justify-center">
+          <div className="flex">
             <ul
               className="grid grid-cols-2 gap-x-8 gap-y-1 xl:flex xl:gap-5"
               role="menubar"
