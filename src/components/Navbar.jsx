@@ -27,11 +27,13 @@ const SocialIcon = ({ href, path, label }) => (
   </a>
 );
 
+import { useMenu } from "./MenuContext";
+
 export const Navbar = () => {
   const { season } = useSeason();
   const isLight = season === "summer";
   const [activeSection, setActiveSection] = useState("#hero");
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { isMenuOpen, openMenu, closeMenu } = useMenu();
 
   // Track active section based on scroll
   useEffect(() => {
@@ -114,7 +116,7 @@ export const Navbar = () => {
         {/* Mobile Menu Toggle */}
         <button
           className="lg:hidden p-2 text-[var(--foreground)]"
-          onClick={() => setMobileMenuOpen(true)}
+          onClick={openMenu}
           aria-label="Menu"
         >
           <span className="block w-6 h-0.5 bg-current mb-1.5"></span>
@@ -123,8 +125,8 @@ export const Navbar = () => {
       </nav>
 
       <MobileMenu
-        isOpen={mobileMenuOpen}
-        onClose={() => setMobileMenuOpen(false)}
+        isOpen={isMenuOpen}
+        onClose={closeMenu}
         navLinks={navLinks}
         activeSection={activeSection}
       />

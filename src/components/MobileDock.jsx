@@ -5,9 +5,12 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSeason } from './SeasonContext';
 
+import { useMenu } from './MenuContext';
+
 export const MobileDock = () => {
   const pathname = usePathname();
   const { season } = useSeason();
+  const { isMenuOpen } = useMenu();
   const isLight = season === "summer";
 
   const roles = [
@@ -15,6 +18,8 @@ export const MobileDock = () => {
     { label: "Data Engineer", href: "/role/data-engineer" },
     { label: "AI/ML Engineer", href: "/role/ai-ml-engineer" },
   ];
+
+  if (isMenuOpen) return null;
 
   return (
     <div className={`nav-shell fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex w-auto items-center justify-center rounded-full px-8 py-4 ${isLight ? "text-[var(--foreground)]" : "text-white"}`}>

@@ -596,7 +596,16 @@ export const ThreeBackground = () => {
 
         const pulseScale = 1 + Math.sin(time * 2) * 0.05;
         const scrollScale = 1 + scrollProgress * 0.5;
-        const targetScale = pulseScale * scrollScale;
+
+        // Responsive scaling logic
+        let responsiveScale = 1.0;
+        if (window.innerWidth < 768) {
+          responsiveScale = 0.6;
+        } else if (window.innerWidth < 1024) {
+          responsiveScale = 0.8;
+        }
+
+        const targetScale = pulseScale * scrollScale * responsiveScale;
 
         mesh.scale.x += (targetScale - mesh.scale.x) * 0.05;
         mesh.scale.y += (targetScale - mesh.scale.y) * 0.05;

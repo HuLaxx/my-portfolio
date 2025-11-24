@@ -7,6 +7,7 @@ import { SmoothScroll } from "@/components/SmoothScroll";
 import { SeasonProvider } from "@/components/SeasonContext";
 import { AnimatedGradient } from "@/components/AnimatedGradient";
 import { ThreeBackground } from "@/components/ThreeBackground";
+import { MenuProvider } from "@/components/MenuContext";
 
 const display = Orbitron({
   variable: "--font-display",
@@ -87,14 +88,16 @@ export default function RootLayout({ children }) {
         className={`${display.variable} ${grotesk.variable} ${geistMono.variable} antialiased`}
       >
         <SeasonProvider>
-          <AnimatedGradient />
-          <ThreeBackground />
-          <SmoothScroll>
-            <div className="film-grain" />
-            {children}
-          </SmoothScroll>
-          <Analytics />
-          <SpeedInsights />
+          <MenuProvider>
+            <AnimatedGradient />
+            <ThreeBackground />
+            <SmoothScroll>
+              <div className="film-grain" />
+              {children}
+            </SmoothScroll>
+            <Analytics />
+            <SpeedInsights />
+          </MenuProvider>
         </SeasonProvider>
       </body>
     </html>
