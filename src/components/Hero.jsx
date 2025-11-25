@@ -8,21 +8,24 @@ export const Hero = ({ resume }) => {
 
   return (
     <section id="hero" className="relative min-h-[90vh] flex flex-col justify-center overflow-hidden">
-      <div className="mx-auto max-w-6xl px-6 md:px-20 pt-32 relative z-10">
+      <div className="mx-auto max-w-6xl px-6 md:px-20 pt-40 md:pt-52 relative z-10">
         <RevealOnScroll delay={100}>
           <div className="flex items-center gap-4 mb-8">
             <div className="h-[2px] w-12 bg-[var(--accent)]/60"></div>
-            <p className="font-mono text-xs tracking-[0.32em] uppercase text-white/70">
-              {label}
+            <p className="font-sans font-bold text-base md:text-lg tracking-widest uppercase text-[var(--accent)]">
+              About Me
             </p>
           </div>
         </RevealOnScroll>
 
         <RevealOnScroll delay={200}>
-          <h1 className="display-heading mb-10 text-6xl font-semibold leading-[0.88] tracking-tight text-[var(--foreground)] md:text-9xl lg:text-[10rem]">
-            RAHUL <br />
-            <span className="text-stroke opacity-100 text-[var(--foreground)]/10">KHANKE</span>
-          </h1>
+          <div className="mb-10 font-semibold leading-[1.1] tracking-tight text-[var(--foreground)]">
+            <h2 className="text-3xl md:text-4xl mb-2">Hello <span className="animate-wave inline-block origin-[70%_70%]">👋</span></h2>
+            <h1 className="text-5xl md:text-8xl lg:text-9xl mb-2">
+              I am Rahul <br />
+              <span className="text-stroke opacity-100 text-[var(--foreground)]/10">Khanke</span>
+            </h1>
+          </div>
         </RevealOnScroll>
 
         <RevealOnScroll delay={300}>

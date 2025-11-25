@@ -246,13 +246,13 @@ export const ThreeBackground = () => {
 
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
-      antialias: false, // OPTIMIZATION: Disabled antialias
+      antialias: false,
       powerPreference: "high-performance",
       stencil: false,
       depth: true
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // OPTIMIZATION: Cap pixelRatio at 1.5
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.0;
     mount.appendChild(renderer.domElement);
@@ -274,11 +274,11 @@ export const ThreeBackground = () => {
     fillLight.position.set(0, -10, 5);
     scene.add(fillLight);
 
-    // The "Digital Soul"
-    const geometry = new THREE.IcosahedronGeometry(6, performanceMode ? 8 : 12); // OPTIMIZATION: Reduced detail from 20 to 12
+    // --- The "Digital Soul" (Solid Crystal) ---
+    const geometry = new THREE.IcosahedronGeometry(6, performanceMode ? 8 : 12);
     const originalPositions = geometry.attributes.position.array.slice();
 
-    // Initial Material
+    // Material for Solid Crystal
     const material = new THREE.MeshPhysicalMaterial({
       envMapIntensity: 1.5,
       clearcoat: 1.0,
@@ -290,19 +290,101 @@ export const ThreeBackground = () => {
       roughness: targetPropsRef.current.roughness,
       transmission: targetPropsRef.current.transmission,
       thickness: targetPropsRef.current.thickness,
-      ior: targetPropsRef.current.ior
+      ior: targetPropsRef.current.ior,
+      transparent: true, // Enable transparency for fade-out
+      opacity: 1.0
     });
     materialRef.current = material;
 
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
-    // Ambient Particle System
-    const particleCount = 1600; // OPTIMIZATION: Reduced from 2100 to 1600
+    // --- "Stardust" System (Exploding Particles) ---
+    const dustGeometry = new THREE.BufferGeometry();
+    const dustCount = originalPositions.length / 3;
+    const dustPositions = new Float32Array(dustCount * 3);
+    const dustSizes = new Float32Array(dustCount);
+    const dustRandoms = new Float32Array(dustCount * 3); // For random explosion direction
+
+    for (let i = 0; i < dustCount; i++) {
+      dustPositions[i * 3] = originalPositions[i * 3];
+      dustPositions[i * 3 + 1] = originalPositions[i * 3 + 1];
+      dustPositions[i * 3 + 2] = originalPositions[i * 3 + 2];
+
+      // Random sizes for "different sizes" requirement
+      dustSizes[i] = Math.random() * 0.3 + 0.05;
+
+      // Pre-calculate random explosion vectors
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      dustRandoms[i * 3] = Math.sin(phi) * Math.cos(theta);
+      dustRandoms[i * 3 + 1] = Math.sin(phi) * Math.sin(theta);
+      dustRandoms[i * 3 + 2] = Math.cos(phi);
+    }
+
+    dustGeometry.setAttribute('position', new THREE.BufferAttribute(dustPositions, 3));
+    dustGeometry.setAttribute('size', new THREE.BufferAttribute(dustSizes, 1));
+
+    const dustMaterial = new THREE.PointsMaterial({
+      color: targetPropsRef.current.color,
+      size: 0.2, // Base size, modulated by attribute
+      transparent: true,
+      opacity: 0.0, // Start invisible
+      blending: THREE.AdditiveBlending,
+      sizeAttenuation: true,
+      depthWrite: false,
+    });
+
+    // Custom shader or onBeforeCompile could be used for per-particle sizing, 
+    // but for simplicity/performance we'll stick to standard PointsMaterial 
+    // and just rely on the 'size' attribute if we were using a ShaderMaterial.
+    // Standard PointsMaterial doesn't support 'size' attribute out of the box easily without modification.
+    // So we will use a slightly modified approach: update the geometry positions and just let them be uniform size 
+    // OR use a simple ShaderMaterial. Let's stick to standard PointsMaterial for stability, 
+    // but we can simulate "different sizes" by actually just having them be small dots.
+    // WAIT: User specifically asked for "different sizes". 
+    // Let's use a simple ShaderMaterial for the dust to support 'attribute float size'.
+
+    const dustShaderMaterial = new THREE.ShaderMaterial({
+      uniforms: {
+        color: { value: new THREE.Color(targetPropsRef.current.color) },
+        opacity: { value: 0.0 }
+      },
+      vertexShader: `
+            attribute float size;
+            varying float vOpacity;
+            void main() {
+                vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+                gl_PointSize = size * (300.0 / -mvPosition.z);
+                gl_Position = projectionMatrix * mvPosition;
+            }
+        `,
+      fragmentShader: `
+            uniform vec3 color;
+            uniform float opacity;
+            void main() {
+                if (opacity <= 0.01) discard;
+                vec2 coord = gl_PointCoord - vec2(0.5);
+                if(length(coord) > 0.5) discard; // Circular particle
+                gl_FragColor = vec4(color, opacity);
+            }
+        `,
+      transparent: true,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending
+    });
+
+    const dustPoints = new THREE.Points(dustGeometry, dustShaderMaterial);
+    scene.add(dustPoints);
+
+
+    // --- Ambient Background Particles (Floating dots) ---
+    const particleCount = 1200;
     const particleGeometry = new THREE.BufferGeometry();
     const particlePositionsArray = new Float32Array(particleCount * 3);
     const particleOriginalPositions = new Float32Array(particleCount * 3);
     const particleColors = new Float32Array(particleCount * 3);
+    const particleSizes = new Float32Array(particleCount); // NEW: Sizes
     const particleBlinkOffsets = new Float32Array(particleCount);
 
     const baseParticleColor = targetPropsRef.current.particleColor || targetPropsRef.current.color;
@@ -328,19 +410,44 @@ export const ThreeBackground = () => {
       particleColors[i * 3 + 1] = baseParticleColor.g;
       particleColors[i * 3 + 2] = baseParticleColor.b;
 
+      // Random sizes for background stardust
+      particleSizes[i] = Math.random() * 0.4 + 0.1;
+
       particleBlinkOffsets[i] = Math.random() * Math.PI * 2;
     }
 
     particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositionsArray, 3));
     particleGeometry.setAttribute('color', new THREE.BufferAttribute(particleColors, 3));
+    particleGeometry.setAttribute('size', new THREE.BufferAttribute(particleSizes, 1));
 
-    const particleMaterial = new THREE.PointsMaterial({
-      vertexColors: true,
-      size: 0.2, // Increased from 0.15 for better visibility
+    // Shader for Background Particles (Supports vertex colors + variable size)
+    const particleMaterial = new THREE.ShaderMaterial({
+      uniforms: {
+        globalOpacity: { value: 0.8 }
+      },
+      vertexShader: `
+        attribute float size;
+        attribute vec3 color;
+        varying vec3 vColor;
+        void main() {
+          vColor = color;
+          vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+          gl_PointSize = size * (300.0 / -mvPosition.z);
+          gl_Position = projectionMatrix * mvPosition;
+        }
+      `,
+      fragmentShader: `
+        uniform float globalOpacity;
+        varying vec3 vColor;
+        void main() {
+          vec2 coord = gl_PointCoord - vec2(0.5);
+          if(length(coord) > 0.5) discard; // Circular
+          gl_FragColor = vec4(vColor, globalOpacity);
+        }
+      `,
       transparent: true,
-      opacity: 0.75, // Increased from 0.6
-      blending: THREE.AdditiveBlending,
-      sizeAttenuation: true
+      depthWrite: false,
+      blending: THREE.AdditiveBlending
     });
     particlesRef.current = particleMaterial;
 
@@ -371,28 +478,24 @@ export const ThreeBackground = () => {
     });
 
     const clock = new THREE.Clock();
-
-    // Current animation state for smooth transitions
     const currentProps = { ...targetPropsRef.current };
-
-    // OPTIMIZATION: Object pooling to reduce GC pressure
     const tempVector = new THREE.Vector3();
     const cursorPosCache = new THREE.Vector3(0, 0, 0);
     let frameCount = 0;
 
     const animate = () => {
       const time = clock.getElapsedTime();
-      const delta = 0.02; // Slower lerp for smoother transitions
+      const delta = 0.02;
       frameCount++;
 
-      // SMOOTH TRANSITION LOGIC
+      // --- Smooth Transition Logic ---
       const target = targetPropsRef.current;
-
-      // Lerp Colors
       material.color.lerp(target.color, delta);
       material.emissive.lerp(target.emissive, delta);
 
-      // Lerp Numbers
+      // Update Dust Color
+      dustShaderMaterial.uniforms.color.value.lerp(target.color, delta);
+
       material.emissiveIntensity += (target.emissiveIntensity - material.emissiveIntensity) * delta;
       material.metalness += (target.metalness - material.metalness) * delta;
       material.roughness += (target.roughness - material.roughness) * delta;
@@ -400,57 +503,66 @@ export const ThreeBackground = () => {
       material.thickness += (target.thickness - material.thickness) * delta;
       material.ior += (target.ior - material.ior) * delta;
 
-      // Lerp Noise Params
       currentProps.noiseScale += (target.noiseScale - currentProps.noiseScale) * delta;
       currentProps.noiseSpeed += (target.noiseSpeed - currentProps.noiseSpeed) * delta;
       currentProps.displacementStrength += (target.displacementStrength - currentProps.displacementStrength) * delta;
 
       if (!performanceMode) {
-        // OPTIMIZATION: Reuse vector object instead of creating new ones
+        // Cursor interaction
         tempVector.set(mouseX, mouseY, 0.5);
         tempVector.unproject(camera);
         tempVector.sub(camera.position).normalize();
         const distance = -camera.position.z / tempVector.z;
         cursorPosCache.copy(camera.position).add(tempVector.multiplyScalar(distance));
 
+        // --- Deform Crystal & Dust ---
         const positions = mesh.geometry.attributes.position;
+        const dPositions = dustGeometry.attributes.position;
         const count = positions.count;
+
+        // Calculate scroll-based disintegration factors
+        const scrollProgress = scrollY;
+
+        // FADE LOGIC:
+        let crystalOpacity = 1.0;
+        let dustOpacity = 0.0;
+
+        if (scrollProgress > 0.05) {
+          const fadeProgress = Math.min((scrollProgress - 0.05) / 0.2, 1.0);
+          crystalOpacity = 1.0 - fadeProgress;
+          dustOpacity = fadeProgress;
+        }
+
+        material.opacity = crystalOpacity;
+        dustShaderMaterial.uniforms.opacity.value = dustOpacity;
+
+        // Explosion Logic
+        const explosionStrength = Math.max(0, (scrollProgress - 0.05) * 30.0);
 
         for (let i = 0; i < count; i++) {
           const ox = originalPositions[i * 3];
           const oy = originalPositions[i * 3 + 1];
           const oz = originalPositions[i * 3 + 2];
 
+          // 1. Calculate Base Deformation
           const n = simplex.noise(
             ox * currentProps.noiseScale + time * currentProps.noiseSpeed * 0.2,
             oy * currentProps.noiseScale + time * currentProps.noiseSpeed * 0.3,
             oz * currentProps.noiseScale + time * currentProps.noiseSpeed * 0.2
           );
 
-          let deformation = n * currentProps.displacementStrength;
-          let px = ox, py = oy, pz = oz;
-
-          // Apply deformation (simplified for smooth transition, using generic spherical + noise)
-          // We can't easily switch logic branches (if/else) smoothly, so we stick to a versatile noise deformation
-          // that varies by parameters (scale/speed/strength)
-
-          // Exception: Spring petal logic is distinct. We can blend it in?
-          // For simplicity and smoothness, we'll stick to the noise deformation which looks great for all if tuned right.
-          // If we really need the petal shape, we'd need a 'petalFactor' to lerp.
-          // Let's stick to the high-quality noise deformation for now to ensure smoothness.
-
+          const deformation = n * currentProps.displacementStrength;
           const len = Math.sqrt(ox * ox + oy * oy + oz * oz);
           const nx = ox / len;
           const ny = oy / len;
           const nz = oz / len;
 
-          px = ox + nx * deformation;
-          py = oy + ny * deformation;
-          pz = oz + nz * deformation;
+          // Deformed position
+          let px = ox + nx * deformation;
+          let py = oy + ny * deformation;
+          let pz = oz + nz * deformation;
 
-          // DISINTEGRATION EFFECT ON SCROLL
-          const scrollProgress = scrollY;
-
+          // DISINTEGRATION EFFECT ON SCROLL (Gaps/Strings for Crystal)
           if (scrollProgress > 0.001) {
             const progress = Math.min((scrollProgress - 0.001) / 0.9, 1.0);
             const ease = Math.pow(progress, 1.5);
@@ -470,9 +582,14 @@ export const ThreeBackground = () => {
             const randY = ((seed * 78.233) % 1);
             const randZ = ((seed * 45.164) % 1);
 
-            px += (randX - 0.5) * disperseStrength;
-            py += (randY - 0.5) * disperseStrength;
-            pz += (randZ - 0.5) * disperseStrength;
+            // Apply to Solid Crystal (Restore Gaps/Strings)
+            const dx = (randX - 0.5) * disperseStrength;
+            const dy = (randY - 0.5) * disperseStrength;
+            const dz = (randZ - 0.5) * disperseStrength;
+
+            px += dx;
+            py += dy;
+            pz += dz;
 
             if (ease > 0.1) {
               const floatStrength = ease * 1.5;
@@ -486,17 +603,36 @@ export const ThreeBackground = () => {
             }
           }
 
+          // 2. Apply to Solid Crystal
           positions.setXYZ(i, px, py, pz);
+
+          // 3. Apply to Dust (ADD EXPLOSION)
+          if (dustOpacity > 0.01) {
+            const rx = dustRandoms[i * 3];
+            const ry = dustRandoms[i * 3 + 1];
+            const rz = dustRandoms[i * 3 + 2];
+
+            const moveX = rx * explosionStrength;
+            const moveY = ry * explosionStrength;
+            const moveZ = rz * explosionStrength;
+
+            const floatX = Math.sin(time * 0.5 + i) * 0.5;
+            const floatY = Math.cos(time * 0.3 + i) * 0.5;
+            const floatZ = Math.sin(time * 0.4 + i) * 0.5;
+
+            dPositions.setXYZ(i, px + moveX + floatX, py + moveY + floatY, pz + moveZ + floatZ);
+          } else {
+            dPositions.setXYZ(i, px, py, pz);
+          }
         }
 
         mesh.geometry.attributes.position.needsUpdate = true;
         mesh.geometry.computeVertexNormals();
+        dustGeometry.attributes.position.needsUpdate = true;
 
-        // Update Ambient Particles
+        // --- Update Ambient Background Particles ---
         const pPositions = particles.geometry.attributes.position;
         const pColors = particles.geometry.attributes.color;
-
-        // OPTIMIZATION: Only update colors every 3rd frame (still 48 FPS color updates)
         const updateColors = frameCount % 3 === 0;
 
         for (let i = 0; i < particleCount; i++) {
@@ -506,142 +642,85 @@ export const ThreeBackground = () => {
 
           let px, py, pz;
 
-          if (i % 25 === 0) { // Stream - Increased from every 50th to every 25th particle
-            const speed = 0.12; // Slightly slower for smoother detachment
-            const offset = i * 0.01;
-            let t = (time * speed + offset) % 1;
-            t = t * t * (3 - 2 * t); // Smooth hermite interpolation
+          // Ambient Float
+          const floatSpeed = 0.2;
+          const floatX = Math.sin(time * floatSpeed + ox) * 0.5;
+          const floatY = Math.cos(time * floatSpeed + oy) * 0.5;
+          const floatZ = Math.sin(time * floatSpeed + oz) * 0.5;
 
-            // OPTIMIZATION: Cache length calculation
-            const lenSq = ox * ox + oy * oy + oz * oz;
-            const len = Math.sqrt(lenSq);
-            const shellRadius = 8.0;
-            let startScale = 1.0;
-            if (len > 0.001) startScale = shellRadius / len;
+          px = ox + floatX;
+          py = oy + floatY;
+          pz = oz + floatZ;
 
-            const startX = ox * startScale;
-            const startY = oy * startScale;
-            const startZ = oz * startScale;
+          // Scroll dispersion for background particles
+          if (scrollY > 0.001) {
+            const progress = Math.min((scrollY - 0.001) / 0.9, 1.0);
+            const ease = Math.pow(progress, 1.5);
+            const disperseFactor = ease * 20.0;
 
-            // Use cached cursor position
-            px = startX + (cursorPosCache.x - startX) * t;
-            py = startY + (cursorPosCache.y - startY) * t;
-            pz = startZ + (cursorPosCache.z - startZ) * t;
-
-            const noiseAmp = 1.2 * Math.sin(t * Math.PI); // Reduced noise
-            px += Math.sin(time * 2.0 + i) * noiseAmp;
-            py += Math.cos(time * 1.5 + i) * noiseAmp;
-            pz += Math.sin(time * 2.2 + i) * noiseAmp;
-
-          } else { // Ambient
-            const floatSpeed = 0.2;
-            const floatX = Math.sin(time * floatSpeed + ox) * 0.5;
-            const floatY = Math.cos(time * floatSpeed + oy) * 0.5;
-            const floatZ = Math.sin(time * floatSpeed + oz) * 0.5;
-
-            px = ox + floatX;
-            py = oy + floatY;
-            pz = oz + floatZ;
-
-            // OPTIMIZATION: Cache length calculations
             const currentLenSq = px * px + py * py + pz * pz;
             const currentLen = Math.sqrt(currentLenSq);
-            const gapRadius = 5.5;
-            const shellTarget = 8.0;
 
-            if (currentLen < gapRadius && currentLen > 0.001) {
-              const pushFactor = gapRadius / currentLen;
-              px *= pushFactor;
-              py *= pushFactor;
-              pz *= pushFactor;
-            } else if (currentLen < 20.0 && currentLen > gapRadius) {
-              const distToShell = shellTarget - currentLen;
-              const pullFactor = 0.05;
-              const invLen = 1.0 / currentLen; // OPTIMIZATION: Avoid division in loop
-              const dirX = px * invLen;
-              const dirY = py * invLen;
-              const dirZ = pz * invLen;
-              px += dirX * distToShell * pullFactor;
-              py += dirY * distToShell * pullFactor;
-              pz += dirZ * distToShell * pullFactor;
-            }
-
-            if (scrollY > 0.001) {
-              const progress = Math.min((scrollY - 0.001) / 0.9, 1.0);
-              const ease = Math.pow(progress, 1.5);
-              const seed = i;
-              const rand = ((seed * 12.9898) % 1);
-              const disperseFactor = ease * (10.0 + rand * 20.0);
-              const len2Sq = px * px + py * py + pz * pz;
-              const len2 = Math.sqrt(len2Sq);
-              const invLen2 = 1.0 / len2;
-              const dx = px * invLen2;
-              const dy = py * invLen2;
-              const dz = pz * invLen2;
-              px += dx * disperseFactor;
-              py += dy * disperseFactor;
-              pz += disperseFactor;
+            if (currentLen > 0.001) {
+              px += (px / currentLen) * disperseFactor;
+              py += (py / currentLen) * disperseFactor;
+              pz += (pz / currentLen) * disperseFactor;
             }
           }
 
           pPositions.setXYZ(i, px, py, pz);
 
-          // OPTIMIZATION: Only update colors every 3rd frame (still smooth at 48 FPS)
           if (updateColors) {
             const blink = Math.sin(time * 3.0 + particleBlinkOffsets[i]);
             const brightness = 0.4 + (blink * 0.5 + 0.5) * 0.6;
-
-            // Lerp particle colors
             const r = THREE.MathUtils.lerp(pColors.getX(i), target.color.r * brightness, delta);
             const g = THREE.MathUtils.lerp(pColors.getY(i), target.color.g * brightness, delta);
             const b = THREE.MathUtils.lerp(pColors.getZ(i), target.color.b * brightness, delta);
-
             pColors.setXYZ(i, r, g, b);
           }
         }
         pPositions.needsUpdate = true;
         if (updateColors) pColors.needsUpdate = true;
 
-        mesh.rotation.y = time * 0.1;
-        mesh.rotation.x = Math.sin(time * 0.2) * 0.1;
+        // --- Global Rotation & Movement ---
+        const rotX = Math.sin(time * 0.2) * 0.1;
+        const rotY = time * 0.1;
 
-        const scrollProgress = scrollY;
+        mesh.rotation.x = rotX;
+        mesh.rotation.y = rotY;
+        dustPoints.rotation.x = rotX;
+        dustPoints.rotation.y = rotY;
+
+        // Scroll-based movement (Wave)
         const waveY = Math.sin(scrollProgress * Math.PI * 2 + time * 0.5) * 2;
         const waveX = Math.cos(scrollProgress * Math.PI * 1.5 + time * 0.3) * 1.5;
 
-        mesh.position.x += (waveX - mesh.position.x) * 0.05;
-        mesh.position.y += (waveY - scrollProgress * 8 - mesh.position.y) * 0.05;
+        const targetPosX = waveX * 0.05;
+        const targetPosY = (waveY - scrollProgress * 8) * 0.05;
+
+        mesh.position.x += (targetPosX - mesh.position.x) * 0.1;
+        mesh.position.y += (targetPosY - mesh.position.y) * 0.1;
+
+        dustPoints.position.copy(mesh.position);
 
         const targetZ = 25 - scrollProgress * 14 + Math.sin(scrollProgress * Math.PI) * 5;
         camera.position.z += (targetZ - camera.position.z) * 0.08;
 
+        // Scaling
         const pulseScale = 1 + Math.sin(time * 2) * 0.05;
         const scrollScale = 1 + scrollProgress * 0.5;
-
-        // Responsive scaling logic
         let responsiveScale = 1.0;
-        if (window.innerWidth < 768) {
-          responsiveScale = 0.6;
-        } else if (window.innerWidth < 1024) {
-          responsiveScale = 0.8;
-        }
+        if (window.innerWidth < 768) responsiveScale = 0.6;
+        else if (window.innerWidth < 1024) responsiveScale = 0.8;
 
         const targetScale = pulseScale * scrollScale * responsiveScale;
 
-        mesh.scale.x += (targetScale - mesh.scale.x) * 0.05;
-        mesh.scale.y += (targetScale - mesh.scale.y) * 0.05;
-        mesh.scale.z += (targetScale - mesh.scale.z) * 0.05;
+        mesh.scale.setScalar(targetScale);
+        dustPoints.scale.setScalar(targetScale);
 
+        // Extra rotation on scroll
         mesh.rotation.z += scrollProgress * 0.002;
-        mesh.rotation.x += Math.sin(scrollProgress * Math.PI) * 0.001;
-        mesh.rotation.y += time * 0.05;
-
-        if (scrollProgress > 0.8) {
-          const opacity = Math.max(0.3, 1 - (scrollProgress - 0.8) * 2);
-          renderer.domElement.style.opacity = opacity;
-        } else {
-          renderer.domElement.style.opacity = 1;
-        }
+        dustPoints.rotation.z += scrollProgress * 0.002;
       }
 
       renderer.render(scene, camera);
@@ -654,13 +733,15 @@ export const ThreeBackground = () => {
       renderer.dispose();
       geometry.dispose();
       material.dispose();
+      dustGeometry.dispose();
+      dustShaderMaterial.dispose();
       particleGeometry.dispose();
       particleMaterial.dispose();
       if (mount) mount.innerHTML = '';
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('scroll', onScroll);
     };
-  }, []); // Run once!
+  }, []);
 
   return (
     <div

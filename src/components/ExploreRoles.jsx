@@ -41,30 +41,35 @@ export const ExploreRoles = () => {
                     </div>
                 </RevealOnScroll>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+                <div className="flex flex-col gap-8 md:gap-12">
                     {roles.map((role, index) => (
                         <RevealOnScroll key={role.id} delay={index * 100}>
-                            <Link href={role.href} className="group relative block h-full">
-                                <div className="relative h-full p-8 rounded-3xl border border-white/10 bg-[var(--card)]/30 backdrop-blur-sm overflow-hidden transition-all duration-500 group-hover:border-white/20 group-hover:translate-y-[-4px] group-hover:shadow-2xl">
+                            <Link href={role.href} className="group relative block w-full">
+                                <div className="relative w-full p-8 md:p-10 rounded-3xl border border-white/10 bg-[var(--card)]/30 backdrop-blur-sm overflow-hidden transition-all duration-500 group-hover:border-white/20 group-hover:translate-y-[-4px] group-hover:shadow-2xl">
 
                                     {/* Hover Gradient Background */}
                                     <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 bg-gradient-to-br ${role.gradient}`} />
 
                                     {/* Content */}
-                                    <div className="relative z-10 flex flex-col h-full">
-                                        <h3 className="text-2xl md:text-3xl font-bold mb-4 text-[var(--foreground)] group-hover:text-white transition-colors">
-                                            {role.title}
-                                        </h3>
+                                    <div className="relative z-10 flex flex-col md:flex-row md:items-center gap-6 md:gap-12">
+                                        {/* Title Section */}
+                                        <div className="md:w-1/3 flex-shrink-0">
+                                            <h3 className="text-3xl md:text-4xl font-bold text-[var(--foreground)] group-hover:text-white transition-colors">
+                                                {role.title}
+                                            </h3>
+                                            <div className="mt-4 flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[var(--accent)] group-hover:text-white transition-colors">
+                                                <span>View Projects</span>
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="transform transition-transform duration-300 group-hover:translate-x-1">
+                                                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                                </svg>
+                                            </div>
+                                        </div>
 
-                                        <p className="text-sm md:text-base leading-relaxed text-[var(--muted)] group-hover:text-white/80 mb-8 flex-grow">
-                                            {role.description}
-                                        </p>
-
-                                        <div className="flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[var(--accent)] group-hover:text-white transition-colors">
-                                            <span>View Projects</span>
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="transform transition-transform duration-300 group-hover:translate-x-1">
-                                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                            </svg>
+                                        {/* Description Section */}
+                                        <div className="md:w-2/3">
+                                            <p className="text-base md:text-lg leading-relaxed text-[var(--muted)] group-hover:text-white/80">
+                                                {role.description}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
