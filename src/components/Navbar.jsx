@@ -5,12 +5,14 @@ import { useEffect, useState } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 import { MobileMenu } from "./MobileMenu";
 import { useSeason } from "./SeasonContext";
+import { useMenu } from "./MenuContext";
+import { AnimatePresence, motion } from "framer-motion";
 
 const navLinks = [
-  { label: "ABOUT", href: "#hero" },
-  { label: "EDUCATION", href: "#education" },
-  { label: "EXPERIENCE", href: "#experience" },
-  { label: "CONTACT", href: "#contact" },
+  { href: "#roles", label: "EXPLORE" },
+  { href: "#experience", label: "EXPERIENCE" },
+  { href: "#education", label: "EDUCATION" },
+  { href: "#contact", label: "CONTACT" },
 ];
 
 const SocialIcon = ({ href, path, label }) => (
@@ -26,8 +28,6 @@ const SocialIcon = ({ href, path, label }) => (
     </svg>
   </a>
 );
-
-import { useMenu } from "./MenuContext";
 
 export const Navbar = () => {
   const { season } = useSeason();
@@ -133,8 +133,6 @@ export const Navbar = () => {
     </>
   );
 };
-
-import { AnimatePresence, motion } from "framer-motion";
 
 const SignatureLogo = () => {
   const [langIndex, setLangIndex] = useState(0);
