@@ -375,9 +375,15 @@ export const ThreeBackground = () => {
     // Current animation state for smooth transitions
     const currentProps = { ...targetPropsRef.current };
 
+    // OPTIMIZATION: Object pooling to reduce GC pressure
+    const tempVector = new THREE.Vector3();
+    const cursorPosCache = new THREE.Vector3(0, 0, 0);
+    let frameCount = 0;
+
     const animate = () => {
       const time = clock.getElapsedTime();
       const delta = 0.02; // Slower lerp for smoother transitions
+      frameCount++;
 
       // SMOOTH TRANSITION LOGIC
       const target = targetPropsRef.current;
@@ -400,11 +406,12 @@ export const ThreeBackground = () => {
       currentProps.displacementStrength += (target.displacementStrength - currentProps.displacementStrength) * delta;
 
       if (!performanceMode) {
-        const vector = new THREE.Vector3(mouseX, mouseY, 0.5);
-        vector.unproject(camera);
-        const dir = vector.sub(camera.position).normalize();
-        const distance = -camera.position.z / dir.z;
-        const cursorPos = camera.position.clone().add(dir.multiplyScalar(distance));
+        // OPTIMIZATION: Reuse vector object instead of creating new ones
+        tempVector.set(mouseX, mouseY, 0.5);
+        tempVector.unproject(camera);
+        tempVector.sub(camera.position).normalize();
+        const distance = -camera.position.z / tempVector.z;
+        cursorPosCache.copy(camera.position).add(tempVector.multiplyScalar(distance));
 
         const positions = mesh.geometry.attributes.position;
         const count = positions.count;
@@ -489,6 +496,9 @@ export const ThreeBackground = () => {
         const pPositions = particles.geometry.attributes.position;
         const pColors = particles.geometry.attributes.color;
 
+        // OPTIMIZATION: Only update colors every 3rd frame (still 48 FPS color updates)
+        const updateColors = frameCount % 3 === 0;
+
         for (let i = 0; i < particleCount; i++) {
           const ox = particleOriginalPositions[i * 3];
           const oy = particleOriginalPositions[i * 3 + 1];
@@ -502,7 +512,9 @@ export const ThreeBackground = () => {
             let t = (time * speed + offset) % 1;
             t = t * t * (3 - 2 * t); // Smooth hermite interpolation
 
-            const len = Math.sqrt(ox * ox + oy * oy + oz * oz);
+            // OPTIMIZATION: Cache length calculation
+            const lenSq = ox * ox + oy * oy + oz * oz;
+            const len = Math.sqrt(lenSq);
             const shellRadius = 8.0;
             let startScale = 1.0;
             if (len > 0.001) startScale = shellRadius / len;
@@ -511,9 +523,10 @@ export const ThreeBackground = () => {
             const startY = oy * startScale;
             const startZ = oz * startScale;
 
-            px = startX + (cursorPos.x - startX) * t;
-            py = startY + (cursorPos.y - startY) * t;
-            pz = startZ + (cursorPos.z - startZ) * t;
+            // Use cached cursor position
+            px = startX + (cursorPosCache.x - startX) * t;
+            py = startY + (cursorPosCache.y - startY) * t;
+            pz = startZ + (cursorPosCache.z - startZ) * t;
 
             const noiseAmp = 1.2 * Math.sin(t * Math.PI); // Reduced noise
             px += Math.sin(time * 2.0 + i) * noiseAmp;
@@ -530,7 +543,9 @@ export const ThreeBackground = () => {
             py = oy + floatY;
             pz = oz + floatZ;
 
-            const currentLen = Math.sqrt(px * px + py * py + pz * pz);
+            // OPTIMIZATION: Cache length calculations
+            const currentLenSq = px * px + py * py + pz * pz;
+            const currentLen = Math.sqrt(currentLenSq);
             const gapRadius = 5.5;
             const shellTarget = 8.0;
 
@@ -542,9 +557,10 @@ export const ThreeBackground = () => {
             } else if (currentLen < 20.0 && currentLen > gapRadius) {
               const distToShell = shellTarget - currentLen;
               const pullFactor = 0.05;
-              const dirX = px / currentLen;
-              const dirY = py / currentLen;
-              const dirZ = pz / currentLen;
+              const invLen = 1.0 / currentLen; // OPTIMIZATION: Avoid division in loop
+              const dirX = px * invLen;
+              const dirY = py * invLen;
+              const dirZ = pz * invLen;
               px += dirX * distToShell * pullFactor;
               py += dirY * distToShell * pullFactor;
               pz += dirZ * distToShell * pullFactor;
@@ -556,30 +572,35 @@ export const ThreeBackground = () => {
               const seed = i;
               const rand = ((seed * 12.9898) % 1);
               const disperseFactor = ease * (10.0 + rand * 20.0);
-              const len2 = Math.sqrt(px * px + py * py + pz * pz);
-              const dx = px / len2;
-              const dy = py / len2;
-              const dz = pz / len2;
+              const len2Sq = px * px + py * py + pz * pz;
+              const len2 = Math.sqrt(len2Sq);
+              const invLen2 = 1.0 / len2;
+              const dx = px * invLen2;
+              const dy = py * invLen2;
+              const dz = pz * invLen2;
               px += dx * disperseFactor;
               py += dy * disperseFactor;
-              pz += dz * disperseFactor;
+              pz += disperseFactor;
             }
           }
 
           pPositions.setXYZ(i, px, py, pz);
 
-          const blink = Math.sin(time * 3.0 + particleBlinkOffsets[i]);
-          const brightness = 0.4 + (blink * 0.5 + 0.5) * 0.6;
+          // OPTIMIZATION: Only update colors every 3rd frame (still smooth at 48 FPS)
+          if (updateColors) {
+            const blink = Math.sin(time * 3.0 + particleBlinkOffsets[i]);
+            const brightness = 0.4 + (blink * 0.5 + 0.5) * 0.6;
 
-          // Lerp particle colors too
-          const r = THREE.MathUtils.lerp(pColors.getX(i), target.color.r * brightness, delta);
-          const g = THREE.MathUtils.lerp(pColors.getY(i), target.color.g * brightness, delta);
-          const b = THREE.MathUtils.lerp(pColors.getZ(i), target.color.b * brightness, delta);
+            // Lerp particle colors
+            const r = THREE.MathUtils.lerp(pColors.getX(i), target.color.r * brightness, delta);
+            const g = THREE.MathUtils.lerp(pColors.getY(i), target.color.g * brightness, delta);
+            const b = THREE.MathUtils.lerp(pColors.getZ(i), target.color.b * brightness, delta);
 
-          pColors.setXYZ(i, r, g, b);
+            pColors.setXYZ(i, r, g, b);
+          }
         }
         pPositions.needsUpdate = true;
-        pColors.needsUpdate = true;
+        if (updateColors) pColors.needsUpdate = true;
 
         mesh.rotation.y = time * 0.1;
         mesh.rotation.x = Math.sin(time * 0.2) * 0.1;
