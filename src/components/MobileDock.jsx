@@ -22,13 +22,13 @@ export const MobileDock = () => {
   if (isMenuOpen) return null;
 
   return (
-    <div className={`nav-shell fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex w-auto items-center justify-center rounded-full px-8 py-4 ${isLight ? "text-[var(--foreground)]" : "text-white"}`}>
-      <nav className="flex items-center gap-8" role="navigation" aria-label="Secondary">
+    <div className={`nav-shell fixed bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 z-50 flex w-auto max-w-[95vw] items-center justify-center rounded-full px-3 sm:px-6 md:px-8 py-3 sm:py-4 ${isLight ? "text-[var(--foreground)]" : "text-white"}`}>
+      <nav className="flex items-center gap-3 sm:gap-6 md:gap-8" role="navigation" aria-label="Secondary">
         {roles.map((role, index) => (
           <div key={role.href} className="flex items-center">
             <Link
               href={role.href}
-              className={`group relative text-xs font-bold tracking-[0.2em] uppercase transition-all duration-300 ${pathname === role.href
+              className={`group relative text-[10px] sm:text-xs font-bold tracking-[0.15em] sm:tracking-[0.2em] uppercase transition-all duration-300 whitespace-nowrap ${pathname === role.href
                 ? 'text-[var(--accent)]'
                 : isLight ? 'text-gray-700 hover:text-black' : 'text-gray-300 hover:text-white'
                 }`}
@@ -41,7 +41,7 @@ export const MobileDock = () => {
                 }`} />
             </Link>
             {index < roles.length - 1 && (
-              <div className="w-px h-4 bg-[var(--border)] ml-8" />
+              <div className="w-px h-3 sm:h-4 bg-[var(--border)] ml-3 sm:ml-6 md:ml-8" />
             )}
           </div>
         ))}
