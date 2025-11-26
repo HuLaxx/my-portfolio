@@ -176,17 +176,17 @@ export const ThreeBackground = () => {
         break;
       case 'winter': // Frozen Ice
         props = {
-          color: 0xaaddff,
-          emissive: 0x000000, // No emissive for ice usually, or very faint
-          emissiveIntensity: 0.1,
-          metalness: 0.1,
-          roughness: 0.05,
-          transmission: 1.0,
-          thickness: 8,
-          ior: 1.31,
+          color: 0x88ccff, // Stronger blue
+          emissive: 0x002244, // Deep blue glow
+          emissiveIntensity: 0.6, // Stronger glow
+          metalness: 0.8, // Metallic ice
+          roughness: 0.1, // Shiny
+          transmission: 0.2, // More solid
+          thickness: 4,
+          ior: 1.5,
           noiseScale: 0.8,
-          noiseSpeed: 1.0,
-          displacementStrength: 0.8
+          noiseSpeed: 0.4, // Slower movement
+          displacementStrength: 1.2
         };
         break;
       case 'rainy': // Refractive Water
