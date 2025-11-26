@@ -19,6 +19,12 @@
   --footer-bg: rgba(255, 255, 255, 0.5);
   /* Light Summer Glass */
   --stroke-color: rgba(0, 0, 0, 0.8);
+  /* Glass variables (light default) */
+  --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.1));
+  --glass-border: rgba(0, 0, 0, 0.48);
+  --glass-outline: rgba(0, 0, 0, 0.38);
+  --glass-blur: 10px;
+  --glass-saturation: 105%;
 }
 
 [data-theme="summer"] {
@@ -43,11 +49,20 @@
   /* More transparent */
   /* Summer Glass */
   --stroke-color: rgba(0, 0, 0, 0.8);
+  --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.08));
+  --glass-border: rgba(0, 0, 0, 0.4);
+  --glass-outline: rgba(0, 0, 0, 0.32);
+  --glass-blur: 9px;
+  --glass-saturation: 102%;
 }
 
 [data-theme="autumn"] {
-  /* Crystal Color: #ffaa00 (Gold) -> Background: Dark Brownish */
-  --background: radial-gradient(circle at 80% 20%, rgba(184, 134, 11, 0.25), transparent 60%), #1a0f05;
+  /* Deep ember tone (darker) */
+  --background:
+    radial-gradient(circle at 18% 12%, rgba(90, 92, 110, 0.28), transparent 48%),
+    radial-gradient(circle at 76% 54%, rgba(102, 110, 70, 0.22), transparent 60%),
+    radial-gradient(circle at 48% 78%, rgba(26, 28, 32, 0.28), transparent 68%),
+    #121416;
   --foreground: #fef3c7;
   --muted: #d4d4d8;
   --accent: #fbbf24;
@@ -63,6 +78,11 @@
   --footer-bg: rgba(25, 15, 5, 0.6);
   /* Autumn Glass */
   --stroke-color: rgba(255, 255, 255, 0.8);
+  --glass-bg: linear-gradient(145deg, rgba(6, 8, 16, 0.28), rgba(10, 12, 22, 0.16));
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-outline: rgba(255, 255, 255, 0.14);
+  --glass-blur: 12px;
+  --glass-saturation: 115%;
 }
 
 [data-theme="winter"] {
@@ -83,6 +103,11 @@
   --footer-bg: rgba(2, 4, 20, 0.6);
   /* Winter Glass */
   --stroke-color: rgba(255, 255, 255, 0.8);
+  --glass-bg: linear-gradient(145deg, rgba(6, 8, 16, 0.28), rgba(10, 12, 22, 0.16));
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-outline: rgba(255, 255, 255, 0.14);
+  --glass-blur: 12px;
+  --glass-saturation: 115%;
 }
 
 [data-theme="spring"] {
@@ -106,6 +131,11 @@
   --footer-bg: rgba(255, 255, 255, 0.15);
   /* Spring Glass */
   --stroke-color: rgba(0, 0, 0, 0.8);
+  --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.08));
+  --glass-border: rgba(0, 0, 0, 0.4);
+  --glass-outline: rgba(0, 0, 0, 0.32);
+  --glass-blur: 9px;
+  --glass-saturation: 102%;
 }
 
 @theme inline {
@@ -146,22 +176,11 @@ footer {
 }
 
 .nav-shell {
-  background: linear-gradient(135deg,
-      rgba(255, 255, 255, 0.4),
-      rgba(255, 255, 255, 0.1)),
-    var(--panel);
-  border: 2px solid var(--border);
-  backdrop-filter: blur(14px);
-  box-shadow:
-    0 14px 40px rgba(0, 0, 0, 0.15),
-    inset 0 2px 0 rgba(255, 255, 255, 0.5),
-    inset 0 -2px 0 rgba(0, 0, 0, 0.05);
-  /* 3D Bevel */
-}
-
-body:not([data-theme="light"]) .nav-shell {
-  background: transparent;
-  border-color: rgba(255, 255, 255, 0.14);
+  background: var(--glass-bg);
+  border: 2px solid var(--glass-border);
+  outline: 1px solid var(--glass-outline);
+  outline-offset: -1px;
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
   box-shadow: none;
 }
 

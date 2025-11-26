@@ -9,32 +9,34 @@ export const Hero = ({ resume }) => {
   return (
     <section id="hero" className="relative min-h-[90vh] flex flex-col justify-center overflow-hidden">
       <div className="mx-auto max-w-6xl px-6 md:px-20 pt-40 md:pt-52 relative z-10">
-        <RevealOnScroll delay={100}>
-          <div className="flex items-center gap-4 mb-4">
-            <div className="h-[2px] w-12 bg-[var(--accent)]/60"></div>
-            <p className="font-sans font-bold text-base md:text-lg tracking-widest uppercase text-[var(--accent)]">
-              About Me
-            </p>
-          </div>
-        </RevealOnScroll>
+        <div className="px-6 py-8 md:px-12 md:py-14">
+          <RevealOnScroll delay={100}>
+            <div className="flex items-center gap-4 mb-6">
+              <div className="h-[2px] w-12 bg-[var(--accent)]/60"></div>
+              <p className="font-sans font-bold text-base md:text-lg tracking-widest uppercase text-[var(--accent)]">
+                About Me
+              </p>
+            </div>
+          </RevealOnScroll>
 
-        <RevealOnScroll delay={200}>
-          <div className="mb-6 font-semibold leading-[1.1] tracking-tight text-[var(--foreground)]">
-            <h1 className="text-5xl md:text-8xl lg:text-9xl mb-2">
-              I am Rahul <br />
-              <span className="text-stroke opacity-100 text-[var(--foreground)]/10">Khanke</span>
-            </h1>
-          </div>
-        </RevealOnScroll>
+          <RevealOnScroll delay={200}>
+            <div className="mb-6 font-semibold leading-[1.1] tracking-tight text-[var(--foreground)]">
+              <h1 className="text-5xl md:text-8xl lg:text-9xl mb-2">
+                I am Rahul <br />
+                <span className="text-stroke opacity-100 text-[var(--foreground)]/10">Khanke</span>
+              </h1>
+            </div>
+          </RevealOnScroll>
 
-        <RevealOnScroll delay={300}>
-          <div className="flex flex-col md:flex-row gap-8 items-start md:items-center">
-            <p className="max-w-xl text-lg leading-relaxed text-white/80 md:text-2xl font-light border-l-2 border-white/10 pl-6">
-              {resume.summary}
-            </p>
-            <div className="hidden md:block h-[1px] flex-1 bg-gradient-to-r from-[var(--accent-soft)] to-transparent"></div>
-          </div>
-        </RevealOnScroll>
+          <RevealOnScroll delay={300}>
+            <div className="flex flex-col md:flex-row gap-8 items-start md:items-center">
+              <p className="max-w-xl text-lg leading-relaxed text-white/80 md:text-2xl font-light border-l-2 border-white/10 pl-6">
+                {resume.summary}
+              </p>
+              <div className="hidden md:block h-[1px] flex-1 bg-gradient-to-r from-[var(--accent-soft)] to-transparent"></div>
+            </div>
+          </RevealOnScroll>
+        </div>
       </div>
 
       {/* Scroll indicator */}

@@ -89,36 +89,38 @@ const ProjectRow = ({ project, index, caseStudy }) => {
 export const Work = ({ projects, caseStudies = [] }) => (
   <section id="work" className="relative z-10 px-6 py-32 md:px-20">
     <div className="mx-auto max-w-6xl">
-      <RevealOnScroll>
-        <div className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p className="font-mono text-xs uppercase tracking-[0.3em] text-white/50">
-              Selected collaborations
-            </p>
-            <h2 className="display-heading text-4xl font-semibold tracking-tight text-white md:text-7xl">
-              Work built for<br className="hidden md:block" /> leading teams
-            </h2>
+      <div className="p-8 md:p-12 space-y-12">
+        <RevealOnScroll>
+          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="font-mono text-xs uppercase tracking-[0.3em] text-white/50">
+                Selected collaborations
+              </p>
+              <h2 className="display-heading text-4xl font-semibold tracking-tight text-white md:text-7xl">
+                Work built for<br className="hidden md:block" /> leading teams
+              </h2>
+            </div>
+            <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-white/50 md:text-right">
+              Edge-first builds, cinematic polish
+            </span>
           </div>
-          <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-white/50 md:text-right">
-            Edge-first builds, cinematic polish
-          </span>
-        </div>
-      </RevealOnScroll>
+        </RevealOnScroll>
 
-      <div className="flex flex-col gap-6">
-        {projects.map((project, index) => {
-          const caseStudy = caseStudies.find(
-            (study) => study.slug === project.slug
-          );
-          return (
-            <ProjectRow
-              project={project}
-              caseStudy={caseStudy}
-              index={index}
-              key={`${project.client}-${project.year}`}
-            />
-          );
-        })}
+        <div className="flex flex-col gap-6">
+          {projects.map((project, index) => {
+            const caseStudy = caseStudies.find(
+              (study) => study.slug === project.slug
+            );
+            return (
+              <ProjectRow
+                project={project}
+                caseStudy={caseStudy}
+                index={index}
+                key={`${project.client}-${project.year}`}
+              />
+            );
+          })}
+        </div>
       </div>
     </div>
   </section>

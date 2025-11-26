@@ -152,19 +152,19 @@ export const ThreeBackground = () => {
         break;
       case 'autumn': // Deep Amber Sunset (Rugged/Dry Leaf)
         props = {
-          color: 0xff6600,
-          emissive: 0xff4400,
-          emissiveIntensity: 0.4,
-          metalness: 0.1, // Less metallic, more organic
-          roughness: 0.6, // Rougher, like a dry leaf
-          transmission: 0.1, // Mostly opaque
-          thickness: 2,
-          ior: 1.5,
-          noiseScale: 0.5, // Slightly smoother
-          noiseSpeed: 0.6, // Reduced wobble (was 1.2)
+          color: 0xc26a1b, // warm leaf amber
+          emissive: 0x5a2a10, // ember veins
+          emissiveIntensity: 0.3,
+          metalness: 0.08, // matte leaf surface
+          roughness: 0.68, // textured like foliage
+          transmission: 0.26, // subtle translucency through the leaf
+          thickness: 2.8,
+          ior: 1.35,
+          noiseScale: 1.1, // more organic lobes
+          noiseSpeed: 0.6, // calm drift
           displacementStrength: 1.4,
-          clearcoat: 0.0,
-          clearcoatRoughness: 1.0
+          clearcoat: 0.12,
+          clearcoatRoughness: 0.9
         };
         break;
       case 'spring': // Floral Bloom (Soft/Pastel)
