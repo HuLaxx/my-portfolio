@@ -105,6 +105,7 @@ export const ThreeBackground = () => {
   const materialRef = useRef(null);
   const geometryRef = useRef(null); // Added geometryRef
   const particlesRef = useRef(null);
+  const particleTargetColorsRef = useRef(null); // NEW: Store target colors for particles
   const targetPropsRef = useRef({
     color: new THREE.Color(0xff8800),
     emissive: new THREE.Color(0xff4400),
@@ -267,6 +268,32 @@ export const ThreeBackground = () => {
       }
     }
 
+    // Update Background Particle Target Colors
+    if (particleTargetColorsRef.current) {
+      const count = particleTargetColorsRef.current.length / 3;
+      const color = new THREE.Color();
+
+      for (let i = 0; i < count; i++) {
+        if (season === 'autumn') {
+          const palette = [
+            0xff0000, 0xffaa00, 0xff8800, 0x8b4513,
+            0x3e2723, 0x4a0404, 0x2d1b0e
+          ];
+          const randomColor = palette[Math.floor(Math.random() * palette.length)];
+          color.setHex(randomColor);
+          color.offsetHSL(0, 0, (Math.random() - 0.5) * 0.1);
+        } else {
+          // Use main color but vary lightness
+          color.set(props.color);
+          color.offsetHSL(0, 0, (Math.random() - 0.5) * 0.2);
+        }
+
+        particleTargetColorsRef.current[i * 3] = color.r;
+        particleTargetColorsRef.current[i * 3 + 1] = color.g;
+        particleTargetColorsRef.current[i * 3 + 2] = color.b;
+      }
+    }
+
   }, [season]);
 
   useEffect(() => {
@@ -371,6 +398,8 @@ export const ThreeBackground = () => {
     const dustPositions = new Float32Array(dustCount * 3);
     const dustSizes = new Float32Array(dustCount);
     const dustRandoms = new Float32Array(dustCount * 3); // For random explosion direction
+    const dustColors = new Float32Array(dustCount * 3);
+    const dustRotations = new Float32Array(dustCount); // Initial rotation
 
     for (let i = 0; i < dustCount; i++) {
       dustPositions[i * 3] = originalPositions[i * 3];
@@ -386,43 +415,65 @@ export const ThreeBackground = () => {
       dustRandoms[i * 3] = Math.sin(phi) * Math.cos(theta);
       dustRandoms[i * 3 + 1] = Math.sin(phi) * Math.sin(theta);
       dustRandoms[i * 3 + 2] = Math.cos(phi);
+
+      // Copy colors from crystal geometry (first vertex of the face)
+      dustColors[i * 3] = colors[i * 3 * 3];
+      dustColors[i * 3 + 1] = colors[i * 3 * 3 + 1];
+      dustColors[i * 3 + 2] = colors[i * 3 * 3 + 2];
+
+      dustRotations[i] = Math.random() * Math.PI * 2;
     }
 
     dustGeometry.setAttribute('position', new THREE.BufferAttribute(dustPositions, 3));
     dustGeometry.setAttribute('size', new THREE.BufferAttribute(dustSizes, 1));
-
-    const dustMaterial = new THREE.PointsMaterial({
-      color: targetPropsRef.current.color,
-      size: 0.2, // Base size, modulated by attribute
-      transparent: true,
-      opacity: 0.0, // Start invisible
-      blending: THREE.AdditiveBlending,
-      sizeAttenuation: true,
-      depthWrite: false,
-    });
+    dustGeometry.setAttribute('color', new THREE.BufferAttribute(dustColors, 3));
+    dustGeometry.setAttribute('rotation', new THREE.BufferAttribute(dustRotations, 1));
 
     const dustShaderMaterial = new THREE.ShaderMaterial({
       uniforms: {
-        color: { value: new THREE.Color(targetPropsRef.current.color) },
-        opacity: { value: 0.0 }
+        opacity: { value: 0.0 },
+        time: { value: 0.0 }
       },
       vertexShader: `
             attribute float size;
-            varying float vOpacity;
+            attribute vec3 color;
+            attribute float rotation;
+            varying vec3 vColor;
+            varying float vRotation;
             void main() {
+                vColor = color;
+                vRotation = rotation;
                 vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
                 gl_PointSize = size * (300.0 / -mvPosition.z);
                 gl_Position = projectionMatrix * mvPosition;
             }
         `,
       fragmentShader: `
-            uniform vec3 color;
             uniform float opacity;
+            uniform float time;
+            varying vec3 vColor;
+            varying float vRotation;
+            
             void main() {
                 if (opacity <= 0.01) discard;
-                vec2 coord = gl_PointCoord - vec2(0.5);
-                if(length(coord) > 0.5) discard; // Circular particle
-                gl_FragColor = vec4(color, opacity);
+                
+                vec2 uv = gl_PointCoord - 0.5;
+                
+                // Rotate
+                float angle = vRotation + time * 2.0;
+                float c = cos(angle);
+                float s = sin(angle);
+                vec2 p = vec2(uv.x * c - uv.y * s, uv.x * s + uv.y * c);
+                
+                // Triangle SDF
+                p.y += 0.1;
+                float r = 0.4;
+                vec2 q = vec2(abs(p.x), p.y);
+                float d = max(q.x * 0.866025 + p.y * 0.5, -p.y * 0.5) - r * 0.5;
+                
+                if (d > 0.0) discard;
+
+                gl_FragColor = vec4(vColor, opacity);
             }
         `,
       transparent: true,
@@ -442,8 +493,28 @@ export const ThreeBackground = () => {
     const particleColors = new Float32Array(particleCount * 3);
     const particleSizes = new Float32Array(particleCount); // NEW: Sizes
     const particleBlinkOffsets = new Float32Array(particleCount);
+    const particleRotations = new Float32Array(particleCount);
 
-    const baseParticleColor = targetPropsRef.current.particleColor || targetPropsRef.current.color;
+    // Initialize target colors ref
+    particleTargetColorsRef.current = new Float32Array(particleCount * 3);
+
+    // Reuse palette logic for background particles
+    const getPaletteColor = () => {
+      if (season === 'autumn') {
+        const palette = [
+          0xff0000, 0xffaa00, 0xff8800, 0x8b4513,
+          0x3e2723, 0x4a0404, 0x2d1b0e
+        ];
+        const c = new THREE.Color(palette[Math.floor(Math.random() * palette.length)]);
+        c.offsetHSL(0, 0, (Math.random() - 0.5) * 0.1);
+        return c;
+      } else {
+        // For other seasons, use the main color but vary lightness
+        const c = new THREE.Color(targetPropsRef.current.color);
+        c.offsetHSL(0, 0, (Math.random() - 0.5) * 0.2);
+        return c;
+      }
+    };
 
     for (let i = 0; i < particleCount; i++) {
       const r = 15 + Math.random() * 30;
@@ -462,31 +533,43 @@ export const ThreeBackground = () => {
       particleOriginalPositions[i * 3 + 1] = y;
       particleOriginalPositions[i * 3 + 2] = z;
 
-      particleColors[i * 3] = baseParticleColor.r;
-      particleColors[i * 3 + 1] = baseParticleColor.g;
-      particleColors[i * 3 + 2] = baseParticleColor.b;
+      const pColor = getPaletteColor();
+      particleColors[i * 3] = pColor.r;
+      particleColors[i * 3 + 1] = pColor.g;
+      particleColors[i * 3 + 2] = pColor.b;
+
+      // Also set initial target
+      particleTargetColorsRef.current[i * 3] = pColor.r;
+      particleTargetColorsRef.current[i * 3 + 1] = pColor.g;
+      particleTargetColorsRef.current[i * 3 + 2] = pColor.b;
 
       // Random sizes for background stardust
       particleSizes[i] = Math.random() * 0.4 + 0.1;
 
       particleBlinkOffsets[i] = Math.random() * Math.PI * 2;
+      particleRotations[i] = Math.random() * Math.PI * 2;
     }
 
     particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositionsArray, 3));
     particleGeometry.setAttribute('color', new THREE.BufferAttribute(particleColors, 3));
     particleGeometry.setAttribute('size', new THREE.BufferAttribute(particleSizes, 1));
+    particleGeometry.setAttribute('rotation', new THREE.BufferAttribute(particleRotations, 1));
 
     // Shader for Background Particles (Supports vertex colors + variable size)
     const particleMaterial = new THREE.ShaderMaterial({
       uniforms: {
-        globalOpacity: { value: 0.8 }
+        globalOpacity: { value: 0.8 },
+        time: { value: 0.0 }
       },
       vertexShader: `
         attribute float size;
         attribute vec3 color;
+        attribute float rotation;
         varying vec3 vColor;
+        varying float vRotation;
         void main() {
           vColor = color;
+          vRotation = rotation;
           vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
           gl_PointSize = size * (300.0 / -mvPosition.z);
           gl_Position = projectionMatrix * mvPosition;
@@ -494,10 +577,26 @@ export const ThreeBackground = () => {
       `,
       fragmentShader: `
         uniform float globalOpacity;
+        uniform float time;
         varying vec3 vColor;
+        varying float vRotation;
         void main() {
-          vec2 coord = gl_PointCoord - vec2(0.5);
-          if(length(coord) > 0.5) discard; // Circular
+          vec2 uv = gl_PointCoord - 0.5;
+          
+          // Rotate
+          float angle = vRotation + time * 0.5; // Slower rotation for background
+          float c = cos(angle);
+          float s = sin(angle);
+          vec2 p = vec2(uv.x * c - uv.y * s, uv.x * s + uv.y * c);
+          
+          // Triangle SDF
+          p.y += 0.1;
+          float r = 0.4;
+          vec2 q = vec2(abs(p.x), p.y);
+          float d = max(q.x * 0.866025 + p.y * 0.5, -p.y * 0.5) - r * 0.5;
+          
+          if (d > 0.0) discard;
+
           gl_FragColor = vec4(vColor, globalOpacity);
         }
       `,
@@ -522,7 +621,8 @@ export const ThreeBackground = () => {
     };
 
     const onScroll = () => {
-      scrollY = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+      const scrollableHeight = document.body.scrollHeight - window.innerHeight;
+      scrollY = scrollableHeight > 0 ? window.scrollY / scrollableHeight : 0;
     };
 
     window.addEventListener('mousemove', onMouseMove);
@@ -539,18 +639,26 @@ export const ThreeBackground = () => {
     const cursorPosCache = new THREE.Vector3(0, 0, 0);
     let frameCount = 0;
 
+    // Random scale factors for crystal faces
+    const faceRandomScales = new Float32Array(count / 3);
+    for (let i = 0; i < count / 3; i++) {
+      faceRandomScales[i] = 0.5 + Math.random() * 1.0; // 0.5 to 1.5
+    }
+
     const animate = () => {
       const time = clock.getElapsedTime();
       const delta = 0.02;
       frameCount++;
+      if (frameCount % 100 === 0) console.log("ThreeBackground: Animate running", frameCount);
 
       // --- Smooth Transition Logic ---
       const target = targetPropsRef.current;
       material.color.lerp(target.color, delta);
       material.emissive.lerp(target.emissive, delta);
 
-      // Update Dust Color
-      dustShaderMaterial.uniforms.color.value.lerp(target.color, delta);
+      // Update Dust Color (Vertex colors handle the main color, but we can tint or just update time)
+      dustShaderMaterial.uniforms.time.value = time;
+      particleMaterial.uniforms.time.value = time;
 
       material.emissiveIntensity += (target.emissiveIntensity - material.emissiveIntensity) * delta;
       material.metalness += (target.metalness - material.metalness) * delta;
@@ -579,7 +687,7 @@ export const ThreeBackground = () => {
         const count = positions.count;
 
         // Calculate scroll-based disintegration factors
-        const scrollProgress = scrollY;
+        const scrollProgress = Number.isFinite(scrollY) ? scrollY : 0;
 
         // --- 3-PHASE DISINTEGRATION LOGIC ---
         // Phase 1: Stress & Cracking (0% - 40%)
@@ -697,7 +805,9 @@ export const ThreeBackground = () => {
             moveY = ny * disperse;
             moveZ = nz * disperse;
 
-            faceScale = Math.max(1.0 - (gapStrength * 0.015), 0.1);
+            // Randomize face scale slightly for broken look
+            const randomScale = faceRandomScales[i / 3];
+            faceScale = Math.max(1.0 - (gapStrength * 0.015), 0.1) * randomScale;
           }
 
           // 3. Apply Final Positions
@@ -791,12 +901,17 @@ export const ThreeBackground = () => {
 
           pPositions.setXYZ(i, px, py, pz);
 
-          if (updateColors) {
+          if (updateColors && particleTargetColorsRef.current) {
             const blink = Math.sin(time * 3.0 + particleBlinkOffsets[i]);
             const brightness = 0.4 + (blink * 0.5 + 0.5) * 0.6;
-            const r = THREE.MathUtils.lerp(pColors.getX(i), target.color.r * brightness, delta);
-            const g = THREE.MathUtils.lerp(pColors.getY(i), target.color.g * brightness, delta);
-            const b = THREE.MathUtils.lerp(pColors.getZ(i), target.color.b * brightness, delta);
+
+            const tr = particleTargetColorsRef.current[i * 3];
+            const tg = particleTargetColorsRef.current[i * 3 + 1];
+            const tb = particleTargetColorsRef.current[i * 3 + 2];
+
+            const r = THREE.MathUtils.lerp(pColors.getX(i), tr * brightness, delta);
+            const g = THREE.MathUtils.lerp(pColors.getY(i), tg * brightness, delta);
+            const b = THREE.MathUtils.lerp(pColors.getZ(i), tb * brightness, delta);
             pColors.setXYZ(i, r, g, b);
           }
         }
@@ -824,7 +939,8 @@ export const ThreeBackground = () => {
 
         dustPoints.position.copy(mesh.position);
 
-        const targetZ = 25 - scrollProgress * 5; // Reduced zoom (was 14)
+        // Reduced zoom effect (was 5, now 2)
+        const targetZ = 25 - scrollProgress * 2;
         camera.position.z += (targetZ - camera.position.z) * 0.08;
 
         // Scaling

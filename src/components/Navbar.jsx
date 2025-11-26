@@ -139,13 +139,13 @@ const SignatureLogo = () => {
 
   const languages = [
     { first: "RAHUL", last: "KHANKE", lang: "en" },
-    { first: "ラフル", last: "カンケ", lang: "ja" },
-    { first: "राहुल", last: "खान्के", lang: "hi" },
-    { first: "РАХУЛ", last: "ХАНКЕ", lang: "ru" },
+    { first: "Ραχούλ", last: "Χάνκε", lang: "el" },
+    { first: "Рахул", last: "Ханке", lang: "ru" },
+    { first: "राहुल", last: "खनके", lang: "hi" },
     { first: "راہول", last: "کھانکے", lang: "ur" },
-    { first: "라훌", last: "칸케", lang: "ko" },
     { first: "拉胡尔", last: "坎克", lang: "zh" },
-    { first: "ΡΑΧΟΥΛ", last: "ΧΑΝΚΕ", lang: "el" },
+    { first: "ラフル", last: "カンケ", lang: "ja" },
+    { first: "라훌", last: "칸케", lang: "ko" },
   ];
 
   useEffect(() => {
@@ -171,11 +171,16 @@ const SignatureLogo = () => {
             exit={{ x: 15, opacity: 0, filter: "blur(4px)" }}
             transition={{ duration: 2.0, ease: [0.16, 1, 0.3, 1] }}
             className="absolute left-0 top-1/2 -translate-y-1/2 flex items-center gap-3 whitespace-nowrap"
+            style={{
+              fontFamily: ['en', 'ja', 'ko', 'zh'].includes(languages[langIndex].lang)
+                ? 'var(--font-display), system-ui'
+                : 'system-ui, -apple-system, "Segoe UI", Arial, sans-serif'
+            }}
           >
-            <span className="font-display text-xl font-bold tracking-tighter text-[var(--foreground)]">
+            <span className="text-xl font-bold tracking-tighter text-[var(--foreground)]">
               {languages[langIndex].first}
             </span>
-            <span className="font-display text-xl font-bold tracking-tighter text-[var(--foreground)]">
+            <span className="text-xl font-bold tracking-tighter text-[var(--foreground)]">
               {languages[langIndex].last}
             </span>
           </motion.div>
