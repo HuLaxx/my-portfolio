@@ -159,8 +159,8 @@ export const ThreeBackground = () => {
           transmission: 0.1, // Mostly opaque
           thickness: 2,
           ior: 1.5,
-          noiseScale: 0.4, // Match Summer scale
-          noiseSpeed: 1.2, // Faster wobble (closer to Summer's 1.5)
+          noiseScale: 0.5, // Slightly smoother
+          noiseSpeed: 0.6, // Reduced wobble (was 1.2)
           displacementStrength: 1.4,
           clearcoat: 0.0,
           clearcoatRoughness: 1.0
@@ -168,8 +168,8 @@ export const ThreeBackground = () => {
         break;
       case 'spring': // Floral Bloom (Soft/Pastel)
         props = {
-          color: 0xff69b4, // Hot Pink (Stronger shade)
-          emissive: 0xff1493, // Deep Pink (Stronger glow)
+          color: 0xff1493, // Deep Pink
+          emissive: 0xff007f, // Bright Pink
           emissiveIntensity: 0.6,
           metalness: 0.1,
           roughness: 0.4, // Soft luster
@@ -314,7 +314,9 @@ export const ThreeBackground = () => {
     scene.add(fillLight);
 
     // --- The "Digital Soul" (Solid Crystal) ---
-    const geometry = new THREE.IcosahedronGeometry(6, performanceMode ? 8 : 12);
+    // Use Non-Indexed geometry to allow faces to separate (crack open)
+    const baseGeometry = new THREE.IcosahedronGeometry(6, performanceMode ? 8 : 12);
+    const geometry = baseGeometry.toNonIndexed();
     const originalPositions = geometry.attributes.position.array.slice();
 
     // Initialize vertex colors
@@ -398,16 +400,6 @@ export const ThreeBackground = () => {
       sizeAttenuation: true,
       depthWrite: false,
     });
-
-    // Custom shader or onBeforeCompile could be used for per-particle sizing, 
-    // but for simplicity/performance we'll stick to standard PointsMaterial 
-    // and just rely on the 'size' attribute if we were using a ShaderMaterial.
-    // Standard PointsMaterial doesn't support 'size' attribute out of the box easily without modification.
-    // So we will use a slightly modified approach: update the geometry positions and just let them be uniform size 
-    // OR use a simple ShaderMaterial. Let's stick to standard PointsMaterial for stability, 
-    // but we can simulate "different sizes" by actually just having them be small dots.
-    // WAIT: User specifically asked for "different sizes". 
-    // Let's use a simple ShaderMaterial for the dust to support 'attribute float size'.
 
     const dustShaderMaterial = new THREE.ShaderMaterial({
       uniforms: {
@@ -636,75 +628,124 @@ export const ThreeBackground = () => {
         material.opacity = crystalOpacity;
         dustShaderMaterial.uniforms.opacity.value = dustOpacity;
 
-        for (let i = 0; i < count; i++) {
-          const ox = originalPositions[i * 3];
-          const oy = originalPositions[i * 3 + 1];
-          const oz = originalPositions[i * 3 + 2];
+        // Iterate by 3 (Face-based manipulation)
+        for (let i = 0; i < count; i += 3) {
+          // Get original positions for the face (3 vertices)
+          const ox1 = originalPositions[i * 3];
+          const oy1 = originalPositions[i * 3 + 1];
+          const oz1 = originalPositions[i * 3 + 2];
 
-          // 1. Calculate Base Deformation (Breathing)
-          const n = simplex.noise(
-            ox * currentProps.noiseScale + time * currentProps.noiseSpeed * 0.2,
-            oy * currentProps.noiseScale + time * currentProps.noiseSpeed * 0.3,
-            oz * currentProps.noiseScale + time * currentProps.noiseSpeed * 0.2
-          );
+          const ox2 = originalPositions[(i + 1) * 3];
+          const oy2 = originalPositions[(i + 1) * 3 + 1];
+          const oz2 = originalPositions[(i + 1) * 3 + 2];
 
-          const deformation = n * currentProps.displacementStrength;
-          const len = Math.sqrt(ox * ox + oy * oy + oz * oz);
-          const nx = ox / len;
-          const ny = oy / len;
-          const nz = oz / len;
+          const ox3 = originalPositions[(i + 2) * 3];
+          const oy3 = originalPositions[(i + 2) * 3 + 1];
+          const oz3 = originalPositions[(i + 2) * 3 + 2];
 
-          // Deformed position
-          let px = ox + nx * deformation;
-          let py = oy + ny * deformation;
-          let pz = oz + nz * deformation;
+          // 1. Calculate Base Deformation (Breathing) PER VERTEX
+          const applyBaseDeformation = (ox, oy, oz) => {
+            const n = simplex.noise(
+              ox * currentProps.noiseScale + time * currentProps.noiseSpeed * 0.2,
+              oy * currentProps.noiseScale + time * currentProps.noiseSpeed * 0.3,
+              oz * currentProps.noiseScale + time * currentProps.noiseSpeed * 0.2
+            );
+            const deformation = n * currentProps.displacementStrength;
+            const len = Math.sqrt(ox * ox + oy * oy + oz * oz);
+            const nx = ox / len;
+            const ny = oy / len;
+            const nz = oz / len;
+            return {
+              x: ox + nx * deformation,
+              y: oy + ny * deformation,
+              z: oz + nz * deformation
+            };
+          };
+
+          const p1 = applyBaseDeformation(ox1, oy1, oz1);
+          const p2 = applyBaseDeformation(ox2, oy2, oz2);
+          const p3 = applyBaseDeformation(ox3, oy3, oz3);
 
           // 2. Apply Cracking/Gap Effect (Phase 1 & 2)
+          // Calculate Centroid of the DEFORMED face
+          const cx = (p1.x + p2.x + p3.x) / 3;
+          const cy = (p1.y + p2.y + p3.y) / 3;
+          const cz = (p1.z + p2.z + p3.z) / 3;
+
+          let faceScale = 1.0;
+          let moveX = 0, moveY = 0, moveZ = 0;
+
           if (gapStrength > 0.01) {
-            const noiseVal = simplex.noise(
-              originalPositions[i * 3] * 0.5,
-              originalPositions[i * 3 + 1] * 0.5,
-              originalPositions[i * 3 + 2] * 0.5
-            );
+            const progress = Math.min(scrollProgress / 0.6, 1.0);
 
-            // Create islands by grouping vertices with similar noise values
-            const islandFactor = (noiseVal + 1) * 0.5;
-            const disperse = gapStrength * islandFactor;
+            // Noise for cracking pattern
+            const origCx = (ox1 + ox2 + ox3) / 3;
+            const origCy = (oy1 + oy2 + oy3) / 3;
+            const origCz = (oz1 + oz2 + oz3) / 3;
 
-            // Random direction per "island" (using noise as seed approximation)
-            // We want vertices close together to move together
-            // So we use the original position to determine direction, but modulated by noise
+            const crackNoise = simplex.noise(origCx * 0.5, origCy * 0.5, origCz * 0.5);
+            const gapFactor = (crackNoise + 1) * 0.5;
+            const disperse = gapStrength * gapFactor;
 
-            px += nx * disperse;
-            py += ny * disperse;
-            pz += nz * disperse;
+            // Calculate face normal for direction
+            const len = Math.sqrt(cx * cx + cy * cy + cz * cz);
+            const nx = cx / len;
+            const ny = cy / len;
+            const nz = cz / len;
+
+            moveX = nx * disperse;
+            moveY = ny * disperse;
+            moveZ = nz * disperse;
+
+            faceScale = Math.max(1.0 - (gapStrength * 0.015), 0.1);
           }
 
-          // 3. Apply to Solid Crystal
-          positions.setXYZ(i, px, py, pz);
+          // 3. Apply Final Positions
+          const applyFinal = (idx, p) => {
+            const vx = p.x - cx;
+            const vy = p.y - cy;
+            const vz = p.z - cz;
 
-          // 4. Apply to Dust (Phase 2 & 3)
+            const px = cx + moveX + vx * faceScale;
+            const py = cy + moveY + vy * faceScale;
+            const pz = cz + moveZ + vz * faceScale;
+
+            positions.setXYZ(idx, px, py, pz);
+            return { x: px, y: py, z: pz };
+          };
+
+          const v1 = applyFinal(i, p1);
+          const v2 = applyFinal(i + 1, p2);
+          const v3 = applyFinal(i + 2, p3);
+
+          // 4. Apply to Dust
           if (dustOpacity > 0.01) {
-            const rx = dustRandoms[i * 3];
-            const ry = dustRandoms[i * 3 + 1];
-            const rz = dustRandoms[i * 3 + 2];
+            const applyDust = (idx, p) => {
+              const rx = dustRandoms[idx * 3];
+              const ry = dustRandoms[idx * 3 + 1];
+              const rz = dustRandoms[idx * 3 + 2];
 
-            // Explosion movement
-            const moveX = rx * explosionStrength;
-            const moveY = ry * explosionStrength;
-            const moveZ = rz * explosionStrength;
+              const mX = rx * explosionStrength;
+              const mY = ry * explosionStrength;
+              const mZ = rz * explosionStrength;
 
-            // Float drift
-            const floatX = Math.sin(time * 0.5 + i) * 0.5;
-            const floatY = Math.cos(time * 0.3 + i) * 0.5;
-            const floatZ = Math.sin(time * 0.4 + i) * 0.5;
+              const fX = Math.sin(time * 0.5 + idx) * 0.5;
+              const fY = Math.cos(time * 0.3 + idx) * 0.5;
+              const fZ = Math.sin(time * 0.4 + idx) * 0.5;
 
-            dPositions.setXYZ(i, px + moveX + floatX, py + moveY + floatY, pz + moveZ + floatZ);
+              dPositions.setXYZ(idx, p.x + mX + fX, p.y + mY + fY, p.z + mZ + fZ);
+            };
+
+            applyDust(i, v1);
+            applyDust(i + 1, v2);
+            applyDust(i + 2, v3);
           } else {
-            // Keep dust attached to crystal when invisible
-            dPositions.setXYZ(i, px, py, pz);
+            dPositions.setXYZ(i, v1.x, v1.y, v1.z);
+            dPositions.setXYZ(i + 1, v2.x, v2.y, v2.z);
+            dPositions.setXYZ(i + 2, v3.x, v3.y, v3.z);
           }
         }
+
 
         mesh.geometry.attributes.position.needsUpdate = true;
         mesh.geometry.computeVertexNormals();
