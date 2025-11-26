@@ -103,6 +103,7 @@ export const ThreeBackground = () => {
   // Refs to store objects for updates
   const sceneRef = useRef(null);
   const materialRef = useRef(null);
+  const geometryRef = useRef(null); // Added geometryRef
   const particlesRef = useRef(null);
   const targetPropsRef = useRef({
     color: new THREE.Color(0xff8800),
@@ -115,7 +116,9 @@ export const ThreeBackground = () => {
     ior: 1.5,
     noiseScale: 0.4,
     noiseSpeed: 1.5,
-    displacementStrength: 1.2
+    displacementStrength: 1.2,
+    clearcoat: 1.0,
+    clearcoatRoughness: 0.1
   });
 
   // Update target properties when season changes
@@ -141,37 +144,43 @@ export const ThreeBackground = () => {
           ior: 1.5,
           noiseScale: 0.4,
           noiseSpeed: 1.5,
-          displacementStrength: 1.2
+          displacementStrength: 1.2,
+          clearcoat: 1.0,
+          clearcoatRoughness: 0.1
         };
         break;
-      case 'autumn': // Deep Amber Sunset
+      case 'autumn': // Deep Amber Sunset (Rugged/Dry Leaf)
         props = {
           color: 0xff6600,
           emissive: 0xff4400,
           emissiveIntensity: 0.4,
-          metalness: 0.8,
-          roughness: 0.2,
-          transmission: 0.2,
+          metalness: 0.1, // Less metallic, more organic
+          roughness: 0.6, // Rougher, like a dry leaf
+          transmission: 0.1, // Mostly opaque
           thickness: 2,
           ior: 1.5,
-          noiseScale: 0.3,
-          noiseSpeed: 0.6,
-          displacementStrength: 1.5
+          noiseScale: 0.4, // Match Summer scale
+          noiseSpeed: 1.2, // Faster wobble (closer to Summer's 1.5)
+          displacementStrength: 1.4,
+          clearcoat: 0.0,
+          clearcoatRoughness: 1.0
         };
         break;
-      case 'spring': // Floral Bloom
+      case 'spring': // Floral Bloom (Soft/Pastel)
         props = {
-          color: 0xff69b4,
-          emissive: 0xc71585,
-          emissiveIntensity: 0.3,
+          color: 0xff69b4, // Hot Pink (Stronger shade)
+          emissive: 0xff1493, // Deep Pink (Stronger glow)
+          emissiveIntensity: 0.6,
           metalness: 0.1,
-          roughness: 0.4,
-          transmission: 0.6,
+          roughness: 0.4, // Soft luster
+          transmission: 0.8, // Translucent/Jelly-like
           thickness: 3,
-          ior: 1.45,
-          noiseScale: 0.6,
-          noiseSpeed: 0.8,
-          displacementStrength: 1.0
+          ior: 1.2,
+          noiseScale: 1.5, // Higher scale for more "petals" (Sakura shape)
+          noiseSpeed: 0.6,
+          displacementStrength: 1.8, // Stronger distortion for petal definition
+          clearcoat: 1.0,
+          clearcoatRoughness: 0.1
         };
         break;
       case 'winter': // Frozen Ice
@@ -186,7 +195,9 @@ export const ThreeBackground = () => {
           ior: 1.5,
           noiseScale: 0.8,
           noiseSpeed: 0.4, // Slower movement
-          displacementStrength: 1.2
+          displacementStrength: 1.2,
+          clearcoat: 1.0,
+          clearcoatRoughness: 0.1
         };
         break;
       case 'rainy': // Refractive Water
@@ -227,6 +238,34 @@ export const ThreeBackground = () => {
       color: new THREE.Color(props.color),
       emissive: new THREE.Color(props.emissive)
     };
+
+    // Update Vertex Colors for Autumn
+    if (geometryRef.current) {
+      const colors = geometryRef.current.attributes.color;
+      if (colors) {
+        const count = colors.count;
+        const color = new THREE.Color();
+
+        for (let i = 0; i < count; i++) {
+          if (season === 'autumn') {
+            // Autumn Palette: Red, Orange, Gold, Brown + Darker Shades
+            const palette = [
+              0xff0000, 0xffaa00, 0xff8800, 0x8b4513, // Standard
+              0x3e2723, 0x4a0404, 0x2d1b0e // Darker shades (Dark Brown, Deep Red)
+            ];
+            const randomColor = palette[Math.floor(Math.random() * palette.length)];
+            color.setHex(randomColor);
+            // Add some variation
+            color.offsetHSL(0, 0, (Math.random() - 0.5) * 0.1);
+          } else {
+            // Reset to white (so material color takes over)
+            color.setHex(0xffffff);
+          }
+          colors.setXYZ(i, color.r, color.g, color.b);
+        }
+        colors.needsUpdate = true;
+      }
+    }
 
   }, [season]);
 
@@ -278,6 +317,30 @@ export const ThreeBackground = () => {
     const geometry = new THREE.IcosahedronGeometry(6, performanceMode ? 8 : 12);
     const originalPositions = geometry.attributes.position.array.slice();
 
+    // Initialize vertex colors
+    const count = geometry.attributes.position.count;
+    const colors = new Float32Array(count * 3);
+    const color = new THREE.Color();
+
+    for (let i = 0; i < count; i++) {
+      if (season === 'autumn') {
+        const palette = [
+          0xff0000, 0xffaa00, 0xff8800, 0x8b4513, // Standard
+          0x3e2723, 0x4a0404, 0x2d1b0e // Darker shades
+        ];
+        const randomColor = palette[Math.floor(Math.random() * palette.length)];
+        color.setHex(randomColor);
+        color.offsetHSL(0, 0, (Math.random() - 0.5) * 0.1);
+      } else {
+        color.setHex(0xffffff);
+      }
+      colors[i * 3] = color.r;
+      colors[i * 3 + 1] = color.g;
+      colors[i * 3 + 2] = color.b;
+    }
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    geometryRef.current = geometry;
+
     // Material for Solid Crystal
     const material = new THREE.MeshPhysicalMaterial({
       envMapIntensity: 1.5,
@@ -292,7 +355,8 @@ export const ThreeBackground = () => {
       thickness: targetPropsRef.current.thickness,
       ior: targetPropsRef.current.ior,
       transparent: true, // Enable transparency for fade-out
-      opacity: 1.0
+      opacity: 1.0,
+      vertexColors: true // Enable vertex colors
     });
     materialRef.current = material;
 
@@ -502,6 +566,8 @@ export const ThreeBackground = () => {
       material.transmission += (target.transmission - material.transmission) * delta;
       material.thickness += (target.thickness - material.thickness) * delta;
       material.ior += (target.ior - material.ior) * delta;
+      material.clearcoat += (target.clearcoat - material.clearcoat) * delta;
+      material.clearcoatRoughness += (target.clearcoatRoughness - material.clearcoatRoughness) * delta;
 
       currentProps.noiseScale += (target.noiseScale - currentProps.noiseScale) * delta;
       currentProps.noiseSpeed += (target.noiseSpeed - currentProps.noiseSpeed) * delta;
@@ -523,28 +589,59 @@ export const ThreeBackground = () => {
         // Calculate scroll-based disintegration factors
         const scrollProgress = scrollY;
 
-        // FADE LOGIC:
+        // --- 3-PHASE DISINTEGRATION LOGIC ---
+        // Phase 1: Stress & Cracking (0% - 40%)
+        // Phase 2: Shattering & Transition (40% - 60%)
+        // Phase 3: Dissipation (60% - 100%)
+
         let crystalOpacity = 1.0;
         let dustOpacity = 0.0;
+        let gapStrength = 0.0;
+        let explosionStrength = 0.0;
 
-        if (scrollProgress > 0.05) {
-          const fadeProgress = Math.min((scrollProgress - 0.05) / 0.2, 1.0);
-          crystalOpacity = 1.0 - fadeProgress;
-          dustOpacity = fadeProgress;
+        if (scrollProgress < 0.4) {
+          // Phase 1: Slow Cracking
+          // Gap increases slowly from 0 to 20.0 (Increased from 8.0)
+          const phase1Progress = scrollProgress / 0.4;
+          gapStrength = Math.pow(phase1Progress, 2) * 20.0;
+          crystalOpacity = 1.0;
+          dustOpacity = 0.0;
+        } else if (scrollProgress < 0.7) {
+          // Phase 2: Shattering
+          gapStrength = 20.0 + (scrollProgress - 0.4) * 60.0; // Widen aggressively
+
+          // Fade Crystal Out (0.4 -> 0.55)
+          const fadeOutProgress = Math.min((scrollProgress - 0.4) / 0.15, 1.0);
+          crystalOpacity = 1.0 - fadeOutProgress;
+
+          // Fade Dust In (0.4 -> 0.5)
+          const fadeInProgress = Math.min((scrollProgress - 0.4) / 0.1, 1.0);
+          dustOpacity = fadeInProgress;
+
+          // Start Explosion
+          explosionStrength = (scrollProgress - 0.4) * 80.0; // Much stronger explosion
+        } else {
+          // Phase 3: Dissipation
+          gapStrength = 40.0; // Max gap
+          crystalOpacity = 0.0;
+
+          // Fade Dust Out (0.7 -> 1.0)
+          const dustFadeOut = (scrollProgress - 0.7) / 0.3;
+          dustOpacity = Math.max(1.0 - dustFadeOut, 0.0);
+
+          // Continue Explosion drift
+          explosionStrength = 24.0 + (scrollProgress - 0.7) * 40.0;
         }
 
         material.opacity = crystalOpacity;
         dustShaderMaterial.uniforms.opacity.value = dustOpacity;
-
-        // Explosion Logic
-        const explosionStrength = Math.max(0, (scrollProgress - 0.05) * 30.0);
 
         for (let i = 0; i < count; i++) {
           const ox = originalPositions[i * 3];
           const oy = originalPositions[i * 3 + 1];
           const oz = originalPositions[i * 3 + 2];
 
-          // 1. Calculate Base Deformation
+          // 1. Calculate Base Deformation (Breathing)
           const n = simplex.noise(
             ox * currentProps.noiseScale + time * currentProps.noiseSpeed * 0.2,
             oy * currentProps.noiseScale + time * currentProps.noiseSpeed * 0.3,
@@ -562,66 +659,49 @@ export const ThreeBackground = () => {
           let py = oy + ny * deformation;
           let pz = oz + nz * deformation;
 
-          // DISINTEGRATION EFFECT ON SCROLL (Gaps/Strings for Crystal)
-          if (scrollProgress > 0.001) {
-            const progress = Math.min((scrollProgress - 0.001) / 0.9, 1.0);
-            const ease = Math.pow(progress, 1.5);
-
+          // 2. Apply Cracking/Gap Effect (Phase 1 & 2)
+          if (gapStrength > 0.01) {
             const noiseVal = simplex.noise(
               originalPositions[i * 3] * 0.5,
               originalPositions[i * 3 + 1] * 0.5,
               originalPositions[i * 3 + 2] * 0.5
             );
 
-            const gapFactor = (noiseVal + 1) * 0.5;
-            const distance = ease * 25.0;
-            const disperseStrength = distance * (gapFactor + 0.2);
+            // Create islands by grouping vertices with similar noise values
+            const islandFactor = (noiseVal + 1) * 0.5;
+            const disperse = gapStrength * islandFactor;
 
-            const seed = i;
-            const randX = ((seed * 12.9898) % 1);
-            const randY = ((seed * 78.233) % 1);
-            const randZ = ((seed * 45.164) % 1);
+            // Random direction per "island" (using noise as seed approximation)
+            // We want vertices close together to move together
+            // So we use the original position to determine direction, but modulated by noise
 
-            // Apply to Solid Crystal (Restore Gaps/Strings)
-            const dx = (randX - 0.5) * disperseStrength;
-            const dy = (randY - 0.5) * disperseStrength;
-            const dz = (randZ - 0.5) * disperseStrength;
-
-            px += dx;
-            py += dy;
-            pz += dz;
-
-            if (ease > 0.1) {
-              const floatStrength = ease * 1.5;
-              const floatX = Math.sin(time * 0.5 + originalPositions[i * 3]) * floatStrength;
-              const floatY = Math.cos(time * 0.3 + originalPositions[i * 3 + 1]) * floatStrength;
-              const floatZ = Math.sin(time * 0.4 + originalPositions[i * 3 + 2]) * floatStrength;
-
-              px += floatX;
-              py += floatY;
-              pz += floatZ;
-            }
+            px += nx * disperse;
+            py += ny * disperse;
+            pz += nz * disperse;
           }
 
-          // 2. Apply to Solid Crystal
+          // 3. Apply to Solid Crystal
           positions.setXYZ(i, px, py, pz);
 
-          // 3. Apply to Dust (ADD EXPLOSION)
+          // 4. Apply to Dust (Phase 2 & 3)
           if (dustOpacity > 0.01) {
             const rx = dustRandoms[i * 3];
             const ry = dustRandoms[i * 3 + 1];
             const rz = dustRandoms[i * 3 + 2];
 
+            // Explosion movement
             const moveX = rx * explosionStrength;
             const moveY = ry * explosionStrength;
             const moveZ = rz * explosionStrength;
 
+            // Float drift
             const floatX = Math.sin(time * 0.5 + i) * 0.5;
             const floatY = Math.cos(time * 0.3 + i) * 0.5;
             const floatZ = Math.sin(time * 0.4 + i) * 0.5;
 
             dPositions.setXYZ(i, px + moveX + floatX, py + moveY + floatY, pz + moveZ + floatZ);
           } else {
+            // Keep dust attached to crystal when invisible
             dPositions.setXYZ(i, px, py, pz);
           }
         }
@@ -703,17 +783,17 @@ export const ThreeBackground = () => {
 
         dustPoints.position.copy(mesh.position);
 
-        const targetZ = 25 - scrollProgress * 14 + Math.sin(scrollProgress * Math.PI) * 5;
+        const targetZ = 25 - scrollProgress * 5; // Reduced zoom (was 14)
         camera.position.z += (targetZ - camera.position.z) * 0.08;
 
         // Scaling
         const pulseScale = 1 + Math.sin(time * 2) * 0.05;
-        const scrollScale = 1 + scrollProgress * 0.5;
+        // Removed scrollScale to prevent "just zooming" effect
         let responsiveScale = 1.0;
         if (window.innerWidth < 768) responsiveScale = 0.6;
         else if (window.innerWidth < 1024) responsiveScale = 0.8;
 
-        const targetScale = pulseScale * scrollScale * responsiveScale;
+        const targetScale = pulseScale * responsiveScale;
 
         mesh.scale.setScalar(targetScale);
         dustPoints.scale.setScalar(targetScale);
