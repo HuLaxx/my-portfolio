@@ -101,9 +101,11 @@ export const ThreeBackground = () => {
   const { season } = useSeason();
 
   // Refs to store objects for updates
+  const rendererRef = useRef(null);
   const sceneRef = useRef(null);
   const materialRef = useRef(null);
   const geometryRef = useRef(null); // Added geometryRef
+  const bgParticleGeometryRef = useRef(null);
   const particlesRef = useRef(null);
   const particleTargetColorsRef = useRef(null); // NEW: Store target colors for particles
   const targetPropsRef = useRef({
@@ -292,6 +294,33 @@ export const ThreeBackground = () => {
         particleTargetColorsRef.current[i * 3 + 1] = color.g;
         particleTargetColorsRef.current[i * 3 + 2] = color.b;
       }
+
+      // Also immediately update the background particle geometry colors so theme switches retint
+      if (bgParticleGeometryRef.current) {
+        const colorAttr = bgParticleGeometryRef.current.getAttribute("color");
+        if (colorAttr) {
+          for (let i = 0; i < count; i++) {
+            const r = particleTargetColorsRef.current[i * 3];
+            const g = particleTargetColorsRef.current[i * 3 + 1];
+            const b = particleTargetColorsRef.current[i * 3 + 2];
+            colorAttr.setXYZ(i, r, g, b);
+          }
+          colorAttr.needsUpdate = true;
+        }
+      }
+    }
+
+    // Clear any lingering scene background and force renderer to stay transparent
+    if (sceneRef.current) {
+      sceneRef.current.background = null;
+    }
+    if (rendererRef.current) {
+      rendererRef.current.setClearColor(0x000000, 0);
+    }
+
+    // Soften background particle intensity on autumn to avoid dark overlay
+    if (particlesRef.current && particlesRef.current.uniforms?.globalOpacity) {
+      particlesRef.current.uniforms.globalOpacity.value = season === 'autumn' ? 0.55 : 0.8;
     }
 
   }, [season]);
@@ -321,6 +350,8 @@ export const ThreeBackground = () => {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.0;
+    renderer.setClearColor(0x000000, 0); // keep canvas fully transparent over CSS background
+    rendererRef.current = renderer;
     mount.appendChild(renderer.domElement);
 
     // Lighting
@@ -394,7 +425,7 @@ export const ThreeBackground = () => {
 
     // --- "Stardust" System (Exploding Particles) ---
     const dustGeometry = new THREE.BufferGeometry();
-    const dustCount = originalPositions.length / 3;
+    const dustCount = Math.floor((originalPositions.length / 3) * 0.6); // reduce dust to 60%
     const dustPositions = new Float32Array(dustCount * 3);
     const dustSizes = new Float32Array(dustCount);
     const dustRandoms = new Float32Array(dustCount * 3); // For random explosion direction
@@ -406,8 +437,8 @@ export const ThreeBackground = () => {
       dustPositions[i * 3 + 1] = originalPositions[i * 3 + 1];
       dustPositions[i * 3 + 2] = originalPositions[i * 3 + 2];
 
-      // Random sizes for "different sizes" requirement
-      dustSizes[i] = Math.random() * 0.3 + 0.05;
+      // Random sizes for "different sizes" requirement (slightly larger)
+      dustSizes[i] = Math.random() * 0.35 + 0.12;
 
       // Pre-calculate random explosion vectors
       const theta = Math.random() * Math.PI * 2;
@@ -416,10 +447,10 @@ export const ThreeBackground = () => {
       dustRandoms[i * 3 + 1] = Math.sin(phi) * Math.sin(theta);
       dustRandoms[i * 3 + 2] = Math.cos(phi);
 
-      // Copy colors from crystal geometry (first vertex of the face)
-      dustColors[i * 3] = colors[i * 3 * 3];
-      dustColors[i * 3 + 1] = colors[i * 3 * 3 + 1];
-      dustColors[i * 3 + 2] = colors[i * 3 * 3 + 2];
+      // Use current material color to stay in palette
+      dustColors[i * 3] = targetPropsRef.current.color.r;
+      dustColors[i * 3 + 1] = targetPropsRef.current.color.g;
+      dustColors[i * 3 + 2] = targetPropsRef.current.color.b;
 
       dustRotations[i] = Math.random() * Math.PI * 2;
     }
@@ -486,7 +517,7 @@ export const ThreeBackground = () => {
 
 
     // --- Ambient Background Particles (Floating dots) ---
-    const particleCount = 1200;
+    const particleCount = 960; // reduced to ~80%
     const particleGeometry = new THREE.BufferGeometry();
     const particlePositionsArray = new Float32Array(particleCount * 3);
     const particleOriginalPositions = new Float32Array(particleCount * 3);
@@ -543,8 +574,8 @@ export const ThreeBackground = () => {
       particleTargetColorsRef.current[i * 3 + 1] = pColor.g;
       particleTargetColorsRef.current[i * 3 + 2] = pColor.b;
 
-      // Random sizes for background stardust
-      particleSizes[i] = Math.random() * 0.4 + 0.1;
+      // Random sizes for background stardust (larger again)
+      particleSizes[i] = Math.random() * 0.7 + 0.35;
 
       particleBlinkOffsets[i] = Math.random() * Math.PI * 2;
       particleRotations[i] = Math.random() * Math.PI * 2;
@@ -554,6 +585,7 @@ export const ThreeBackground = () => {
     particleGeometry.setAttribute('color', new THREE.BufferAttribute(particleColors, 3));
     particleGeometry.setAttribute('size', new THREE.BufferAttribute(particleSizes, 1));
     particleGeometry.setAttribute('rotation', new THREE.BufferAttribute(particleRotations, 1));
+    bgParticleGeometryRef.current = particleGeometry;
 
     // Shader for Background Particles (Supports vertex colors + variable size)
     const particleMaterial = new THREE.ShaderMaterial({

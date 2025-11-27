@@ -30,7 +30,7 @@ const roles = [
 export const ExploreRoles = () => {
     return (
         <section id="roles" className="relative py-32 flex flex-col justify-center overflow-hidden">
-            <div className="mx-auto max-w-7xl px-6 md:px-12 relative z-10 w-full">
+            <div className="mx-auto max-w-6xl px-6 md:px-12 relative z-10 w-full">
                 <div className="px-6 py-10 md:px-12 md:py-14">
                     <RevealOnScroll>
                         <div className="flex items-center gap-4 mb-12">

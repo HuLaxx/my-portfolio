@@ -9,7 +9,7 @@ export const RagShowcase = ({ resume }) => {
   return (
     <section className="relative z-10 px-6 pb-24 md:px-20">
       <div className="rag-highlight" />
-      <div className="mx-auto flex max-w-5xl flex-col items-start gap-10 rounded-[32px] border border-[var(--border)] bg-[var(--panel)]/70 p-8 md:p-12 backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.35)] relative overflow-hidden">
+      <div className="mx-auto flex max-w-6xl flex-col items-start gap-10 rounded-[32px] border border-[var(--border)] bg-[var(--panel)]/70 p-8 md:p-12 backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.35)] relative overflow-hidden">
         <RevealOnScroll>
           <div className="space-y-4">
             <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gray-500">

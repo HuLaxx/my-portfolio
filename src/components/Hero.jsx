@@ -7,8 +7,8 @@ export const Hero = ({ resume }) => {
   const label = resume.label || "Creative Developer & Designer";
 
   return (
-    <section id="hero" className="relative min-h-[90vh] flex flex-col justify-center overflow-hidden">
-      <div className="mx-auto max-w-6xl px-6 md:px-20 pt-40 md:pt-52 relative z-10">
+    <section id="hero" className="relative min-h-[85vh] flex flex-col justify-center overflow-hidden">
+      <div className="mx-auto max-w-6xl px-6 md:px-16 pt-28 md:pt-40 relative z-10">
         <div className="px-6 py-8 md:px-12 md:py-14">
           <RevealOnScroll delay={100}>
             <div className="flex items-center gap-4 mb-6">
