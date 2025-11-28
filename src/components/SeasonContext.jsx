@@ -19,7 +19,7 @@ const normalizeseason = (season) => {
 };
 
 export const SeasonProvider = ({ children }) => {
-    const [season, setSeasonState] = useState('summer');
+    const [season, setSeasonState] = useState(getAutoSeason());
     const [isLoaded, setIsLoaded] = useState(false);
 
     // Load saved season or auto-detect on mount

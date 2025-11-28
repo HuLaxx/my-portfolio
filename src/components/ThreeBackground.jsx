@@ -106,8 +106,10 @@ export const ThreeBackground = () => {
   const materialRef = useRef(null);
   const geometryRef = useRef(null); // Added geometryRef
   const bgParticleGeometryRef = useRef(null);
+  const dustGeometryRef = useRef(null); // NEW: Ref for dust geometry
   const particlesRef = useRef(null);
   const particleTargetColorsRef = useRef(null); // NEW: Store target colors for particles
+  const dustTargetColorsRef = useRef(null); // NEW: Store target colors for dust
   const targetPropsRef = useRef({
     color: new THREE.Color(0xff8800),
     emissive: new THREE.Color(0xff4400),
@@ -310,6 +312,53 @@ export const ThreeBackground = () => {
       }
     }
 
+    // Update Crystal Dust Colors
+    if (dustTargetColorsRef.current && dustGeometryRef.current) {
+      const count = dustTargetColorsRef.current.length / 3;
+      const color = new THREE.Color();
+
+      // Access main crystal geometry colors if available
+      const crystalColors = geometryRef.current ? geometryRef.current.attributes.color : null;
+
+      for (let i = 0; i < count; i++) {
+        if (season === 'autumn' && crystalColors) {
+          // Exact match with crystal geometry (Mosaic effect)
+          // Dust index corresponds to vertex index (since we copied positions 1:1 initially)
+          // Note: dustCount is 20% of original, so we need to map back if we want exact correspondence.
+          // However, we just iterated linearly when creating dust.
+          // Let's just grab the color from the SAME index in the original geometry.
+          // Since dustPositions[i] = originalPositions[i], this works perfectly.
+
+          dustTargetColorsRef.current[i * 3] = crystalColors.getX(i);
+          dustTargetColorsRef.current[i * 3 + 1] = crystalColors.getY(i);
+          dustTargetColorsRef.current[i * 3 + 2] = crystalColors.getZ(i);
+
+        } else {
+          // Use main color but vary lightness
+          color.set(props.color);
+          color.offsetHSL(0, 0, (Math.random() - 0.5) * 0.2);
+
+          dustTargetColorsRef.current[i * 3] = color.r;
+          dustTargetColorsRef.current[i * 3 + 1] = color.g;
+          dustTargetColorsRef.current[i * 3 + 2] = color.b;
+        }
+      }
+
+      // Update geometry immediately
+      const colorAttr = dustGeometryRef.current.getAttribute("color");
+      if (colorAttr) {
+        for (let i = 0; i < count; i++) {
+          colorAttr.setXYZ(
+            i,
+            dustTargetColorsRef.current[i * 3],
+            dustTargetColorsRef.current[i * 3 + 1],
+            dustTargetColorsRef.current[i * 3 + 2]
+          );
+        }
+        colorAttr.needsUpdate = true;
+      }
+    }
+
     // Clear any lingering scene background and force renderer to stay transparent
     if (sceneRef.current) {
       sceneRef.current.background = null;
@@ -425,12 +474,14 @@ export const ThreeBackground = () => {
 
     // --- "Stardust" System (Exploding Particles) ---
     const dustGeometry = new THREE.BufferGeometry();
-    const dustCount = Math.floor((originalPositions.length / 3) * 0.6); // reduce dust to 60%
+    const dustCount = Math.floor((originalPositions.length / 3) * 0.2); // reduce dust to 20%
     const dustPositions = new Float32Array(dustCount * 3);
     const dustSizes = new Float32Array(dustCount);
     const dustRandoms = new Float32Array(dustCount * 3); // For random explosion direction
     const dustColors = new Float32Array(dustCount * 3);
+    dustTargetColorsRef.current = new Float32Array(dustCount * 3); // Initialize ref
     const dustRotations = new Float32Array(dustCount); // Initial rotation
+    const dustBlinkOffsets = new Float32Array(dustCount); // New: Shine offset
 
     for (let i = 0; i < dustCount; i++) {
       dustPositions[i * 3] = originalPositions[i * 3];
@@ -438,7 +489,8 @@ export const ThreeBackground = () => {
       dustPositions[i * 3 + 2] = originalPositions[i * 3 + 2];
 
       // Random sizes for "different sizes" requirement (slightly larger)
-      dustSizes[i] = Math.random() * 0.35 + 0.12;
+      // Updated to match background particles: 0.1 to 1.5
+      dustSizes[i] = Math.random() * 1.4 + 0.1;
 
       // Pre-calculate random explosion vectors
       const theta = Math.random() * Math.PI * 2;
@@ -452,13 +504,21 @@ export const ThreeBackground = () => {
       dustColors[i * 3 + 1] = targetPropsRef.current.color.g;
       dustColors[i * 3 + 2] = targetPropsRef.current.color.b;
 
+      // Also set initial target
+      dustTargetColorsRef.current[i * 3] = targetPropsRef.current.color.r;
+      dustTargetColorsRef.current[i * 3 + 1] = targetPropsRef.current.color.g;
+      dustTargetColorsRef.current[i * 3 + 2] = targetPropsRef.current.color.b;
+
       dustRotations[i] = Math.random() * Math.PI * 2;
+      dustBlinkOffsets[i] = Math.random() * Math.PI * 2; // Random blink offset
     }
 
     dustGeometry.setAttribute('position', new THREE.BufferAttribute(dustPositions, 3));
     dustGeometry.setAttribute('size', new THREE.BufferAttribute(dustSizes, 1));
     dustGeometry.setAttribute('color', new THREE.BufferAttribute(dustColors, 3));
     dustGeometry.setAttribute('rotation', new THREE.BufferAttribute(dustRotations, 1));
+    dustGeometry.setAttribute('blinkOffset', new THREE.BufferAttribute(dustBlinkOffsets, 1)); // Add attribute
+    dustGeometryRef.current = dustGeometry; // Store ref
 
     const dustShaderMaterial = new THREE.ShaderMaterial({
       uniforms: {
@@ -469,11 +529,14 @@ export const ThreeBackground = () => {
             attribute float size;
             attribute vec3 color;
             attribute float rotation;
+            attribute float blinkOffset; // New attribute
             varying vec3 vColor;
             varying float vRotation;
+            varying float vBlinkOffset; // Pass to fragment
             void main() {
                 vColor = color;
                 vRotation = rotation;
+                vBlinkOffset = blinkOffset;
                 vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
                 gl_PointSize = size * (300.0 / -mvPosition.z);
                 gl_Position = projectionMatrix * mvPosition;
@@ -484,6 +547,7 @@ export const ThreeBackground = () => {
             uniform float time;
             varying vec3 vColor;
             varying float vRotation;
+            varying float vBlinkOffset; // Receive from vertex
             
             void main() {
                 if (opacity <= 0.01) discard;
@@ -504,7 +568,12 @@ export const ThreeBackground = () => {
                 
                 if (d > 0.0) discard;
 
-                gl_FragColor = vec4(vColor, opacity);
+                // Shine/Twinkle Effect (Same as background)
+                float shine = sin(time * 3.0 + vBlinkOffset);
+                // Reduced brightness as requested (was 0.7 base, now 0.4)
+                float brightness = 0.4 + (shine * 0.5 + 0.5) * 0.5;
+
+                gl_FragColor = vec4(vColor * brightness, opacity);
             }
         `,
       transparent: true,
@@ -575,7 +644,9 @@ export const ThreeBackground = () => {
       particleTargetColorsRef.current[i * 3 + 2] = pColor.b;
 
       // Random sizes for background stardust (larger again)
-      particleSizes[i] = Math.random() * 0.7 + 0.35;
+      // Random sizes for background stardust (larger again)
+      // Drastically reduced for "very small" look: 0.1 to 1.5
+      particleSizes[i] = Math.random() * 1.4 + 0.1;
 
       particleBlinkOffsets[i] = Math.random() * Math.PI * 2;
       particleRotations[i] = Math.random() * Math.PI * 2;
@@ -585,25 +656,31 @@ export const ThreeBackground = () => {
     particleGeometry.setAttribute('color', new THREE.BufferAttribute(particleColors, 3));
     particleGeometry.setAttribute('size', new THREE.BufferAttribute(particleSizes, 1));
     particleGeometry.setAttribute('rotation', new THREE.BufferAttribute(particleRotations, 1));
+    particleGeometry.setAttribute('blinkOffset', new THREE.BufferAttribute(particleBlinkOffsets, 1)); // Add blinkOffset attribute
     bgParticleGeometryRef.current = particleGeometry;
-
     // Shader for Background Particles (Supports vertex colors + variable size)
     const particleMaterial = new THREE.ShaderMaterial({
       uniforms: {
         globalOpacity: { value: 0.8 },
-        time: { value: 0.0 }
+        time: { value: 0.0 },
+        sizeScale: { value: 1.0 } // New uniform for dynamic sizing
       },
       vertexShader: `
         attribute float size;
         attribute vec3 color;
         attribute float rotation;
+        attribute float blinkOffset; // New attribute
         varying vec3 vColor;
         varying float vRotation;
+        varying float vBlinkOffset; // Pass to fragment
+        uniform float sizeScale;
         void main() {
           vColor = color;
           vRotation = rotation;
+          vBlinkOffset = blinkOffset;
           vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-          gl_PointSize = size * (300.0 / -mvPosition.z);
+          // Apply sizeScale to the point size
+          gl_PointSize = (size * sizeScale) * (300.0 / -mvPosition.z);
           gl_Position = projectionMatrix * mvPosition;
         }
       `,
@@ -612,6 +689,7 @@ export const ThreeBackground = () => {
         uniform float time;
         varying vec3 vColor;
         varying float vRotation;
+        varying float vBlinkOffset; // Receive from vertex
         void main() {
           vec2 uv = gl_PointCoord - 0.5;
           
@@ -629,7 +707,11 @@ export const ThreeBackground = () => {
           
           if (d > 0.0) discard;
 
-          gl_FragColor = vec4(vColor, globalOpacity);
+          // Shine/Twinkle Effect
+          float shine = sin(time * 3.0 + vBlinkOffset); // Oscillate -1 to 1
+          float brightness = 0.7 + (shine * 0.5 + 0.5) * 0.6; // Map to 0.7 - 1.3 range (approx)
+
+          gl_FragColor = vec4(vColor * brightness, globalOpacity);
         }
       `,
       transparent: true,
@@ -691,6 +773,18 @@ export const ThreeBackground = () => {
       // Update Dust Color (Vertex colors handle the main color, but we can tint or just update time)
       dustShaderMaterial.uniforms.time.value = time;
       particleMaterial.uniforms.time.value = time;
+
+      // Update Particle Size Scale based on scroll (Disintegration Logic)
+      // When scroll > 0.6 (disintegration), reduce size
+      const scrollProgress = Number.isFinite(scrollY) ? scrollY : 0;
+      let targetSizeScale = 1.0;
+      if (scrollProgress > 0.5) {
+        // Smoothly reduce to 0.2 size as it disintegrates
+        const shrinkFactor = Math.min((scrollProgress - 0.5) / 0.3, 1.0);
+        targetSizeScale = 1.0 - (shrinkFactor * 0.8); // 1.0 -> 0.2
+      }
+      // Lerp for smoothness
+      particleMaterial.uniforms.sizeScale.value += (targetSizeScale - particleMaterial.uniforms.sizeScale.value) * 0.1;
 
       material.emissiveIntensity += (target.emissiveIntensity - material.emissiveIntensity) * delta;
       material.metalness += (target.metalness - material.metalness) * delta;
@@ -899,23 +993,31 @@ export const ThreeBackground = () => {
         const updateColors = frameCount % 3 === 0;
 
         for (let i = 0; i < particleCount; i++) {
-          const ox = particleOriginalPositions[i * 3];
-          const oy = particleOriginalPositions[i * 3 + 1];
-          const oz = particleOriginalPositions[i * 3 + 2];
+          let ox = particleOriginalPositions[i * 3];
+          let oy = particleOriginalPositions[i * 3 + 1];
+          let oz = particleOriginalPositions[i * 3 + 2];
 
-          let px, py, pz;
+          // 1. Apply Wind to Base Position (Stateful update)
+          // Drift right and slightly up/down
+          // Reduced speed as requested: "towards slower side" (was 0.02, now 0.006)
+          ox += 0.006;
+          oy += Math.sin(time * 0.5 + ox * 0.1) * 0.003;
 
-          // Ambient Float
-          const floatSpeed = 0.2;
-          const floatX = Math.sin(time * floatSpeed + ox) * 0.5;
-          const floatY = Math.cos(time * floatSpeed + oy) * 0.5;
-          const floatZ = Math.sin(time * floatSpeed + oz) * 0.5;
+          // Wrap around (Bounds based on initial spread ~45)
+          if (ox > 50) ox = -50;
+          if (oy > 50) oy = -50;
+          if (oy < -50) oy = 50;
 
-          px = ox + floatX;
-          py = oy + floatY;
-          pz = oz + floatZ;
+          // Update "Original" (Base) Position so drift persists
+          particleOriginalPositions[i * 3] = ox;
+          particleOriginalPositions[i * 3 + 1] = oy;
+          // oz stays same
 
-          // Scroll dispersion for background particles
+          let px = ox;
+          let py = oy;
+          let pz = oz;
+
+          // 2. Scroll dispersion (Existing logic)
           if (scrollY > 0.001) {
             const progress = Math.min((scrollY - 0.001) / 0.9, 1.0);
             const ease = Math.pow(progress, 1.5);
