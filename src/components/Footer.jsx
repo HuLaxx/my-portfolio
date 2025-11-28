@@ -1,74 +1,73 @@
-import { RevealOnScroll } from "./RevealOnScroll";
+'use client';
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-  return (
-    <footer
-      id="contact"
-      className="relative z-40 mt-20 border-t border-[var(--border)] pb-28 pt-12 backdrop-blur-2xl transition-colors duration-500"
-      style={{ background: 'var(--footer-bg)' }}
-    >
-      {/* Gradient overlay for depth */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-black/30 pointer-events-none" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-4xl bg-[var(--accent-soft)] blur-[120px] pointer-events-none opacity-20" />
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 pt-12 pb-20 md:grid-cols-2 md:px-20 relative z-10">
-        <RevealOnScroll>
-          <h3 className="mb-8 text-4xl font-bold leading-[0.9] tracking-tighter text-[var(--foreground)] md:text-6xl">
-            Let&apos;s <span className="text-[var(--accent)]">connect</span>.
-          </h3>
-          <div className="flex flex-col gap-4">
+  const socials = [
+    { label: "LINKEDIN", href: "https://linkedin.com" },
+    { label: "GITHUB", href: "https://github.com" },
+    { label: "TWITTER", href: "https://twitter.com" },
+    { label: "KAGGLE", href: "https://kaggle.com" }
+  ];
+
+  return (
+    <footer className="relative z-40 mt-20 px-2 pb-6 w-full">
+      <div className="nav-shell mx-auto w-[98%] rounded-[2rem] px-6 py-12 md:px-16 md:py-20 flex flex-col justify-between min-h-[50vh]">
+
+        {/* Top: Massive Headline */}
+        <div className="flex-1 flex items-center">
+          <h2 className="text-[13vw] leading-[0.8] font-bold tracking-tighter text-[var(--foreground)] opacity-90">
+            LET&apos;S WORK <br />
+            <span className="text-[var(--muted)]">TOGETHER</span>
+          </h2>
+        </div>
+
+        {/* Bottom: Minimalist Row */}
+        <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between border-t border-[var(--border)] pt-8 mt-12">
+
+          {/* Left: Identity */}
+          <div className="flex flex-col gap-1">
+            <span className="text-sm font-bold tracking-widest text-[var(--foreground)]">RAHUL KHANKE</span>
+            <span className="text-xs text-[var(--muted)]">&copy; {currentYear}</span>
+          </div>
+
+          {/* Center: Socials */}
+          <div className="flex flex-wrap gap-6 md:gap-8">
+            {socials.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-bold tracking-[0.2em] text-[var(--muted)] transition-colors hover:text-[var(--accent)]"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+
+          {/* Right: Actions */}
+          <div className="flex items-center gap-8">
             <a
               href="mailto:hello@rahul.dev"
-              className="group flex items-center gap-3 text-lg text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
+              className="text-xs font-bold tracking-[0.2em] text-[var(--foreground)] transition-colors hover:text-[var(--accent)]"
             >
-              <span className="text-[var(--accent)]">✉</span> hello@rahul.dev
+              HELLO@RAHUL.DEV
             </a>
-            <a
-              href="tel:+1234567890"
-              className="group flex items-center gap-3 text-lg text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
+            <button
+              onClick={scrollToTop}
+              className="group flex items-center gap-2 text-xs font-bold tracking-[0.2em] text-[var(--muted)] transition-colors hover:text-[var(--foreground)]"
             >
-              <span className="text-[var(--accent)]">📞</span> +1 (234) 567-890
-            </a>
+              TOP
+              <span className="transition-transform duration-300 group-hover:-translate-y-1">↑</span>
+            </button>
           </div>
-        </RevealOnScroll>
 
-        <RevealOnScroll delay={200}>
-          <div className="flex h-full flex-col justify-between md:items-end">
-            <div className="mb-6 flex flex-col gap-4 text-right">
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm font-bold tracking-[0.2em] text-[var(--muted)] transition-all duration-300 hover:text-[var(--foreground)] hover:text-shadow-neon"
-              >
-                LINKEDIN
-              </a>
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm font-bold tracking-[0.2em] text-[var(--muted)] transition-all duration-300 hover:text-[var(--foreground)] hover:text-shadow-neon"
-              >
-                GITHUB
-              </a>
-              <a
-                href="https://kaggle.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm font-bold tracking-[0.2em] text-[var(--muted)] transition-all duration-300 hover:text-[var(--foreground)] hover:text-shadow-neon"
-              >
-                KAGGLE
-              </a>
-            </div>
-            <div className="text-right">
-              <p className="font-mono text-xs text-[var(--muted)]">
-                &copy; {currentYear} RAHUL VISHWAKARMA.
-              </p>
-            </div>
-          </div>
-        </RevealOnScroll>
+        </div>
       </div>
     </footer>
   );
