@@ -2,8 +2,8 @@ import { RevealOnScroll } from "./RevealOnScroll";
 
 export const Education = ({ resume }) => {
     return (
-        <section id="education" className="relative z-10 px-6 py-24 md:px-20">
-            <div className="mx-auto max-w-6xl">
+        <section id="education" className="relative z-10 px-0 md:px-20 py-24">
+            <div className="mx-auto w-[98%] md:w-full md:max-w-6xl">
                 <div className="p-8 md:p-12">
                     <RevealOnScroll>
                         <div className="mb-12">

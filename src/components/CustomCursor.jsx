@@ -113,10 +113,29 @@ export const CustomCursor = () => {
                 marginLeft: '-14px'
             }}
         >
-            {/* Main Cursor Dot */}
-            <div className="relative flex items-center justify-center w-7 h-7">
-                <div className="absolute w-2 h-2 bg-[var(--cursor-accent)] rounded-full shadow-[0_0_10px_var(--cursor-glow)]" />
-                <div className="absolute w-full h-full border border-[var(--cursor-accent)] rounded-full opacity-40 animate-pulse" />
+            <div className="relative w-10 h-10">
+                <div
+                    className="absolute -inset-2 rounded-full blur-xl opacity-60 transition-opacity"
+                    style={{ background: 'var(--cursor-glow)' }}
+                />
+                <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="relative drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
+                >
+                    <path
+                        d="M3 3L10.07 19.97L12.58 12.58L19.97 10.07L3 3Z"
+                        fill="var(--cursor-accent)"
+                        fillOpacity="0.8"
+                        stroke="white"
+                        strokeWidth="1.5"
+                        strokeLinejoin="round"
+                        style={{ filter: 'drop-shadow(0 0 2px rgba(255,255,255,0.5))' }}
+                    />
+                </svg>
             </div>
         </div>
     );

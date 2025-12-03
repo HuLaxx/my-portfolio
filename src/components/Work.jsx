@@ -87,9 +87,9 @@ const ProjectRow = ({ project, index, caseStudy }) => {
 };
 
 export const Work = ({ projects, caseStudies = [] }) => (
-  <section id="work" className="relative z-10 px-6 py-32 md:px-20">
-    <div className="mx-auto max-w-6xl">
-      <div className="p-8 md:p-12 space-y-12">
+  <section id="work" className="relative z-10 px-0 md:px-20 py-32">
+    <div className="mx-auto w-[98%] md:w-full md:max-w-6xl">
+      <div className="p-4 md:p-12 space-y-12">
         <RevealOnScroll>
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div>

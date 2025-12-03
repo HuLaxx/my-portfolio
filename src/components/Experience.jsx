@@ -2,8 +2,8 @@ import { RevealOnScroll } from "./RevealOnScroll";
 
 export const Experience = ({ experience }) => {
     return (
-        <section id="experience" className="relative z-10 px-6 py-24 md:px-20">
-            <div className="mx-auto max-w-6xl">
+        <section id="experience" className="relative z-10 px-0 md:px-20 py-24">
+            <div className="mx-auto w-[98%] md:w-full md:max-w-6xl">
                 <div className="p-8 md:p-12">
                     <RevealOnScroll>
                         <div className="mb-12 flex items-end justify-between">
