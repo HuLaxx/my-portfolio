@@ -2,56 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useSeason } from './SeasonContext';
-import { AnimatePresence, motion } from 'framer-motion';
-
-const TouchRipple = ({ accentColor }) => {
-    const [ripples, setRipples] = useState([]);
-
-    useEffect(() => {
-        const handleTouch = (e) => {
-            const touch = e.touches[0];
-            const newRipple = {
-                id: Date.now(),
-                x: touch.clientX,
-                y: touch.clientY,
-            };
-            setRipples((prev) => [...prev, newRipple]);
-
-            // Cleanup ripple after animation
-            setTimeout(() => {
-                setRipples((prev) => prev.filter((r) => r.id !== newRipple.id));
-            }, 800);
-        };
-
-        window.addEventListener('touchstart', handleTouch, { passive: true });
-        return () => window.removeEventListener('touchstart', handleTouch);
-    }, []);
-
-    return (
-        <div className="fixed inset-0 pointer-events-none z-[9999] overflow-hidden">
-            <AnimatePresence>
-                {ripples.map((ripple) => (
-                    <motion.div
-                        key={ripple.id}
-                        initial={{ opacity: 0.6, scale: 0 }}
-                        animate={{ opacity: 0, scale: 2 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.6, ease: "easeOut" }}
-                        className="absolute rounded-full blur-md"
-                        style={{
-                            left: ripple.x - 25,
-                            top: ripple.y - 25,
-                            width: 50,
-                            height: 50,
-                            background: accentColor,
-                            boxShadow: `0 0 20px ${accentColor}`,
-                        }}
-                    />
-                ))}
-            </AnimatePresence>
-        </div>
-    );
-};
 
 export const CustomCursor = () => {
     const { season } = useSeason();
@@ -150,7 +100,7 @@ export const CustomCursor = () => {
     }, [accentColor]);
 
     if (isTouch) {
-        return <TouchRipple accentColor={accentColor} />;
+        return null;
     }
 
     return (
