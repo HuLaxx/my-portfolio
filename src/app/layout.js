@@ -8,6 +8,7 @@ import { SeasonProvider } from "@/components/SeasonContext";
 import { AnimatedGradient } from "@/components/AnimatedGradient";
 import { ThreeBackground } from "@/components/ThreeBackground";
 import { MenuProvider } from "@/components/MenuContext";
+import { LoaderWrapper } from "@/components/LoaderWrapper";
 
 const display = Orbitron({
   variable: "--font-display",
@@ -73,6 +74,8 @@ export const metadata = {
   },
 };
 
+import { CustomCursor } from "@/components/CustomCursor";
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning data-theme="dark">
@@ -89,14 +92,17 @@ export default function RootLayout({ children }) {
       >
         <SeasonProvider>
           <MenuProvider>
-            <AnimatedGradient />
-            <ThreeBackground />
-            <SmoothScroll>
-              <div className="film-grain" />
-              {children}
-            </SmoothScroll>
-            <Analytics />
-            <SpeedInsights />
+            <CustomCursor />
+            <LoaderWrapper>
+              <AnimatedGradient />
+              <ThreeBackground />
+              <SmoothScroll>
+                <div className="film-grain" />
+                {children}
+              </SmoothScroll>
+              <Analytics />
+              <SpeedInsights />
+            </LoaderWrapper>
           </MenuProvider>
         </SeasonProvider>
       </body>

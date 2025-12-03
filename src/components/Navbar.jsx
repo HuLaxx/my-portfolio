@@ -12,7 +12,7 @@ const navLinks = [
   { href: "#roles", label: "EXPLORE" },
   { href: "#experience", label: "EXPERIENCE" },
   { href: "#education", label: "EDUCATION" },
-  { href: "#contact", label: "CONTACT" },
+  { href: "#footer", label: "CONTACT" },
 ];
 
 const SocialIcon = ({ href, path, label }) => (
@@ -38,14 +38,22 @@ export const Navbar = () => {
   // Track active section based on scroll
   useEffect(() => {
     const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+
+      // If at the very top (Hero section), clear active section
+      if (scrollPosition < 100) {
+        setActiveSection(null);
+        return;
+      }
+
       const sections = navLinks.map(link => link.href.replace('#', ''));
-      const scrollPosition = window.scrollY + 100;
+      const offset = 100;
 
       for (const sectionId of sections) {
         const element = document.getElementById(sectionId);
         if (element) {
           const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+          if (scrollPosition + offset >= offsetTop && scrollPosition + offset < offsetTop + offsetHeight) {
             setActiveSection(`#${sectionId}`);
             break;
           }

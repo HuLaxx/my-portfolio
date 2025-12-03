@@ -15,7 +15,7 @@ export const Footer = () => {
   ];
 
   return (
-    <footer className="relative z-40 mt-20 px-2 pb-6 w-full">
+    <footer id="footer" className="relative z-40 mt-20 px-2 pb-6 w-full">
       <div className="nav-shell mx-auto w-[98%] rounded-[2rem] px-6 py-12 md:px-16 md:py-20 flex flex-col justify-between min-h-[50vh]">
 
         {/* Top: Massive Headline */}
