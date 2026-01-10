@@ -31,6 +31,15 @@ const roles = [
         index: "03",
         image: "/generated/role-ai.png"
     },
+    {
+        id: "software-engineer",
+        title: "Software Engineer",
+        description: "Engineered robust full-stack systems, spanning scalable backend architectures, interactive frontends, and cloud-native integration.",
+        href: "/role/software-engineer",
+        gradient: "from-orange-400 to-amber-300",
+        index: "04",
+        image: "/generated/role-se.png"
+    },
 ];
 
 export const ExploreRoles = () => {
@@ -70,15 +79,34 @@ export const ExploreRoles = () => {
                                             <div className="h-1 bg-[var(--accent)] opacity-30 group-hover:opacity-100 transition-all duration-500" />
                                         </div>
 
+                                        {/* Slide-in Drawer (Right Side - Matches Experience/Projects) */}
+                                        <div className="hidden md:flex absolute right-0 top-0 bottom-0 w-1/2 h-full bg-gradient-to-l from-[var(--card)] via-[var(--card)]/90 to-transparent translate-x-12 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500 ease-out flex-col justify-center items-end pr-8 md:pr-12 pointer-events-none z-20">
+                                            <div className="flex flex-col items-end gap-3 text-right">
+                                                <span className="p-3 rounded-full border border-[var(--accent)] bg-[var(--accent)]/10 text-[var(--accent)] group-hover:bg-[var(--accent)] group-hover:text-black transition-all duration-500 shadow-[0_0_15px_rgba(0,0,0,0.2)]">
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                        <path d="M5 12h14M12 5l7 7-7 7" />
+                                                    </svg>
+                                                </span>
+                                                <div>
+                                                    <span className="font-bold text-sm uppercase tracking-wider text-[var(--foreground)] block mb-1">
+                                                        Explore Role
+                                                    </span>
+                                                    <span className="text-xs font-mono text-[var(--muted)] block">
+                                                        Deep Dive & Skills
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div className="relative z-10 grid grid-cols-1 items-start gap-4 md:grid-cols-2">
-                                            <div className="col-span-2 font-mono text-base sm:text-xl font-bold uppercase tracking-[0.22em] text-[var(--accent-dark)] opacity-80 group-hover:text-[var(--text-hover)] transition-colors duration-500">
+                                            <div className="col-span-2 font-mono text-xl sm:text-2xl font-bold uppercase tracking-[0.22em] text-[var(--accent-dark)] opacity-80 group-hover:text-[var(--text-hover)] transition-colors duration-500">
                                                 {role.index}
                                             </div>
                                             <div className="col-span-2 mt-3 sm:mt-4 space-y-2">
                                                 <h3 className="display-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-[var(--foreground)] group-hover:text-[var(--text-hover)] transition-colors duration-500">
                                                     {role.title}
                                                 </h3>
-                                                <p className="text-[var(--foreground)] opacity-90 leading-relaxed text-sm sm:text-base md:text-lg font-medium max-w-md group-hover:text-[var(--text-hover)] transition-colors duration-500">
+                                                <p className="text-[var(--foreground)] opacity-90 leading-relaxed text-base sm:text-lg md:text-xl font-medium max-w-2xl group-hover:text-[var(--text-hover)] transition-colors duration-500">
                                                     {role.description}
                                                 </p>
                                             </div>

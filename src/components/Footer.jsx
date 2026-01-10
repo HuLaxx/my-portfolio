@@ -1,7 +1,11 @@
 'use client';
 
+import { useSeason } from "./SeasonContext";
+
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
+  // "Normal Dark Blend" for all themes
+  const maskGradient = 'radial-gradient(ellipse at center, black 40%, transparent 90%)';
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -63,10 +67,10 @@ export const Footer = () => {
               <img
                 src="/me2.png"
                 alt="Let's Connect"
-                className="w-auto h-full max-h-full object-contain scale-[1] origin-bottom-right -translate-y-7 -translate-x-6"
+                className="w-auto h-full max-h-full object-contain scale-[1] origin-bottom-right -translate-y-[0.7rem] -translate-x-6"
                 style={{
-                  maskImage: 'radial-gradient(circle at center, black 50%, transparent 95%)',
-                  WebkitMaskImage: 'radial-gradient(circle at center, black 50%, transparent 95%)'
+                  maskImage: maskGradient,
+                  WebkitMaskImage: maskGradient
                 }}
               />
             </div>

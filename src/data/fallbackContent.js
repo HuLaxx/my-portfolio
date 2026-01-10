@@ -17,8 +17,6 @@ export const fallbackProjects = [
     role: "AI/ML Engineer",
     slug: "nike-lab",
   },
-  { year: "2023", client: "MoMA NYC", role: "DIGITAL ARCHIVE" },
-  { year: "2023", client: "Polestar", role: "INTERFACE DESIGN" },
 ];
 
 export const fallbackResume = {

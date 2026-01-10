@@ -1,114 +1,118 @@
 import Link from "next/link";
 import { RevealOnScroll } from "./RevealOnScroll";
 
-const ProjectRow = ({ project, index, caseStudy }) => {
-  const Wrapper = project.slug ? Link : "div";
-  const wrapperProps = project.slug
-    ? { href: `/case/${project.slug}` }
-    : { role: "presentation" };
-
-  const poster = caseStudy?.media?.poster || caseStudy?.media?.cover;
-  const summary = project.summary || caseStudy?.summary;
-  const role = project.role || caseStudy?.role?.[0] || "Lead build";
-
+export const Projects = ({ projects, caseStudies = [] }) => {
   return (
-    <RevealOnScroll delay={index * 100}>
-      <Wrapper
-        {...wrapperProps}
-        className="group relative block w-full p-8 md:p-10 rounded-3xl border border-[var(--border)] bg-[var(--card)]/30 backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-[var(--accent)] hover:translate-y-[-4px] hover:shadow-2xl hover:bg-[var(--card-hover-tint)]"
-      >
-        {/* Unified Glassy gradient hover overlay */}
-        <div
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 backdrop-blur-sm z-0"
-          style={{ background: 'var(--hover-overlay)' }}
-        />
-
-        {/* Existing Image Overlay Override (if poster exists) - keeping it but adjusting z-index */}
-        {poster && (
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 z-0 bg-center bg-cover" style={{ backgroundImage: `url(${poster})` }} />
-        )}
-
-        <div className="relative z-10 grid grid-cols-1 items-start gap-6 md:grid-cols-12">
-          <div className="col-span-2 font-mono text-sm font-semibold uppercase tracking-[0.22em] text-[var(--foreground)] opacity-80 group-hover:text-[var(--accent-dark)] transition-colors">
-            {project.year}
-          </div>
-
-          <div className="col-span-7 space-y-3">
-            <h3 className="display-heading text-3xl font-semibold tracking-tight text-[var(--foreground)] md:text-5xl group-hover:text-[var(--accent-dark)] transition-colors">
-              {project.client}
-            </h3>
-            {summary && (
-              <p className="text-[var(--foreground)] opacity-90 font-medium max-w-xl group-hover:text-[var(--foreground)] transition-colors">
-                {summary}
-              </p>
-            )}
-          </div>
-
-          <div className="col-span-3 flex flex-col items-start gap-3 md:items-end">
-            <span className="font-mono text-sm font-semibold uppercase tracking-[0.2em] text-[var(--foreground)] opacity-80 text-right">
-              {role}
-            </span>
-
-            {/* GitHub-style Language Bar */}
-            {project.languages && (
-              <div className="w-full max-w-[200px] mb-2 opacity-80 group-hover:opacity-100 transition-opacity">
-                <div className="flex h-1.5 w-full overflow-hidden rounded-full bg-[var(--card)] mb-1">
-                  {Object.entries(project.languages).map(([lang, pct], i) => (
-                    <div
-                      key={lang}
-                      style={{ width: `${pct}%`, backgroundColor: ['#3178c6', '#f1e05a', '#e34c26', '#563d7c'][i % 4] }}
-                      className="h-full"
-                    />
-                  ))}
+    <section id="projects" className="relative z-10 py-10 md:py-12">
+      <div className="mx-auto w-[98%] md:w-full md:max-w-6xl px-4 sm:px-6 md:px-12">
+        <div className="p-4 sm:p-8 md:p-12">
+          <RevealOnScroll>
+            <div className="mb-12 flex items-end justify-between">
+              <div>
+                <div className="flex items-center gap-3 sm:gap-4 mb-4">
+                  <div className="h-[2px] sm:h-[3px] w-10 sm:w-14 bg-[var(--accent)]"></div>
+                  <p className="font-display text-base sm:text-xl md:text-2xl font-black italic uppercase tracking-[0.1em] text-[var(--foreground)]">
+                    Portfolio
+                  </p>
                 </div>
-                <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs font-semibold text-[var(--foreground)] opacity-80 font-mono justify-end">
-                  {Object.entries(project.languages).map(([lang, pct], i) => (
-                    <div key={lang} className="flex items-center gap-1.5">
-                      <div className="w-2 h-2 rounded-full" style={{ backgroundColor: ['#3178c6', '#f1e05a', '#e34c26', '#563d7c'][i % 4] }} />
-                      <span>{lang} {pct}%</span>
-                    </div>
-                  ))}
-                </div>
+                <h2 className="display-heading text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-semibold tracking-tight text-[var(--foreground)]">
+                  Selected Work
+                </h2>
               </div>
-            )}
+              <div className="hidden md:block h-[1px] w-32 bg-gradient-to-r from-[var(--accent)] to-transparent opacity-30 mb-4" />
+            </div>
+          </RevealOnScroll>
 
-            {project.slug && (
-              <span className="inline-flex items-center gap-2 text-sm font-bold text-[var(--accent)] opacity-0 -translate-x-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-0 mt-2 group-hover:text-[var(--accent-dark)] transition-colors">
-                View case
-                <span aria-hidden className="transition-all duration-500 group-hover:translate-x-1">
-                  -&gt;
-                </span>
-              </span>
-            )}
+          <div className="flex flex-col gap-6">
+            {projects?.map((project, index) => {
+              const CardContent = () => (
+                <div className="group relative h-full min-h-[240px] sm:min-h-[280px] md:min-h-[320px] p-5 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl border border-[var(--border)] bg-[var(--card)]/30 backdrop-blur-sm overflow-hidden transition-all duration-700 hover:shadow-2xl hover:translate-y-[-4px] hover:bg-[var(--card-hover-tint)] hover:border-[var(--accent)] flex flex-col justify-between">
+
+                  {/* Hover Gradient Overlay */}
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-0"
+                    style={{ background: 'var(--hover-overlay)' }}
+                  />
+
+                  {/* Bottom Accent Bar (only if clickable) */}
+                  {project.slug && (
+                    <div className="absolute bottom-0 left-0 right-0 z-20 overflow-hidden rounded-b-3xl">
+                      <div className="h-1 bg-[var(--accent)] opacity-30 group-hover:opacity-100 transition-all duration-500" />
+                    </div>
+                  )}
+
+                  <div className="relative z-10 flex flex-col gap-6 h-full">
+                    <div className="flex justify-between items-start">
+                      <div className="flex flex-col gap-1 sm:gap-2">
+                        <span className="font-mono text-xs sm:text-sm font-semibold uppercase tracking-[0.22em] text-[var(--accent-dark)] opacity-80 group-hover:text-[var(--text-hover)] transition-colors duration-500">
+                          {project.year}
+                        </span>
+                        <h3 className="display-heading text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight text-[var(--foreground)] group-hover:text-[var(--text-hover)] transition-colors duration-500">
+                          {project.client}
+                        </h3>
+                      </div>
+                      <div className="text-right pl-4">
+                        <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[var(--foreground)] opacity-60 group-hover:text-[var(--text-hover)] transition-colors duration-500 block">
+                          {project.role}
+                        </span>
+                      </div>
+                    </div>
+
+                    <p className="text-[var(--foreground)] opacity-90 leading-relaxed text-sm font-medium group-hover:text-[var(--text-hover)] transition-colors duration-500 max-w-xl">
+                      {project.summary}
+                    </p>
+
+                    {/* Tech Stack Bubbles (Optional addition for Projects) */}
+                    {project.languages && (
+                      <div className="flex flex-wrap gap-2 opacity-80 group-hover:opacity-100 transition-opacity">
+                        {Object.keys(project.languages).slice(0, 3).map(lang => (
+                          <span key={lang} className="text-[10px] font-mono border border-[var(--border)] px-2 py-1 rounded-full text-[var(--muted)]">
+                            {lang}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Right-Side Hover Expansion - Slide-in Drawer */}
+                  {project.slug && (
+                    <div className="hidden md:flex absolute right-0 top-0 bottom-0 w-1/3 h-full bg-gradient-to-l from-[var(--card)] via-[var(--card)]/90 to-transparent translate-x-12 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500 ease-out flex-col justify-center items-end pr-8 md:pr-12 pointer-events-none">
+                      <div className="flex flex-col items-end gap-3 text-right">
+                        <span className="p-3 rounded-full border border-[var(--accent)] bg-[var(--accent)]/10 text-[var(--accent)] group-hover:bg-[var(--accent)] group-hover:text-black transition-all duration-500 shadow-[0_0_15px_rgba(0,0,0,0.2)]">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                          </svg>
+                        </span>
+                        <div>
+                          <span className="font-bold text-sm uppercase tracking-wider text-[var(--foreground)] block mb-1">
+                            View Case Study
+                          </span>
+                          <span className="text-xs font-mono text-[var(--muted)] block">
+                            Deep Dive & Metrics
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+
+              return (
+                <RevealOnScroll key={index} delay={index * 100}>
+                  {project.slug ? (
+                    <Link href={`/case/${project.slug}`} className="block h-full">
+                      <CardContent />
+                    </Link>
+                  ) : (
+                    <CardContent />
+                  )}
+                </RevealOnScroll>
+              );
+            })}
           </div>
         </div>
-      </Wrapper>
-    </RevealOnScroll>
+      </div>
+    </section>
   );
 };
 
-export const Work = ({ projects, caseStudies = [] }) => (
-  <section id="work" className="relative z-10 px-0 md:px-20 py-12 md:py-14">
-    <div className="mx-auto w-[98%] md:w-full md:max-w-6xl">
-      <div className="p-4 md:p-12 space-y-12">
-
-
-        <div className="flex flex-col gap-6">
-          {projects.map((project, index) => {
-            const caseStudy = caseStudies.find(
-              (study) => study.slug === project.slug
-            );
-            return (
-              <ProjectRow
-                project={project}
-                caseStudy={caseStudy}
-                index={index}
-                key={`${project.client}-${project.year}`}
-              />
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  </section>
-);

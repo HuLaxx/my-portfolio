@@ -11,8 +11,8 @@ import { AnimatePresence, motion } from "framer-motion";
 const navLinks = [
   { href: "/#roles", label: "ROLES" },
   { href: "/#experience", label: "EXPERIENCE" },
+  { href: "/#projects", label: "PROJECTS" },
   { href: "/#education", label: "EDUCATION" },
-  { href: "/#footer", label: "CONTACT" },
 ];
 
 const SocialIcon = ({ href, path, label, isEmail }) => (
@@ -31,9 +31,11 @@ const SocialIcon = ({ href, path, label, isEmail }) => (
 
 export const Navbar = () => {
   const { season } = useSeason();
-  const isLight = season === "summer";
+  const isLight = season === "summer" || season === "spring";
   const [activeSection, setActiveSection] = useState("#hero");
   const { isMenuOpen, openMenu, closeMenu } = useMenu();
+
+
 
   // Track active section based on scroll
   useEffect(() => {
@@ -101,7 +103,7 @@ export const Navbar = () => {
           </div>
 
           {/* Right block: socials + theme toggle */}
-          <div className="pl-6 border-l border-white/10 flex items-center gap-4">
+          <div className={`pl-6 border-l-2 flex items-center gap-4 ${isLight ? 'border-black/30' : 'border-white/20'}`}>
             <SocialIcon
               href="mailto:rahulkhanke786@gmail.com"
               label="Email"

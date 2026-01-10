@@ -2,8 +2,12 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { RevealOnScroll } from "./RevealOnScroll";
+import { useSeason } from "./SeasonContext";
 
 export const Hero = ({ resume }) => {
+  // "Normal Dark Blend" for all themes as requested
+  const maskGradient = 'radial-gradient(ellipse at center, black 40%, transparent 90%)';
+
   return (
     <section id="hero" className="relative min-h-[95vh] flex flex-col justify-center overflow-hidden border-0 outline-none">
 
@@ -59,7 +63,7 @@ export const Hero = ({ resume }) => {
 
           {/* Right Side (Image) - 40% */}
           <motion.div
-            className="hidden md:flex w-full md:w-[40%] items-end justify-end relative translate-x-[10%] -translate-y-[12%]"
+            className="hidden md:flex w-full md:w-[40%] items-end justify-end relative translate-x-[10%] -translate-y-[9%]"
           >
             <div className="relative w-full h-full max-h-[220vh] flex items-center justify-end">
               <img
@@ -67,8 +71,8 @@ export const Hero = ({ resume }) => {
                 alt="Rahul Khanke"
                 className="w-full h-full object-contain scale-[1.0] origin-bottom-right"
                 style={{
-                  maskImage: 'radial-gradient(ellipse at center, black 40%, transparent 90%)',
-                  WebkitMaskImage: 'radial-gradient(ellipse at center, black 40%, transparent 90%)'
+                  maskImage: maskGradient,
+                  WebkitMaskImage: maskGradient
                 }}
               />
               {/* Backing Glow */}
