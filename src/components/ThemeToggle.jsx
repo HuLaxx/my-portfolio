@@ -4,10 +4,10 @@ import clsx from "clsx";
 import { useSeason } from "./SeasonContext";
 
 const seasons = [
-  { id: "spring", label: "Spring" },
-  { id: "summer", label: "Summer" },
-  { id: "autumn", label: "Autumn" },
-  { id: "winter", label: "Winter" },
+  { id: "spring", label: "Spring", color: "#be185d" },
+  { id: "summer", label: "Summer", color: "#f59e0b" },
+  { id: "autumn", label: "Autumn", color: "#a16207" },
+  { id: "winter", label: "Winter", color: "#1e3a8a" },
 ];
 
 export const ThemeToggle = () => {
@@ -33,6 +33,7 @@ export const ThemeToggle = () => {
         <button
           key={t.id}
           onClick={() => setSeason(t.id)}
+          style={{ "--theme-glow": t.color }}
           className={clsx(
             `
             rounded-full
@@ -42,10 +43,11 @@ export const ThemeToggle = () => {
             transition-all duration-300
             text-center
             xl:flex-none
+            hover:scale-105 hover:shadow-[0_0_15px_var(--theme-glow)] hover:text-[var(--theme-glow)]
             `,
             season === t.id
-              ? "bg-[var(--accent)] text-[var(--background)] shadow-[0_4px_12px_rgba(0,0,0,0.25)]"
-              : "text-gray-400 hover:text-white"
+              ? "bg-[var(--accent)] text-[var(--background)] shadow-[0_4px_12px_rgba(0,0,0,0.25)] hover:!text-[var(--background)]"
+              : "text-gray-400"
           )}
           aria-pressed={season === t.id}
         >

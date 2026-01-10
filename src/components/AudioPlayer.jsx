@@ -20,7 +20,8 @@ export const AudioPlayer = () => {
         }
     }, []);
 
-    const togglePlay = () => {
+    const togglePlay = (e) => {
+        e?.stopPropagation();
         if (audioRef.current) {
             if (isPlaying) {
                 audioRef.current.pause();
@@ -31,130 +32,112 @@ export const AudioPlayer = () => {
         }
     };
 
-    const toggleMute = () => {
+    const toggleMute = (e) => {
+        e?.stopPropagation();
         if (audioRef.current) {
             audioRef.current.muted = !isMuted;
             setIsMuted(!isMuted);
         }
     };
 
+    // Minimalist sound bars
+    const SoundBars = () => (
+        <div className="flex items-center gap-[2px] h-3">
+            {[1, 2, 3].map((bar) => (
+                <motion.div
+                    key={bar}
+                    className="w-[2px] bg-current rounded-full"
+                    animate={{ height: ['20%', '100%', '50%'] }}
+                    transition={{
+                        duration: 0.6,
+                        repeat: Infinity,
+                        delay: bar * 0.1,
+                        ease: "easeInOut"
+                    }}
+                />
+            ))}
+        </div>
+    );
+
     return (
         <>
             <audio ref={audioRef} src="/audio/Timeless.m4a" preload="auto" />
 
-            {/* Compact Player - Bottom Left */}
+            {/* 
+               Ghost Capsule Container 
+               - Fixed Bottom Left
+               - Z-Index 40 (Above background, below critical UI)
+               - Very subtle default opacity (Ghost Mode)
+            */}
             <motion.div
                 className="fixed bottom-6 left-6 z-40"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 2, duration: 0.5 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1 }}
             >
                 <motion.div
                     layout
-                    className={`flex items-center overflow-hidden backdrop-blur-2xl border shadow-lg rounded-full ${isLight
-                            ? 'bg-white/80 border-black/10'
-                            : 'bg-black/70 border-white/10'
+                    onMouseEnter={() => setIsExpanded(true)}
+                    onMouseLeave={() => setIsExpanded(false)}
+                    onClick={() => !isExpanded && setIsExpanded(true)}
+                    className={`flex items-center backdrop-blur-md rounded-full border transition-all duration-500 cursor-pointer ${isExpanded ? 'px-4 pr-5' : 'px-0 w-10 justify-center'
+                        } ${isLight
+                            ? 'bg-white/40 border-black/5 hover:bg-white/60'
+                            : 'bg-black/30 border-white/5 hover:bg-black/50'
                         }`}
+                    style={{
+                        height: '40px',
+                        boxShadow: isExpanded ? '0 8px 32px rgba(0,0,0,0.1)' : 'none'
+                    }}
                 >
-                    {/* Main Play Button (always visible) */}
+                    {/* Icon / Play Button */}
                     <button
-                        onClick={() => {
-                            if (!isExpanded) {
-                                setIsExpanded(true);
-                            } else {
-                                togglePlay();
-                            }
-                        }}
-                        className={`w-10 h-10 flex items-center justify-center rounded-full transition-all duration-300 ${isPlaying
-                                ? 'bg-[var(--accent)] text-black'
-                                : isLight
-                                    ? 'text-gray-600 hover:bg-black/5'
-                                    : 'text-white/70 hover:bg-white/10'
+                        onClick={togglePlay}
+                        className={`flex items-center justify-center rounded-full transition-colors flex-shrink-0 ${isExpanded ? 'w-8 h-8 mr-2' : 'w-10 h-10'
                             }`}
+                        aria-label={isPlaying ? "Pause music" : "Play music"}
                     >
                         {isPlaying ? (
-                            // Sound bars when playing
-                            <div className="flex items-end gap-[2px] h-4">
-                                {[1, 2, 3].map((bar) => (
-                                    <motion.div
-                                        key={bar}
-                                        className="w-[2px] rounded-full bg-current"
-                                        animate={{ height: ['30%', '100%', '50%', '80%', '30%'] }}
-                                        transition={{
-                                            duration: 0.8,
-                                            repeat: Infinity,
-                                            delay: bar * 0.1,
-                                        }}
-                                    />
-                                ))}
-                            </div>
+                            isExpanded ? (
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1" /><rect x="14" y="4" width="4" height="16" rx="1" /></svg>
+                            ) : (
+                                <SoundBars />
+                            )
                         ) : (
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="opacity-70">
                                 <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
                             </svg>
                         )}
                     </button>
 
-                    {/* Expanded Controls */}
-                    <AnimatePresence>
+                    {/* Expanded Controls (Ghost Reveal) */}
+                    <AnimatePresence mode="popLayout">
                         {isExpanded && (
                             <motion.div
-                                initial={{ width: 0, opacity: 0 }}
-                                animate={{ width: 'auto', opacity: 1 }}
-                                exit={{ width: 0, opacity: 0 }}
-                                transition={{ duration: 0.3 }}
-                                className="flex items-center gap-2 pr-3 overflow-hidden"
+                                initial={{ opacity: 0, width: 0 }}
+                                animate={{ opacity: 1, width: 'auto' }}
+                                exit={{ opacity: 0, width: 0 }}
+                                transition={{ duration: 0.3, ease: "circOut" }}
+                                className="flex items-center gap-3 overflow-hidden whitespace-nowrap"
                             >
-                                {/* Play/Pause */}
-                                <button
-                                    onClick={togglePlay}
-                                    className={`w-7 h-7 flex items-center justify-center rounded-full transition-colors ${isLight
-                                            ? 'text-gray-600 hover:bg-black/10'
-                                            : 'text-white/70 hover:bg-white/10'
-                                        }`}
-                                >
-                                    {isPlaying ? (
-                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                                            <rect x="6" y="4" width="4" height="16" rx="1" />
-                                            <rect x="14" y="4" width="4" height="16" rx="1" />
-                                        </svg>
-                                    ) : (
-                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                                            <polygon points="5 3 19 12 5 21 5 3" />
-                                        </svg>
-                                    )}
-                                </button>
+                                {/* Track Info */}
+                                <div className="flex flex-col justify-center leading-none select-none">
+                                    <span className="text-[10px] font-bold tracking-widest uppercase opacity-80">Timeless</span>
+                                </div>
 
-                                {/* Mute */}
+                                {/* Divider */}
+                                <div className="w-px h-3 bg-current opacity-20" />
+
+                                {/* Mute Toggle */}
                                 <button
                                     onClick={toggleMute}
-                                    className={`w-7 h-7 flex items-center justify-center rounded-full transition-colors ${isMuted
-                                            ? 'text-red-400'
-                                            : isLight
-                                                ? 'text-gray-400 hover:text-gray-600'
-                                                : 'text-white/40 hover:text-white/70'
-                                        }`}
+                                    className="opacity-60 hover:opacity-100 transition-opacity p-1"
                                 >
                                     {isMuted ? (
-                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                            <line x1="4" y1="4" x2="20" y2="20" />
-                                        </svg>
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="1" y1="1" x2="23" y2="23" /><path d="M9 9v6a3 3 0 0 0 5.12 2.12M15 9.34V4h6v9" /></svg>
                                     ) : (
-                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                                        </svg>
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" /></svg>
                                     )}
-                                </button>
-
-                                {/* Close */}
-                                <button
-                                    onClick={() => setIsExpanded(false)}
-                                    className={`w-5 h-5 flex items-center justify-center rounded-full ${isLight ? 'text-gray-300 hover:text-gray-500' : 'text-white/20 hover:text-white/40'
-                                        }`}
-                                >
-                                    <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                                        <polyline points="15 18 9 12 15 6" />
-                                    </svg>
                                 </button>
                             </motion.div>
                         )}

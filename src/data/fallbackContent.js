@@ -23,75 +23,95 @@ export const fallbackProjects = [
 
 export const fallbackResume = {
   label: "DATA SCIENTIST & AI ENGINEER",
-  title: "RAHUL VISHWAKARMA",
+  title: "RAHUL KHANKE",
   summary:
-    "Specializing in building robust data pipelines, training state-of-the-art ML models, and deploying scalable AI solutions. Passionate about turning complex data into actionable insights.",
+    "Data Scientist and AI Engineer with expertise in building robust data pipelines, training state-of-the-art ML models, and deploying scalable AI solutions. Proven track record at Accenture and Company A.",
   neuralSummary:
-    "Ask about my experience with LLMs, RAG architectures, or data engineering pipelines.",
+    "Ask about my MSc in Data Science from Glasgow, my time at Accenture, or my work with RAG and LLMs.",
   studies: [
     {
-      institution: "University Name",
-      degree: "Master of Science in Data Science",
-      year: "2023",
-      dissertation: "Optimizing Large Language Models for Edge Devices",
-      modules: ["Advanced Machine Learning", "Big Data Architecture", "Deep Learning", "Statistical Methods", "Data Ethics"],
+      institution: "University of Glasgow",
+      degree: "MSc in Data Science",
+      year: "2025",
+      dissertation: "Advanced Data Science & AI Systems",
+      modules: ["Machine Learning", "Big Data", "Deep Learning", "Information Retrieval"],
       image: "/generated/edu-univ.png",
     },
     {
-      institution: "University Name",
-      degree: "Bachelor of Computer Science",
-      year: "2021",
-      dissertation: "Real-time Object Detection in Autonomous Systems",
-      modules: ["Algorithms & Data Structures", "Database Systems", "Software Engineering", "Linear Algebra", "Calculus"],
+      institution: "G.H. Raisoni College of Engineering",
+      degree: "B.E in Computer Science",
+      year: "2022",
+      dissertation: "Computer Science Fundamentals",
+      modules: ["Data Structures", "Algorithms", "DBMS", "Operating Systems"],
       image: "/generated/edu-univ.png",
     },
   ],
   experience: [
     {
-      company: "Tech Company A",
-      slug: "tech-company-a",
-      role: "Senior Data Scientist",
-      period: "2023 - Present",
-      description: "Leading the NLP research team, developing RAG systems for enterprise clients.",
+      company: "Company A",
+      slug: "company-a",
+      role: "AI & Data Solution Engineer",
+      period: "Sep 2024 - Dec 2025",
+      description: "Engineering advanced AI and data solutions, focusing on scalable architecture and ML integration.",
       image: "/generated/exp-tech.png",
-      stack: ["Python", "PyTorch", "FastAPI", "Docker", "AWS"],
+      stack: ["Python", "AWS", "LLMs", "RAG", "Data Pipelines"],
       stats: [
-        { label: "Models Shipped", value: "12" },
-        { label: "Accuracy Lift", value: "+24%" },
-        { label: "Team Size", value: "8" }
+        { label: "Projects", value: "Multiple" },
+        { label: "Impact", value: "High" },
+        { label: "Team", value: "Engineering" }
       ]
     },
     {
-      company: "Tech Company B",
-      slug: "tech-company-b",
-      role: "Data Engineer",
-      period: "2021 - 2023",
-      description: "Built real-time data streaming pipelines using Kafka and Spark.",
+      company: "Accenture",
+      slug: "accenture",
+      role: "Software Engineer",
+      period: "Oct 2022 - Sept 2024",
+      description: "Developed and maintained full-stack applications, optimizing performance and ensuring code quality.",
       image: "/generated/exp-corp.png",
-      stack: ["Scala", "Apache Spark", "Kafka", "Hadoop", "GCP"],
+      stack: ["Java", "Spring Boot", "React", "Cloud", "SQL"],
       stats: [
-        { label: "Data Volume", value: "5PB" },
-        { label: "Latency", value: "<100ms" },
-        { label: "Pipelines", value: "45+" }
+        { label: "Tenure", value: "2 Years" },
+        { label: "Role", value: "Full Stack" },
+        { label: "Global", value: "Client Delivery" }
+      ]
+    },
+    {
+      company: "Cognizant",
+      slug: "cognizant",
+      role: "Intern",
+      period: "Jan 2022 - Apr 2022",
+      description: "Gained hands-on experience in software development life cycle and enterprise technologies.",
+      image: "/generated/exp-corp.png",
+      stack: ["Java", "SQL", "Testing"],
+      stats: [
+        { label: "Duration", value: "4 Months" },
+        { label: "Focus", value: "Training" }
+      ]
+    },
+    {
+      company: "Company A (Intern)",
+      slug: "company-a-intern",
+      role: "Data Engineering Intern",
+      period: "Aug 2020 - Dec 2021",
+      description: "Assisted in building data pipelines and processing large datasets.",
+      image: "/generated/exp-tech.png",
+      stack: ["Python", "SQL", "ETL"],
+      stats: [
+        { label: "Duration", value: "1.5 Years" },
+        { label: "Focus", value: "Data Eng" }
       ]
     },
   ],
   knowledgeBase: `
-    RESUME DATA FOR RAHUL:
-    - Role: Data Scientist, Data Engineer, AI/ML Engineer.
-    - Location: [Location] (Open to Remote).
-    - Core Stack: Python, PyTorch, TensorFlow, SQL, AWS/GCP, Docker, Kubernetes, Next.js (for demos).
-    - Experience: Building RAG systems, Data Pipelines, ML Model Deployment.
-    
-    PROJECT DEEP DIVES:
-    1. Vogue Scandinavia (Data Scientist Role): Analyzed user engagement data to optimize content delivery.
-    2. SpaceX Starship (Data Engineer Role): Processed telemetry data streams for real-time visualization.
-    3. Nike Lab (AI/ML Engineer Role): Developed computer vision models for product interaction.
-
-    CONTACT:
-    - LinkedIn: [LINKEDIN_URL]
-    - GitHub: [GITHUB_URL]
-    - Kaggle: [KAGGLE_URL]
+    RESUME DATA FOR RAHUL KHANKE:
+    - Role: Data Scientist, AI Engineer.
+    - Education: MSc Data Science (University of Glasgow), B.E Computer Science (G.H. Raisoni).
+    - Experience: 
+      1. Company A (AI & Data Solution Engineer)
+      2. Accenture (Software Engineer)
+      3. Cognizant (Intern)
+    - Location: Glasgow, UK.
+    - Contact: +44 07584251036, rahulkhanke786@gmail.com
   `,
 };
 
