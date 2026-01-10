@@ -1,8 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    reactCompiler: true,
-  },
+    reactStrictMode: true,
+    // Using default export for latest Next.js ESM support
 };
 
 export default nextConfig;

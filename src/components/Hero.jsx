@@ -1,46 +1,87 @@
+"use client";
+
+import { motion, useScroll, useTransform } from "framer-motion";
 import { RevealOnScroll } from "./RevealOnScroll";
 
 export const Hero = ({ resume }) => {
   return (
-    <section id="hero" className="relative min-h-[85vh] flex flex-col justify-center overflow-hidden">
-      <div className="mx-auto max-w-6xl px-6 md:px-16 pt-28 md:pt-40 relative z-10">
-        <div className="px-6 py-8 md:px-12 md:py-14">
-          <RevealOnScroll delay={100}>
-            <div className="flex items-center gap-4 mb-6">
-              <div className="h-[3px] w-14 bg-[var(--accent)]"></div>
-              <p className="font-display text-xl md:text-2xl font-black italic uppercase tracking-[0.1em] text-[var(--accent)]">
-                About Me
-              </p>
-            </div>
-          </RevealOnScroll>
+    <section id="hero" className="relative min-h-[95vh] flex flex-col justify-center overflow-hidden border-0 outline-none">
 
-          <RevealOnScroll delay={200}>
-            <div className="mb-6 font-semibold leading-[1.1] tracking-tight text-[var(--foreground)]">
-              <h1 className="text-5xl md:text-8xl lg:text-9xl mb-2 flex flex-col gap-2">
-                <span className="inline-block transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_35px_var(--accent)] hover:brightness-125 origin-left w-fit py-2">
-                  I am Rahul
-                </span>
-                <span className="inline-block text-stroke opacity-100 text-[var(--foreground)]/10 transition-all duration-300 hover:scale-105 hover:text-[var(--accent)] hover:drop-shadow-[0_0_25px_var(--accent)] hover:text-stroke-0 origin-left w-fit py-2">
-                  Khanke
-                </span>
-              </h1>
-            </div>
-          </RevealOnScroll>
+      {/* Background Gradient Orbs */}
+      <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full bg-[var(--accent)]/10 blur-[120px] pointer-events-none mix-blend-screen" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] rounded-full bg-[var(--secondary)]/10 blur-[140px] pointer-events-none mix-blend-screen" />
 
-          <RevealOnScroll delay={300}>
-            <div className="flex flex-col md:flex-row gap-8 items-start md:items-center">
-              <p className="max-w-xl text-lg leading-relaxed text-[var(--foreground)] md:text-2xl font-medium border-l-2 border-[var(--border)] pl-6">
-                {resume.summary}
-              </p>
-              <div className="hidden md:block h-[1px] flex-1 bg-gradient-to-r from-[var(--accent-soft)] to-transparent"></div>
+      {/* Increased width to max-w-[95%] */}
+      <div className="mx-auto w-full max-w-[95%] px-4 md:px-8 pt-32 md:pt-48 relative z-10">
+
+        {/* Main Content Row */}
+        <div className="flex flex-col md:flex-row items-stretch justify-between gap-8 md:gap-12 min-h-[85vh]">
+
+          {/* Left Side (Text) - 60% */}
+          <motion.div
+            className="w-full md:w-[60%] flex flex-col justify-start gap-8 py-6 pl-6 md:pl-12"
+          >
+            {/* Top Group: Label + Name */}
+            <div className="flex flex-col gap-4">
+              <RevealOnScroll delay={100}>
+                <div className="flex items-center gap-4">
+                  <div className="h-[3px] w-14 bg-[var(--accent)]"></div>
+                  <p className="font-display text-xl md:text-2xl font-black italic uppercase tracking-[0.1em] text-[var(--accent)]">
+                    About Me
+                  </p>
+                </div>
+              </RevealOnScroll>
+
+              <RevealOnScroll delay={200}>
+                <div className="font-semibold leading-[1.1] tracking-tight text-[var(--foreground)]">
+                  <h1 className="text-5xl md:text-8xl lg:text-9xl mb-0 flex flex-col gap-0">
+                    {/* Forced single line */}
+                    <span className="inline-block whitespace-nowrap transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_35px_var(--accent)] hover:brightness-125 origin-left w-fit py-1">
+                      I am Rahul
+                    </span>
+                    <span className="inline-block text-stroke opacity-100 text-[var(--foreground)]/10 transition-all duration-300 hover:scale-105 hover:text-[var(--accent)] hover:drop-shadow-[0_0_25px_var(--accent)] hover:text-stroke-0 origin-left w-fit py-1">
+                      Khanke
+                    </span>
+                  </h1>
+                </div>
+              </RevealOnScroll>
             </div>
-          </RevealOnScroll>
+
+            {/* Bottom Group: Summary */}
+            <RevealOnScroll delay={300}>
+              <div className="flex flex-col gap-4">
+                <p className="max-w-xl text-lg leading-relaxed text-[var(--foreground)] md:text-2xl font-medium">
+                  {resume.summary}
+                </p>
+              </div>
+            </RevealOnScroll>
+          </motion.div>
+
+          {/* Right Side (Image) - 40% */}
+          <motion.div
+            className="hidden md:flex w-full md:w-[40%] items-end justify-end relative translate-x-[25%] -translate-y-[5%]"
+          >
+            <div className="relative w-full h-full max-h-[220vh] flex items-center justify-end">
+              <img
+                src="/me.png"
+                alt="Rahul Khanke"
+                className="w-full h-full object-contain scale-[1.125] origin-bottom-right"
+                style={{
+                  maskImage: 'radial-gradient(ellipse at center, black 40%, transparent 90%)',
+                  WebkitMaskImage: 'radial-gradient(ellipse at center, black 40%, transparent 90%)'
+                }}
+              />
+              {/* Backing Glow */}
+              <div className="absolute inset-0 bg-[var(--accent)]/5 blur-[80px] rounded-full -z-10" />
+            </div>
+          </motion.div>
+
         </div>
       </div>
 
       {/* Scroll indicator */}
       <RevealOnScroll delay={400}>
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 animate-bounce z-20">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 animate-bounce z-20">
           <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--muted)]">Scroll</p>
           <div className="h-12 w-6 rounded-full border-2 border-[var(--border)] flex items-start justify-center p-1.5">
             <div className="h-2 w-2 rounded-full bg-[var(--accent)] animate-pulse"></div>

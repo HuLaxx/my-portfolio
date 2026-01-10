@@ -31,35 +31,61 @@ export const Footer = () => {
   ];
 
   return (
-    <footer id="footer" className="relative z-40 mt-20 px-2 pb-6 w-full">
-      {/* Reduced min-height to ~35vh (another 30% reduction) */}
-      <div className="nav-shell relative overflow-hidden mx-auto w-[98%] rounded-[2rem] px-6 py-12 md:px-16 md:py-20 flex flex-col min-h-[35vh]">
+    <footer id="footer" className="relative z-40 mt-12 px-2 pb-2 w-full">
+      {/* 
+         - Width: 99.5%
+         - Min-h: 22vh
+         - pt-6 (Symmetrical Top Space)
+         - Glass effect + border
+      */}
+      <div className="nav-shell relative overflow-hidden mx-auto w-[99.5%] rounded-[2rem] px-4 pt-2 pb-6 md:px-8 md:pt-2 md:pb-6 flex flex-col min-h-[12vh] bg-[var(--card)]/30 backdrop-blur-sm border border-[var(--border)]/20">
 
-        {/* Decorative 'Me' Images - High Opacity, No Blend, Corner Positioned */}
-        <div className="absolute top-4 right-4 w-[200px] h-[200px] md:w-[350px] md:h-[350px] opacity-90 pointer-events-none z-0">
-          <img src="/me.png" alt="" className="w-full h-full object-contain" />
-        </div>
-        {/* Left Side Image - me2.png */}
-        <div className="absolute top-4 left-4 w-[200px] h-[200px] md:w-[300px] md:h-[300px] opacity-90 pointer-events-none z-0">
-          <img src="/me2.png" alt="" className="w-full h-full object-contain" />
+        {/* Background Gradients (Theme Shades) */}
+        <div className="absolute top-[-50%] left-[-20%] w-[500px] h-[500px] rounded-full bg-[var(--accent)]/10 blur-[120px] pointer-events-none mix-blend-screen" />
+        <div className="absolute bottom-[-50%] right-[-20%] w-[600px] h-[600px] rounded-full bg-[var(--secondary)]/10 blur-[140px] pointer-events-none mix-blend-screen" />
+
+        {/* Flex container: Added pb-4 for Bottom Space (above border) */}
+        {/* Pulled up (-mt-1) per user request */}
+        <div className="flex flex-col md:flex-row items-end justify-between flex-1 w-full gap-8 md:gap-12 relative z-10 pb-4 -mt-1">
+
+          {/* Left: Text Content - 70% (Widened) - Justify Center (Symmetry) */}
+          <div className="w-full md:w-[70%] flex flex-col justify-center h-full translate-x-6 -translate-y-9">
+            <h2 className="text-[14vw] md:text-[10vw] leading-[0.95] font-bold tracking-tighter text-[var(--foreground)] opacity-90 text-left">
+              LET&apos;S <br />
+              CONNECT <br />
+              <span className="text-[var(--muted)]">TODAY</span>
+            </h2>
+          </div>
+
+          {/* Right: Me Image - 30% (Reduced to fit text) */}
+          <div className="hidden md:flex w-full md:w-[30%] justify-end items-end relative -mb-2">
+            <div className="relative w-full h-full flex items-end justify-end">
+              <img
+                src="/me2.png"
+                alt="Let's Connect"
+                className="w-auto h-full max-h-full object-contain scale-[1] origin-bottom-right -translate-y-7 -translate-x-6"
+                style={{
+                  maskImage: 'radial-gradient(circle at center, black 50%, transparent 95%)',
+                  WebkitMaskImage: 'radial-gradient(circle at center, black 50%, transparent 95%)'
+                }}
+              />
+            </div>
+          </div>
+
         </div>
 
-        {/* Top Part: "Let's Work Together" (~60% of space) */}
-        <div className="flex-[1.5] flex items-center justify-center border-b border-[var(--border)]/30 pb-8 relative z-10 text-center">
-          <h2 className="text-[14vw] leading-[0.8] font-bold tracking-tighter text-[var(--foreground)] opacity-90">
-            LET&apos;S WORK <br />
-            <span className="text-[var(--muted)]">TOGETHER</span>
-          </h2>
-        </div>
+        {/* Full width border below both Text and Image */}
+        {/* Pulled up (-mt-5) per user request */}
+        <div className="w-full h-[1px] bg-[var(--border)]/30 mb-8 z-10 relative -mt-5"></div>
 
-        {/* Bottom Part: Socials/Info (~35% of space) */}
-        <div className="flex-1 flex flex-col justify-end pt-12 relative z-10">
-          <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+        {/* Bottom Part: Socials/Info */}
+        <div className="flex-1 shrink-0 flex flex-col justify-end relative z-10">
+          <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
 
             {/* Left: Identity */}
             <div className="flex flex-col gap-1">
-              <span className="text-sm font-bold tracking-widest text-[var(--foreground)]">RAHUL KHANKE</span>
-              <span className="text-xs text-[var(--muted)]">&copy; {currentYear}</span>
+              <span className="text-xl font-black tracking-widest text-[var(--foreground)]">RAHUL KHANKE</span>
+              <span className="text-sm font-bold text-[var(--muted)]">&copy; {currentYear}</span>
             </div>
 
             {/* Center: Socials (Icons + Text) */}
@@ -70,14 +96,14 @@ export const Footer = () => {
                   href={link.href}
                   target={link.label === "EMAIL" ? undefined : "_blank"}
                   rel={link.label === "EMAIL" ? undefined : "noopener noreferrer"}
-                  className="group flex items-center gap-2 text-xs font-bold tracking-[0.2em] text-[var(--muted)] transition-all duration-300 hover:text-[var(--foreground)] hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]"
+                  className="group flex items-center gap-2 text-base font-bold tracking-[0.2em] text-[var(--foreground)] transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]"
                 >
                   <svg
-                    width="16"
-                    height="16"
+                    width="18"
+                    height="18"
                     viewBox="0 0 24 24"
                     fill="currentColor"
-                    className="opacity-70 group-hover:opacity-100 transition-opacity"
+                    className="opacity-100 group-hover:opacity-80 transition-opacity"
                   >
                     <path d={link.path} />
                   </svg>
@@ -88,10 +114,9 @@ export const Footer = () => {
 
             {/* Right: Actions */}
             <div className="flex items-center gap-8">
-              {/* Removed standalone Email link as it's now in socials */}
               <button
                 onClick={scrollToTop}
-                className="group flex items-center gap-2 text-xs font-bold tracking-[0.2em] text-[var(--muted)] transition-colors hover:text-[var(--foreground)]"
+                className="group flex items-center gap-2 text-base font-bold tracking-[0.2em] text-[var(--foreground)] transition-colors hover:opacity-80"
               >
                 TOP
                 <span className="transition-transform duration-300 group-hover:-translate-y-1">↑</span>
