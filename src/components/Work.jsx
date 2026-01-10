@@ -1,7 +1,21 @@
+'use client';
+
 import Link from "next/link";
 import { RevealOnScroll } from "./RevealOnScroll";
+import { Watermark } from "./Watermark";
+import { AppWindow, Database, Smartphone, Globe, Layout, Code, Monitor } from "lucide-react";
 
 export const Projects = ({ projects, caseStudies = [] }) => {
+
+  const getProjectWatermark = (role) => {
+    const r = role?.toLowerCase() || "";
+    if (r.includes("mobile") || r.includes("app") || r.includes("ios")) return { type: "neon", icon: Smartphone };
+    if (r.includes("backend") || r.includes("api") || r.includes("infrastructure")) return { type: "wireframe", icon: Database };
+    if (r.includes("web") || r.includes("frontend") || r.includes("full stack")) return { type: "classic", icon: Layout };
+    if (r.includes("ai") || r.includes("ml") || r.includes("data")) return { type: "neon", icon: Code };
+    return { type: "engraved", icon: Monitor };
+  };
+
   return (
     <section id="projects" className="relative z-10 py-10 md:py-12">
       <div className="mx-auto w-[98%] md:w-full md:max-w-6xl px-4 sm:px-6 md:px-12">
@@ -16,7 +30,7 @@ export const Projects = ({ projects, caseStudies = [] }) => {
                   </p>
                 </div>
                 <h2 className="display-heading text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-semibold tracking-tight text-[var(--foreground)]">
-                  Selected Work
+                  Portfolio Projects
                 </h2>
               </div>
               <div className="hidden md:block h-[1px] w-32 bg-gradient-to-r from-[var(--accent)] to-transparent opacity-30 mb-4" />
@@ -25,6 +39,8 @@ export const Projects = ({ projects, caseStudies = [] }) => {
 
           <div className="flex flex-col gap-6">
             {projects?.map((project, index) => {
+              const { type, icon } = getProjectWatermark(project.role);
+
               const CardContent = () => (
                 <div className="group relative h-full min-h-[240px] sm:min-h-[280px] md:min-h-[320px] p-5 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl border border-[var(--border)] bg-[var(--card)]/30 backdrop-blur-sm overflow-hidden transition-all duration-700 hover:shadow-2xl hover:translate-y-[-4px] hover:bg-[var(--card-hover-tint)] hover:border-[var(--accent)] flex flex-col justify-between">
 
@@ -41,24 +57,27 @@ export const Projects = ({ projects, caseStudies = [] }) => {
                     </div>
                   )}
 
+                  {/* Watermark Background */}
+                  <Watermark type={type} icon={icon} />
+
                   <div className="relative z-10 flex flex-col gap-6 h-full">
                     <div className="flex justify-between items-start">
                       <div className="flex flex-col gap-1 sm:gap-2">
-                        <span className="font-mono text-xs sm:text-sm font-semibold uppercase tracking-[0.22em] text-[var(--accent-dark)] opacity-80 group-hover:text-[var(--text-hover)] transition-colors duration-500">
+                        <span className="font-mono text-sm sm:text-base font-bold uppercase tracking-[0.22em] text-[var(--accent-dark)] opacity-80 group-hover:text-[var(--text-hover)] transition-colors duration-500">
                           {project.year}
                         </span>
-                        <h3 className="display-heading text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight text-[var(--foreground)] group-hover:text-[var(--text-hover)] transition-colors duration-500">
+                        <h3 className="display-heading text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-[var(--foreground)] group-hover:text-[var(--text-hover)] transition-colors duration-500">
                           {project.client}
                         </h3>
                       </div>
                       <div className="text-right pl-4">
-                        <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[var(--foreground)] opacity-60 group-hover:text-[var(--text-hover)] transition-colors duration-500 block">
+                        <span className="font-mono text-base sm:text-lg font-bold uppercase tracking-wider text-[var(--foreground)] opacity-70 group-hover:text-[var(--text-hover)] transition-colors duration-500 block">
                           {project.role}
                         </span>
                       </div>
                     </div>
 
-                    <p className="text-[var(--foreground)] opacity-90 leading-relaxed text-sm font-medium group-hover:text-[var(--text-hover)] transition-colors duration-500 max-w-xl">
+                    <p className="text-[var(--foreground)] opacity-90 leading-relaxed text-base sm:text-lg font-medium group-hover:text-[var(--text-hover)] transition-colors duration-500 max-w-xl">
                       {project.summary}
                     </p>
 
@@ -76,7 +95,7 @@ export const Projects = ({ projects, caseStudies = [] }) => {
 
                   {/* Right-Side Hover Expansion - Slide-in Drawer */}
                   {project.slug && (
-                    <div className="hidden md:flex absolute right-0 top-0 bottom-0 w-1/3 h-full bg-gradient-to-l from-[var(--card)] via-[var(--card)]/90 to-transparent translate-x-12 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500 ease-out flex-col justify-center items-end pr-8 md:pr-12 pointer-events-none">
+                    <div className="hidden md:flex absolute right-0 top-0 bottom-0 w-1/3 h-full bg-gradient-to-l from-[var(--card)] via-[var(--card)]/90 to-transparent translate-x-12 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500 ease-out flex-col justify-center items-end pr-8 md:pr-12 pointer-events-none z-20">
                       <div className="flex flex-col items-end gap-3 text-right">
                         <span className="p-3 rounded-full border border-[var(--accent)] bg-[var(--accent)]/10 text-[var(--accent)] group-hover:bg-[var(--accent)] group-hover:text-black transition-all duration-500 shadow-[0_0_15px_rgba(0,0,0,0.2)]">
                           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

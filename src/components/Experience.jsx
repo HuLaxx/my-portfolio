@@ -1,7 +1,22 @@
+'use client';
+
 import Link from "next/link";
 import { RevealOnScroll } from "./RevealOnScroll";
+import { Watermark } from "./Watermark";
+import { BrainCircuit, Server, Terminal, Code2, Sprout, Briefcase, Activity } from "lucide-react";
 
 export const Experience = ({ experience }) => {
+
+    const getRoleWatermark = (title) => {
+        const t = title.toLowerCase();
+        if (t.includes('ai') || t.includes('machine learning')) return { type: 'neon', icon: BrainCircuit };
+        if (t.includes('data scientist')) return { type: 'wireframe', icon: Activity };
+        if (t.includes('data engineer')) return { type: 'wireframe', icon: Server };
+        if (t.includes('intern')) return { type: 'soft', icon: Sprout };
+        if (t.includes('frontend') || t.includes('web')) return { type: 'classic', icon: Code2 };
+        return { type: 'engraved', icon: Briefcase };
+    };
+
     return (
         <section id="experience" className="relative z-10 py-10 md:py-12">
             <div className="mx-auto w-[98%] md:w-full md:max-w-6xl px-4 sm:px-6 md:px-12">
@@ -25,6 +40,8 @@ export const Experience = ({ experience }) => {
 
                     <div className="flex flex-col gap-6">
                         {experience?.map((job, index) => {
+                            const { type, icon } = getRoleWatermark(job.role);
+
                             const CardContent = () => (
                                 <div className="group relative h-full min-h-[240px] sm:min-h-[280px] md:min-h-[320px] p-5 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl border border-[var(--border)] bg-[var(--card)]/30 backdrop-blur-sm overflow-hidden transition-all duration-700 hover:shadow-2xl hover:translate-y-[-4px] hover:bg-[var(--card-hover-tint)] hover:border-[var(--accent)] flex flex-col justify-between">
 
@@ -41,31 +58,34 @@ export const Experience = ({ experience }) => {
                                         </div>
                                     )}
 
+                                    {/* Keyword-based Watermark */}
+                                    <Watermark type={type} icon={icon} />
+
                                     <div className="relative z-10 flex flex-col gap-6 h-full">
                                         <div className="flex justify-between items-start">
                                             <div className="flex flex-col gap-1 sm:gap-2">
-                                                <span className="font-mono text-xs sm:text-sm font-semibold uppercase tracking-[0.22em] text-[var(--accent-dark)] opacity-80 group-hover:text-[var(--text-hover)] transition-colors duration-500">
+                                                <span className="font-mono text-sm sm:text-base font-bold uppercase tracking-[0.22em] text-[var(--accent-dark)] opacity-80 group-hover:text-[var(--text-hover)] transition-colors duration-500">
                                                     {job.period}
                                                 </span>
-                                                <h3 className="display-heading text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight text-[var(--foreground)] group-hover:text-[var(--text-hover)] transition-colors duration-500">
+                                                <h3 className="display-heading text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-[var(--foreground)] group-hover:text-[var(--text-hover)] transition-colors duration-500">
                                                     {job.role}
                                                 </h3>
                                             </div>
                                             <div className="text-right pl-4">
-                                                <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[var(--foreground)] opacity-60 group-hover:text-[var(--text-hover)] transition-colors duration-500 block">
+                                                <span className="font-mono text-base sm:text-lg font-bold uppercase tracking-wider text-[var(--foreground)] opacity-70 group-hover:text-[var(--text-hover)] transition-colors duration-500 block">
                                                     {job.company}
                                                 </span>
                                             </div>
                                         </div>
 
-                                        <p className="text-[var(--foreground)] opacity-90 leading-relaxed text-sm font-medium group-hover:text-[var(--text-hover)] transition-colors duration-500">
+                                        <p className="text-[var(--foreground)] opacity-90 leading-relaxed text-base sm:text-lg font-medium group-hover:text-[var(--text-hover)] transition-colors duration-500">
                                             {job.description}
                                         </p>
                                     </div>
 
                                     {/* Right-Side Hover Expansion - Only if clickable, hidden on mobile */}
                                     {job.slug && (
-                                        <div className="hidden md:flex absolute right-0 top-0 bottom-0 w-1/3 h-full bg-gradient-to-l from-[var(--card)] via-[var(--card)]/90 to-transparent translate-x-12 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500 ease-out flex-col justify-center items-end pr-8 md:pr-12 pointer-events-none">
+                                        <div className="hidden md:flex absolute right-0 top-0 bottom-0 w-1/3 h-full bg-gradient-to-l from-[var(--card)] via-[var(--card)]/90 to-transparent translate-x-12 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500 ease-out flex-col justify-center items-end pr-8 md:pr-12 pointer-events-none z-20">
                                             <div className="flex flex-col items-end gap-3 text-right">
                                                 <span className="p-3 rounded-full border border-[var(--accent)] bg-[var(--accent)]/10 text-[var(--accent)] group-hover:bg-[var(--accent)] group-hover:text-black transition-all duration-500 shadow-[0_0_15px_rgba(0,0,0,0.2)]">
                                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

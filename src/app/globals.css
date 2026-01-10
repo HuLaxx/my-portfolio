@@ -66,8 +66,8 @@
   --muted: #d4d4d8;
   --accent: #fbbf24;
   --accent-soft: rgba(251, 191, 36, 0.15);
-  --accent-dark: #fbbf24;
-  /* Keep bright for dark theme */
+  --accent-dark: #d97706;
+  /* Amber 600 - Darker Shade */
   --console-accent: #fbbf24;
   --card: rgba(25, 15, 5, 0.9);
   --card-hover-tint: rgba(25, 15, 5, 0.95);
@@ -95,8 +95,8 @@
   --muted: #cbd5e1;
   --accent: #7dd3fc;
   --accent-soft: rgba(125, 211, 252, 0.15);
-  --accent-dark: #7dd3fc;
-  /* Keep bright for dark theme */
+  --accent-dark: #0284c7;
+  /* Sky 600 - Darker Shade */
   --console-accent: #7dd3fc;
   --card: rgba(5, 10, 30, 0.9);
   --card-hover-tint: rgba(5, 10, 30, 0.95);
@@ -440,10 +440,4 @@ a {
 [data-theme="autumn"],
 [data-theme="autumn"] body {
   background: var(--background) !important;
-}
-
-[data-theme="autumn"] .film-grain {
-  display: none !important;
-  opacity: 0 !important;
-  background: none !important;
 }

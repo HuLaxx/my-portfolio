@@ -42,7 +42,7 @@ export const Footer = () => {
          - pt-6 (Symmetrical Top Space)
          - Glass effect + border
       */}
-      <div className="nav-shell relative overflow-hidden mx-auto w-[99.5%] rounded-[2rem] px-4 pt-2 pb-6 md:px-8 md:pt-2 md:pb-6 flex flex-col min-h-[12vh] backdrop-blur-sm border border-[var(--border)]/20" style={{ background: 'var(--footer-bg)' }}>
+      <div className="nav-shell relative overflow-hidden mx-auto w-[99.5%] rounded-[2rem] px-4 pt-2 pb-12 md:px-8 md:pt-2 md:pb-16 flex flex-col min-h-[12vh] backdrop-blur-sm border border-[var(--border)]/20" style={{ background: 'var(--footer-bg)' }}>
 
         {/* Background Orbs (Subtle) */}
         <div className="absolute top-[-50%] left-[-20%] w-[500px] h-[500px] rounded-full bg-[var(--accent)]/5 blur-[120px] pointer-events-none" />
@@ -53,12 +53,30 @@ export const Footer = () => {
         <div className="flex flex-col md:flex-row items-end justify-between flex-1 w-full gap-8 md:gap-12 relative z-10 pb-4 -mt-1">
 
           {/* Left: Text Content - 70% (Widened) - Justify Center (Symmetry) */}
-          <div className="w-full md:w-[70%] flex flex-col justify-center h-full translate-x-2 sm:translate-x-6 -translate-y-4 sm:-translate-y-9">
-            <h2 className="text-[11vw] sm:text-[14vw] md:text-[10vw] leading-[0.95] font-bold tracking-tighter text-[var(--foreground)] opacity-90 text-left">
+          <div className="w-full md:w-[70%] flex flex-col justify-center h-full pl-6 sm:pl-10 md:pl-20 -translate-y-4 sm:-translate-y-9">
+            <h2 className="text-[11vw] sm:text-[14vw] md:text-[10vw] leading-[0.95] font-bold tracking-tighter text-[var(--foreground)] opacity-90 text-left mb-6 sm:mb-10">
               LET&apos;S <br />
-              CONNECT <br />
-              <span className="text-[var(--muted)]">TODAY</span>
+              CONNECT
             </h2>
+
+            <div className="flex flex-wrap gap-6 sm:gap-10">
+              {socials.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target={link.label === "EMAIL" ? undefined : "_blank"}
+                  rel={link.label === "EMAIL" ? undefined : "noopener noreferrer"}
+                  className="group flex items-center gap-2 text-lg sm:text-2xl font-bold tracking-[0.1em] text-[var(--foreground)] transition-colors duration-300 hover:text-[var(--accent-dark)]"
+                >
+                  <span className="p-2 rounded-full border border-[var(--border)] bg-[var(--card)]/50 group-hover:bg-[var(--accent-dark)] group-hover:text-white transition-colors duration-300">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 sm:w-5 sm:h-5">
+                      <path d={link.path} />
+                    </svg>
+                  </span>
+                  {link.label}
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* Right: Me Image - 30% (Reduced to fit text) */}
@@ -84,7 +102,7 @@ export const Footer = () => {
 
         {/* Bottom Part: Socials/Info */}
         <div className="flex-1 shrink-0 flex flex-col justify-end relative z-10">
-          <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+          <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between px-6 sm:px-10 md:px-20">
 
             {/* Left: Identity */}
             <div className="flex flex-col gap-1">
@@ -92,29 +110,7 @@ export const Footer = () => {
               <span className="text-xs sm:text-sm font-bold text-[var(--muted)]">&copy; {currentYear}</span>
             </div>
 
-            {/* Center: Socials (Icons + Text) */}
-            <div className="flex flex-wrap gap-4 sm:gap-6 md:gap-10">
-              {socials.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target={link.label === "EMAIL" ? undefined : "_blank"}
-                  rel={link.label === "EMAIL" ? undefined : "noopener noreferrer"}
-                  className="group flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm md:text-base font-bold tracking-[0.15em] sm:tracking-[0.2em] text-[var(--foreground)] transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]"
-                >
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="opacity-100 group-hover:opacity-80 transition-opacity"
-                  >
-                    <path d={link.path} />
-                  </svg>
-                  {link.label}
-                </a>
-              ))}
-            </div>
+
 
             {/* Right: Actions */}
             <div className="flex items-center gap-8">

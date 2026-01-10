@@ -48,6 +48,12 @@ export const Navbar = () => {
         return;
       }
 
+      // If at the very bottom (Footer), clear active section to prevent "Education" highlight
+      if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 150) {
+        setActiveSection(null);
+        return;
+      }
+
       const sections = navLinks.map(link => link.href.replace('/#', ''));
       const offset = 100;
 

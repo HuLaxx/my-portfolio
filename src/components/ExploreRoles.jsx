@@ -1,7 +1,11 @@
 'use client';
 
+'use client';
+
 import Link from "next/link";
 import { RevealOnScroll } from "./RevealOnScroll";
+import { Watermark } from "./Watermark";
+import { Activity, Server, BrainCircuit, Terminal } from "lucide-react";
 
 const roles = [
     {
@@ -11,7 +15,9 @@ const roles = [
         href: "/role/data-scientist",
         gradient: "from-blue-400 to-cyan-300",
         index: "01",
-        image: "/generated/role-ds.png"
+        image: "/generated/role-ds.png",
+        icon: Activity,
+        watermarkType: "wireframe"
     },
     {
         id: "data-engineer",
@@ -20,7 +26,9 @@ const roles = [
         href: "/role/data-engineer",
         gradient: "from-emerald-400 to-teal-300",
         index: "02",
-        image: "/generated/role-de.png"
+        image: "/generated/role-de.png",
+        icon: Server,
+        watermarkType: "wireframe"
     },
     {
         id: "ai-ml-engineer",
@@ -29,7 +37,9 @@ const roles = [
         href: "/role/ai-ml-engineer",
         gradient: "from-purple-400 to-pink-300",
         index: "03",
-        image: "/generated/role-ai.png"
+        image: "/generated/role-ai.png",
+        icon: BrainCircuit,
+        watermarkType: "neon"
     },
     {
         id: "software-engineer",
@@ -38,7 +48,9 @@ const roles = [
         href: "/role/software-engineer",
         gradient: "from-orange-400 to-amber-300",
         index: "04",
-        image: "/generated/role-se.png"
+        image: "/generated/role-se.png",
+        icon: Terminal,
+        watermarkType: "engraved"
     },
 ];
 
@@ -111,12 +123,8 @@ export const ExploreRoles = () => {
                                                 </p>
                                             </div>
 
-                                            {/* Decorative Icon - Network/Globe */}
-                                            <div className="absolute -bottom-4 -right-4 text-[var(--accent)] opacity-5 transform rotate-[-15deg] scale-150 pointer-events-none group-hover:opacity-10 transition-all duration-700">
-                                                <svg width="120" height="120" viewBox="0 0 24 24" fill="currentColor">
-                                                    <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM11 19.93C7.05 19.44 4 16.08 4 12C4 11.38 4.08 10.79 4.21 10.21L9 15V16C9 17.1 9.9 18 11 18V19.93ZM17.9 17.39C17.64 16.8 16.9 16 16 16H15V13C15 12.45 14.55 12 14 12H8V10H10C10.55 10 11 9.55 11 9V7H13C14.1 7 15 6.1 15 5V4.59C17.93 5.78 20 8.65 20 12C20 14.08 19.2 15.97 17.9 17.39Z" />
-                                                </svg>
-                                            </div>
+                                            {/* Decorative Watermark - Dynamic */}
+                                            <Watermark type={role.watermarkType} icon={role.icon} />
                                         </div>
                                     </div>
                                 </Link>

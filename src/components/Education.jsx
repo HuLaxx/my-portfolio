@@ -37,15 +37,15 @@ export const Education = ({ resume }) => {
                                             {/* Top Row: Year & Institution */}
                                             <div className="flex justify-between items-start">
                                                 <div className="flex flex-col gap-1 sm:gap-2">
-                                                    <span className="font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.22em] text-[var(--accent-dark)] opacity-80 group-hover:text-[var(--text-hover)] transition-colors duration-500">
+                                                    <span className="font-mono text-sm sm:text-base font-bold uppercase tracking-[0.22em] text-[var(--accent-dark)] opacity-80 group-hover:text-[var(--text-hover)] transition-colors duration-500">
                                                         {study.year}
                                                     </span>
-                                                    <h3 className="display-heading text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight text-[var(--foreground)] group-hover:text-[var(--text-hover)] transition-colors duration-500">
+                                                    <h3 className="display-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-[var(--foreground)] group-hover:text-[var(--text-hover)] transition-colors duration-500">
                                                         {study.degree}
                                                     </h3>
                                                 </div>
                                                 <div className="text-right">
-                                                    <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[var(--foreground)] opacity-60 group-hover:text-[var(--text-hover)] transition-colors duration-500">
+                                                    <span className="font-mono text-base sm:text-lg font-bold uppercase tracking-wider text-[var(--foreground)] opacity-70 group-hover:text-[var(--text-hover)] transition-colors duration-500">
                                                         {study.institution}
                                                     </span>
                                                 </div>
@@ -57,7 +57,7 @@ export const Education = ({ resume }) => {
                                                     <span className="text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-2 block group-hover:text-[var(--text-hover)] transition-colors duration-500">
                                                         Dissertation
                                                     </span>
-                                                    <p className="text-[var(--foreground)] opacity-90 text-sm leading-relaxed group-hover:text-[var(--text-hover)] transition-colors duration-500">
+                                                    <p className="text-[var(--foreground)] opacity-90 text-base leading-relaxed group-hover:text-[var(--text-hover)] transition-colors duration-500">
                                                         {study.dissertation}
                                                     </p>
                                                 </div>
