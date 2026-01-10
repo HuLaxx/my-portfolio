@@ -60,8 +60,8 @@ export const CustomCursor = () => {
         };
 
         const animate = () => {
-            current.current.x += (target.current.x - current.current.x) * 0.18;
-            current.current.y += (target.current.y - current.current.y) * 0.18;
+            current.current.x += (target.current.x - current.current.x) * 0.35;
+            current.current.y += (target.current.y - current.current.y) * 0.35;
             cursor.style.transform = `translate3d(${current.current.x}px, ${current.current.y}px, 0)`;
             rafRef.current = requestAnimationFrame(animate);
         };
@@ -106,7 +106,7 @@ export const CustomCursor = () => {
     return (
         <div
             ref={cursorRef}
-            className="fixed top-0 left-0 pointer-events-none z-[9999] will-change-transform transition-opacity duration-300"
+            className="fixed top-0 left-0 pointer-events-none z-[9999] will-change-transform"
             style={{
                 transform: 'translate3d(-100px, -100px, 0)',
                 marginTop: '-14px',
@@ -115,8 +115,8 @@ export const CustomCursor = () => {
         >
             <div className="relative w-10 h-10">
                 <div
-                    className="absolute -inset-2 rounded-full blur-xl opacity-60 transition-opacity"
-                    style={{ background: 'var(--cursor-glow)' }}
+                    className="absolute -inset-1 rounded-full opacity-50"
+                    style={{ background: `radial-gradient(circle, var(--cursor-glow) 0%, transparent 70%)` }}
                 />
                 <svg
                     width="24"
@@ -133,7 +133,6 @@ export const CustomCursor = () => {
                         stroke="white"
                         strokeWidth="1.5"
                         strokeLinejoin="round"
-                        style={{ filter: 'drop-shadow(0 0 2px rgba(255,255,255,0.5))' }}
                     />
                 </svg>
             </div>

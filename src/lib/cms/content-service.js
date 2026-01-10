@@ -79,3 +79,8 @@ export async function getCaseStudy(slug) {
   const { caseStudies } = await getPortfolioContent();
   return caseStudies.find((study) => study.slug === slug);
 }
+
+export async function getCompany(slug) {
+  const { resume } = await getPortfolioContent();
+  return resume.experience?.find((job) => job.slug === slug);
+}

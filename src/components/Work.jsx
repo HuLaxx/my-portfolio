@@ -15,43 +15,44 @@ const ProjectRow = ({ project, index, caseStudy }) => {
     <RevealOnScroll delay={index * 100}>
       <Wrapper
         {...wrapperProps}
-        className="group relative block overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--card)] px-6 py-10 transition-all duration-700 hover:-translate-y-1 hover:border-[var(--accent)] hover:shadow-[0_20px_60px_rgba(0,0,0,0.35)] md:px-10"
+        className="group relative block w-full p-8 md:p-10 rounded-3xl border border-[var(--border)] bg-[var(--card)]/30 backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-[var(--accent)] hover:translate-y-[-4px] hover:shadow-2xl hover:bg-[var(--card-hover-tint)]"
       >
+        {/* Unified Glassy gradient hover overlay */}
+        <div
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 backdrop-blur-sm z-0"
+          style={{ background: 'var(--hover-overlay)' }}
+        />
+
+        {/* Existing Image Overlay Override (if poster exists) - keeping it but adjusting z-index */}
         {poster && (
-          <div className="pointer-events-none absolute inset-0 overflow-hidden">
-            <div
-              className="absolute inset-2 rounded-2xl bg-cover bg-center opacity-0 transition-all duration-700 group-hover:opacity-100 group-hover:scale-[1.02]"
-              style={{ backgroundImage: `linear-gradient(120deg, rgba(11,13,16,0.72), rgba(11,13,16,0.25)), url(${poster})` }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-[var(--background)]/80 via-[var(--background)]/40 to-transparent opacity-0 transition-all duration-700 group-hover:opacity-100" />
-          </div>
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 z-0 bg-center bg-cover" style={{ backgroundImage: `url(${poster})` }} />
         )}
 
         <div className="relative z-10 grid grid-cols-1 items-start gap-6 md:grid-cols-12">
-          <div className="col-span-2 font-mono text-xs uppercase tracking-[0.22em] text-white/50">
+          <div className="col-span-2 font-mono text-sm font-semibold uppercase tracking-[0.22em] text-[var(--foreground)] opacity-80 group-hover:text-[var(--accent-dark)] transition-colors">
             {project.year}
           </div>
 
           <div className="col-span-7 space-y-3">
-            <h3 className="display-heading text-3xl font-semibold tracking-tight text-white md:text-5xl">
+            <h3 className="display-heading text-3xl font-semibold tracking-tight text-[var(--foreground)] md:text-5xl group-hover:text-[var(--accent-dark)] transition-colors">
               {project.client}
             </h3>
             {summary && (
-              <p className="text-white/70 max-w-xl">
+              <p className="text-[var(--foreground)] opacity-90 font-medium max-w-xl group-hover:text-[var(--foreground)] transition-colors">
                 {summary}
               </p>
             )}
           </div>
 
           <div className="col-span-3 flex flex-col items-start gap-3 md:items-end">
-            <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/60">
+            <span className="font-mono text-sm font-semibold uppercase tracking-[0.2em] text-[var(--foreground)] opacity-80 text-right">
               {role}
             </span>
 
             {/* GitHub-style Language Bar */}
             {project.languages && (
-              <div className="w-full max-w-[200px] mb-2">
-                <div className="flex h-1.5 w-full overflow-hidden rounded-full bg-white/5 mb-1">
+              <div className="w-full max-w-[200px] mb-2 opacity-80 group-hover:opacity-100 transition-opacity">
+                <div className="flex h-1.5 w-full overflow-hidden rounded-full bg-[var(--card)] mb-1">
                   {Object.entries(project.languages).map(([lang, pct], i) => (
                     <div
                       key={lang}
@@ -60,7 +61,7 @@ const ProjectRow = ({ project, index, caseStudy }) => {
                     />
                   ))}
                 </div>
-                <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-white/50 font-mono">
+                <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs font-semibold text-[var(--foreground)] opacity-80 font-mono justify-end">
                   {Object.entries(project.languages).map(([lang, pct], i) => (
                     <div key={lang} className="flex items-center gap-1.5">
                       <div className="w-2 h-2 rounded-full" style={{ backgroundColor: ['#3178c6', '#f1e05a', '#e34c26', '#563d7c'][i % 4] }} />
@@ -72,7 +73,7 @@ const ProjectRow = ({ project, index, caseStudy }) => {
             )}
 
             {project.slug && (
-              <span className="inline-flex items-center gap-2 text-sm font-semibold text-white/80 transition-all duration-500 group-hover:text-white">
+              <span className="inline-flex items-center gap-2 text-sm font-bold text-[var(--accent)] opacity-0 -translate-x-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-0 mt-2 group-hover:text-[var(--accent-dark)] transition-colors">
                 View case
                 <span aria-hidden className="transition-all duration-500 group-hover:translate-x-1">
                   -&gt;
@@ -87,24 +88,10 @@ const ProjectRow = ({ project, index, caseStudy }) => {
 };
 
 export const Work = ({ projects, caseStudies = [] }) => (
-  <section id="work" className="relative z-10 px-0 md:px-20 py-32">
+  <section id="work" className="relative z-10 px-0 md:px-20 py-12 md:py-14">
     <div className="mx-auto w-[98%] md:w-full md:max-w-6xl">
       <div className="p-4 md:p-12 space-y-12">
-        <RevealOnScroll>
-          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="font-mono text-xs uppercase tracking-[0.3em] text-white/50">
-                Selected collaborations
-              </p>
-              <h2 className="display-heading text-4xl font-semibold tracking-tight text-white md:text-7xl">
-                Work built for<br className="hidden md:block" /> leading teams
-              </h2>
-            </div>
-            <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-white/50 md:text-right">
-              Edge-first builds, cinematic polish
-            </span>
-          </div>
-        </RevealOnScroll>
+
 
         <div className="flex flex-col gap-6">
           {projects.map((project, index) => {

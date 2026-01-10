@@ -28,32 +28,29 @@
 }
 
 [data-theme="summer"] {
-  /* Explicit Summer Theme - Mid-tone (Reverted) */
-  --background: radial-gradient(circle at 15% 15%, rgba(255, 255, 255, 0.5), transparent 60%), #f59e0b;
-  /* Amber 500 */
-  --foreground: #000000;
-  --muted: #1f2937;
-  --accent: #f59e0b;
-  /* Amber 500 (Matches Base) */
-  --accent-soft: rgba(245, 158, 11, 0.2);
-  --console-accent: #059669;
+  /* ... */
+  --accent-dark: #78350f;
+  /* Amber 900 - Darkest Shade */
+  --text-hover: #000000;
+  /* Force Black on Hover */
   --card: rgba(255, 255, 255, 0.85);
-  --border: rgba(0, 0, 0, 0.8);
-  /* Dark Black Border */
-  --panel: rgba(255, 255, 255, 0.8);
-  --grain: linear-gradient(135deg, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.1));
-  --scrollbar-track: #f6dcb0; /* softer track to match thumb */
-  --scrollbar-thumb: #f59e0b; /* keep the accent thumb */
-  /* Amber 500 */
-  --footer-bg: rgba(255, 255, 255, 0.15);
-  /* More transparent */
-  /* Summer Glass */
-  --stroke-color: rgba(0, 0, 0, 0.8);
-  --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.08));
-  --glass-border: rgba(0, 0, 0, 0.4);
-  --glass-outline: rgba(0, 0, 0, 0.32);
-  --glass-blur: 9px;
-  --glass-saturation: 102%;
+  --card-hover-tint: rgba(254, 243, 199, 0.9);
+  /* Pale Amber Tint (Crystal) instead of White */
+  /* ... */
+}
+
+/* ... Autumn ... */
+
+[data-theme="spring"] {
+  /* ... */
+  --accent-dark: #831843;
+  /* Pink 900 - Darkest Shade */
+  --text-hover: #000000;
+  /* Force Black on Hover */
+  --card: rgba(255, 255, 255, 0.85);
+  --card-hover-tint: rgba(253, 232, 244, 0.9);
+  /* Pale Pink Tint (Crystal) instead of White */
+  /* ... */
 }
 
 [data-theme="autumn"] {
@@ -67,8 +64,12 @@
   --muted: #d4d4d8;
   --accent: #fbbf24;
   --accent-soft: rgba(251, 191, 36, 0.15);
+  --accent-dark: #fbbf24;
+  /* Keep bright for dark theme */
   --console-accent: #fbbf24;
   --card: rgba(25, 15, 5, 0.9);
+  --card-hover-tint: rgba(25, 15, 5, 0.95);
+  --hover-overlay: linear-gradient(120deg, rgba(251, 191, 36, 0.15), transparent);
   --border: rgba(255, 255, 255, 0.08);
   /* Subtle glassy border */
   --panel: rgba(30, 18, 8, 0.95);
@@ -92,8 +93,12 @@
   --muted: #cbd5e1;
   --accent: #7dd3fc;
   --accent-soft: rgba(125, 211, 252, 0.15);
+  --accent-dark: #7dd3fc;
+  /* Keep bright for dark theme */
   --console-accent: #7dd3fc;
   --card: rgba(5, 10, 30, 0.9);
+  --card-hover-tint: rgba(5, 10, 30, 0.95);
+  --hover-overlay: linear-gradient(120deg, rgba(125, 211, 252, 0.15), transparent);
   --border: rgba(125, 211, 252, 0.3);
   /* Subtle glassy border */
   --panel: rgba(8, 15, 40, 0.95);
@@ -119,8 +124,15 @@
   --accent: #ec4899;
   /* Pink 500 (Matches Base) */
   --accent-soft: rgba(236, 72, 153, 0.2);
+  --accent-dark: #831843;
+  /* Pink 900 - Darkest text */
+  --text-hover: #000000;
+  /* Force Black on Hover */
   --console-accent: #be185d;
   --card: rgba(255, 255, 255, 0.85);
+  --card-hover-tint: rgba(253, 232, 244, 0.9);
+  /* Pale Pink Tint (Crystal) instead of White */
+  --hover-overlay: linear-gradient(120deg, rgba(236, 72, 153, 0.25), rgba(236, 72, 153, 0.1));
   --border: rgba(0, 0, 0, 0.8);
   /* Dark Black Border */
   --panel: rgba(255, 255, 255, 0.8);
@@ -163,6 +175,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans), "Space Grotesk", system-ui, sans-serif;
   font-size: 17px;
+  font-weight: 500;
   line-height: 1.6;
   overflow-x: hidden;
   transition: background 0.5s ease, color 0.5s ease;
@@ -209,7 +222,8 @@ h3,
 }
 
 p {
-  color: var(--muted);
+  color: var(--foreground);
+  font-weight: 500;
 }
 
 a {

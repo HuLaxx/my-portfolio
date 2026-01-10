@@ -10,10 +10,13 @@ export const About = ({ resume }) => {
                 <RevealOnScroll>
                     <div className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
                         <div>
-                            <p className="font-mono text-xs uppercase tracking-[0.3em] text-gray-500">
-                                Profile
-                            </p>
-                            <h2 className="display-heading text-4xl font-semibold tracking-tight text-white md:text-7xl">
+                            <div className="flex items-center gap-4 mb-4">
+                                <div className="h-[3px] w-14 bg-[var(--accent)]"></div>
+                                <p className="font-mono text-sm font-black italic uppercase tracking-[0.3em] text-[var(--foreground)] opacity-80">
+                                    Profile
+                                </p>
+                            </div>
+                            <h2 className="display-heading text-4xl font-semibold tracking-tight text-[var(--foreground)] md:text-7xl">
                                 About Me
                             </h2>
                         </div>
@@ -22,13 +25,13 @@ export const About = ({ resume }) => {
 
                 <div className="grid grid-cols-1 gap-16">
                     <RevealOnScroll delay={100}>
-                        <div className="relative pl-8 border-l border-white/10">
+                        <div className="relative pl-8 border-l border-[var(--border)]">
                             <div className="absolute -left-[1px] top-0 h-full w-[2px] bg-gradient-to-b from-[var(--accent)] to-transparent opacity-30" />
-                            <h3 className="text-2xl font-semibold text-white mb-6">Bio</h3>
-                            <p className="text-lg text-gray-300 leading-relaxed">
+                            <h3 className="text-2xl font-bold text-[var(--foreground)] mb-6">Bio</h3>
+                            <p className="text-lg text-[var(--foreground)] font-medium leading-relaxed">
                                 {resume.summary}
                             </p>
-                            <p className="mt-4 text-gray-400">
+                            <p className="mt-4 text-[var(--foreground)] font-medium opacity-90">
                                 {resume.neuralSummary}
                             </p>
                         </div>

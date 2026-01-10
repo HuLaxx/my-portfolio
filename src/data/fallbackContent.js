@@ -34,28 +34,46 @@ export const fallbackResume = {
       degree: "Master of Science in Data Science",
       year: "2023",
       dissertation: "Optimizing Large Language Models for Edge Devices",
-      modules: ["Advanced Machine Learning", "Big Data Architecture", "Deep Learning", "Statistical Methods", "Data Ethics"]
+      modules: ["Advanced Machine Learning", "Big Data Architecture", "Deep Learning", "Statistical Methods", "Data Ethics"],
+      image: "/generated/edu-univ.png",
     },
     {
       institution: "University Name",
       degree: "Bachelor of Computer Science",
       year: "2021",
       dissertation: "Real-time Object Detection in Autonomous Systems",
-      modules: ["Algorithms & Data Structures", "Database Systems", "Software Engineering", "Linear Algebra", "Calculus"]
+      modules: ["Algorithms & Data Structures", "Database Systems", "Software Engineering", "Linear Algebra", "Calculus"],
+      image: "/generated/edu-univ.png",
     },
   ],
   experience: [
     {
       company: "Tech Company A",
+      slug: "tech-company-a",
       role: "Senior Data Scientist",
       period: "2023 - Present",
       description: "Leading the NLP research team, developing RAG systems for enterprise clients.",
+      image: "/generated/exp-tech.png",
+      stack: ["Python", "PyTorch", "FastAPI", "Docker", "AWS"],
+      stats: [
+        { label: "Models Shipped", value: "12" },
+        { label: "Accuracy Lift", value: "+24%" },
+        { label: "Team Size", value: "8" }
+      ]
     },
     {
       company: "Tech Company B",
+      slug: "tech-company-b",
       role: "Data Engineer",
       period: "2021 - 2023",
       description: "Built real-time data streaming pipelines using Kafka and Spark.",
+      image: "/generated/exp-corp.png",
+      stack: ["Scala", "Apache Spark", "Kafka", "Hadoop", "GCP"],
+      stats: [
+        { label: "Data Volume", value: "5PB" },
+        { label: "Latency", value: "<100ms" },
+        { label: "Pipelines", value: "45+" }
+      ]
     },
   ],
   knowledgeBase: `

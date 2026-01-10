@@ -9,7 +9,7 @@ import { useMenu } from "./MenuContext";
 import { AnimatePresence, motion } from "framer-motion";
 
 const navLinks = [
-  { href: "#roles", label: "EXPLORE" },
+  { href: "#roles", label: "ROLES" },
   { href: "#experience", label: "EXPERIENCE" },
   { href: "#education", label: "EDUCATION" },
   { href: "#footer", label: "CONTACT" },
@@ -86,7 +86,7 @@ export const Navbar = () => {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className={`group relative block px-2 py-1 text-[11px] font-semibold tracking-[0.3em] uppercase transition-all duration-500 ${activeSection === link.href
+                    className={`group relative block px-2 py-1 text-[11px] font-bold tracking-[0.3em] uppercase transition-all duration-500 ${activeSection === link.href
                       ? "text-[var(--accent)]"
                       : "text-[var(--muted)] hover:text-[var(--foreground)]"
                       }`}

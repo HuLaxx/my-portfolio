@@ -3,12 +3,14 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
 import { Orbitron, Space_Grotesk, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Navbar } from "@/components/Navbar";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { SeasonProvider } from "@/components/SeasonContext";
 import { AnimatedGradient } from "@/components/AnimatedGradient";
 import { ThreeBackground } from "@/components/ThreeBackground";
 import { MenuProvider } from "@/components/MenuContext";
 import { LoaderWrapper } from "@/components/LoaderWrapper";
+
 
 const display = Orbitron({
   variable: "--font-display",
@@ -94,6 +96,7 @@ export default function RootLayout({ children }) {
           <MenuProvider>
             <CustomCursor />
             <LoaderWrapper>
+              <Navbar />
               <AnimatedGradient />
               <ThreeBackground />
               <SmoothScroll>
