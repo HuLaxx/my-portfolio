@@ -110,7 +110,6 @@ export default async function CompanyPage({ params }) {
 
             </main>
             <Footer />
-            <MobileDock />
         </div>
     );
 }

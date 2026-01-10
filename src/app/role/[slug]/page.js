@@ -139,7 +139,6 @@ export default async function RolePage({ params }) {
                 </div>
             </main>
             <Footer />
-            <MobileDock />
         </div>
     );
 }

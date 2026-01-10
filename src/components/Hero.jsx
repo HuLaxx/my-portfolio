@@ -19,7 +19,7 @@ export const Hero = ({ resume }) => {
 
           {/* Left Side (Text) - 60% */}
           <motion.div
-            className="w-full md:w-[60%] flex flex-col justify-start gap-8 py-6 pl-6 md:pl-12"
+            className="w-full md:w-[60%] flex flex-col justify-start gap-8 py-6 pl-14 md:pl-32"
           >
             {/* Top Group: Label + Name */}
             <div className="flex flex-col gap-4">
@@ -59,13 +59,13 @@ export const Hero = ({ resume }) => {
 
           {/* Right Side (Image) - 40% */}
           <motion.div
-            className="hidden md:flex w-full md:w-[40%] items-end justify-end relative translate-x-[25%] -translate-y-[5%]"
+            className="hidden md:flex w-full md:w-[40%] items-end justify-end relative translate-x-[10%] -translate-y-[12%]"
           >
             <div className="relative w-full h-full max-h-[220vh] flex items-center justify-end">
               <img
                 src="/me.png"
                 alt="Rahul Khanke"
-                className="w-full h-full object-contain scale-[1.125] origin-bottom-right"
+                className="w-full h-full object-contain scale-[1.0] origin-bottom-right"
                 style={{
                   maskImage: 'radial-gradient(ellipse at center, black 40%, transparent 90%)',
                   WebkitMaskImage: 'radial-gradient(ellipse at center, black 40%, transparent 90%)'

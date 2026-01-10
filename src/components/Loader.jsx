@@ -64,8 +64,17 @@ export const Loader = ({ onUnlock }) => {
         },
     };
 
-    // Use winter/crystal as default until mounted and context is loaded to prevent flash
-    const activeTheme = (mounted && isLoaded && themeStyles[season]) ? themeStyles[season] : themeStyles.winter;
+    const neutralTheme = {
+        bg: '#000000',
+        accent: '#ffffff',
+        text: '#ffffff',
+        subtext: '#a1a1aa',
+        glow: 'transparent',
+        shadow: 'none',
+    };
+
+    // Use neutral theme until mounted and context is fully loaded to prevent flash
+    const activeTheme = (mounted && isLoaded && themeStyles[season]) ? themeStyles[season] : neutralTheme;
 
     useEffect(() => {
         const timer = setInterval(() => setTime(new Date()), 1000);

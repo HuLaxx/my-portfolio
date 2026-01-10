@@ -16,8 +16,8 @@
   --grain: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 248, 231, 0.9));
   --scrollbar-track: #fff8e7;
   --scrollbar-thumb: #e6a54b;
-  --footer-bg: rgba(255, 255, 255, 0.5);
-  /* Light Summer Glass */
+  /* Rising Gradient: Strong Amber tint from bottom */
+  --footer-bg: linear-gradient(to top, rgba(217, 119, 6, 0.6) 0%, rgba(251, 191, 36, 0.3) 50%, rgba(255, 255, 255, 0.2) 100%);
   --stroke-color: rgba(0, 0, 0, 0.8);
   /* Glass variables (light default) */
   --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.1));
@@ -36,6 +36,8 @@
   --card: rgba(255, 255, 255, 0.85);
   --card-hover-tint: rgba(254, 243, 199, 0.9);
   /* Pale Amber Tint (Crystal) instead of White */
+  /* Darker/Richer Gradient: Amber 800 -> Amber 600 -> Transparent */
+  --hover-overlay: linear-gradient(135deg, rgba(146, 64, 14, 0.6) 0%, rgba(217, 119, 6, 0.4) 45%, rgba(251, 191, 36, 0.1) 100%);
   /* ... */
 }
 
@@ -132,7 +134,8 @@
   --card: rgba(255, 255, 255, 0.85);
   --card-hover-tint: rgba(253, 232, 244, 0.9);
   /* Pale Pink Tint (Crystal) instead of White */
-  --hover-overlay: linear-gradient(120deg, rgba(236, 72, 153, 0.25), rgba(236, 72, 153, 0.1));
+  /* Darker/Richer Gradient: Pink 800 -> Pink 600 -> Transparent */
+  --hover-overlay: linear-gradient(135deg, rgba(157, 23, 77, 0.6) 0%, rgba(219, 39, 119, 0.4) 45%, rgba(244, 114, 182, 0.1) 100%);
   --border: rgba(0, 0, 0, 0.8);
   /* Dark Black Border */
   --panel: rgba(255, 255, 255, 0.8);
@@ -140,8 +143,8 @@
   --scrollbar-track: #fbcfe8;
   --scrollbar-thumb: #ec4899;
   /* Pink 500 */
-  --footer-bg: rgba(255, 255, 255, 0.15);
-  /* Spring Glass */
+  /* Rising Gradient: Strong Pink tint from bottom */
+  --footer-bg: linear-gradient(to top, rgba(190, 24, 93, 0.5) 0%, rgba(236, 72, 153, 0.25) 50%, rgba(255, 255, 255, 0.1) 100%);
   --stroke-color: rgba(0, 0, 0, 0.8);
   --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.08));
   --glass-border: rgba(0, 0, 0, 0.4);

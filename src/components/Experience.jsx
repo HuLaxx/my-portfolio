@@ -34,6 +34,13 @@ export const Experience = ({ experience }) => {
                                         style={{ background: 'var(--hover-overlay)' }}
                                     />
 
+                                    {/* Bottom Accent Bar (only if clickable) */}
+                                    {job.slug && (
+                                        <div className="absolute bottom-0 left-0 right-0 z-20 overflow-hidden rounded-b-3xl">
+                                            <div className="h-1 bg-[var(--accent)] opacity-30 group-hover:opacity-100 transition-all duration-500" />
+                                        </div>
+                                    )}
+
                                     <div className="relative z-10 flex flex-col gap-6 h-full">
                                         <div className="flex justify-between items-start">
                                             <div className="flex flex-col gap-2">

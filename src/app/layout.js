@@ -10,6 +10,7 @@ import { AnimatedGradient } from "@/components/AnimatedGradient";
 import { ThreeBackground } from "@/components/ThreeBackground";
 import { MenuProvider } from "@/components/MenuContext";
 import { LoaderWrapper } from "@/components/LoaderWrapper";
+import { AudioPlayer } from "@/components/AudioPlayer";
 
 
 const display = Orbitron({
@@ -105,6 +106,7 @@ export default function RootLayout({ children }) {
               </SmoothScroll>
               <Analytics />
               <SpeedInsights />
+              <AudioPlayer />
             </LoaderWrapper>
           </MenuProvider>
         </SeasonProvider>

@@ -178,7 +178,6 @@ export default async function CasePage({ params }) {
         )}
       </div>
       <Footer />
-      <MobileDock />
     </div>
   );
 }

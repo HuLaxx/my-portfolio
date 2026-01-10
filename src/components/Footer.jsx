@@ -38,11 +38,11 @@ export const Footer = () => {
          - pt-6 (Symmetrical Top Space)
          - Glass effect + border
       */}
-      <div className="nav-shell relative overflow-hidden mx-auto w-[99.5%] rounded-[2rem] px-4 pt-2 pb-6 md:px-8 md:pt-2 md:pb-6 flex flex-col min-h-[12vh] bg-[var(--card)]/30 backdrop-blur-sm border border-[var(--border)]/20">
+      <div className="nav-shell relative overflow-hidden mx-auto w-[99.5%] rounded-[2rem] px-4 pt-2 pb-6 md:px-8 md:pt-2 md:pb-6 flex flex-col min-h-[12vh] backdrop-blur-sm border border-[var(--border)]/20" style={{ background: 'var(--footer-bg)' }}>
 
-        {/* Background Gradients (Theme Shades) */}
-        <div className="absolute top-[-50%] left-[-20%] w-[500px] h-[500px] rounded-full bg-[var(--accent)]/10 blur-[120px] pointer-events-none mix-blend-screen" />
-        <div className="absolute bottom-[-50%] right-[-20%] w-[600px] h-[600px] rounded-full bg-[var(--secondary)]/10 blur-[140px] pointer-events-none mix-blend-screen" />
+        {/* Background Orbs (Subtle) */}
+        <div className="absolute top-[-50%] left-[-20%] w-[500px] h-[500px] rounded-full bg-[var(--accent)]/5 blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-[-50%] right-[-20%] w-[600px] h-[600px] rounded-full bg-[var(--accent)]/5 blur-[140px] pointer-events-none" />
 
         {/* Flex container: Added pb-4 for Bottom Space (above border) */}
         {/* Pulled up (-mt-1) per user request */}
