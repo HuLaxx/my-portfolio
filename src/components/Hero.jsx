@@ -19,10 +19,10 @@ export const Hero = ({ resume }) => {
 
           {/* Left Side (Text) - 60% */}
           <motion.div
-            className="w-full md:w-[60%] flex flex-col justify-start gap-6 sm:gap-8 py-6 px-4 sm:px-8 md:pl-32 md:pr-4"
+            className="w-full md:w-[60%] flex flex-col justify-start gap-3 sm:gap-5 py-6 px-4 sm:px-8 md:pl-32 md:pr-4"
           >
             {/* Top Group: Label + Name */}
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-1">
               <RevealOnScroll delay={100}>
                 <div className="flex items-center gap-3 sm:gap-4">
                   <div className="h-[2px] sm:h-[3px] w-10 sm:w-14 bg-[var(--accent)]"></div>
