@@ -3,17 +3,17 @@ import { RevealOnScroll } from "./RevealOnScroll";
 export const Education = ({ resume }) => {
     return (
         <section id="education" className="relative z-10 py-10 md:py-12">
-            <div className="mx-auto w-[98%] md:w-full md:max-w-6xl px-6 md:px-12">
-                <div className="p-8 md:p-12">
+            <div className="mx-auto w-[98%] md:w-full md:max-w-6xl px-4 sm:px-6 md:px-12">
+                <div className="p-4 sm:p-8 md:p-12">
                     <RevealOnScroll>
                         <div className="mb-12">
-                            <div className="flex items-center gap-4 mb-4">
-                                <div className="h-[3px] w-14 bg-[var(--accent)]"></div>
-                                <p className="font-display text-xl md:text-2xl font-black italic uppercase tracking-[0.1em] text-[var(--foreground)]">
+                            <div className="flex items-center gap-3 sm:gap-4 mb-4">
+                                <div className="h-[2px] sm:h-[3px] w-10 sm:w-14 bg-[var(--accent)]"></div>
+                                <p className="font-display text-base sm:text-xl md:text-2xl font-black italic uppercase tracking-[0.1em] text-[var(--foreground)]">
                                     Academic Background
                                 </p>
                             </div>
-                            <h2 className="display-heading text-4xl font-semibold tracking-tight text-[var(--foreground)] md:text-7xl">
+                            <h2 className="display-heading text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-semibold tracking-tight text-[var(--foreground)]">
                                 Education
                             </h2>
                         </div>
@@ -24,7 +24,7 @@ export const Education = ({ resume }) => {
                             <RevealOnScroll key={index} delay={index * 100}>
                                 <div className="group relative block w-full">
                                     {/* Unified Card Style - Exact match to Work.jsx */}
-                                    <div className="group relative h-full min-h-[320px] p-8 rounded-3xl transition-all duration-700 hover:shadow-2xl overflow-hidden bg-[var(--card)]/30 backdrop-blur-sm border border-[var(--border)] hover:bg-[var(--card-hover-tint)] hover:border-[var(--accent)] hover:translate-y-[-4px]">
+                                    <div className="group relative h-full min-h-[260px] sm:min-h-[300px] md:min-h-[320px] p-5 sm:p-8 rounded-2xl sm:rounded-3xl transition-all duration-700 hover:shadow-2xl overflow-hidden bg-[var(--card)]/30 backdrop-blur-sm border border-[var(--border)] hover:bg-[var(--card-hover-tint)] hover:border-[var(--accent)] hover:translate-y-[-4px]">
 
                                         {/* Hover Gradient Overlay - Fade in/out */}
                                         <div
@@ -36,11 +36,11 @@ export const Education = ({ resume }) => {
 
                                             {/* Top Row: Year & Institution */}
                                             <div className="flex justify-between items-start">
-                                                <div className="flex flex-col gap-2">
-                                                    <span className="font-mono text-sm font-bold uppercase tracking-[0.22em] text-[var(--accent-dark)] opacity-80 group-hover:text-[var(--text-hover)] transition-colors duration-500">
+                                                <div className="flex flex-col gap-1 sm:gap-2">
+                                                    <span className="font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.22em] text-[var(--accent-dark)] opacity-80 group-hover:text-[var(--text-hover)] transition-colors duration-500">
                                                         {study.year}
                                                     </span>
-                                                    <h3 className="display-heading text-3xl font-semibold tracking-tight text-[var(--foreground)] md:text-4xl group-hover:text-[var(--text-hover)] transition-colors duration-500">
+                                                    <h3 className="display-heading text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight text-[var(--foreground)] group-hover:text-[var(--text-hover)] transition-colors duration-500">
                                                         {study.degree}
                                                     </h3>
                                                 </div>

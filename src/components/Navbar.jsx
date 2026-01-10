@@ -69,7 +69,7 @@ export const Navbar = () => {
   return (
     <>
       <nav
-        className="nav-shell fixed top-4 left-1/2 z-50 flex w-[98%] max-w-6.5xl -translate-x-1/2 items-center justify-between rounded-full px-8 py-5 md:px-12 text-[var(--foreground)]"
+        className="nav-shell fixed top-4 left-1/2 z-50 flex w-[98%] max-w-6.5xl -translate-x-1/2 items-center justify-between rounded-full px-4 sm:px-8 py-4 sm:py-5 md:px-12 text-[var(--foreground)]"
         aria-label="Primary"
       >
         <SignatureLogo />

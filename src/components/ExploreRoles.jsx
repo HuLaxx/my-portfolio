@@ -40,13 +40,13 @@ export const ExploreRoles = () => {
                 <div className="px-2 py-10 md:px-12 md:py-14">
                     <RevealOnScroll>
                         <div className="mb-12">
-                            <div className="flex items-center gap-4 mb-4">
-                                <div className="h-[3px] w-14 bg-[var(--accent)]"></div>
-                                <p className="font-display text-xl md:text-2xl font-black italic uppercase tracking-[0.1em] text-[var(--foreground)]">
+                            <div className="flex items-center gap-3 sm:gap-4 mb-4">
+                                <div className="h-[2px] sm:h-[3px] w-10 sm:w-14 bg-[var(--accent)]"></div>
+                                <p className="font-display text-base sm:text-xl md:text-2xl font-black italic uppercase tracking-[0.1em] text-[var(--foreground)]">
                                     What I Do
                                 </p>
                             </div>
-                            <h2 className="display-heading text-4xl font-semibold tracking-tight text-[var(--foreground)] md:text-7xl">
+                            <h2 className="display-heading text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-semibold tracking-tight text-[var(--foreground)]">
                                 Explore My Roles
                             </h2>
                         </div>
@@ -57,7 +57,7 @@ export const ExploreRoles = () => {
                             <RevealOnScroll key={role.id} delay={index * 100}>
                                 <Link href={role.href} className="group relative block w-full">
                                     {/* Unified Card Style (from ExploreRoles original) */}
-                                    <div className="relative w-full p-8 md:p-10 rounded-3xl border border-[var(--border)] bg-[var(--card)]/30 backdrop-blur-sm overflow-hidden transition-all duration-700 hover:bg-[var(--card-hover-tint)] hover:border-[var(--accent)] hover:translate-y-[-4px] hover:shadow-2xl">
+                                    <div className="relative w-full p-5 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl border border-[var(--border)] bg-[var(--card)]/30 backdrop-blur-sm overflow-hidden transition-all duration-700 hover:bg-[var(--card-hover-tint)] hover:border-[var(--accent)] hover:translate-y-[-4px] hover:shadow-2xl">
 
                                         {/* Glassy gradient hover overlay - Fade in/out */}
                                         <div
@@ -71,14 +71,14 @@ export const ExploreRoles = () => {
                                         </div>
 
                                         <div className="relative z-10 grid grid-cols-1 items-start gap-4 md:grid-cols-2">
-                                            <div className="col-span-2 font-mono text-xl font-bold uppercase tracking-[0.22em] text-[var(--accent-dark)] opacity-80 group-hover:text-[var(--text-hover)] transition-colors duration-500">
+                                            <div className="col-span-2 font-mono text-base sm:text-xl font-bold uppercase tracking-[0.22em] text-[var(--accent-dark)] opacity-80 group-hover:text-[var(--text-hover)] transition-colors duration-500">
                                                 {role.index}
                                             </div>
-                                            <div className="col-span-2 mt-4 space-y-2">
-                                                <h3 className="display-heading text-3xl font-semibold tracking-tight text-[var(--foreground)] md:text-5xl group-hover:text-[var(--text-hover)] transition-colors duration-500">
+                                            <div className="col-span-2 mt-3 sm:mt-4 space-y-2">
+                                                <h3 className="display-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-[var(--foreground)] group-hover:text-[var(--text-hover)] transition-colors duration-500">
                                                     {role.title}
                                                 </h3>
-                                                <p className="text-[var(--foreground)] opacity-90 leading-relaxed text-lg font-medium max-w-md group-hover:text-[var(--text-hover)] transition-colors duration-500">
+                                                <p className="text-[var(--foreground)] opacity-90 leading-relaxed text-sm sm:text-base md:text-lg font-medium max-w-md group-hover:text-[var(--text-hover)] transition-colors duration-500">
                                                     {role.description}
                                                 </p>
                                             </div>

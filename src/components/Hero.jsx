@@ -19,14 +19,14 @@ export const Hero = ({ resume }) => {
 
           {/* Left Side (Text) - 60% */}
           <motion.div
-            className="w-full md:w-[60%] flex flex-col justify-start gap-8 py-6 pl-14 md:pl-32"
+            className="w-full md:w-[60%] flex flex-col justify-start gap-6 sm:gap-8 py-6 px-4 sm:px-8 md:pl-32 md:pr-4"
           >
             {/* Top Group: Label + Name */}
             <div className="flex flex-col gap-4">
               <RevealOnScroll delay={100}>
-                <div className="flex items-center gap-4">
-                  <div className="h-[3px] w-14 bg-[var(--accent)]"></div>
-                  <p className="font-display text-xl md:text-2xl font-black italic uppercase tracking-[0.1em] text-[var(--accent)]">
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <div className="h-[2px] sm:h-[3px] w-10 sm:w-14 bg-[var(--accent)]"></div>
+                  <p className="font-display text-base sm:text-xl md:text-2xl font-black italic uppercase tracking-[0.1em] text-[var(--accent)]">
                     About Me
                   </p>
                 </div>
@@ -34,7 +34,7 @@ export const Hero = ({ resume }) => {
 
               <RevealOnScroll delay={200}>
                 <div className="font-semibold leading-[1.1] tracking-tight text-[var(--foreground)]">
-                  <h1 className="text-5xl md:text-8xl lg:text-9xl mb-0 flex flex-col gap-0">
+                  <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-9xl mb-0 flex flex-col gap-0">
                     {/* Forced single line */}
                     <span className="inline-block whitespace-nowrap transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_35px_var(--accent)] hover:brightness-125 origin-left w-fit py-1">
                       I am Rahul
@@ -50,7 +50,7 @@ export const Hero = ({ resume }) => {
             {/* Bottom Group: Summary */}
             <RevealOnScroll delay={300}>
               <div className="flex flex-col gap-4">
-                <p className="max-w-xl text-lg leading-relaxed text-[var(--foreground)] md:text-2xl font-medium">
+                <p className="max-w-full sm:max-w-lg md:max-w-xl text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-[var(--foreground)] font-medium">
                   {resume.summary}
                 </p>
               </div>

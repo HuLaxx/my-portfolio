@@ -49,8 +49,8 @@ export const Footer = () => {
         <div className="flex flex-col md:flex-row items-end justify-between flex-1 w-full gap-8 md:gap-12 relative z-10 pb-4 -mt-1">
 
           {/* Left: Text Content - 70% (Widened) - Justify Center (Symmetry) */}
-          <div className="w-full md:w-[70%] flex flex-col justify-center h-full translate-x-6 -translate-y-9">
-            <h2 className="text-[14vw] md:text-[10vw] leading-[0.95] font-bold tracking-tighter text-[var(--foreground)] opacity-90 text-left">
+          <div className="w-full md:w-[70%] flex flex-col justify-center h-full translate-x-2 sm:translate-x-6 -translate-y-4 sm:-translate-y-9">
+            <h2 className="text-[11vw] sm:text-[14vw] md:text-[10vw] leading-[0.95] font-bold tracking-tighter text-[var(--foreground)] opacity-90 text-left">
               LET&apos;S <br />
               CONNECT <br />
               <span className="text-[var(--muted)]">TODAY</span>
@@ -84,19 +84,19 @@ export const Footer = () => {
 
             {/* Left: Identity */}
             <div className="flex flex-col gap-1">
-              <span className="text-xl font-black tracking-widest text-[var(--foreground)]">RAHUL KHANKE</span>
-              <span className="text-sm font-bold text-[var(--muted)]">&copy; {currentYear}</span>
+              <span className="text-base sm:text-xl font-black tracking-widest text-[var(--foreground)]">RAHUL KHANKE</span>
+              <span className="text-xs sm:text-sm font-bold text-[var(--muted)]">&copy; {currentYear}</span>
             </div>
 
             {/* Center: Socials (Icons + Text) */}
-            <div className="flex flex-wrap gap-6 md:gap-10">
+            <div className="flex flex-wrap gap-4 sm:gap-6 md:gap-10">
               {socials.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
                   target={link.label === "EMAIL" ? undefined : "_blank"}
                   rel={link.label === "EMAIL" ? undefined : "noopener noreferrer"}
-                  className="group flex items-center gap-2 text-base font-bold tracking-[0.2em] text-[var(--foreground)] transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]"
+                  className="group flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm md:text-base font-bold tracking-[0.15em] sm:tracking-[0.2em] text-[var(--foreground)] transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]"
                 >
                   <svg
                     width="18"
