@@ -10,6 +10,7 @@ export const AudioPlayer = () => {
     const { season } = useSeason();
 
     const isLightMode = ['spring', 'summer'].includes(season);
+    const isDarkSeason = ['autumn', 'winter'].includes(season);
     // Dynamic border opacity for light/dark modes
     const ringBase = isLightMode ? 'border-[var(--accent-dark)]' : 'border-[var(--accent)]';
 
@@ -30,9 +31,22 @@ export const AudioPlayer = () => {
         }
     }, []);
 
+    // Determine active style based on season
+    const getActiveStyle = () => {
+        if (!isPlaying) return 'bg-black/40 border-white/10 text-white hover:bg-black/60';
+
+        if (isDarkSeason) {
+            // Dark Pill for Autumn/Winter (Dark Theme Tint)
+            return 'bg-gradient-to-r from-[var(--accent-dark)]/30 to-black border-white/10 shadow-[0_0_25px_rgba(0,0,0,0.5)] pr-4';
+        }
+
+        // Standard vibrant pill for Spring/Summer
+        return 'bg-gradient-to-r from-[var(--accent-dark)]/90 to-black/90 border-[var(--accent-dark)]/30 shadow-[0_0_20px_var(--accent-soft)] pr-4';
+    };
+
     return (
         <div className="fixed bottom-6 left-8 z-50 flex items-center">
-            <audio ref={audioRef} src="/audio/Timeless.m4a" loop />
+            <audio ref={audioRef} src="/audio/Cold_Neffex.mp3" loop />
 
             <motion.button
                 layout
@@ -40,11 +54,18 @@ export const AudioPlayer = () => {
                 initial={{ width: "2rem" }}
                 animate={{ width: isPlaying ? "auto" : "2rem" }}
                 transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                className={`relative h-8 rounded-full backdrop-blur-2xl border overflow-hidden flex items-center group z-20 ${isPlaying
-                    ? 'bg-gradient-to-r from-[var(--accent-dark)]/90 to-black/90 border-[var(--accent-dark)]/30 shadow-[0_0_20px_var(--accent-soft)] pr-1'
-                    : 'bg-black/40 border-white/10 text-white hover:bg-black/60'
-                    }`}
+                className={`relative h-8 rounded-full backdrop-blur-2xl border overflow-hidden flex items-center group z-20 ${getActiveStyle()}`}
             >
+                {/* Shine Effect */}
+                {isPlaying && (
+                    <motion.div
+                        className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12"
+                        initial={{ x: '-150%' }}
+                        animate={{ x: '150%' }}
+                        transition={{ repeat: Infinity, duration: 3, ease: "easeInOut", delay: 1 }}
+                    />
+                )}
+
                 {/* Icon Container (Fixed Left) */}
                 <div className="w-8 h-8 flex items-center justify-center flex-shrink-0 relative z-10">
                     {isPlaying ? (
@@ -65,7 +86,7 @@ export const AudioPlayer = () => {
                             ))}
                         </div>
                     ) : (
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" className="opacity-90 group-hover:opacity-100 transition-opacity ml-0.5">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" className="opacity-90 group-hover:opacity-100 transition-opacity">
                             <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" />
                         </svg>
                     )}
@@ -79,13 +100,13 @@ export const AudioPlayer = () => {
                             animate={{ opacity: 1, width: "auto" }}
                             exit={{ opacity: 0, width: 0 }}
                             transition={{ duration: 0.2, delay: 0.1 }}
-                            className="flex flex-col justify-center items-start leading-none whitespace-nowrap overflow-hidden pl-0 -ml-1"
+                            className="flex flex-col justify-center items-center leading-none whitespace-nowrap overflow-hidden pl-0"
                         >
                             <span className="text-[10.5px] font-serif italic font-bold bg-gradient-to-r from-white to-[var(--accent)] bg-clip-text text-transparent tracking-tight">
-                                Timeless
+                                "Cold"
                             </span>
-                            <span className="text-[7px] font-medium bg-gradient-to-r from-[var(--accent)] to-white bg-clip-text text-transparent uppercase tracking-wide mt-[1px]">
-                                The Weeknd
+                            <span className="text-[9px] font-medium bg-gradient-to-r from-[var(--accent)] to-white bg-clip-text text-transparent uppercase tracking-wide mt-[1px]">
+                                NEFFEX
                             </span>
                         </motion.div>
                     )}
