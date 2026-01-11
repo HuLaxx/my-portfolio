@@ -1,21 +1,27 @@
 import { getCaseStudy } from "@/lib/cms/content-service";
 import { notFound } from "next/navigation";
-import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-
-export const runtime = "edge";
 
 export default async function CaseStudyPage({ params }) {
     const { slug } = await params;
     const project = await getCaseStudy(slug);
 
+    console.log("[DEBUG] CaseStudyPage Slug:", slug);
+    console.log("[DEBUG] Project Found:", project);
+
     if (!project) {
-        notFound();
+        return (
+            <div className="min-h-screen pt-32 px-12 text-center text-white z-50 relative">
+                <h1 className="text-4xl font-bold text-red-500">Project Not Found</h1>
+                <p className="text-xl mt-4">Slug received: {slug}</p>
+                <p className="text-sm mt-2 text-gray-400">Please check if the slug matches the fallback content.</p>
+            </div>
+        );
     }
 
     return (
         <div className="relative min-h-screen w-full overflow-hidden text-[var(--foreground)] bg-[var(--background)]">
-            <Navbar />
+            {/* Navbar handled by RootLayout */}
 
             <main className="relative z-10 mx-auto w-full max-w-5xl px-4 md:px-12 pt-32 pb-20 flex flex-col gap-12">
                 {/* Header Section */}

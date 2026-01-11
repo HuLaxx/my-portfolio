@@ -1,5 +1,6 @@
 'use client';
 
+import { motion } from "framer-motion";
 import { useSeason } from "./SeasonContext";
 
 export const Footer = () => {
@@ -21,11 +22,6 @@ export const Footer = () => {
       label: "GITHUB",
       href: "https://github.com/HuLaxx",
       path: "M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-    },
-    {
-      label: "KAGGLE",
-      href: "https://kaggle.com",
-      path: "M18.825 23.859c-.022.092-.117.141-.281.141h-3.139c-.187 0-.351-.082-.492-.248l-5.178-6.589-1.448 1.373v5.128c0 .246-.128.369-.386.369h-3.084c-.258 0-.386-.123-.386-.369v-23.31c0-.246.128-.369.386-.369h3.084c.258 0 .386.123.386.369v14.557l6.549-6.846c.14-.153.304-.229.492-.229h3.314c.152 0 .24.047.264.141.023.082-.012.176-.105.281l-5.688 5.688 6.021 9.242c.094.141.117.258.07.352z"
     },
     {
       label: "EMAIL",
@@ -66,14 +62,16 @@ export const Footer = () => {
                   href={link.href}
                   target={link.label === "EMAIL" ? undefined : "_blank"}
                   rel={link.label === "EMAIL" ? undefined : "noopener noreferrer"}
-                  className="group flex items-center gap-2 text-lg sm:text-2xl font-bold tracking-[0.1em] text-[var(--foreground)] transition-colors duration-300 hover:text-[var(--accent-dark)]"
+                  className="group flex items-center gap-3 text-lg sm:text-2xl font-bold tracking-[0.1em] text-[var(--foreground)] transition-colors duration-300"
                 >
-                  <span className="p-2 rounded-full border border-[var(--border)] bg-[var(--card)]/50 group-hover:bg-[var(--accent-dark)] group-hover:text-white transition-colors duration-300">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 sm:w-5 sm:h-5">
+                  <span className="p-3 rounded-full border border-[var(--border)] bg-[var(--card)]/50 group-hover:bg-[var(--accent)] group-hover:text-black group-hover:scale-110 group-hover:shadow-[0_0_25px_var(--accent)] transition-all duration-300 relative overflow-hidden flex items-center justify-center">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 sm:w-6 sm:h-6 relative z-10 block">
                       <path d={link.path} />
                     </svg>
                   </span>
-                  {link.label}
+                  <span className="transition-all duration-300 group-hover:text-[var(--accent)] group-hover:scale-105 group-hover:drop-shadow-[0_0_12px_var(--accent)] origin-left">
+                    {link.label}
+                  </span>
                 </a>
               ))}
             </div>
@@ -97,33 +95,32 @@ export const Footer = () => {
         </div>
 
         {/* Full width border below both Text and Image */}
-        {/* Pulled up (-mt-5) per user request */}
-        <div className="w-full h-[1px] bg-[var(--border)]/30 mb-8 z-10 relative -mt-5"></div>
+        {/* Divider Line */}
+        <div className="w-full h-[1px] bg-[var(--border)]/30 z-10 relative -mt-5"></div>
 
-        {/* Bottom Part: Socials/Info */}
-        <div className="flex-1 shrink-0 flex flex-col justify-end relative z-10">
-          <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between px-6 sm:px-10 md:px-20">
+        {/* Bottom Section: Clean & Minimal (Transparent) */}
+        <div className="relative w-full overflow-hidden rounded-b-[2rem]">
 
-            {/* Left: Identity */}
-            <div className="flex flex-col gap-1">
-              <span className="text-base sm:text-xl font-black tracking-widest text-[var(--foreground)]">RAHUL KHANKE</span>
-              <span className="text-xs sm:text-sm font-bold text-[var(--muted)]">&copy; {currentYear}</span>
+          {/* Content Layer */}
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 px-6 sm:px-10 md:px-20 py-6 text-[10px] sm:text-xs font-medium uppercase tracking-[0.15em] text-[var(--muted)] relative z-10">
+
+            {/* Left: Copyright */}
+            <div className="flex items-center gap-2 opacity-80">
+              <span>© {currentYear} Rahul Khanke.</span>
+              <span className="hidden sm:inline">All Rights Reserved.</span>
             </div>
 
-
-
-            {/* Right: Actions */}
-            <div className="flex items-center gap-8">
-              <button
-                onClick={scrollToTop}
-                className="group flex items-center gap-2 text-base font-bold tracking-[0.2em] text-[var(--foreground)] transition-colors hover:opacity-80"
-              >
-                TOP
-                <span className="transition-transform duration-300 group-hover:-translate-y-1">↑</span>
-              </button>
-            </div>
+            {/* Right: Back to Top */}
+            <button
+              onClick={scrollToTop}
+              className="group flex items-center gap-2 text-[var(--foreground)] hover:text-[var(--accent)] transition-colors self-start md:self-auto"
+            >
+              Back to Top
+              <span className="transition-transform duration-300 group-hover:-translate-y-1 text-[var(--accent)]">↑</span>
+            </button>
 
           </div>
+
         </div>
 
       </div>

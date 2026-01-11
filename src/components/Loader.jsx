@@ -11,6 +11,7 @@ export const Loader = ({ onUnlock }) => {
     const { season, isLoaded } = useSeason();
     const [mounted, setMounted] = useState(false);
     const [particles, setParticles] = useState([]);
+    const [loadingText, setLoadingText] = useState("Preparing Portfolio...");
 
     useEffect(() => {
         setMounted(true);
@@ -27,6 +28,16 @@ export const Loader = ({ onUnlock }) => {
             delay: Math.random() * 2,
         }));
         setParticles(newParticles);
+
+        const tips = [
+            "Initializing Design System...",
+            "Compiling Case Studies...",
+            "Optimizing Visuals...",
+            "Loading Assets...",
+            "Calibrating Aesthetics...",
+            "Fetching Experience..."
+        ];
+        setLoadingText(tips[Math.floor(Math.random() * tips.length)]);
     }, []);
 
     const themeStyles = {
@@ -196,7 +207,7 @@ export const Loader = ({ onUnlock }) => {
                                         src="/Portfolio_Image.jpeg"
                                         alt="Rahul Khanke"
                                         fill
-                                        className="object-cover scale-105"
+                                        className="object-cover"
                                         priority
                                     />
                                 </motion.div>
@@ -259,7 +270,7 @@ export const Loader = ({ onUnlock }) => {
 
                             <div className="flex flex-col gap-1">
                                 <span className="text-xs font-bold tracking-[0.3em] uppercase opacity-80" style={{ color: activeTheme.subtext }}>
-                                    Building Portfolio
+                                    {loadingText}
                                 </span>
                                 {/* Loading Bar */}
                                 <div className="relative w-32 h-1 rounded-full overflow-hidden bg-black/10 dark:bg-white/10">

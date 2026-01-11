@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 
 import { getCaseStudy, getPortfolioContent } from "@/lib/cms/content-service";
 import { RevealOnScroll } from "@/components/RevealOnScroll";
-import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { MobileDock } from "@/components/MobileDock";
 
@@ -15,7 +14,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const study = await getCaseStudy(params.slug);
+  const { slug } = await params;
+  const study = await getCaseStudy(slug);
   if (!study) return {};
   return {
     title: `${study.client} - ${study.title}`,
@@ -24,7 +24,8 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function CasePage({ params }) {
-  const study = await getCaseStudy(params.slug);
+  const { slug } = await params;
+  const study = await getCaseStudy(slug);
   if (!study) return notFound();
 
   const heroPoster = study.media?.poster;
@@ -42,7 +43,7 @@ export default async function CasePage({ params }) {
         <div className="absolute inset-0 bg-gradient-to-b from-[var(--background)] via-[var(--background)]/80 to-[var(--background)]" />
       </div>
 
-      <Navbar />
+
 
       <div className="relative z-10 mx-auto max-w-6xl px-6 py-16 md:py-24 md:px-10">
         <div className="mb-10 flex items-center justify-between">
