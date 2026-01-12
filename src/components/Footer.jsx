@@ -64,12 +64,12 @@ export const Footer = () => {
                   rel={link.label === "EMAIL" ? undefined : "noopener noreferrer"}
                   className="group flex items-center gap-3 text-lg sm:text-2xl font-bold tracking-[0.1em] text-[var(--foreground)] transition-colors duration-300"
                 >
-                  <span className="p-3 rounded-full border border-[var(--border)] bg-[var(--card)]/50 group-hover:bg-[var(--accent)] group-hover:text-black group-hover:scale-110 group-hover:shadow-[0_0_25px_var(--accent)] transition-all duration-300 relative overflow-hidden flex items-center justify-center">
+                  <span className="p-3 rounded-full border border-[var(--border)] bg-[var(--card)]/50 group-hover:bg-[var(--accent-dark)] group-hover:text-white group-hover:scale-110 group-hover:shadow-[0_0_25px_var(--accent-dark)] transition-all duration-300 relative overflow-hidden flex items-center justify-center">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 sm:w-6 sm:h-6 relative z-10 block">
                       <path d={link.path} />
                     </svg>
                   </span>
-                  <span className="transition-all duration-300 group-hover:text-[var(--accent)] group-hover:scale-105 group-hover:drop-shadow-[0_0_12px_var(--accent)] origin-left">
+                  <span className="transition-all duration-300 group-hover:text-[var(--accent-dark)] group-hover:scale-105 group-hover:drop-shadow-[0_0_12px_var(--accent-soft)] origin-left">
                     {link.label}
                   </span>
                 </a>
