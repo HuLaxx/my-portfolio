@@ -78,6 +78,7 @@ export const metadata = {
 };
 
 import { CustomCursor } from "@/components/CustomCursor";
+import { AIChatWidget } from "@/components/AIChatWidget";
 
 export default function RootLayout({ children }) {
   return (
@@ -107,6 +108,7 @@ export default function RootLayout({ children }) {
               <Analytics />
               <SpeedInsights />
               <AudioPlayer />
+              <AIChatWidget />
             </LoaderWrapper>
           </MenuProvider>
         </SeasonProvider>

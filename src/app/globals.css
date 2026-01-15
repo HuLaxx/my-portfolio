@@ -66,8 +66,8 @@
   --muted: #d4d4d8;
   --accent: #fbbf24;
   --accent-soft: rgba(251, 191, 36, 0.15);
-  --accent-dark: #78350f;
-  /* Amber 900 - Darkest Shade */
+  --accent-dark: #d97706;
+  /* Amber 600 - Darker Shade */
   --console-accent: #fbbf24;
   --card: rgba(25, 15, 5, 0.9);
   --card-hover-tint: rgba(25, 15, 5, 0.95);

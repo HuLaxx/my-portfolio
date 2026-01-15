@@ -16,7 +16,7 @@ export const Hero = ({ resume }) => {
       <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] rounded-full bg-[var(--secondary)]/10 blur-[140px] pointer-events-none mix-blend-screen" />
 
       {/* Increased width to max-w-[95%] */}
-      <div className="mx-auto w-full max-w-[95%] px-4 md:px-8 pt-32 md:pt-48 relative z-10">
+      <div className="mx-auto w-full max-w-[95%] px-4 md:px-8 pt-24 md:pt-28 relative z-10">
 
         {/* Main Content Row */}
         <div className="flex flex-col md:flex-row items-stretch justify-between gap-8 md:gap-12 min-h-[85vh]">
@@ -63,9 +63,9 @@ export const Hero = ({ resume }) => {
 
           {/* Right Side (Image) - 40% */}
           <motion.div
-            className="hidden md:flex w-full md:w-[40%] items-end justify-end relative translate-x-[10%] -translate-y-[9%]"
+            className="hidden md:flex w-full md:w-[40%] items-end justify-end relative translate-x-[10%]"
           >
-            <div className="relative w-full h-full max-h-[220vh] flex items-center justify-end">
+            <div className="relative w-full h-[86vh] flex items-end justify-end">
               <img
                 src="/me.png"
                 alt="Rahul Khanke"
