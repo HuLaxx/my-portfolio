@@ -244,32 +244,13 @@ export const AIChatWidget = () => {
                                 <div className="flex flex-col items-center justify-center py-6 h-full">
                                     <div className="relative mb-8">
                                         <div className="w-20 h-20 rounded-full border-[1.5px] border-[var(--accent)]/20 flex items-center justify-center bg-[var(--accent)]/5">
-                                            {isListening || isSpeaking ? (
-                                                <div className="flex gap-1 items-center justify-center h-full">
-                                                    {[1, 2, 3, 4, 5].map(i => (
-                                                        <motion.div
-                                                            key={i}
-                                                            className="w-1 bg-[var(--accent)]"
-                                                            animate={{
-                                                                height: isListening ? [10, 30, 10] : [10, 20, 10]
-                                                            }}
-                                                            transition={{
-                                                                duration: 0.5,
-                                                                repeat: Infinity,
-                                                                delay: i * 0.1
-                                                            }}
-                                                        />
-                                                    ))}
-                                                </div>
-                                            ) : (
-                                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="text-[var(--accent)] opacity-80">
-                                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                                                    <polyline points="14 2 14 8 20 8" />
-                                                    <line x1="16" y1="13" x2="8" y2="13" />
-                                                    <line x1="16" y1="17" x2="8" y2="17" />
-                                                    <line x1="10" y1="9" x2="8" y2="9" />
-                                                </svg>
-                                            )}
+                                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="text-[var(--accent)] opacity-80">
+                                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                                <polyline points="14 2 14 8 20 8" />
+                                                <line x1="16" y1="13" x2="8" y2="13" />
+                                                <line x1="16" y1="17" x2="8" y2="17" />
+                                                <line x1="10" y1="9" x2="8" y2="9" />
+                                            </svg>
                                         </div>
                                     </div>
 
