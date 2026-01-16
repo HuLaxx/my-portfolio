@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSeason } from './SeasonContext';
+import ReactMarkdown from 'react-markdown';
 
 const quickPrompts = [
     "Tech stack?",
@@ -285,10 +286,31 @@ export const AIChatWidget = () => {
                                             ? `bg-[var(--accent)] text-black rounded-br-sm`
                                             : message.role === 'system'
                                                 ? 'bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 border border-yellow-500/30'
-                                                : `${isLightMode ? 'bg-black/5' : 'bg-white/5'} text-[var(--foreground)] rounded-bl-sm`
+                                                : `${isLightMode ? 'bg-black/5 text-black' : 'bg-white/5 text-[var(--foreground)]'} rounded-bl-sm`
                                             }`}
                                     >
-                                        <span className="whitespace-pre-wrap leading-relaxed">{message.content}</span>
+                                        {message.role === 'user' ? (
+                                            <span className="whitespace-pre-wrap leading-relaxed">{message.content}</span>
+                                        ) : (
+                                            <ReactMarkdown
+                                                components={{
+                                                    p: ({ node, ...props }) => <p className={`my-2 leading-relaxed ${isLightMode ? 'text-black' : ''}`} {...props} />,
+                                                    strong: ({ node, ...props }) => <strong className={`font-bold ${isLightMode ? 'text-[var(--accent)]' : 'text-[var(--accent)]'}`} {...props} />,
+                                                    ul: ({ node, ...props }) => <ul className={`list-disc list-inside my-2 space-y-1 ${isLightMode ? 'text-black' : ''}`} {...props} />,
+                                                    ol: ({ node, ...props }) => <ol className={`list-decimal list-inside my-2 space-y-1 ${isLightMode ? 'text-black' : ''}`} {...props} />,
+                                                    li: ({ node, ...props }) => <li className={`my-0.5 ${isLightMode ? 'text-black' : ''}`} {...props} />,
+                                                    code: ({ node, inline, ...props }) =>
+                                                        inline
+                                                            ? <code className="bg-[var(--accent)]/20 px-1.5 py-0.5 rounded text-xs font-mono" {...props} />
+                                                            : <code className="block bg-[var(--accent)]/10 p-2 rounded my-2 text-xs font-mono" {...props} />,
+                                                    h1: ({ node, ...props }) => <h1 className="text-base font-bold my-2 text-[var(--accent)]" {...props} />,
+                                                    h2: ({ node, ...props }) => <h2 className="text-sm font-bold my-1.5 text-[var(--accent)]" {...props} />,
+                                                    h3: ({ node, ...props }) => <h3 className="text-xs font-bold my-1 text-[var(--accent)]" {...props} />,
+                                                }}
+                                            >
+                                                {message.content}
+                                            </ReactMarkdown>
+                                        )}
                                     </div>
                                 </div>
                             ))}
