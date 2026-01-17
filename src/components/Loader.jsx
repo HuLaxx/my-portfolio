@@ -82,7 +82,7 @@ export const Loader = () => {
     return (
         <motion.div
             initial={{ opacity: 1 }}
-            exit={{ opacity: 0, transition: { duration: 1.5 }, pointerEvents: 'none' }}
+            exit={{ opacity: 0, transition: { duration: 0.5 }, pointerEvents: 'none' }}
             className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden pointer-events-none"
             style={{ pointerEvents: 'auto' }}
         >
@@ -267,7 +267,41 @@ export const Loader = () => {
                     </motion.div>
                 </motion.div>
 
-                {/* Cinematic Text - 3D Reveal */}
+                {/* Main Heading - RAHUL KHANKE (Swapped to Top, Flat Style) */}
+                <div
+                    key={showColor ? 'text-active' : 'text-inactive'}
+                    className="flex flex-col md:flex-row items-center gap-2 md:gap-4 mt-6"
+                >
+                    {['RAHUL', 'KHANKE'].map((word, wordIndex) => (
+                        <div key={wordIndex} className="flex" style={{ transformStyle: 'preserve-3d' }}>
+                            {word.split('').map((char, charIndex) => {
+                                // Calculate unique delay based on total index
+                                const delay = wordIndex === 0
+                                    ? 0 + (charIndex * 100)
+                                    : 300 + (charIndex * 80);
+
+                                return (
+                                    <div
+                                        key={charIndex}
+                                        className={`cinematic-char text-3xl md:text-5xl font-black tracking-widest ${showColor ? 'animate-reveal' : 'opacity-0'} ${showGlitch ? 'glitch-active' : ''}`}
+                                        data-char={char}
+                                        style={{
+                                            animationDelay: `${delay}ms`,
+                                            fontFamily: 'var(--font-display)',
+                                            '--char-color': (season === 'spring' || season === 'summer') ? 'transparent' : activeTheme.text,
+                                            '--char-glow': (season === 'spring' || season === 'summer') ? 'transparent' : activeTheme.accent,
+                                            WebkitTextStroke: `1px ${season === 'spring' || season === 'summer' ? activeTheme.text : 'rgba(255,255,255,0.3)'}`
+                                        }}
+                                    >
+                                        {char}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    ))}
+                </div>
+
+                {/* Subtext - LOADING PORTFOLIO (Swapped to Bottom, 3D Cinematic Style) */}
                 <motion.div
                     initial="hidden"
                     animate={showColor ? "visible" : "hidden"}
@@ -275,7 +309,7 @@ export const Loader = () => {
                         hidden: { opacity: 0 },
                         visible: { opacity: 1, transition: { duration: 0.1 } }
                     }}
-                    className="flex flex-col md:flex-row items-center gap-2 md:gap-6 perspective-[500px]"
+                    className="flex flex-col md:flex-row items-center gap-2 md:gap-6 perspective-[500px] mt-2"
                     style={{
                         perspective: '500px',
                         transformStyle: 'preserve-3d'
@@ -311,11 +345,10 @@ export const Loader = () => {
 
                         .cinematic-char {
                             display: inline-block;
-                            color: transparent;
+                            color: transparent; /* Main text transparent for stroke effect */
                             -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
                             transform-style: preserve-3d;
                             position: relative;
-                            /* opacity handled by tailwind class */
                         }
 
                         .cinematic-char::before {
@@ -323,15 +356,20 @@ export const Loader = () => {
                             position: absolute;
                             left: 0;
                             top: 0;
-                            color: ${activeTheme.text};
+                            color: var(--char-color); /* FIX: Dynamic Color via Variable */
                             opacity: 0;
                             transform: translateZ(5px);
-                            text-shadow: 0 0 20px ${activeTheme.accent};
+                            text-shadow: 0 0 20px var(--char-glow); /* FIX: Dynamic Glow */
                             transition: opacity 0.5s ease;
                         }
 
                         .animate-reveal {
                             animation: cinematicReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+                        }
+                        
+                        /* Ensure opacity is set to 1 when revealed */
+                        .animate-reveal::before {
+                            opacity: 1 !important;
                         }
 
                         .glitch-active::before {
@@ -340,7 +378,7 @@ export const Loader = () => {
                         }
                     `}</style>
 
-                    {['RAHUL', 'KHANKE'].map((word, wordIndex) => (
+                    {['LOADING', 'PORTFOLIO'].map((word, wordIndex) => (
                         <div key={wordIndex} className="flex" style={{ transformStyle: 'preserve-3d' }}>
                             {word.split('').map((char, charIndex) => {
                                 // Calculate unique delay based on total index
@@ -351,53 +389,14 @@ export const Loader = () => {
                                 return (
                                     <div
                                         key={charIndex}
-                                        className={`cinematic-char text-3xl md:text-5xl font-black tracking-widest ${showColor ? 'animate-reveal' : 'opacity-0'} ${showGlitch ? 'glitch-active' : ''}`}
+                                        className={`cinematic-char text-xl md:text-2xl font-black tracking-widest ${showColor ? 'animate-reveal' : 'opacity-0'} ${showGlitch ? 'glitch-active' : ''}`}
                                         data-char={char}
                                         style={{
                                             animationDelay: `${delay}ms`,
                                             fontFamily: 'var(--font-display)',
-                                            textShadow: `0 0 10px ${activeTheme.accent}`
-                                        }}
-                                    >
-                                        {char}
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    ))}
-                </motion.div>
-
-                {/* Subtext - LOADING PORTFOLIO (Exact Replica of Main Text Animation) */}
-                <motion.div
-                    initial="hidden"
-                    animate={showColor ? "visible" : "hidden"}
-                    variants={{
-                        hidden: { opacity: 0 },
-                        visible: { opacity: 1, transition: { duration: 0.1 } }
-                    }}
-                    className="flex flex-col md:flex-row items-center gap-2 md:gap-4 perspective-[500px] mt-4"
-                    style={{
-                        perspective: '500px',
-                        transformStyle: 'preserve-3d'
-                    }}
-                >
-                    {['LOADING', 'PORTFOLIO'].map((word, wordIndex) => (
-                        <div key={wordIndex} className="flex" style={{ transformStyle: 'preserve-3d' }}>
-                            {word.split('').map((char, charIndex) => {
-                                // EXACT same delay logic structure, just shifted time-wise
-                                const delay = 2500 + (wordIndex === 0 // Start after Monochrome phase (2.5s)
-                                    ? 0 + (charIndex * 60)
-                                    : 200 + (charIndex * 40));
-
-                                return (
-                                    <div
-                                        key={charIndex}
-                                        className={`cinematic-char text-xl md:text-2xl font-bold tracking-[0.2em] ${showColor ? 'animate-reveal' : 'opacity-0'} ${showGlitch ? 'glitch-active' : ''}`}
-                                        data-char={char}
-                                        style={{
-                                            animationDelay: `${delay}ms`, // Syncs with Color Reveal
-                                            fontFamily: 'var(--font-display)',
-                                            textShadow: `0 0 10px ${activeTheme.accent}` // Exact same glow
+                                            '--char-color': activeTheme.text,
+                                            '--char-glow': activeTheme.accent,
+                                            WebkitTextStroke: `1px ${season === 'spring' || season === 'summer' ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.3)'}`
                                         }}
                                     >
                                         {char}
