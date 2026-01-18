@@ -55,17 +55,17 @@ export const Footer = () => {
               CONNECT
             </h2>
 
-            <div className="flex flex-wrap gap-6 sm:gap-10">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 md:gap-8 lg:gap-10">
               {socials.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
                   target={link.label === "EMAIL" ? undefined : "_blank"}
                   rel={link.label === "EMAIL" ? undefined : "noopener noreferrer"}
-                  className="group flex items-center gap-3 text-lg sm:text-2xl font-bold tracking-[0.1em] text-[var(--foreground)] transition-colors duration-300"
+                  className="group flex items-center gap-2 sm:gap-3 text-sm sm:text-lg md:text-xl lg:text-2xl font-bold tracking-[0.1em] text-[var(--foreground)] transition-colors duration-300"
                 >
-                  <span className="p-3 rounded-full border border-[var(--border)] bg-[var(--card)]/50 group-hover:bg-[var(--accent-dark)] group-hover:text-white group-hover:scale-110 group-hover:shadow-[0_0_25px_var(--accent-dark)] transition-all duration-300 relative overflow-hidden flex items-center justify-center">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 sm:w-6 sm:h-6 relative z-10 block">
+                  <span className="p-2 sm:p-3 rounded-full border border-[var(--border)] bg-[var(--card)]/50 group-hover:bg-[var(--accent-dark)] group-hover:text-white group-hover:scale-110 group-hover:shadow-[0_0_25px_var(--accent-dark)] transition-all duration-300 relative overflow-hidden flex items-center justify-center">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 relative z-10 block">
                       <path d={link.path} />
                     </svg>
                   </span>

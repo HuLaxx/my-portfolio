@@ -19,11 +19,11 @@ export const Hero = ({ resume }) => {
       <div className="mx-auto w-full max-w-[95%] px-4 md:px-8 pt-24 md:pt-28 relative z-10">
 
         {/* Main Content Row */}
-        <div className="flex flex-col md:flex-row items-stretch justify-between gap-8 md:gap-12 min-h-[85vh]">
+        <div className="flex flex-col md:flex-row items-stretch justify-between gap-6 md:gap-8 lg:gap-12 min-h-[85vh]">
 
           {/* Left Side (Text) - 60% */}
           <motion.div
-            className="w-full md:w-[60%] flex flex-col justify-start gap-3 sm:gap-5 py-6 px-4 sm:px-8 md:pl-32 md:pr-4"
+            className="w-full md:w-[60%] lg:w-[55%] flex flex-col justify-start gap-3 sm:gap-5 py-6 px-4 sm:px-8 md:pl-12 lg:pl-20 xl:pl-28 2xl:pl-32 md:pr-4 z-10 relative"
           >
             {/* Top Group: Label + Name */}
             <div className="flex flex-col gap-1">
@@ -38,8 +38,8 @@ export const Hero = ({ resume }) => {
 
               <RevealOnScroll delay={200}>
                 <div className="font-semibold leading-[1.1] tracking-tight text-[var(--foreground)]">
-                  <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-9xl mb-0 flex flex-col gap-0">
-                    {/* Forced single line */}
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl mb-0 flex flex-col gap-0">
+                    {/* Forced single line - smoother scaling */}
                     <span className="inline-block whitespace-nowrap transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_35px_var(--accent)] hover:brightness-125 origin-left w-fit py-1">
                       I am Rahul
                     </span>
@@ -54,7 +54,7 @@ export const Hero = ({ resume }) => {
             {/* Bottom Group: Summary */}
             <RevealOnScroll delay={300}>
               <div className="flex flex-col gap-4">
-                <p className="max-w-full sm:max-w-lg md:max-w-xl text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-[var(--foreground)] font-medium">
+                <p className="max-w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-[var(--foreground)] font-medium opacity-100">
                   {resume.summary}
                 </p>
               </div>
@@ -63,7 +63,7 @@ export const Hero = ({ resume }) => {
 
           {/* Right Side (Image) - 40% */}
           <motion.div
-            className="hidden md:flex w-full md:w-[40%] items-end justify-end relative translate-x-[10%]"
+            className="hidden md:flex w-full md:w-[40%] lg:w-[45%] items-end justify-end relative translate-x-[5%] lg:translate-x-[10%] z-5"
           >
             <div className="relative w-full h-[86vh] flex items-end justify-end">
               <img
@@ -82,16 +82,6 @@ export const Hero = ({ resume }) => {
 
         </div>
       </div>
-
-      {/* Scroll indicator */}
-      <RevealOnScroll delay={400}>
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 animate-bounce z-20">
-          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--muted)]">Scroll</p>
-          <div className="h-12 w-6 rounded-full border-2 border-[var(--border)] flex items-start justify-center p-1.5">
-            <div className="h-2 w-2 rounded-full bg-[var(--accent)] animate-pulse"></div>
-          </div>
-        </div>
-      </RevealOnScroll>
     </section>
   );
 };

@@ -61,14 +61,14 @@ export const Loader = () => {
 
         setOrbitalParticles([...Array(60)].map(generateParticle));
 
-        setGlitchLayers([...Array(5)].map(() => ({
-            clipPaths: [...Array(10)].map(() => {
+        setGlitchLayers([...Array(3)].map(() => ({  // Reduced from 5 to 3 strips
+            clipPaths: [...Array(6)].map(() => {  // Fewer clip variations
                 const top = Math.random() * 100;
-                const height = Math.random() * 20; // Max 20% height per strip
+                const height = Math.random() * 15; // Thinner strips
                 return `inset(${top}% 0 ${100 - top - height}% 0)`;
             }),
-            durations: 0.2 + Math.random() * 0.3,
-            delays: Math.random() * 0.2 // Start earlier (0.3s quicker max delay)
+            durations: 1 + Math.random() * 1, // Much slower: 1s to 2s
+            delays: Math.random() * 0.6 // More spread out
         })));
 
         return () => clearTimeout(timer);
@@ -160,7 +160,7 @@ export const Loader = () => {
                                 ? `linear-gradient(135deg, hsl(0, 0%, ${p.shade * 100}%), hsl(0, 0%, ${p.shade * 40}%))` // Gradient Mono (Silver to Dark Grey)
                                 : (activeTheme.particleColors ? activeTheme.particleColors[i % activeTheme.particleColors.length] : activeTheme.accent),
                             mixBlendMode: 'plus-lighter',
-                            filter: !showColor ? 'brightness(1.0)' : 'brightness(0.35)', // Ultra-Dark Color Shards
+                            filter: !showColor ? 'brightness(1.0)' : 'brightness(0.8)', // Darker, more visible color shards
                             clipPath: 'polygon(50% 0%, 100% 85%, 0% 100%)', // Bent/Broken Triangle
                             left: `${p.left}%`,
                             top: `${p.top}%`,
@@ -172,7 +172,7 @@ export const Loader = () => {
                             x: [0, p.driftX],
                             y: [0, p.driftY, 0],
                             rotate: [0, 360],
-                            opacity: [0.2, 0.8, 0.2] // Always visible pulse
+                            opacity: [0.3, 0.9, 0.3] // Higher opacity for better visibility
                         }}
                         exit={{ opacity: 0 }}
                         transition={{
@@ -194,10 +194,13 @@ export const Loader = () => {
             >
                 {/* Profile Section */}
                 <motion.div
-                    initial={{ scale: 1.5, opacity: 1 }}
+                    initial={{ scale: 0.8, opacity: 1 }}
                     animate={{ scale: 1, opacity: 1 }}
-                    exit={{ opacity: 0, scale: 0.8 }} // Zoom out on exit
-                    transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
+                    exit={{ opacity: 0, scale: 1.2 }} // Zoom IN on exit
+                    transition={{
+                        default: { duration: 1.5, ease: [0.22, 1, 0.36, 1] },
+                        exit: { duration: 1.2, ease: [0.76, 0, 0.24, 1] }
+                    }}
                     className="relative"
                 >
                     {/* Orbital Particles - Visible ONLY when Color is shown (Phase 2) */}
@@ -222,26 +225,23 @@ export const Loader = () => {
 
                     {/* Glitch Rendering Effect - Scans from Top to Bottom */}
                     <motion.div
-                        className="absolute inset-0 rounded-full z-20 overflow-hidden bg-black" // Solid black to hide background dots
+                        className="absolute inset-0 rounded-full z-20 overflow-hidden bg-black"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: showColor ? 0 : 1 }}
-                        transition={{ duration: 0.5, delay: showColor ? 0 : 0.2 }} // Crossfade out when color shows
+                        transition={{ duration: 0.5, delay: showColor ? 0 : 0.2 }}
                         style={{ pointerEvents: showColor ? 'none' : 'auto' }}
                     >
-                        {/* Base Layer - Static, faint image so it's never empty */}
-                        <div className="absolute inset-0 grayscale opacity-20 contrast-125">
-                            <Image src="/Portfolio_Image.jpeg" alt="Rahul Khanke" fill className="object-cover" priority />
-                        </div>
+                        {/* Background is solid black - only glitch strips show the photo */}
 
                         {/* Glitch Layers - Random Strips */}
                         {glitchLayers.map((layer, i) => (
                             <motion.div
                                 key={i}
-                                className="absolute inset-0 grayscale contrast-125 brightness-125"
+                                className="absolute inset-0 grayscale contrast-125 brightness-110"
                                 animate={{
                                     clipPath: layer.clipPaths,
-                                    opacity: [0, 0.8, 0],
-                                    x: [-2, 2, -2, 2, 0] // Horizontal jitter
+                                    opacity: [0, 0.4, 0],
+                                    x: [-2, 2, -2, 2, 0]
                                 }}
                                 transition={{
                                     duration: layer.durations,
@@ -283,14 +283,13 @@ export const Loader = () => {
                                 return (
                                     <div
                                         key={charIndex}
-                                        className={`cinematic-char text-3xl md:text-5xl font-black tracking-widest ${showColor ? 'animate-reveal' : 'opacity-0'} ${showGlitch ? 'glitch-active' : ''}`}
+                                        className={`text-3xl md:text-5xl font-black tracking-widest ${showColor ? 'hollow-fill' : 'opacity-0'} ${showGlitch ? 'glitch-active' : ''}`}
                                         data-char={char}
                                         style={{
                                             animationDelay: `${delay}ms`,
                                             fontFamily: 'var(--font-display)',
-                                            '--char-color': (season === 'spring' || season === 'summer') ? 'transparent' : activeTheme.text,
-                                            '--char-glow': (season === 'spring' || season === 'summer') ? 'transparent' : activeTheme.accent,
-                                            WebkitTextStroke: `1px ${season === 'spring' || season === 'summer' ? activeTheme.text : 'rgba(255,255,255,0.3)'}`
+                                            '--stroke-color': activeTheme.text,
+                                            '--fill-color': activeTheme.text
                                         }}
                                     >
                                         {char}
@@ -301,14 +300,8 @@ export const Loader = () => {
                     ))}
                 </div>
 
-                {/* Subtext - LOADING PORTFOLIO (Swapped to Bottom, 3D Cinematic Style) */}
-                <motion.div
-                    initial="hidden"
-                    animate={showColor ? "visible" : "hidden"}
-                    variants={{
-                        hidden: { opacity: 0 },
-                        visible: { opacity: 1, transition: { duration: 0.1 } }
-                    }}
+                {/* Subtext - LOADING PORTFOLIO (Visible in both monochrome and color) */}
+                <div
                     className="flex flex-col md:flex-row items-center gap-2 md:gap-6 perspective-[500px] mt-2"
                     style={{
                         perspective: '500px',
@@ -329,9 +322,26 @@ export const Loader = () => {
                                 opacity: 1;
                                 transform: translateZ(0) rotateX(0deg) rotateY(0deg);
                                 filter: blur(0px);
-                                color: rgba(255, 255, 255, 0.1);
-                                -webkit-text-stroke: 2px white;
                             }
+                        }
+                        
+                        /* RAHUL KHANKE hollow to fill animation - synced with loader exit */
+                        @keyframes hollowToFill {
+                            0% {
+                                color: transparent;
+                                -webkit-text-stroke: 2px var(--stroke-color);
+                            }
+                            100% {
+                                color: var(--fill-color);
+                                -webkit-text-stroke: 0px var(--stroke-color);
+                            }
+                        }
+                        
+                        .hollow-fill {
+                            color: transparent;
+                            -webkit-text-stroke: 2px var(--stroke-color);
+                            animation: hollowToFill 2.5s ease-out forwards;
+                            animation-fill-mode: backwards; /* Start from 0% state */
                         }
 
                         @keyframes glitchText {
@@ -346,7 +356,7 @@ export const Loader = () => {
                         .cinematic-char {
                             display: inline-block;
                             color: transparent; /* Main text transparent for stroke effect */
-                            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+                            /* Stroke now controlled by JavaScript for spring/summer themes */
                             transform-style: preserve-3d;
                             position: relative;
                         }
@@ -364,7 +374,7 @@ export const Loader = () => {
                         }
 
                         .animate-reveal {
-                            animation: cinematicReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+                            animation: cinematicReveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; /* single rotation, key change triggers 2nd */
                         }
                         
                         /* Ensure opacity is set to 1 when revealed */
@@ -381,22 +391,25 @@ export const Loader = () => {
                     {['LOADING', 'PORTFOLIO'].map((word, wordIndex) => (
                         <div key={wordIndex} className="flex" style={{ transformStyle: 'preserve-3d' }}>
                             {word.split('').map((char, charIndex) => {
-                                // Calculate unique delay based on total index
-                                const delay = wordIndex === 0
-                                    ? 0 + (charIndex * 100)
-                                    : 300 + (charIndex * 80);
+                                // Smooth continuous wave: all chars flow together
+                                // LOADING (7 chars) + PORTFOLIO (9 chars) = 16 chars total
+                                // Single smooth wave with 80ms between each character
+                                const totalIndex = wordIndex === 0
+                                    ? charIndex  // LOADING: 0-6
+                                    : 7 + charIndex;  // PORTFOLIO: 7-15
+                                const charDelay = totalIndex * 80; // Smooth 80ms stagger
 
                                 return (
                                     <div
-                                        key={charIndex}
-                                        className={`cinematic-char text-xl md:text-2xl font-black tracking-widest ${showColor ? 'animate-reveal' : 'opacity-0'} ${showGlitch ? 'glitch-active' : ''}`}
+                                        key={`${charIndex}-${showColor ? 'color' : 'mono'}`}
+                                        className={`cinematic-char text-xl md:text-2xl font-black tracking-widest animate-reveal ${showGlitch ? 'glitch-active' : ''}`}
                                         data-char={char}
                                         style={{
-                                            animationDelay: `${delay}ms`,
+                                            animationDelay: `${charDelay}ms`,
                                             fontFamily: 'var(--font-display)',
                                             '--char-color': activeTheme.text,
                                             '--char-glow': activeTheme.accent,
-                                            WebkitTextStroke: `1px ${season === 'spring' || season === 'summer' ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.3)'}`
+                                            WebkitTextStroke: (season === 'spring' || season === 'summer') ? 'none' : '1px rgba(255,255,255,0.3)'
                                         }}
                                     >
                                         {char}
@@ -405,7 +418,7 @@ export const Loader = () => {
                             })}
                         </div>
                     ))}
-                </motion.div>
+                </div>
 
                 {/* Loading Dots */}
                 <motion.div
@@ -444,6 +457,6 @@ export const Loader = () => {
                 className="absolute bottom-12 right-12 w-16 h-16 border-b-2 border-r-2 transition-colors duration-1000"
                 style={{ borderColor: activeTheme.accent }}
             />
-        </motion.div>
+        </motion.div >
     );
 };

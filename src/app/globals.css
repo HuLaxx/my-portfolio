@@ -441,3 +441,37 @@ a {
 [data-theme="autumn"] body {
   background: var(--background) !important;
 }
+
+/* ============================================
+   HERO SECTION RESPONSIVE SAFEGUARDS
+   Ensures text visibility at all viewport sizes
+   ============================================ */
+
+/* Force visibility on hero content */
+#hero h1,
+#hero h1 span,
+#hero p {
+  visibility: visible !important;
+}
+
+/* Intermediate viewport fix (1024px - 1400px) */
+@media (min-width: 1024px) and (max-width: 1400px) {
+  #hero .reveal-hidden {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    filter: blur(0) !important;
+  }
+
+  /* Ensure text container has proper z-index */
+  #hero>div>div:first-child {
+    z-index: 10;
+    position: relative;
+  }
+}
+
+/* Prevent layout collapse at laptop sizes */
+@media (min-width: 768px) and (max-width: 1280px) {
+  #hero {
+    min-height: 90vh;
+  }
+}
