@@ -48,44 +48,45 @@
       <br />
       <br />
       <h3>📊 Weekly Activity</h3>
-      <!-- Snake Animation Placeholder: Requires GitHub Actions to run once -->
-      <img src="https://github.com/HuLaxx/my-portfolio/blob/output/github-contribution-grid-snake.svg" alt="Snake Animation" />
+      <!-- Snake Animation: Points to the raw file in the output branch -->
+      <img src="https://raw.githubusercontent.com/HuLaxx/my-portfolio/output/github-contribution-grid-snake.svg" alt="Snake Animation" />
     </td>
   </tr>
 </table>
 
 <div align="center">
   <br />
-  <h3>🎧 Listening Now</h3>
-  <!-- Changed theme to 'novatorem' for better reliability. Requires Spotify authorization. -->
-  <a href="https://spotify-github-profile.vercel.app/api/view?uid=HuLaxx&cover_image=true&theme=novatorem&bar_color=53b14f&bar_color_cover=false">
-    <img src="https://spotify-github-profile.vercel.app/api/view?uid=HuLaxx&cover_image=true&theme=novatorem&bar_color=6366f1&bar_color_cover=false&background_color=0D1117" alt="Spotify" />
-  </a>
+  <h3>🎧 Coding Vibe</h3>
+  <img src="https://media.giphy.com/media/l0He4fRAcmXKwd1ni/giphy.gif" width="100%" height="100" style="object-fit: cover; border-radius: 10px;" alt="Audio Waveform" />
   <br />
 </div>
 
 <br />
 
-## 🏗️ System Architecture
-
 <div align="center">
-  <pre>
-  mermaid
-  graph TD
-    A[User Client] -->|Https/Edge| B[Next.js 15 Edge Runtime]
-    B -->|RSC| C[React Server Components]
-    B -->|API| D[Vercel AI SDK]
-    
-    subgraph "Frontend Layer"
-      C --> E[Three.js Canvas]
-      C --> F[Tailwind 4 + Framer Motion]
-    end
-    
-    subgraph "Data & Logic"
-      D -->|Inference| G[Gemini 2.5 Flash]
-      C -->|Content| H[Sanity CMS]
-    end
-  </pre>
+  <h2>🚀 Capabilities & Roles</h2>
+  <table width="100%">
+    <tr>
+      <td width="33%" align="center">
+        <h3>🤖 AI Engineer</h3>
+        <p>Large Language Models</p>
+        <p>RAG pipelines</p>
+        <p>Vector Embeddings</p>
+      </td>
+      <td width="33%" align="center">
+        <h3>📊 Data Scientist</h3>
+        <p>Predictive Modeling</p>
+        <p>Data Visualization</p>
+        <p>Python / Pandas / PyTorch</p>
+      </td>
+      <td width="33%" align="center">
+        <h3>🎨 Creative Dev</h3>
+        <p>3D WebGL / Three.js</p>
+        <p>Next.js 15 & React 19</p>
+        <p>Interactive UI/UX</p>
+      </td>
+    </tr>
+  </table>
 </div>
 
 <br />
