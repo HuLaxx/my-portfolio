@@ -67,40 +67,35 @@
 
 <br />
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" />
 
-## 🧪 Featured Experiences
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%" />
+</div>
 
-<table width="100%">
-  <tr>
-    <td width="55%">
-        <h3>🔭 Vogue Scandinavia</h3>
-        <p><i>Immersive WebGL Runway w/ RAG AI</i></p>
-        <p>A bespoke runway experience where editors scrub across time, revealing look layers triggered by AI commentary on every scene.</p>
-        <p>
-            <img src="https://img.shields.io/badge/Three.js-black?style=flat-square&logo=three.js" />
-            <img src="https://img.shields.io/badge/Next.js-black?style=flat-square&logo=next.js" />
-        </p>
-    </td>
-    <td width="45%" align="center">
-        <img src="https://media.giphy.com/media/l41YkZk2u0M8XyK7C/giphy.gif" width="100%" style="border-radius: 8px;" />
-    </td>
-  </tr>
-  <tr>
-    <td width="45%" align="center">
-        <img src="https://media.giphy.com/media/3o7TKSjRrfIPjeiVyM/giphy.gif" width="100%" style="border-radius: 8px;" />
-    </td>
-    <td width="55%">
-        <h3>🚀 SpaceX Starship</h3>
-        <p><i>Mission Control Simulator</i></p>
-        <p>Browser-based mission control with real telemetry, GPU smoke sims, and AI-guided mission status for VIP guests.</p>
-        <p>
-            <img src="https://img.shields.io/badge/WebGL-black?style=flat-square&logo=webgl" />
-            <img src="https://img.shields.io/badge/Python-blue?style=flat-square&logo=python" />
-        </p>
-    </td>
-  </tr>
-</table>
+<div align="center">
+  <br />
+  <h2>⚡ Tech Stack & Analytics</h2>
+  
+  <table>
+    <tr>
+      <td align="center" width="50%">
+         <h3>💻 Core Arsenal</h3>
+         <img src="https://skillicons.dev/icons?i=nextjs,react,threejs,tailwind,python,pytorch,fastapi,aws,docker,git&perline=5" />
+      </td>
+      <td align="center" width="50%">
+        <h3>📊 Code Frequency</h3>
+        <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=HuLaxx&layout=compact&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=A855F7" width="100%" />
+      </td>
+    </tr>
+  </table>
+
+  <br />
+
+  <h3>🎧 Vibe Check</h3>
+  <a href="https://spotify-github-profile.vercel.app/api/view?uid=HuLaxx&cover_image=true&theme=novatorem&bar_color=53b14f&bar_color_cover=false">
+    <img src="https://spotify-github-profile.vercel.app/api/view?uid=HuLaxx&cover_image=true&theme=novatorem&bar_color=A855F7&bar_color_cover=false&background_color=0D1117" alt="Spotify" />
+  </a>
+</div>
 
 <br />
 
