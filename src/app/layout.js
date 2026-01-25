@@ -68,6 +68,11 @@ export const metadata = {
   description:
     "Next.js 15 + React 19 portfolio showcasing data science projects, ML models, and AI engineering work.",
   metadataBase: new URL("https://rahulkhanke.dev"),
+  icons: {
+    icon: "/icon.ico",
+    shortcut: "/icon.ico",
+    apple: "/icon.ico",
+  },
   openGraph: {
     title: "Rahul Khanke",
     description:
