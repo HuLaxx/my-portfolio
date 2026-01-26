@@ -452,24 +452,14 @@ export const fallbackRoles = {
   },
   "software-engineer": {
     title: "Software Engineer",
-    description: "Delivering robust full-stack applications with type-safe APIs, real-time WebSocket layers, and modern component architectures.",
-    skills: ["Next.js 16", "TypeScript", "React 19", "Tailwind 4", "tRPC", "GraphQL", "Socket.IO", "Docker"],
+    description: "Delivering robust full-stack applications and owning the complete feature lifecycle—from database schema design to responsive, animated frontend UIs and real-time WebSocket layers.",
+    skills: ["Next.js 16", "TypeScript", "React 19", "Tailwind 4", "FastAPI", "PostgreSQL", "Redis", "tRPC", "GraphQL", "Framer Motion", "D3.js", "Docker"],
     projects: ["sentinance", "graphguard", "fleetflow"],
     stats: [
       { label: "Frontend", value: "Next.js 16 + React 19" },
-      { label: "APIs", value: "tRPC + GraphQL" },
-      { label: "Ops", value: "Docker + CI/CD" },
-    ]
-  },
-  "full-stack-developer": {
-    title: "Full Stack Developer",
-    description: "Owning the complete feature lifecycle—from database schema design and API implementation to responsive, animated frontend UIs.",
-    skills: ["Next.js 16", "FastAPI", "PostgreSQL", "Redis", "Tailwind 4", "Framer Motion", "D3.js", "Deck.gl"],
-    projects: ["sentinance", "graphguard", "fleetflow"],
-    stats: [
-      { label: "Realtime", value: "WebSockets + streaming" },
+      { label: "Realtime", value: "WebSockets + Streaming" },
       { label: "Visuals", value: "D3.js + Deck.gl" },
-      { label: "Stack", value: "Next.js + Python" },
     ]
   },
+
 };

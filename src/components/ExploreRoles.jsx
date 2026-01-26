@@ -42,24 +42,13 @@ const roles = [
     {
         id: "software-engineer",
         title: "Software Engineer",
-        description: "Delivering robust full-stack applications with type-safe APIs, real-time WebSocket layers, and modern component architectures.",
+        description: "Delivering robust full-stack applications and owning the complete feature lifecycle—from database schema design to responsive, animated frontend UIs and real-time WebSocket layers.",
         href: "/role/software-engineer",
         gradient: "from-orange-400 to-amber-300",
         index: "04",
         image: "/generated/role-se.png",
         icon: Terminal,
         watermarkType: "engraved"
-    },
-    {
-        id: "full-stack-developer",
-        title: "Full Stack Developer",
-        description: "Owning the complete feature lifecycle—from database schema design and API implementation to responsive, animated frontend UIs.",
-        href: "/role/full-stack-developer",
-        gradient: "from-sky-400 to-indigo-300",
-        index: "05",
-        image: "/generated/role-fs.png",
-        icon: Layout,
-        watermarkType: "classic"
     },
 ];
 

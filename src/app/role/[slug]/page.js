@@ -101,13 +101,13 @@ export default async function RolePage({ params }) {
                                             </h4>
                                             <span className="font-mono text-xs text-[var(--muted)]">{project.year}</span>
                                         </div>
-                                        <p className="text-[var(--muted)] mb-6 max-w-xl">
+                                        <p className="text-[var(--muted)] mb-6 max-w-xl md:max-w-[60%]">
                                             {project.summary}
                                         </p>
 
                                         {/* GitHub-style Language Bar */}
                                         {project.languages && (
-                                            <div className="mb-6">
+                                            <div className="mb-6 md:max-w-[60%]">
                                                 <div className="flex h-2 w-full overflow-hidden rounded-full bg-[var(--card)] mb-2">
                                                     {Object.entries(project.languages).map(([lang, pct], i) => (
                                                         <div
