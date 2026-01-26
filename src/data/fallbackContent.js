@@ -87,20 +87,20 @@ export const fallbackResume = {
     },
   ],
   experience: [
-    {
-      company: "Enterprise AI Consultancy",
-      slug: "enterprise-ai",
-      role: "AI & Data Solution Engineer",
-      period: "Sep 2024 - Dec 2025",
-      description: "Engineering advanced AI and data solutions, focusing on scalable architecture, RAG systems, and ML integration for enterprise clients.",
-      image: "/generated/exp-tech.png",
-      stack: ["Python", "AWS", "LLMs", "RAG", "Data Pipelines"],
-      stats: [
-        { label: "Projects", value: "Multiple" },
-        { label: "Impact", value: "High" },
-        { label: "Team", value: "Engineering" }
-      ]
-    },
+    // {
+    //   company: "Enterprise AI Consultancy",
+    //   slug: "enterprise-ai",
+    //   role: "AI & Data Solution Engineer",
+    //   period: "Sep 2024 - Dec 2025",
+    //   description: "Engineering advanced AI and data solutions, focusing on scalable architecture, RAG systems, and ML integration for enterprise clients.",
+    //   image: "/generated/exp-tech.png",
+    //   stack: ["Python", "AWS", "LLMs", "RAG", "Data Pipelines"],
+    //   stats: [
+    //     { label: "Projects", value: "Multiple" },
+    //     { label: "Impact", value: "High" },
+    //     { label: "Team", value: "Engineering" }
+    //   ]
+    // },
     {
       company: "Accenture",
       slug: "accenture",
