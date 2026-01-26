@@ -104,14 +104,14 @@ export const fallbackResume = {
     {
       company: "Accenture",
       slug: "accenture",
-      role: "Software Engineer",
+      role: "Custom Software Engineering Associate",
       period: "Oct 2022 - Sept 2024",
-      description: "Developed and maintained full-stack enterprise applications, optimizing performance and ensuring code quality in a global delivery environment.",
+      description: "Engineered scalable full-stack architectures and data pipelines, integrating AI/ML capabilities for global enterprise clients. Optimized high-throughput systems and led cloud-native migrations.",
       image: "/generated/exp-corp.png",
-      stack: ["Java", "Spring Boot", "React", "Cloud", "SQL"],
+      stack: ["Java", "Spring Boot", "React", "AWS", "SQL", "Python"],
       stats: [
         { label: "Tenure", value: "2 Years" },
-        { label: "Role", value: "Full Stack" },
+        { label: "Role", value: "Full Stack/AI" },
         { label: "Global", value: "Client Delivery" }
       ]
     },
@@ -120,12 +120,12 @@ export const fallbackResume = {
       slug: "cognizant",
       role: "Intern",
       period: "Jan 2022 - Apr 2022",
-      description: "Intensive training in software development lifecycle, Java enterprise stacks, and modern testing methodologies.",
+      description: "Gained foundational experience in data engineering patterns, software development lifecycles, and modern enterprise technology stacks.",
       image: "/generated/exp-corp.png",
-      stack: ["Java", "SQL", "Testing"],
+      stack: ["Java", "SQL", "Data Structures", "Testing"],
       stats: [
         { label: "Duration", value: "4 Months" },
-        { label: "Focus", value: "Training" }
+        { label: "Focus", value: "DE & Software" }
       ]
     },
     // {
