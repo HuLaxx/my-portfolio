@@ -59,7 +59,7 @@ export const Education = ({ resume }) => {
                                                     <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]"></span>
                                                     Dissertation Project
                                                 </span>
-                                                <p className="text-[var(--foreground)] font-medium text-lg leading-relaxed group-hover:text-[var(--text-hover)] transition-colors duration-500">
+                                                <p className="text-[var(--foreground)] font-medium text-lg leading-relaxed group-hover:text-[var(--text-hover)] transition-colors duration-500 max-w-[90%] sm:max-w-[85%]">
                                                     {study.dissertation}
                                                 </p>
                                             </div>
