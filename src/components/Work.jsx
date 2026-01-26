@@ -1,11 +1,12 @@
 'use client';
 
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { RevealOnScroll } from "./RevealOnScroll";
 import { Watermark } from "./Watermark";
-import { AppWindow, Database, Smartphone, Globe, Layout, Code, Monitor } from "lucide-react";
+import { AppWindow, Database, Smartphone, Globe, Layout, Code, Monitor, Github } from "lucide-react";
 
 export const Projects = ({ projects, caseStudies = [] }) => {
+  const router = useRouter();
 
   const getProjectWatermark = (role) => {
     const r = role?.toLowerCase() || "";
@@ -42,7 +43,24 @@ export const Projects = ({ projects, caseStudies = [] }) => {
               const { type, icon } = getProjectWatermark(project.role);
 
               const CardContent = () => (
-                <div className="group relative h-full min-h-[240px] sm:min-h-[280px] md:min-h-[320px] p-5 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl border border-[var(--border)] bg-[var(--card)]/30 backdrop-blur-sm overflow-hidden transition-all duration-700 hover:shadow-2xl hover:translate-y-[-4px] hover:bg-[var(--card-hover-tint)] hover:border-[var(--accent)] flex flex-col justify-between">
+                <div
+                  className={`group relative h-full min-h-[240px] sm:min-h-[280px] md:min-h-[320px] p-5 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl border border-[var(--border)] bg-[var(--card)]/30 backdrop-blur-sm overflow-hidden transition-all duration-700 hover:shadow-2xl hover:translate-y-[-4px] hover:bg-[var(--card-hover-tint)] hover:border-[var(--accent)] flex flex-col justify-between ${project.slug ? "cursor-pointer" : ""}`}
+                  onClick={() => {
+                    if (project.slug) {
+                      router.push(`/case/${project.slug}`);
+                    }
+                  }}
+                  onKeyDown={(event) => {
+                    if (!project.slug) return;
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      router.push(`/case/${project.slug}`);
+                    }
+                  }}
+                  role={project.slug ? "link" : undefined}
+                  tabIndex={project.slug ? 0 : undefined}
+                  aria-label={project.slug ? `View ${project.client} case study` : undefined}
+                >
 
                   {/* Hover Gradient Overlay */}
                   <div
@@ -60,24 +78,17 @@ export const Projects = ({ projects, caseStudies = [] }) => {
                   {/* Watermark Background */}
                   <Watermark type={type} icon={icon} />
 
-                  <div className="relative z-10 flex flex-col gap-6 h-full">
-                    <div className="flex justify-between items-start">
-                      <div className="flex flex-col gap-1 sm:gap-2">
-                        <span className="font-mono text-sm sm:text-base font-bold uppercase tracking-[0.22em] text-[var(--accent-dark)] opacity-80 group-hover:text-[var(--text-hover)] transition-colors duration-500">
-                          {project.year}
-                        </span>
-                        <h3 className="display-heading text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-[var(--foreground)] group-hover:text-[var(--text-hover)] transition-colors duration-500">
-                          {project.client}
-                        </h3>
-                      </div>
-                      <div className="text-right pl-4">
-                        <span className="font-mono text-base sm:text-lg font-bold uppercase tracking-wider text-[var(--foreground)] opacity-70 group-hover:text-[var(--text-hover)] transition-colors duration-500 block">
-                          {project.role}
-                        </span>
-                      </div>
+                  <div className="relative z-20 flex flex-col gap-6 h-full">
+                    <div className="flex flex-col gap-1 sm:gap-2">
+                      <span className="font-mono text-sm sm:text-base font-bold uppercase tracking-[0.22em] text-[var(--accent-dark)] opacity-80 group-hover:text-[var(--text-hover)] transition-colors duration-500">
+                        {project.year}
+                      </span>
+                      <h3 className="display-heading text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-[var(--foreground)] group-hover:text-[var(--text-hover)] transition-colors duration-500">
+                        {project.client}
+                      </h3>
                     </div>
 
-                    <p className="text-[var(--foreground)] opacity-90 leading-relaxed text-base sm:text-lg font-medium group-hover:text-[var(--text-hover)] transition-colors duration-500 max-w-xl">
+                    <p className="text-[var(--foreground)] opacity-90 leading-relaxed text-base sm:text-lg font-medium group-hover:text-[var(--text-hover)] transition-colors duration-500 max-w-2xl">
                       {project.summary}
                     </p>
 
@@ -91,11 +102,40 @@ export const Projects = ({ projects, caseStudies = [] }) => {
                         ))}
                       </div>
                     )}
+
+                    {(project.live || project.github) && (
+                      <div className="mt-auto flex flex-wrap items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] pointer-events-auto">
+                        {project.live && (
+                          <a
+                            href={project.live}
+                            target="_blank"
+                            rel="noreferrer"
+                            onClick={(event) => event.stopPropagation()}
+                            className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] px-3 py-1 text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[var(--accent)] transition-colors"
+                          >
+                            <Globe className="h-3.5 w-3.5" />
+                            Live Demo
+                          </a>
+                        )}
+                        {project.github && (
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noreferrer"
+                            onClick={(event) => event.stopPropagation()}
+                            className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] px-3 py-1 text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[var(--accent)] transition-colors"
+                          >
+                            <Github className="h-3.5 w-3.5" />
+                            GitHub
+                          </a>
+                        )}
+                      </div>
+                    )}
                   </div>
 
                   {/* Right-Side Hover Expansion - Slide-in Drawer */}
                   {project.slug && (
-                    <div className="hidden md:flex absolute right-0 top-0 bottom-0 w-1/3 h-full bg-gradient-to-l from-[var(--card)] via-[var(--card)]/90 to-transparent translate-x-12 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500 ease-out flex-col justify-center items-end pr-8 md:pr-12 pointer-events-none z-20">
+                    <div className="hidden md:flex absolute right-0 top-0 bottom-0 w-1/3 h-full bg-gradient-to-l from-[var(--card)] via-[var(--card)]/90 to-transparent opacity-80 group-hover:opacity-100 group-hover:-translate-x-2 transition-all duration-500 ease-out flex-col justify-center items-end pr-8 md:pr-12 pointer-events-none z-20">
                       <div className="flex flex-col items-end gap-3 text-right">
                         <span className="p-3 rounded-full border border-[var(--accent)] bg-[var(--accent)]/10 text-[var(--accent)] group-hover:bg-[var(--accent)] group-hover:text-black transition-all duration-500 shadow-[0_0_15px_rgba(0,0,0,0.2)]">
                           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -118,13 +158,7 @@ export const Projects = ({ projects, caseStudies = [] }) => {
 
               return (
                 <RevealOnScroll key={index} delay={index * 100}>
-                  {project.slug ? (
-                    <Link href={`/case/${project.slug}`} className="block h-full">
-                      <CardContent />
-                    </Link>
-                  ) : (
-                    <CardContent />
-                  )}
+                  <CardContent />
                 </RevealOnScroll>
               );
             })}

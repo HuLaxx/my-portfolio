@@ -93,7 +93,7 @@ export default async function RolePage({ params }) {
                                     <Link
                                         href={`/case/${project.slug}`}
                                         key={index}
-                                        className="group block p-8 rounded-3xl bg-[var(--card)] border border-[var(--border)] hover:border-[var(--accent)] transition-all duration-500"
+                                        className="group relative block p-8 rounded-3xl bg-[var(--card)] border border-[var(--border)] hover:border-[var(--accent)] transition-all duration-500"
                                     >
                                         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
                                             <h4 className="text-3xl font-bold text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors">
@@ -102,7 +102,7 @@ export default async function RolePage({ params }) {
                                             <span className="font-mono text-xs text-[var(--muted)]">{project.year}</span>
                                         </div>
                                         <p className="text-[var(--muted)] mb-6 max-w-xl">
-                                            {project.role}
+                                            {project.summary}
                                         </p>
 
                                         {/* GitHub-style Language Bar */}
@@ -128,8 +128,22 @@ export default async function RolePage({ params }) {
                                             </div>
                                         )}
 
-                                        <div className="flex items-center gap-2 text-sm font-medium text-[var(--foreground)] opacity-80 group-hover:translate-x-2 transition-transform">
-                                            View Case Study →
+                                        <div className="hidden md:flex absolute right-0 top-0 bottom-0 w-1/3 h-full bg-gradient-to-l from-[var(--card)] via-[var(--card)]/90 to-transparent opacity-80 group-hover:opacity-100 group-hover:-translate-x-2 transition-all duration-500 ease-out flex-col justify-center items-end pr-8 pointer-events-none">
+                                            <div className="flex flex-col items-end gap-3 text-right">
+                                                <span className="p-3 rounded-full border border-[var(--accent)] bg-[var(--accent)]/10 text-[var(--accent)] group-hover:bg-[var(--accent)] group-hover:text-black transition-all duration-500 shadow-[0_0_15px_rgba(0,0,0,0.2)]">
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                        <path d="M5 12h14M12 5l7 7-7 7" />
+                                                    </svg>
+                                                </span>
+                                                <div>
+                                                    <span className="font-bold text-sm uppercase tracking-wider text-[var(--foreground)] block mb-1">
+                                                        View Case Study
+                                                    </span>
+                                                    <span className="text-xs font-mono text-[var(--muted)] block">
+                                                        Deep Dive & Metrics
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </Link>
                                 ))}

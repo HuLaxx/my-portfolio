@@ -53,6 +53,8 @@ export const MobileMenu = ({ isOpen, onClose }) => {
         { label: "Data Scientist", href: "/role/data-scientist" },
         { label: "Data Engineer", href: "/role/data-engineer" },
         { label: "AI/ML Engineer", href: "/role/ai-ml-engineer" },
+        { label: "Software Engineer", href: "/role/software-engineer" },
+        { label: "Full Stack Developer", href: "/role/full-stack-developer" },
     ];
 
     if (!isOpen) return null;
