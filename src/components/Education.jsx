@@ -55,10 +55,11 @@ export const Education = ({ resume }) => {
                                         {/* Bottom Row: Dissertation & Highlights */}
                                         <div className="space-y-4">
                                             <div>
-                                                <span className="text-xs font-bold uppercase tracking-wider text-[var(--accent)] mb-2 block group-hover:text-[var(--text-hover)] transition-colors duration-500">
-                                                    Dissertation
+                                                <span className="text-sm font-bold uppercase tracking-wider text-[var(--accent)] mb-2 block group-hover:text-[var(--text-hover)] transition-colors duration-500 flex items-center gap-2">
+                                                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]"></span>
+                                                    Dissertation Project
                                                 </span>
-                                                <p className="text-[var(--foreground)] opacity-90 text-base leading-relaxed group-hover:text-[var(--text-hover)] transition-colors duration-500">
+                                                <p className="text-[var(--foreground)] font-medium text-lg leading-relaxed group-hover:text-[var(--text-hover)] transition-colors duration-500">
                                                     {study.dissertation}
                                                 </p>
                                             </div>
