@@ -111,38 +111,42 @@ export const fallbackResume = {
       slug: "accenture",
       role: "Custom Software Engineering Associate",
       period: "Oct 2022 - Sept 2024",
-      description: "Engineered scalable full-stack architectures and data pipelines, integrating AI/ML capabilities for global enterprise clients. Optimized high-throughput systems and led cloud-native migrations.",
+      description: "Engineered scalable end-to-end ML systems and data pipelines, integrating AI solutions with legacy architecture. Built predictive models for claims analytics and automated production workflows.",
       image: "/generated/exp-corp.png",
-      stack: ["Java", "Spring Boot", "React", "Kafka", "AWS", "Docker", "PostgreSQL", "Python"],
+      stack: ["Java", "Spring Boot", "React", "Kafka", "AWS", "Docker", "Kubernetes", "Airflow", "Python", "SQL"],
       stats: [
         { label: "Data Scale", value: "TB+" },
-        { label: "Uptime", value: "99.9%" },
+        { label: "Accuracy", value: "+30%" },
         { label: "Users", value: "Global" }
       ],
       highlights: [
-        "Architected and deployed scalable spring-boot microservices handling high-frequency transaction data.",
-        "Optimized complex SQL queries and database indexes, reducing report generation time by 40%.",
-        "Built real-time data ingestion pipelines using Kafka to feed analytics dashboards.",
-        "Led the migration of legacy monolithic applications to cloud-native AWS infrastructure using Docker and Kubernetes."
+        "Built end‑to‑end ML models for claims analytics, improving accuracy by 30% and reducing processing time by 50%.",
+        "Designed ETL/data pipelines with Python, SQL, and Airflow, improving data availability and reliability.",
+        "Built feature engineering and model evaluation workflows to improve model quality and business usability.",
+        "Deployed containerized ML services with Docker + Kubernetes, and set up CI/CD for production delivery.",
+        "Integrated AI solutions with legacy systems to deliver real‑time insights for underwriters and product teams.",
+        "Collaborated with cross‑functional teams to align data architecture and production requirements."
       ]
     },
     {
       company: "Cognizant",
       slug: "cognizant",
-      role: "Data Engineering Intern",
+      role: "Intern",
       period: "Jan 2022 - Apr 2022",
-      description: "Gained foundational experience in data engineering patterns, ETL workflows, and modern enterprise technology stacks.",
+      description: "Developed fundamental data engineering and ML solutions, focusing on real-time analytics pipelines, sentiment analysis models, and production-grade visualizations.",
       image: "/generated/exp-corp.png",
-      stack: ["Python", "SQL", "ETL", "Data Warehousing", "Java"],
+      stack: ["Python", "SQL", "Spark", "Tableau", "Power BI", "Docker", "Kubernetes", "Java"],
       stats: [
-        { label: "Pipelines", value: "10+" },
-        { label: "Data Quality", value: "100%" },
-        { label: "Focus", value: "DE Core" }
+        { label: "Pipelines", value: "Real-time" },
+        { label: "ML Ops", value: "Docker/K8s" },
+        { label: "Focus", value: "DE & ML" }
       ],
       highlights: [
-        "Developed automated ETL scripts in Python to migrate legacy CSV data into modern data warehouses.",
-        "Designed and implemented data quality checks to ensure integrity across migration steps.",
-        "Assisted in the development of Java-based internal tooling for data validation."
+        "Engineered ETL pipelines using Python, SQL, and Apache Spark to integrate multi‑source data for real‑time analytics.",
+        "Built ML modules for sentiment analysis and topic modeling on customer reviews and social data.",
+        "Contributed to DevOps/MLOps workflows using Docker + Kubernetes for containerized services.",
+        "Developed Tableau/Power BI dashboards to visualize KPIs and support stakeholder decisions.",
+        "Assisted with data cleaning/validation and documentation to support analytics reporting."
       ]
     },
     // {
