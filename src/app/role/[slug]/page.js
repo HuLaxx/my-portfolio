@@ -73,7 +73,7 @@ export default async function RolePage({ params }) {
                                 {role.skills.map((skill, index) => (
                                     <span
                                         key={index}
-                                        className="px-4 py-2 rounded-full border border-white/10 text-sm text-gray-300 bg-white/5 hover:bg-white/10 hover:border-[var(--accent)] transition-all duration-300 cursor-default"
+                                        className="px-4 py-2 rounded-full border border-[var(--border)] text-sm text-[var(--foreground)] bg-[var(--card)]/50 hover:bg-[var(--accent)]/10 hover:border-[var(--accent)] transition-all duration-300 cursor-default"
                                     >
                                         {skill}
                                     </span>
