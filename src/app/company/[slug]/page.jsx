@@ -63,6 +63,25 @@ export default async function CompanyPage({ params }) {
                             {company.description}
                         </p>
                     </div>
+
+                    {/* Highlights / Responsibilities Section */}
+                    {company.highlights && (
+                        <div className="mb-24">
+                            <h3 className="font-mono text-sm uppercase tracking-[0.2em] text-[var(--muted)] mb-8">
+                                Key Achievements
+                            </h3>
+                            <ul className="grid gap-4 max-w-4xl">
+                                {company.highlights.map((item, i) => (
+                                    <li key={i} className="flex items-start gap-4 p-4 rounded-xl bg-[var(--card)]/50 border border-[var(--border)] hover:border-[var(--accent)] transition-colors">
+                                        <div className="mt-1.5 h-2 w-2 rounded-full bg-[var(--accent)] shrink-0" />
+                                        <span className="text-lg text-[var(--foreground)] leading-relaxed">
+                                            {item}
+                                        </span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
                 </RevealOnScroll>
 
                 {/* Impact Stats Grid */}
