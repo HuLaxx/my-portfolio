@@ -1,17 +1,15 @@
 'use client';
 
-'use client';
-
 import Link from "next/link";
 import { RevealOnScroll } from "./RevealOnScroll";
 import { Watermark } from "./Watermark";
-import { Activity, Server, BrainCircuit, Terminal } from "lucide-react";
+import { Activity, Server, BrainCircuit, Terminal, Layout } from "lucide-react";
 
 const roles = [
     {
         id: "data-scientist",
         title: "Data Scientist",
-        description: "Uncovering hidden patterns and deriving actionable insights from complex datasets using advanced statistical methods and machine learning.",
+        description: "Designing LSTM forecasting models, graph neural networks (GAT), and predictive optimization systems for high-stakes domains.",
         href: "/role/data-scientist",
         gradient: "from-blue-400 to-cyan-300",
         index: "01",
@@ -22,7 +20,7 @@ const roles = [
     {
         id: "data-engineer",
         title: "Data Engineer",
-        description: "Architecting robust data pipelines and scalable infrastructure to ensure data reliability, availability, and performance.",
+        description: "Building resilient streaming (Kafka) and batch (Airflow/dbt) pipelines, persisting data to specialized stores like TimescaleDB and Neo4j.",
         href: "/role/data-engineer",
         gradient: "from-emerald-400 to-teal-300",
         index: "02",
@@ -33,7 +31,7 @@ const roles = [
     {
         id: "ai-ml-engineer",
         title: "AI/ML Engineer",
-        description: "Building and deploying state-of-the-art artificial intelligence models to solve real-world problems and automate intelligent decision-making.",
+        description: "Deploying production-grade AI systems, from LangGraph multi-agent RAG pipelines to scalable model serving APIs.",
         href: "/role/ai-ml-engineer",
         gradient: "from-purple-400 to-pink-300",
         index: "03",
@@ -44,13 +42,24 @@ const roles = [
     {
         id: "software-engineer",
         title: "Software Engineer",
-        description: "Engineered robust full-stack systems, spanning scalable backend architectures, interactive frontends, and cloud-native integration.",
+        description: "Delivering robust full-stack applications with type-safe APIs, real-time WebSocket layers, and modern component architectures.",
         href: "/role/software-engineer",
         gradient: "from-orange-400 to-amber-300",
         index: "04",
         image: "/generated/role-se.png",
         icon: Terminal,
         watermarkType: "engraved"
+    },
+    {
+        id: "full-stack-developer",
+        title: "Full Stack Developer",
+        description: "Owning the complete feature lifecycle—from database schema design and API implementation to responsive, animated frontend UIs.",
+        href: "/role/full-stack-developer",
+        gradient: "from-sky-400 to-indigo-300",
+        index: "05",
+        image: "/generated/role-fs.png",
+        icon: Layout,
+        watermarkType: "classic"
     },
 ];
 
@@ -92,7 +101,7 @@ export const ExploreRoles = () => {
                                         </div>
 
                                         {/* Slide-in Drawer (Right Side - Matches Experience/Projects) */}
-                                        <div className="hidden md:flex absolute right-0 top-0 bottom-0 w-1/2 h-full bg-gradient-to-l from-[var(--card)] via-[var(--card)]/90 to-transparent translate-x-12 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500 ease-out flex-col justify-center items-end pr-8 md:pr-12 pointer-events-none z-20">
+                                        <div className="hidden md:flex absolute right-0 top-0 bottom-0 w-1/2 h-full bg-gradient-to-l from-[var(--card)] via-[var(--card)]/90 to-transparent opacity-80 group-hover:opacity-100 group-hover:-translate-x-2 transition-all duration-500 ease-out flex-col justify-center items-end pr-8 md:pr-12 pointer-events-none z-20">
                                             <div className="flex flex-col items-end gap-3 text-right">
                                                 <span className="p-3 rounded-full border border-[var(--accent)] bg-[var(--accent)]/10 text-[var(--accent)] group-hover:bg-[var(--accent)] group-hover:text-black transition-all duration-500 shadow-[0_0_15px_rgba(0,0,0,0.2)]">
                                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

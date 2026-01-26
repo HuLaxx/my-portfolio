@@ -28,25 +28,16 @@ export default async function CasePage({ params }) {
   const study = await getCaseStudy(slug);
   if (!study) return notFound();
 
-  const heroPoster = study.media?.poster;
-  const heroVideo = study.media?.video;
+  const links = study.links ?? {};
 
   return (
     <div className="relative min-h-screen overflow-hidden text-[var(--foreground)]">
-      <div className="absolute inset-0">
-        {heroPoster && (
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-60"
-            style={{ backgroundImage: `url(${heroPoster})` }}
-          />
-        )}
-        <div className="absolute inset-0 bg-gradient-to-b from-[var(--background)] via-[var(--background)]/80 to-[var(--background)]" />
-      </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-[var(--background)] via-[var(--background)]/80 to-[var(--background)]" />
 
 
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6 py-16 md:py-24 md:px-10">
-        <div className="mb-10 flex items-center justify-between">
+      <div className="relative z-10 mx-auto max-w-6xl px-6 pt-32 pb-16 md:pt-40 md:pb-24 md:px-10">
+        <div className="mb-16 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <Link
             href="/"
             className="group inline-flex items-center gap-3 text-sm font-bold tracking-[0.2em] uppercase text-[var(--foreground)] opacity-80 hover:opacity-100 transition-all duration-300"
@@ -58,9 +49,9 @@ export default async function CasePage({ params }) {
             </span>
             Back
           </Link>
-          <span className="font-mono text-sm font-semibold uppercase tracking-[0.3em] text-[var(--foreground)] opacity-80">
-            {study.year}
-          </span>
+          <div className="flex flex-col items-start gap-3 md:items-end">
+            {/* Metadata (Year/Links) removed as requested */}
+          </div>
         </div>
 
         <div className="grid gap-10 md:grid-cols-5 md:items-end">
@@ -76,14 +67,21 @@ export default async function CasePage({ params }) {
             </p>
           </RevealOnScroll>
 
-          <RevealOnScroll delay={100} className="md:col-span-2 md:justify-self-end">
+          <RevealOnScroll delay={100} className="md:col-span-2 md:justify-self-end flex flex-col gap-6 w-full md:w-auto">
             <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 backdrop-blur-xl">
               <p className="font-mono text-sm font-semibold uppercase tracking-[0.25em] text-[var(--foreground)] opacity-80 mb-4">
-                Role
+                Technologies & Skills
               </p>
-              <div className="space-y-2 text-sm text-[var(--foreground)]">
-                {(study.role || []).map((item) => (
-                  <div key={item} className="rounded-full bg-[var(--card)] px-3 py-2">
+              <div className="flex flex-wrap gap-2 text-sm text-[var(--foreground)]">
+                {/* Combining Roles and Tech for a complete view */}
+                {[...(study.role || []), ...(study.tech || [])].map((item, idx) => (
+                  <div
+                    key={`${item}-${idx}`}
+                    className={`rounded-full px-3 py-2 border ${(study.role || []).includes(item)
+                        ? "bg-[var(--card)] border-[var(--border)]"
+                        : "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/20"
+                      }`}
+                  >
                     {item}
                   </div>
                 ))}
@@ -91,21 +89,6 @@ export default async function CasePage({ params }) {
             </div>
           </RevealOnScroll>
         </div>
-
-        {heroVideo && (
-          <RevealOnScroll>
-            <div className="mt-14 overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--card)] p-1 backdrop-blur-xl">
-              <video
-                className="h-full w-full rounded-3xl object-cover"
-                src={heroVideo}
-                poster={heroPoster}
-                controls
-                muted
-                playsInline
-              />
-            </div>
-          </RevealOnScroll>
-        )}
 
         <div className="mt-16 grid gap-10 rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8 backdrop-blur-xl md:grid-cols-2">
           <RevealOnScroll>

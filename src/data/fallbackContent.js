@@ -1,21 +1,48 @@
 export const fallbackProjects = [
   {
-    year: "2025",
-    client: "Vogue Scandinavia",
-    role: "Data Scientist",
-    slug: "vogue-scandinavia",
+    year: "2026",
+    client: "Sentinance",
+    role: "All Roles",
+    slug: "sentinance",
+    summary:
+      "Real-time crypto market intelligence with LangGraph AI agents, LSTM forecasting, and live multi-exchange streaming.",
+    live: "https://sentinance.hulax.vercel.app",
+    github: "https://github.com/HuLaxx/Sentinance",
+    languages: {
+      "Next.js": 40,
+      Python: 35,
+      TypeScript: 25,
+    },
   },
   {
-    year: "2024",
-    client: "SpaceX / Starship",
-    role: "Data Engineer",
-    slug: "spacex-starship",
+    year: "2026",
+    client: "GraphGuard",
+    role: "All Roles",
+    slug: "graphguard",
+    summary:
+      "Fraud detection platform blending Neo4j graph analytics, explainable XGBoost ML models, and a GraphQL API.",
+    live: "https://graphguard.hulax.vercel.app",
+    github: "https://github.com/HuLaxx/GraphGuard",
+    languages: {
+      Python: 50,
+      "Next.js": 30,
+      GraphQL: 20,
+    },
   },
   {
-    year: "2024",
-    client: "Nike Lab",
-    role: "AI/ML Engineer",
-    slug: "nike-lab",
+    year: "2026",
+    client: "FleetFlow",
+    role: "All Roles",
+    slug: "fleetflow",
+    summary:
+      "Real-time delivery optimization using OR-Tools, React 19 + Tailwind 4, and reactive Kafka event streaming.",
+    live: "https://fleetflow.hulax.vercel.app",
+    github: "https://github.com/HuLaxx/FleetFlow",
+    languages: {
+      "Next.js": 50,
+      Python: 30,
+      SQL: 20,
+    },
   },
 ];
 
@@ -25,17 +52,32 @@ export const fallbackResume = {
   summary:
     "Data Scientist and AI Engineer with expertise in building robust data pipelines, training state-of-the-art ML models, and deploying scalable AI solutions. Proven track record at Accenture and Company A.",
   neuralSummary:
-    "Ask about my MSc in Data Science from Glasgow, my time at Accenture, or my work with RAG and LLMs.",
+    "Ask about my dissertation on Bayesian Change Point Detection, my work with LangGraph agents and RAG systems, or my experience building real-time event-driven architectures.",
   studies: [
     {
+      slug: "msc-data-science",
       institution: "University of Glasgow",
       degree: "MSc in Data Science",
       year: "2025",
-      dissertation: "Advanced Data Science & AI Systems",
-      modules: ["Machine Learning", "Big Data", "Deep Learning", "Information Retrieval"],
+      dissertation: "BCPD (Bayesian Change Point Detection) using ML for indexes and crypto time series.",
+      modules: [
+        "COMPSCI 4084: Programming Systems",
+        "COMPSCI 5012: Internet Technology (M)",
+        "COMPSCI 5063: Cyber Security Fundamentals M",
+        "COMPSCI 5086P: MSc Project CS+",
+        "COMPSCI 5088: Big Data (M)",
+        "COMPSCI 5089: Data Science and Systems",
+        "COMPSCI 5092: Research Professional Skills",
+        "COMPSCI 5100: Machine Learning & AI for DS",
+        "COMPSCI 5103: Deep Learning MSc (M)",
+        "COMPSCI 5106: Text as Data for MSc",
+        "COMPSCI 5107: Web Science for MSc",
+        "COMPSCI 9009: MSc CS+ Enrolment",
+      ],
       image: "/generated/edu-univ.png",
     },
     {
+      slug: "be-computer-science",
       institution: "G.H. Raisoni College of Engineering",
       degree: "B.E in Computer Science",
       year: "2022",
@@ -46,11 +88,11 @@ export const fallbackResume = {
   ],
   experience: [
     {
-      company: "Company A",
-      slug: "company-a",
+      company: "Enterprise AI Consultancy",
+      slug: "enterprise-ai",
       role: "AI & Data Solution Engineer",
       period: "Sep 2024 - Dec 2025",
-      description: "Engineering advanced AI and data solutions, focusing on scalable architecture and ML integration.",
+      description: "Engineering advanced AI and data solutions, focusing on scalable architecture, RAG systems, and ML integration for enterprise clients.",
       image: "/generated/exp-tech.png",
       stack: ["Python", "AWS", "LLMs", "RAG", "Data Pipelines"],
       stats: [
@@ -64,7 +106,7 @@ export const fallbackResume = {
       slug: "accenture",
       role: "Software Engineer",
       period: "Oct 2022 - Sept 2024",
-      description: "Developed and maintained full-stack applications, optimizing performance and ensuring code quality.",
+      description: "Developed and maintained full-stack enterprise applications, optimizing performance and ensuring code quality in a global delivery environment.",
       image: "/generated/exp-corp.png",
       stack: ["Java", "Spring Boot", "React", "Cloud", "SQL"],
       stats: [
@@ -78,7 +120,7 @@ export const fallbackResume = {
       slug: "cognizant",
       role: "Intern",
       period: "Jan 2022 - Apr 2022",
-      description: "Gained hands-on experience in software development life cycle and enterprise technologies.",
+      description: "Intensive training in software development lifecycle, Java enterprise stacks, and modern testing methodologies.",
       image: "/generated/exp-corp.png",
       stack: ["Java", "SQL", "Testing"],
       stats: [
@@ -86,23 +128,24 @@ export const fallbackResume = {
         { label: "Focus", value: "Training" }
       ]
     },
-    {
-      company: "Company A (Intern)",
-      slug: "company-a-intern",
-      role: "Data Engineering Intern",
-      period: "Aug 2020 - Dec 2021",
-      description: "Assisted in building data pipelines and processing large datasets.",
-      image: "/generated/exp-tech.png",
-      stack: ["Python", "SQL", "ETL"],
-      stats: [
-        { label: "Duration", value: "1.5 Years" },
-        { label: "Focus", value: "Data Eng" }
-      ]
-    },
+    // {
+    //   company: "Company A (Intern)",
+    //   slug: "company-a-intern",
+    //   role: "Data Engineering Intern",
+    //   period: "Aug 2020 - Dec 2021",
+    //   description: "Assisted in building data pipelines and processing large datasets.",
+    //   image: "/generated/exp-tech.png",
+    //   stack: ["Python", "SQL", "ETL"],
+    //   stats: [
+    //     { label: "Duration", value: "1.5 Years" },
+    //     { label: "Focus", value: "Data Eng" }
+    //   ]
+    // },
   ],
   knowledgeBase: `
     RESUME DATA FOR RAHUL KHANKE:
     - Role: Data Scientist, AI Engineer.
+    - Projects: Sentinance (real-time crypto intelligence), GraphGuard (graph ML fraud detection), FleetFlow (delivery optimization).
     - Education: MSc Data Science (University of Glasgow), B.E Computer Science (G.H. Raisoni).
     - Experience: 
       1. Company A (AI & Data Solution Engineer)
@@ -154,220 +197,258 @@ export const fallbackStackComparisons = [
 
 export const fallbackCaseStudies = [
   {
-    slug: "vogue-scandinavia",
-    client: "Vogue Scandinavia",
-    title: "Immersive runway for Vogue Scandinavia",
-    year: "2025",
+    slug: "sentinance",
+    client: "Sentinance",
+    title: "Real-Time Crypto Market Intelligence",
+    year: "2026",
     summary:
-      "A bespoke WebGL runway where editors scrub across time, reveal look layers, and trigger AI commentary on every scene.",
+      "A real-time crypto analytics platform featuring live multi-exchange WebSocket streaming, LSTM-powered price forecasting, and an autonomous LangGraph agent for market analysis.",
     scenario: {
       challenge:
-        "Vogue wanted a motion-native experience with a 3D runway, but the art direction had to run at 60fps on iPad Pros and degrade gracefully on mobile.",
+        "Traders struggle with fragmented data sources and lack verifiable, AI-driven insights for volatile crypto markets.",
       solution:
-        "Built a streaming Three.js runway with GPU-instanced garments, AI-powered metadata overlays, and headless CMS orchestrating looks, audio, and motion cues.",
+        "Built a streaming architecture using Kafka and WebSocket for sub-second updates, integrated LSTM models for 24h price prediction, and deployed a multi-agent RAG system (LangGraph + Qdrant) to answer market queries with citation-backed reasoning.",
     },
     role: [
-      "Creative lead for digital runway",
-      "Shader + Three.js engineering",
-      "RAG-powered editorial copilot",
+      "Data Engineering",
+      "AI/ML Engineering",
+      "Full Stack Development",
+      "System Architecture"
     ],
     metrics: [
-      { label: "Avg FPS on iPad Pro", value: "60fps" },
-      { label: "Time to render lookbook", value: "3.5s" },
-      { label: "Engagement lift", value: "+42%" },
+      { label: "Assets", value: "10+ Live Streams" },
+      { label: "Latency", value: "<100ms Inference" },
+      { label: "Coverage", value: "96% Test Coverage" },
     ],
     languages: {
-      "JavaScript": 45,
-      "GLSL": 30,
-      "Python": 25
+      "Next.js": 40,
+      Python: 40,
+      TypeScript: 20,
     },
     process: [
       {
-        title: "Narrative prototyping",
+        title: "Streaming Pipeline",
         detail:
-          "Pen-and-paper storyboards + Figmotion prototypes to align with Vogue creative directors.",
+          "Engineered a high-throughput pipeline using `aiokafka` and FastAPI WebSockets to aggregate and broadcast real-time price feeds from Binance, Coinbase, and Kraken.",
       },
       {
-        title: "Shader + performance pass",
+        title: "Agentic AI System",
         detail:
-          "Authored triplanar materials, LOD rules, and mesh batching for 30% lighter GPU load.",
+          "Developed a multi-agent system with LangGraph and Gemini/Groq, enabling autonomous research and structured market analysis with fallback resilience.",
       },
       {
-        title: "AI editorial copilot",
+        title: "Predictive Modeling",
         detail:
-          "Hooked Sanity structured data and Gemini RAG to surface context and styling notes as you scrub.",
+          "Trained and deployed PyTorch LSTM models for time-series forecasting, served via FastAPI with comprehensive backtesting and MLflow tracking.",
       },
     ],
-    testimonial: {
-      quote:
-        "Alexander translated couture art direction into an interactive piece that feels like magic. The AI runway script saved our editors hours each show.",
-      author: "Rebecka Winther - Digital Director, Vogue Scandinavia",
-    },
     media: {
-      video:
-        "https://storage.googleapis.com/portfolio-assets/vogue-runway-teaser.mp4",
-      poster:
-        "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=1600&q=80",
+      poster: "/projects/sentinance-poster.png", // Placeholder - improved path
+      video: "",
+    },
+    links: {
+      live: "https://sentinance.hulax.vercel.app",
+      github: "https://github.com/HuLaxx/Sentinance",
     },
     tech: [
-      "Next.js 15",
-      "Three.js",
-      "LangChain",
-      "Sanity",
-      "Vercel Edge",
-      "Partytown",
+      "Next.js 16",
+      "FastAPI",
+      "LangGraph",
+      "Kafka",
+      "TimescaleDB",
+      "Redis",
+      "Qdrant",
+      "PyTorch",
+      "Docker",
     ],
   },
   {
-    slug: "spacex-starship",
-    client: "SpaceX",
-    title: "Starship launch room simulator",
-    year: "2024",
+    slug: "graphguard",
+    client: "GraphGuard",
+    title: "Network Fraud Detection Platform",
+    year: "2026",
     summary:
-      "Browser-based mission control with real telemetry, GPU smoke sims, and AI-guided mission status for VIP guests.",
+      "A fraud detection system combining graph analytics (Neo4j), explainable ML (XGBoost + SHAP), and a GraphQL API to uncover hidden transaction rings and money laundering patterns.",
     scenario: {
       challenge:
-        "Build an at-home launch control that mirrors the real instrumentation without exposing secure endpoints.",
+        "Traditional fraud rules miss complex network patterns like circular transactions and mule accounts used in money laundering.",
       solution:
-        "Generated synthetic telemetry using Onnx runtime, piped it through Vercel Edge, and built a neural HUD so guests could interrogate the mission.",
+        "Implemented a graph-first approach using Neo4j to detect cycles and community structures, paired with an XGBoost classifier and SHAP explainability to provide transparent risk scores to investigators via a GraphQL dashboard.",
     },
     role: [
-      "Lead creative dev",
-      "WebGL Fx + physics integration",
-      "Mission copilot prompt engineering",
+      "Data Engineering",
+      "ML Engineering",
+      "Backend API",
+      "Frontend Visualization"
     ],
     metrics: [
-      { label: "Concurrent VIP viewers", value: "120K" },
-      { label: "Latency to HUD", value: "280ms" },
-      { label: "AI Q&A accuracy", value: "92%" },
+      { label: "Graph", value: "Neo4j + Cypher" },
+      { label: "API", value: "GraphQL + FastAPI" },
+      { label: "ML", value: "XGBoost + SHAP" },
     ],
     languages: {
-      "Python": 50,
-      "C++": 30,
-      "JavaScript": 20
+      Python: 50,
+      "Next.js": 30,
+      GraphQL: 20,
     },
     process: [
       {
-        title: "Telemetry sandbox",
+        title: "Graph Data Engineering",
         detail:
-          "Converted SpaceX sample data to vector embeddings to simulate real-time mission calls without live endpoints.",
+          "Designed a Neo4j graph schema to model Users, Accounts, and Transactions, ingestion streams from Kafka to surface 2nd and 3rd-degree connections in real-time.",
       },
       {
-        title: "HUD fabrication",
+        title: "Explainable ML",
         detail:
-          "Built a GLSL-based glass cockpit with volumetric plumes and orbit trails, tuned for Chrome/Edge/Stage displays.",
+          "Trained XGBoost models on graph-engineered features (PageRank, Community ID) and integrated SHAP values to explain valid reasons behind every fraud flag.",
       },
       {
-        title: "VIP neural briefings",
+        title: "Investigator Interface",
         detail:
-          "Gemini + LangChain pipeline to answer 'What just happened?' with grounded mission context + audio cues.",
+          "Built a Next.js + D3.js dashboard consuming a Strawberry GraphQL API, creating an interactive visual exploration tool for compliance teams.",
       },
     ],
-    testimonial: {
-      quote:
-        "The launch companion felt like a private SpaceX console. Guests finally understood the critical milestones as they happened.",
-      author: "R. Schaefer - Experiential Lead, SpaceX",
-    },
     media: {
-      video:
-        "https://storage.googleapis.com/portfolio-assets/spacex-hud.mp4",
-      poster:
-        "https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?auto=format&fit=crop&w=1600&q=80",
+      poster: "/projects/graphguard-poster.png", // Placeholder - improved path
+      video: "",
     },
-    tech: ["Next.js 15", "WebGL", "Onnx Runtime", "Vercel Edge", "LangChain"],
+    links: {
+      live: "https://graphguard.hulax.vercel.app",
+      github: "https://github.com/HuLaxx/GraphGuard",
+    },
+    tech: [
+      "Next.js 16",
+      "FastAPI",
+      "GraphQL",
+      "Neo4j",
+      "Kafka",
+      "XGBoost",
+      "D3.js",
+      "Docker",
+    ],
   },
   {
-    slug: "nike-lab",
-    client: "Nike Lab",
-    title: "Nike Lab kinetic commerce",
-    year: "2024",
+    slug: "fleetflow",
+    client: "FleetFlow",
+    title: "Real-Time Delivery Optimization",
+    year: "2026",
     summary:
-      "A motion-reactive commerce stack that merges product stories, sensor inputs, and AI stylists.",
+      "A next-gen logistics platform leveraging React 19, Tailwind 4, and OR-Tools to provide real-time reactive route optimization and live fleet tracking.",
     scenario: {
       challenge:
-        "Nike Lab wanted kinetic product drops that respond to gesture and voice, without tanking conversion.",
+        "Last-mile delivery efficiency collapses when static routes meet real-world chaos (traffic, cancellations, new high-priority orders).",
       solution:
-        "Built an RSC-powered storefront with WebGL loops, real-time pose detection, and AI styling suggestions anchored in inventory.",
+        "Architected a reactive optimization engine using Google OR-Tools and Kafka to re-calculate routes on the fly, pushing updates instantly to a Next.js dashboard via WebSockets and tRPC.",
     },
     role: [
-      "Experience tech lead",
-      "Motion system + shader author",
-      "AI stylist workflow",
+      "Full Stack Development",
+      "Data Engineering",
+      "Optimization (OR)",
+      "DevOps"
     ],
     metrics: [
-      { label: "Conversion lift", value: "+18%" },
-      { label: "Largest contentful paint", value: "1.4s" },
-      { label: "Pose-to-product delay", value: "320ms" },
+      { label: "Frontend", value: "React 19 + TW4" },
+      { label: "Optimization", value: "Google OR-Tools" },
+      { label: "Updates", value: "Real-time Socket.IO" },
     ],
     languages: {
-      "Python": 40,
-      "TypeScript": 40,
-      "GLSL": 20
+      "Next.js": 50,
+      Python: 30,
+      SQL: 20,
     },
     process: [
       {
-        title: "Gesture + pose prototyping",
+        title: "Modern Frontend Architecture",
         detail:
-          "Hooked mediapipe + custom smoothing to map motion to camera rails and product cards.",
+          "Built a cutting-edge UI using Next.js 16 (App Router), React 19, and Tailwind 4, integrated with Deck.gl for high-performance map visualizations of fleet movements.",
       },
       {
-        title: "Composable drops",
+        title: "Optimization Engine",
         detail:
-          "Sanity + Next server components powering campaign-specific scenes without redeploys.",
+          "Implemented the Vehicle Routing Problem (VRP) solver using Google OR-Tools in Python, exposed via FastAPI to dynamically re-assign stops based on capacity and time windows.",
       },
       {
-        title: "Stylist copilot",
+        title: "Event-Driven Backbone",
         detail:
-          "Gemini 2.5 Flash referencing Nike knowledge graph to answer 'How do I style this?' inside the checkout flow.",
+          "Orchestrated order ingestion and GPS telemetry streams using Confluent Kafka, ensuring data integrity and allowing for replayability of delivery scenarios.",
       },
     ],
-    testimonial: {
-      quote:
-        "It feels like walking into an R&D lab made for you. Every drop is fast, alive, and fully shoppable.",
-      author: "Sofia Ramirez - Creative Director, Nike Lab",
-    },
     media: {
-      video:
-        "https://storage.googleapis.com/portfolio-assets/nike-lab-motion.mp4",
-      poster:
-        "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1600&q=80",
+      poster: "/projects/fleetflow-poster.png", // Placeholder - improved path
+      video: "",
     },
-    tech: ["Next.js 15", "React Server Components", "Three.js", "Sanity", "LangChain"],
+    links: {
+      live: "https://fleetflow.hulax.vercel.app",
+      github: "https://github.com/HuLaxx/FleetFlow",
+    },
+    tech: [
+      "Next.js 16",
+      "React 19",
+      "Tailwind 4",
+      "tRPC",
+      "Socket.IO",
+      "OR-Tools",
+      "Kafka",
+      "PostGIS",
+      "TimescaleDB",
+    ],
   },
 ];
 
 export const fallbackRoles = {
   "data-scientist": {
     title: "Data Scientist",
-    description: "Uncovering hidden patterns in complex datasets to drive strategic decision-making.",
-    skills: ["Python", "Pandas", "Scikit-learn", "TensorFlow", "SQL", "Data Visualization", "Statistical Analysis"],
-    projects: ["vogue-scandinavia", "nike-lab"], // Linking to existing projects for now
+    description: "Designing LSTM forecasting models, graph neural networks (GAT), and predictive optimization systems for high-stakes domains.",
+    skills: ["Python", "Pandas", "PyTorch", "LSTM/Prophet", "XGBoost", "Graph ML", "SHAP/LIME", "OR-Tools"],
+    projects: ["sentinance", "graphguard", "fleetflow"],
     stats: [
-      { label: "Models Deployed", value: "50+" },
-      { label: "Data Processed", value: "10PB+" },
-      { label: "Accuracy Lift", value: "35%" },
+      { label: "Forecasting", value: "LSTM + Prophet" },
+      { label: "Graph ML", value: "GAT + XGBoost" },
+      { label: "Optimization", value: "OR-Tools" },
     ]
   },
   "data-engineer": {
     title: "Data Engineer",
-    description: "Architecting scalable data pipelines and infrastructure for real-time analytics.",
-    skills: ["Apache Spark", "Kafka", "AWS Glue", "Airflow", "Docker", "Kubernetes", "Snowflake"],
-    projects: ["spacex-starship"],
+    description: "Building resilient streaming (Kafka) and batch (Airflow/dbt) pipelines, persisting data to specialized stores like TimescaleDB and Neo4j.",
+    skills: ["Kafka", "Airflow", "dbt", "PostgreSQL", "TimescaleDB", "Neo4j", "Redis", "Docker"],
+    projects: ["sentinance", "graphguard", "fleetflow"],
     stats: [
-      { label: "Pipelines Built", value: "100+" },
-      { label: "Uptime", value: "99.99%" },
-      { label: "Latency Reduced", value: "400ms" },
+      { label: "Streaming", value: "Kafka backbone" },
+      { label: "Pipelines", value: "Airflow + dbt" },
+      { label: "Stores", value: "Postgres + Neo4j" },
     ]
   },
   "ai-ml-engineer": {
     title: "AI/ML Engineer",
-    description: "Building and deploying state-of-the-art machine learning models for production environments.",
-    skills: ["PyTorch", "Hugging Face", "LLMs", "RAG", "MLOps", "FastAPI", "Computer Vision"],
-    projects: ["nike-lab", "spacex-starship"],
+    description: "Deploying production-grade AI systems, from LangGraph multi-agent RAG pipelines to scalable model serving APIs.",
+    skills: ["LangGraph", "RAG", "Qdrant", "FastAPI", "LLMs (Gemini/Groq)", "MLflow", "Model Serving", "Vector Search"],
+    projects: ["sentinance", "graphguard", "fleetflow"],
     stats: [
-      { label: "LLMs Fine-tuned", value: "15+" },
-      { label: "Inference Speed", value: "<50ms" },
-      { label: "Users Served", value: "1M+" },
+      { label: "Agents", value: "LangGraph Multi-Agent" },
+      { label: "Models", value: "GenAI + Predictive" },
+      { label: "Serving", value: "FastAPI Production" },
     ]
-  }
+  },
+  "software-engineer": {
+    title: "Software Engineer",
+    description: "Delivering robust full-stack applications with type-safe APIs, real-time WebSocket layers, and modern component architectures.",
+    skills: ["Next.js 16", "TypeScript", "React 19", "Tailwind 4", "tRPC", "GraphQL", "Socket.IO", "Docker"],
+    projects: ["sentinance", "graphguard", "fleetflow"],
+    stats: [
+      { label: "Frontend", value: "Next.js 16 + React 19" },
+      { label: "APIs", value: "tRPC + GraphQL" },
+      { label: "Ops", value: "Docker + CI/CD" },
+    ]
+  },
+  "full-stack-developer": {
+    title: "Full Stack Developer",
+    description: "Owning the complete feature lifecycle—from database schema design and API implementation to responsive, animated frontend UIs.",
+    skills: ["Next.js 16", "FastAPI", "PostgreSQL", "Redis", "Tailwind 4", "Framer Motion", "D3.js", "Deck.gl"],
+    projects: ["sentinance", "graphguard", "fleetflow"],
+    stats: [
+      { label: "Realtime", value: "WebSockets + streaming" },
+      { label: "Visuals", value: "D3.js + Deck.gl" },
+      { label: "Stack", value: "Next.js + Python" },
+    ]
+  },
 };
