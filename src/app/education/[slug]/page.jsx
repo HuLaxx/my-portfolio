@@ -76,31 +76,81 @@ export default async function EducationPage({ params }) {
           </div>
         </RevealOnScroll>
 
-        <RevealOnScroll delay={100}>
-          <div className="grid gap-10 rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8 backdrop-blur-xl md:grid-cols-2">
-            <div>
-              <p className="font-mono text-xs uppercase tracking-[0.25em] text-[var(--muted)] mb-4">
-                Dissertation
+        <div className="flex flex-col gap-12">
+          {/* Dissertation Section - Priority 1 */}
+          <RevealOnScroll delay={100}>
+            <div className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8 md:p-10 backdrop-blur-xl relative overflow-hidden">
+              <div className="absolute top-0 right-0 p-32 bg-[var(--accent)]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+              <p className="font-mono text-sm uppercase tracking-[0.25em] text-[var(--accent)] mb-6 flex items-center gap-3">
+                <span className="h-[1px] w-8 bg-[var(--accent)]"></span>
+                Dissertation Focus
               </p>
-              <p className="text-[var(--muted)] leading-relaxed">{study.dissertation}</p>
+              <h3 className="text-2xl md:text-3xl font-bold text-[var(--foreground)] mb-6 leading-tight">
+                {study.dissertation}
+              </h3>
+              <p className="text-lg md:text-xl text-[var(--muted)] leading-relaxed max-w-4xl">
+                {study.dissertationDetail || study.dissertation}
+              </p>
             </div>
-            <div>
-              <p className="font-mono text-xs uppercase tracking-[0.25em] text-[var(--muted)] mb-4">
-                Course Modules
+          </RevealOnScroll>
+
+          {/* Modules Section */}
+          <RevealOnScroll delay={200}>
+            <div className="rounded-3xl border border-[var(--border)] bg-[var(--card)]/50 p-8">
+              <p className="font-mono text-xs uppercase tracking-[0.25em] text-[var(--muted)] mb-8">
+                Key Modules
               </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-3">
                 {modules.map((module) => (
                   <span
                     key={module}
-                    className="rounded-full border border-[var(--border)] px-3 py-1 text-[10px] font-mono uppercase tracking-[0.2em] text-[var(--muted)]"
+                    className="rounded-lg border border-[var(--border)] bg-[var(--background)] px-4 py-2 text-xs md:text-sm font-medium text-[var(--foreground)] hover:border-[var(--accent)] transition-colors"
                   >
                     {module}
                   </span>
                 ))}
               </div>
             </div>
-          </div>
-        </RevealOnScroll>
+          </RevealOnScroll>
+
+          {/* Skills & Tools Section - (New) */}
+          {(study.skills || study.tools) && (
+            <RevealOnScroll delay={300}>
+              <div className="grid md:grid-cols-2 gap-8">
+                {study.skills && (
+                  <div className="rounded-3xl border border-[var(--border)] bg-[var(--card)]/50 p-8">
+                    <p className="font-mono text-xs uppercase tracking-[0.25em] text-[var(--muted)] mb-6">
+                      Skills
+                    </p>
+                    <ul className="grid gap-3">
+                      {study.skills.map((skill) => (
+                        <li key={skill} className="flex items-center gap-3 text-sm md:text-base text-[var(--foreground)]">
+                          <div className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]"></div>
+                          {skill}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {study.tools && (
+                  <div className="rounded-3xl border border-[var(--border)] bg-[var(--card)]/50 p-8">
+                    <p className="font-mono text-xs uppercase tracking-[0.25em] text-[var(--muted)] mb-6">
+                      Tools & Tech
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {study.tools.map((tool) => (
+                        <span key={tool} className="rounded-full bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20 px-3 py-1 text-xs font-bold tracking-wider uppercase">
+                          {tool}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </RevealOnScroll>
+          )}
+        </div>
       </main>
       <Footer />
     </div>
