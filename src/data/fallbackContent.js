@@ -64,11 +64,11 @@ export const fallbackResume = {
       skills: ["Bayesian Statistics", "Time Series Analysis", "Deep Learning", "Big Data Analytics", "Information Retrieval", "Text Mining"],
       tools: ["Python", "PyTorch", "PyMC3", "Hadoop/Spark", "MongoDB", "Linux"],
       modules: [
-        "Machine Learning & AI for DS",
+        "Data Science and Systems",
         "Deep Learning",
+        "Machine Learning & AI for DS",
         "Big Data",
         "Text as Data",
-        "Data Science and Systems",
         "Web Science",
         "Information Retrieval", // specialist course mentioned in search
         "Research Professional Skills",
