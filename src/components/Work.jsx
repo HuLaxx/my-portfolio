@@ -31,7 +31,7 @@ export const Projects = ({ projects, caseStudies = [] }) => {
                   </p>
                 </div>
                 <h2 className="display-heading text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-semibold tracking-tight text-[var(--foreground)]">
-                  Portfolio Projects
+                  Projects
                 </h2>
               </div>
               <div className="hidden md:block h-[1px] w-32 bg-gradient-to-r from-[var(--accent)] to-transparent opacity-30 mb-4" />
@@ -92,29 +92,24 @@ export const Projects = ({ projects, caseStudies = [] }) => {
                       {project.summary}
                     </p>
 
-                    {/* Tech Stack Bubbles (Optional addition for Projects) */}
-                    {project.languages && (
-                      <div className="flex flex-wrap gap-2 opacity-80 group-hover:opacity-100 transition-opacity">
-                        {Object.keys(project.languages).slice(0, 3).map(lang => (
-                          <span key={lang} className="text-[10px] font-mono border border-[var(--border)] px-2 py-1 rounded-full text-[var(--muted)]">
-                            {lang}
-                          </span>
-                        ))}
-                      </div>
-                    )}
+                    {/* Skills removed as requested */}
 
                     {(project.live || project.github) && (
-                      <div className="mt-auto flex flex-wrap items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] pointer-events-auto">
+                      <div className="mt-auto flex flex-wrap items-center gap-4 sm:gap-6 pointer-events-auto">
                         {project.live && (
                           <a
                             href={project.live}
                             target="_blank"
                             rel="noreferrer"
                             onClick={(event) => event.stopPropagation()}
-                            className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] px-3 py-1 text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[var(--accent)] transition-colors"
+                            className="group/link flex items-center gap-2 text-xs font-bold tracking-[0.1em] text-[var(--foreground)] transition-colors duration-300"
                           >
-                            <Globe className="h-3.5 w-3.5" />
-                            Live Demo
+                            <span className="p-2 rounded-full border border-[var(--border)] bg-[var(--card)]/50 group-hover/link:bg-[var(--accent-dark)] group-hover/link:text-white group-hover/link:scale-110 group-hover/link:shadow-[0_0_25px_var(--accent-dark)] transition-all duration-300 relative overflow-hidden flex items-center justify-center">
+                              <Globe className="h-3.5 w-3.5 relative z-10 block" />
+                            </span>
+                            <span className="transition-all duration-300 group-hover/link:text-[var(--accent-dark)] group-hover/link:scale-105 origin-left overflow-visible">
+                              Live Demo
+                            </span>
                           </a>
                         )}
                         {project.github && (
@@ -123,10 +118,14 @@ export const Projects = ({ projects, caseStudies = [] }) => {
                             target="_blank"
                             rel="noreferrer"
                             onClick={(event) => event.stopPropagation()}
-                            className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] px-3 py-1 text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[var(--accent)] transition-colors"
+                            className="group/link flex items-center gap-2 text-xs font-bold tracking-[0.1em] text-[var(--foreground)] transition-colors duration-300"
                           >
-                            <Github className="h-3.5 w-3.5" />
-                            GitHub
+                            <span className="p-2 rounded-full border border-[var(--border)] bg-[var(--card)]/50 group-hover/link:bg-[var(--accent-dark)] group-hover/link:text-white group-hover/link:scale-110 group-hover/link:shadow-[0_0_25px_var(--accent-dark)] transition-all duration-300 relative overflow-hidden flex items-center justify-center">
+                              <Github className="h-3.5 w-3.5 relative z-10 block" />
+                            </span>
+                            <span className="transition-all duration-300 group-hover/link:text-[var(--accent-dark)] group-hover/link:scale-105 origin-left overflow-visible">
+                              GitHub
+                            </span>
                           </a>
                         )}
                       </div>
@@ -168,4 +167,3 @@ export const Projects = ({ projects, caseStudies = [] }) => {
     </section>
   );
 };
-

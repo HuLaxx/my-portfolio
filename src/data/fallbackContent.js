@@ -50,7 +50,7 @@ export const fallbackResume = {
   label: "DATA SCIENTIST & AI ENGINEER",
   title: "RAHUL KHANKE",
   summary:
-    "AI & Data Engineer with a strong full-stack background. I build end-to-end intelligent systems—from resilient streaming pipelines and graph databases to scalable API architectures and user-facing AI agents.",
+    "Data Scientist & AI Engineer building high-performance systems where data meets scale. I architect resilient streaming pipelines, train predictive ML models, and deploy autonomous AI agents—backed by a robust full-stack engineering foundation.",
   neuralSummary:
     "Ask about my dissertation on Bayesian Change Point Detection, my work with LangGraph agents and RAG systems, or my experience building real-time event-driven architectures.",
   studies: [
