@@ -38,7 +38,7 @@ export const Hero = ({ resume }) => {
 
               <RevealOnScroll delay={200}>
                 <div className="font-semibold leading-[1.1] tracking-tight text-[var(--foreground)]">
-                  <h1 className="text-[clamp(1.9rem,10vw,6.8rem)] lg:text-[clamp(3.5rem,6.2vw,6rem)] xl:text-[clamp(4.2rem,6vw,6.5rem)] 2xl:text-9xl mb-0 flex flex-col gap-0">
+                  <h1 className="text-[2.125rem] sm:text-[3.75rem] md:text-[4.5rem] lg:text-[3.75rem] xl:text-[5rem] 2xl:text-9xl mb-0 flex flex-col gap-0">
                     {/* On phones and tablets, the staggered three-line name fits beside the portrait. */}
                     <span className="flex w-full min-w-0 flex-col items-end gap-0 leading-[1.08] text-right lg:hidden">
                       <span className="mr-[10%] whitespace-nowrap">I am</span>
@@ -60,7 +60,7 @@ export const Hero = ({ resume }) => {
             {/* Bottom Group: Summary */}
             <RevealOnScroll delay={300} className="col-span-2 row-start-2 min-w-0 px-2 sm:px-3 lg:px-0 relative z-10">
               <div className="flex flex-col gap-4">
-                <p className="max-w-full lg:max-w-2xl text-base sm:text-lg md:text-xl lg:text-[clamp(1rem,1.65vw,1.5rem)] 2xl:text-2xl leading-relaxed text-[var(--foreground)] font-medium opacity-100">
+                <p className="max-w-full break-words lg:max-w-2xl text-lg sm:text-xl lg:text-xl xl:text-2xl leading-relaxed text-[var(--foreground)] font-medium opacity-100">
                   {resume.summary}
                 </p>
               </div>
