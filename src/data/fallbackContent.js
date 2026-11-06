@@ -44,6 +44,21 @@ export const fallbackProjects = [
       SQL: 20,
     },
   },
+  {
+    year: "2026",
+    client: "Shiftify",
+    role: "Full Stack / Product Design",
+    slug: "shiftify",
+    summary:
+      "A music-library portability experiment: import and normalize playlists, review track metadata, export CSV reports, and explore YouTube Music account transfers with explicit credential boundaries.",
+    live: "https://shiftify.hulax.uk/",
+    github: "https://github.com/HuLaxx/Shiftify",
+    languages: {
+      TypeScript: 80,
+      "Next.js": 15,
+      SQL: 5,
+    },
+  },
 ];
 
 export const fallbackResume = {
@@ -412,6 +427,73 @@ export const fallbackCaseStudies = [
       "Kafka",
       "PostGIS",
       "TimescaleDB",
+    ],
+  },
+  {
+    slug: "shiftify",
+    client: "Shiftify",
+    title: "The Music Passport",
+    year: "2026",
+    summary:
+      "An expressive music-library project exploring portable tracklists, review workflows and account-to-account operations, with a deliberate focus on understanding where data and credentials travel.",
+    scenario: {
+      challenge:
+        "A music collection is easy to build but difficult to move or audit. Different exports can have inconsistent artist/title fields, while authenticated account transfers introduce sensitive security and trust boundaries.",
+      solution:
+        "Developed a Next.js experience with server-side CSV, JSON and text importing, track normalization, a review queue and a CSV report. A separate advanced YouTube Music adapter explores account actions through a server API using user-provided session cookies; it requires a trusted environment and further security review.",
+    },
+    role: [
+      "Full Stack Development",
+      "Product Design",
+      "Data Normalization",
+      "API Engineering",
+    ],
+    metrics: [
+      { label: "Imports", value: "CSV / JSON / Text" },
+      { label: "Workflow", value: "Import → Review" },
+      { label: "Report", value: "CSV Download" },
+    ],
+    languages: {
+      TypeScript: 80,
+      "Next.js": 15,
+      SQL: 5,
+    },
+    process: [
+      {
+        title: "Side A — The tracklist",
+        detail:
+          "Built parsing and normalization flows that recognize track/artist fields and present questionable records for review. Imported collections are processed by an API and stored in server-side SQLite, not only inside the browser.",
+      },
+      {
+        title: "Side B — The transfer adapter",
+        detail:
+          "Explored YouTube Music source/destination playlist operations via server-side requests. Session cookies cross into the API, so this route is not marketed as browser-only or security-audited.",
+      },
+      {
+        title: "The product experience",
+        detail:
+          "Designed an editorial, music-led interface with review tools, library concepts and optional Supabase-based party-room experiments. Public deployment and full account-transfer behaviour still need verification.",
+      },
+    ],
+    media: {
+      poster: "/projects/shiftify-music-passport.svg",
+      showPoster: true,
+      alt: "Original Shiftify Music Passport artwork with animated vinyl record, library cards and music portability motif",
+      caption: "Original conceptual visual — no real account data or audio playback.",
+      video: "",
+    },
+    links: {
+      live: "https://shiftify.hulax.uk/",
+      github: "https://github.com/HuLaxx/Shiftify",
+    },
+    tech: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS 4",
+      "SQLite",
+      "CSV / JSON",
+      "Supabase (optional)",
     ],
   },
 ];

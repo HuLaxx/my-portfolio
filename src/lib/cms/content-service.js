@@ -56,8 +56,18 @@ export const getPortfolioContent = cache(async () => {
     const stackComparisons =
       stackSchema.array().safeParse(stackRaw).data ?? fallbackStackComparisons;
 
+    // Keep the curated Shiftify case study visible even when Sanity is configured.
+    // Avoid duplicating it if the CMS already contains a Shiftify project.
+    const curatedShiftify = fallbackProjects.find((project) => project.slug === "shiftify");
+    const cmsProjects = projects.length ? projects : fallbackProjects;
+    const visibleProjects =
+      curatedShiftify &&
+      !cmsProjects.some((project) => project.client?.toLowerCase() === "shiftify")
+        ? [...cmsProjects, curatedShiftify]
+        : cmsProjects;
+
     return {
-      projects: projects.length ? projects : fallbackProjects,
+      projects: visibleProjects,
       resume: { ...fallbackResume, ...resume },
       stackComparisons: stackComparisons.length
         ? stackComparisons

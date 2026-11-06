@@ -47,9 +47,8 @@
       <img src="public/me.png" width="200" style="border-radius: 50%; border: 4px solid #6366f1;" alt="Rahul Khanke" />
       <br />
       <br />
-      <h3>📊 Weekly Activity</h3>
-      <!-- Snake Animation: Points to the raw file in the output branch -->
-      <img src="https://raw.githubusercontent.com/HuLaxx/my-portfolio/output/github-contribution-grid-snake.svg" alt="Snake Animation" />
+      <h3>✦ Engineering Constellation</h3>
+      <p><a href="https://portfolio.hulax.uk/constellation">Explore the connected story behind four AI, data and product projects →</a></p>
     </td>
   </tr>
 </table>
