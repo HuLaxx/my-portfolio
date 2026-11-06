@@ -46,23 +46,23 @@ export const Footer = () => {
 
         {/* Flex container: Added pb-4 for Bottom Space (above border) */}
         {/* Pulled up (-mt-1) per user request */}
-        <div className="flex flex-col 2xl:flex-row items-end justify-between flex-1 w-full gap-8 md:gap-12 relative z-10 pb-4 -mt-1">
+        <div className="grid grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] sm:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)] md:grid-cols-[minmax(0,7fr)_minmax(0,3fr)] items-end justify-between flex-1 w-full gap-x-2 gap-y-4 sm:gap-x-4 md:gap-x-6 2xl:flex 2xl:flex-row 2xl:gap-12 relative z-10 pb-4 -mt-1">
 
           {/* Left: Text Content - 70% (Widened) - Justify Center (Symmetry) */}
-          <div className="w-full 2xl:w-[70%] flex flex-col justify-center h-full pl-6 sm:pl-10 2xl:pl-20 -translate-y-4 sm:-translate-y-4 2xl:-translate-y-9">
-            <h2 className="text-[clamp(2.5rem,10vw,5rem)] md:text-[10vw] leading-[0.95] font-bold tracking-tighter text-[var(--foreground)] opacity-90 text-left mb-6 sm:mb-10">
+          <div className="contents md:flex md:min-w-0 md:w-full md:flex-col md:justify-center md:h-full md:pl-8 xl:pl-14 2xl:w-[70%] 2xl:pl-20 md:-translate-y-4 2xl:-translate-y-9">
+            <h2 className="col-start-1 row-start-1 min-w-0 self-center px-1 sm:px-3 md:px-0 text-[clamp(1.5rem,7.4vw,4rem)] md:text-[clamp(3.5rem,8vw,7.5rem)] 2xl:text-[10vw] leading-[0.95] font-bold tracking-tighter text-[var(--foreground)] opacity-90 text-left mb-6 sm:mb-10">
               LET&apos;S <br />
               CONNECT
             </h2>
 
-            <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 md:gap-8 lg:gap-10">
+            <div className="col-span-2 row-start-2 flex flex-wrap gap-3 sm:gap-6 md:gap-8 lg:gap-10 px-1 sm:px-3 md:px-0">
               {socials.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
                   target={link.label === "EMAIL" ? undefined : "_blank"}
                   rel={link.label === "EMAIL" ? undefined : "noopener noreferrer"}
-                  className="group flex items-center gap-2 sm:gap-3 text-sm sm:text-lg md:text-xl lg:text-2xl font-bold tracking-[0.1em] text-[var(--foreground)] transition-colors duration-300"
+                  className="group flex items-center gap-2 sm:gap-3 text-xs sm:text-lg md:text-xl lg:text-2xl font-bold tracking-[0.1em] text-[var(--foreground)] transition-colors duration-300"
                 >
                   <span className="p-2 sm:p-3 rounded-full border border-[var(--border)] bg-[var(--card)]/50 group-hover:bg-[var(--accent-dark)] group-hover:text-white group-hover:scale-110 group-hover:shadow-[0_0_25px_var(--accent-dark)] transition-all duration-300 relative overflow-hidden flex items-center justify-center">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 relative z-10 block">
@@ -78,12 +78,12 @@ export const Footer = () => {
           </div>
 
           {/* Right: Me Image - 30% (Reduced to fit text) */}
-          <div className="hidden md:flex w-full 2xl:w-[30%] justify-center 2xl:justify-end items-end relative -mb-2">
-            <div className="relative w-full h-[min(43vh,26rem)] 2xl:h-full flex items-end justify-center 2xl:justify-end">
+          <div className="flex col-start-2 row-start-1 min-w-0 w-full 2xl:w-[30%] justify-end items-end relative -mb-2">
+            <div className="relative w-full h-[clamp(9rem,40vw,17rem)] md:h-full md:min-h-[12rem] 2xl:min-h-0 flex items-end justify-end">
               <img
                 src="/me2.png"
                 alt="Let's Connect"
-                className="w-auto h-full max-h-full max-w-full object-contain scale-[1] origin-bottom-right -translate-y-[0.7rem] 2xl:-translate-x-6"
+                className="w-auto h-full max-h-full max-w-full object-contain scale-[1] origin-bottom-right md:-translate-y-[0.7rem] 2xl:-translate-x-6"
                 style={{
                   maskImage: maskGradient,
                   WebkitMaskImage: maskGradient
