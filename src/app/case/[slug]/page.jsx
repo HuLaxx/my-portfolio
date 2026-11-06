@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 
 import { getCaseStudy, getPortfolioContent } from "@/lib/cms/content-service";
@@ -89,6 +90,26 @@ export default async function CasePage({ params }) {
             </div>
           </RevealOnScroll>
         </div>
+
+        {study.media?.showPoster && study.media?.poster && (
+          <RevealOnScroll className="mt-12">
+            <figure className="overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--card)]">
+              <Image
+                src={study.media.poster}
+                width={1200}
+                height={445}
+                unoptimized
+                alt={study.media.alt || `Original project artwork for ${study.client}`}
+                className="h-auto w-full"
+              />
+              {study.media.caption && (
+                <figcaption className="px-5 py-3 text-xs text-[var(--muted)]">
+                  {study.media.caption}
+                </figcaption>
+              )}
+            </figure>
+          </RevealOnScroll>
+        )}
 
         <div className="mt-16 grid gap-10 rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8 backdrop-blur-xl md:grid-cols-2">
           <RevealOnScroll>
