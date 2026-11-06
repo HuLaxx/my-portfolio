@@ -9,9 +9,9 @@ import { RevealOnScroll } from "./RevealOnScroll";
 
 const initialState = { status: "IDLE", response: undefined, error: null };
 const defaultPrompts = [
-  "How did you keep 60fps on the Vogue runway?",
-  "What stack do you ship for immersive work?",
-  "How do AI copilots fit into launch timelines?",
+  "How does the portfolio combine Next.js and Three.js?",
+  "Which projects demonstrate AI and data engineering?",
+  "What makes each portfolio project different?",
 ];
 
 export const NeuralSearch = ({
@@ -71,14 +71,14 @@ export const NeuralSearch = ({
         120
       ),
       setTimeout(
-        () => setLogs((prev) => [...prev, "> CONNECTING TO KNOWLEDGE GRAPH..."]),
+        () => setLogs((prev) => [...prev, "> LOADING CURATED PORTFOLIO CONTEXT..."]),
         600
       ),
       setTimeout(
         () =>
           setLogs((prev) => [
             ...prev,
-            "> VECTOR STORE ONLINE. GENERATING RESPONSE...",
+            "> REQUESTING MODEL RESPONSE WHEN CONFIGURED...",
           ]),
         1100
       ),
@@ -107,7 +107,7 @@ export const NeuralSearch = ({
     !query.trim() || isPending || status === "SCANNING" || status === "STREAMING";
 
   const hint = useMemo(
-    () => promptHint ?? "Ask the knowledge graph (e.g., 'How do you scope work?')",
+    () => promptHint ?? "Ask about the portfolio (e.g., 'What do the projects demonstrate?')",
     [promptHint]
   );
 
