@@ -38,7 +38,7 @@ export const Footer = () => {
          - pt-6 (Symmetrical Top Space)
          - Glass effect + border
       */}
-      <div className="nav-shell relative overflow-hidden mx-auto w-[99.5%] rounded-[2rem] px-4 pt-2 pb-12 md:px-8 md:pt-2 md:pb-16 flex flex-col min-h-[12vh] backdrop-blur-sm border border-[var(--border)]/20" style={{ background: 'var(--footer-bg)' }}>
+      <div className="nav-shell relative overflow-hidden mx-auto w-[99.5%] rounded-[2rem] px-4 pt-8 sm:pt-10 pb-12 md:px-8 md:pb-16 2xl:pt-2 flex flex-col min-h-[12vh] backdrop-blur-sm border border-[var(--border)]/20" style={{ background: 'var(--footer-bg)' }}>
 
         {/* Background Orbs (Subtle) */}
         <div className="absolute top-[-50%] left-[-20%] w-[500px] h-[500px] rounded-full bg-[var(--accent)]/5 blur-[120px] pointer-events-none" />
@@ -46,30 +46,30 @@ export const Footer = () => {
 
         {/* Flex container: Added pb-4 for Bottom Space (above border) */}
         {/* Pulled up (-mt-1) per user request */}
-        <div className="grid grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] sm:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)] md:grid-cols-[minmax(0,7fr)_minmax(0,3fr)] items-end justify-between flex-1 w-full gap-x-2 gap-y-4 sm:gap-x-4 md:gap-x-6 2xl:flex 2xl:flex-row 2xl:gap-12 relative z-10 pb-4 -mt-1">
+        <div className="grid grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] sm:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)] md:grid-cols-[minmax(0,7fr)_minmax(0,3fr)] items-end justify-between flex-1 w-full gap-x-2 gap-y-4 sm:gap-x-4 md:gap-x-6 2xl:flex 2xl:flex-row 2xl:gap-12 relative z-10 pb-4 mt-0 2xl:-mt-1">
 
           {/* Left: Text Content - 70% (Widened) - Justify Center (Symmetry) */}
-          <div className="contents md:flex md:min-w-0 md:w-full md:flex-col md:justify-center md:h-full md:pl-8 xl:pl-14 2xl:w-[70%] 2xl:pl-20 md:-translate-y-4 2xl:-translate-y-9">
+          <div className="contents md:flex md:min-w-0 md:w-full md:flex-col md:justify-center md:h-full md:pl-8 xl:pl-14 2xl:w-[70%] 2xl:pl-20 md:translate-y-0 2xl:-translate-y-9">
             <h2 className="col-start-1 row-start-1 min-w-0 self-center px-1 sm:px-3 md:px-0 text-[clamp(1.5rem,7.4vw,4rem)] md:text-[clamp(3.5rem,8vw,7.5rem)] 2xl:text-[10vw] leading-[0.95] font-bold tracking-tighter text-[var(--foreground)] opacity-90 text-left mb-6 sm:mb-10">
               LET&apos;S <br />
               CONNECT
             </h2>
 
-            <div className="col-span-2 row-start-2 flex flex-wrap gap-3 sm:gap-6 md:gap-8 lg:gap-10 px-1 sm:px-3 md:px-0">
+            <div className="col-span-2 row-start-2 grid grid-cols-3 gap-x-2 gap-y-3 sm:flex sm:flex-wrap sm:gap-x-4 sm:gap-y-3 md:gap-x-4 md:gap-y-4 xl:gap-x-6 2xl:gap-10 px-1 sm:px-3 md:px-0">
               {socials.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
                   target={link.label === "EMAIL" ? undefined : "_blank"}
                   rel={link.label === "EMAIL" ? undefined : "noopener noreferrer"}
-                  className="group flex items-center gap-2 sm:gap-3 text-xs sm:text-lg md:text-xl lg:text-2xl font-bold tracking-[0.1em] text-[var(--foreground)] transition-colors duration-300"
+                  className="group min-w-0 flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-1 sm:gap-2 2xl:gap-3 text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-2xl font-bold tracking-[0.03em] sm:tracking-[0.06em] 2xl:tracking-[0.1em] text-[var(--foreground)] transition-colors duration-300"
                 >
-                  <span className="p-2 sm:p-3 rounded-full border border-[var(--border)] bg-[var(--card)]/50 group-hover:bg-[var(--accent-dark)] group-hover:text-white group-hover:scale-110 group-hover:shadow-[0_0_25px_var(--accent-dark)] transition-all duration-300 relative overflow-hidden flex items-center justify-center">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 relative z-10 block">
+                  <span className="p-1.5 sm:p-2 2xl:p-3 shrink-0 rounded-full border border-[var(--border)] bg-[var(--card)]/50 group-hover:bg-[var(--accent-dark)] group-hover:text-white group-hover:scale-110 group-hover:shadow-[0_0_25px_var(--accent-dark)] transition-all duration-300 relative overflow-hidden flex items-center justify-center">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5 sm:w-4 sm:h-4 xl:w-5 xl:h-5 2xl:w-6 2xl:h-6 relative z-10 block">
                       <path d={link.path} />
                     </svg>
                   </span>
-                  <span className="transition-all duration-300 group-hover:text-[var(--accent-dark)] group-hover:scale-105 group-hover:drop-shadow-[0_0_12px_var(--accent-soft)] origin-left">
+                  <span className="max-w-full whitespace-nowrap transition-all duration-300 group-hover:text-[var(--accent-dark)] group-hover:scale-105 group-hover:drop-shadow-[0_0_12px_var(--accent-soft)] origin-left">
                     {link.label}
                   </span>
                 </a>
