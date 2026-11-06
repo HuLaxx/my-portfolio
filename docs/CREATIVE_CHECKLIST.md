@@ -50,9 +50,9 @@ Checked items record source-level changes and verified file presence. **No box h
 
 ## File and link verification
 
-- [ ] Confirm all local README links, Studio page source files and four case-study artwork files exist on master.
-- [ ] Validate both new studio SVGs for basic XML structure, duplicate IDs and accessible descriptions.
-- [ ] Check Studio page CSS classes and imported assets against the committed tree.
+- [x] Confirm all **13 distinct local README targets**, the Studio route/style and all four case-study artwork files exist on master.
+- [x] Validate both original studio SVGs for basic element nesting, duplicate IDs and accessible title/description metadata.
+- [x] Check **36 Studio page CSS module classes**, confirm all referenced classes exist, and verify all 9 checklist-relative links resolve on master.
 - [ ] Verify external demo domains and URLs independently; source links existing does not prove a hosted demo works.
 
 **Status:** Presentation and content refresh committed. Deployment, build, runtime accessibility and performance validation remain open.
