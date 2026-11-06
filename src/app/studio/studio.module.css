@@ -25,6 +25,7 @@
   color: #aabfbb; font: 11px ui-monospace, Consolas, monospace;
   letter-spacing: .14em;
 }
+.back { font-weight: 700; color: #d5e9dc; }
 .navline a, .textLink { transition: color .2s ease; }
 .navline a:hover, .textLink:hover { color: #e6f5aa; }
 .hero { padding-top: 66px; }
