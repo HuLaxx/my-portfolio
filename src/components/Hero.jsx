@@ -38,12 +38,12 @@ export const Hero = ({ resume }) => {
 
               <RevealOnScroll delay={200}>
                 <div className="font-semibold leading-[1.1] tracking-tight text-[var(--foreground)]">
-                  <h1 className="text-[clamp(1.85rem,8.5vw,7.5rem)] 2xl:text-9xl mb-0 flex flex-col gap-0">
-                    {/* Up to 1535px, the four-line heading fills the left column beside the portrait. */}
-                    <span className="flex flex-col gap-0 leading-[1.06] 2xl:hidden">
-                      <span>I</span>
-                      <span>am</span>
-                      <span>Rahul</span>
+                  <h1 className="text-[clamp(1.45rem,7vw,6.5rem)] 2xl:text-9xl mb-0 flex flex-col gap-0">
+                    {/* The staggered, right-aligned lines follow the portrait's edge on compact screens. */}
+                    <span className="flex w-full min-w-0 flex-col items-end gap-0 leading-[1.06] text-right 2xl:hidden">
+                      <span className="mr-[12%]">I</span>
+                      <span className="mr-[7%]">am</span>
+                      <span className="mr-[2%]">Rahul</span>
                       <span className="text-stroke text-[var(--foreground)]/10" style={{ WebkitTextStrokeWidth: "1.3px" }}>Khanke</span>
                     </span>
                     {/* Keep the original two-line heading on wide desktop screens. */}
