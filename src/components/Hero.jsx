@@ -63,7 +63,7 @@ export const Hero = ({ resume }) => {
 
           {/* Right Side (Image) - 40% */}
           <motion.div
-            className="flex col-start-2 row-start-1 min-w-0 w-full items-end justify-end relative md:col-auto md:row-auto md:w-[40%] lg:w-[45%] md:translate-x-0 xl:translate-x-[10%] z-5"
+            className="flex col-start-2 row-start-1 min-w-0 w-full items-end justify-end relative md:col-auto md:row-auto md:w-[40%] lg:w-[45%] md:translate-x-0 2xl:translate-x-[10%] z-5"
           >
             <div className="relative w-full h-[clamp(10rem,42vw,18rem)] sm:h-[min(45vh,24rem)] md:h-[min(72vh,44rem)] 2xl:h-[86vh] flex items-end justify-end">
               <img
