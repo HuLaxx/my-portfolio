@@ -16,14 +16,14 @@ export const Hero = ({ resume }) => {
       <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] rounded-full bg-[var(--secondary)]/10 blur-[140px] pointer-events-none mix-blend-screen" />
 
       {/* Increased width to max-w-[95%] */}
-      <div className="mx-auto w-full max-w-[95%] px-4 md:px-8 pt-24 md:pt-28 relative z-10">
+      <div className="mx-auto w-full max-w-[95%] px-4 md:px-6 xl:px-8 pt-24 md:pt-28 relative z-10">
 
         {/* Main Content Row */}
-        <div className="flex flex-col md:flex-row items-stretch justify-between gap-6 md:gap-8 lg:gap-12 min-h-[85vh]">
+        <div className="flex flex-col md:flex-row items-stretch justify-between gap-6 md:gap-6 xl:gap-12 min-h-[85vh]">
 
           {/* Left Side (Text) - 60% */}
           <motion.div
-            className="w-full md:w-[60%] lg:w-[55%] flex flex-col justify-start gap-3 sm:gap-5 py-6 px-4 sm:px-8 md:pl-12 lg:pl-20 xl:pl-28 2xl:pl-32 md:pr-4 z-10 relative"
+            className="w-full min-w-0 md:w-[60%] lg:w-[55%] flex flex-col justify-start gap-3 sm:gap-5 py-6 px-4 sm:px-8 md:pl-6 lg:pl-8 xl:pl-28 2xl:pl-32 md:pr-4 z-10 relative"
           >
             {/* Top Group: Label + Name */}
             <div className="flex flex-col gap-1">
@@ -38,9 +38,9 @@ export const Hero = ({ resume }) => {
 
               <RevealOnScroll delay={200}>
                 <div className="font-semibold leading-[1.1] tracking-tight text-[var(--foreground)]">
-                  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl mb-0 flex flex-col gap-0">
+                  <h1 className="text-[clamp(1.9rem,9vw,2.25rem)] sm:text-5xl md:text-[clamp(2rem,4vw,3.75rem)] xl:text-[clamp(3.5rem,5.4vw,6rem)] 2xl:text-9xl mb-0 flex flex-col gap-0">
                     {/* Forced single line - smoother scaling */}
-                    <span className="inline-block whitespace-nowrap transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_35px_var(--accent)] hover:brightness-125 origin-left w-fit py-1">
+                    <span className="inline-block max-[639px]:whitespace-normal whitespace-nowrap transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_35px_var(--accent)] hover:brightness-125 origin-left w-fit py-1">
                       I am Rahul
                     </span>
                     <span className="inline-block text-stroke opacity-100 text-[var(--foreground)]/10 transition-all duration-300 hover:scale-105 hover:text-[var(--accent)] hover:drop-shadow-[0_0_25px_var(--accent)] hover:text-stroke-0 origin-left w-fit py-1">
@@ -54,7 +54,7 @@ export const Hero = ({ resume }) => {
             {/* Bottom Group: Summary */}
             <RevealOnScroll delay={300}>
               <div className="flex flex-col gap-4">
-                <p className="max-w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-[var(--foreground)] font-medium opacity-100">
+                <p className="max-w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl text-base sm:text-lg md:text-lg xl:text-2xl leading-relaxed text-[var(--foreground)] font-medium opacity-100">
                   {resume.summary}
                 </p>
               </div>
@@ -63,13 +63,13 @@ export const Hero = ({ resume }) => {
 
           {/* Right Side (Image) - 40% */}
           <motion.div
-            className="hidden md:flex w-full md:w-[40%] lg:w-[45%] items-end justify-end relative translate-x-[5%] lg:translate-x-[10%] z-5"
+            className="hidden md:flex min-w-0 w-full md:w-[40%] lg:w-[45%] items-end justify-end relative md:translate-x-0 xl:translate-x-[10%] z-5"
           >
-            <div className="relative w-full h-[86vh] flex items-end justify-end">
+            <div className="relative w-full h-[min(72vh,44rem)] 2xl:h-[86vh] flex items-end justify-end">
               <img
                 src="/me.png"
                 alt="Rahul Khanke"
-                className="w-full h-full object-contain scale-[1.0] origin-bottom-right"
+                className="w-full h-full max-w-full max-h-full object-contain scale-[1.0] origin-bottom-right"
                 style={{
                   maskImage: maskGradient,
                   WebkitMaskImage: maskGradient

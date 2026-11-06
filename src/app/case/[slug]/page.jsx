@@ -36,7 +36,7 @@ export default async function CasePage({ params }) {
 
 
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6 pt-32 pb-16 md:pt-40 md:pb-24 md:px-10">
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 pt-32 pb-16 md:pt-40 md:pb-24 md:px-6 xl:px-10">
         <div className="mb-16 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <Link
             href="/"
@@ -54,12 +54,12 @@ export default async function CasePage({ params }) {
           </div>
         </div>
 
-        <div className="grid gap-10 md:grid-cols-5 md:items-end">
-          <RevealOnScroll className="md:col-span-3">
+        <div className="grid gap-10 lg:grid-cols-5 lg:items-end">
+          <RevealOnScroll className="lg:col-span-3">
             <p className="font-mono text-sm font-semibold uppercase tracking-[0.34em] text-[var(--foreground)] opacity-80 mb-4">
               {study.client}
             </p>
-            <h1 className="display-heading text-4xl md:text-6xl font-bold leading-[1.05] text-[var(--foreground)]">
+            <h1 className="display-heading text-4xl md:text-5xl xl:text-6xl font-bold leading-[1.05] text-[var(--foreground)]">
               {study.title}
             </h1>
             <p className="mt-6 max-w-2xl text-lg font-medium text-[var(--foreground)] opacity-90">
@@ -67,7 +67,7 @@ export default async function CasePage({ params }) {
             </p>
           </RevealOnScroll>
 
-          <RevealOnScroll delay={100} className="md:col-span-2 md:justify-self-end flex flex-col gap-6 w-full md:w-auto">
+          <RevealOnScroll delay={100} className="lg:col-span-2 lg:justify-self-end flex flex-col gap-6 w-full md:w-auto">
             <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 backdrop-blur-xl">
               <p className="font-mono text-sm font-semibold uppercase tracking-[0.25em] text-[var(--foreground)] opacity-80 mb-4">
                 Technologies & Skills
@@ -90,7 +90,7 @@ export default async function CasePage({ params }) {
           </RevealOnScroll>
         </div>
 
-        <div className="mt-16 grid gap-10 rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8 backdrop-blur-xl md:grid-cols-2">
+        <div className="mt-16 grid gap-10 rounded-3xl border border-[var(--border)] bg-[var(--card)] p-5 sm:p-8 backdrop-blur-xl md:grid-cols-2">
           <RevealOnScroll>
             <p className="font-mono text-xs uppercase tracking-[0.25em] text-[var(--muted)] mb-3">
               Challenge
@@ -150,7 +150,7 @@ export default async function CasePage({ params }) {
 
         {!!study.testimonial && (
           <RevealOnScroll className="mt-14">
-            <div className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8 text-left">
+            <div className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-5 sm:p-8 text-left">
               <p className="text-lg text-[var(--foreground)] leading-relaxed">
                 "{study.testimonial.quote}"
               </p>

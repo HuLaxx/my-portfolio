@@ -55,8 +55,8 @@ const roles = [
 export const ExploreRoles = () => {
     return (
         <section id="roles" className="relative py-12 md:py-16 flex flex-col justify-center overflow-hidden">
-            <div className="mx-auto w-[98%] md:w-full md:max-w-6xl px-6 md:px-12 relative z-10">
-                <div className="px-2 py-10 md:px-12 md:py-14">
+            <div className="mx-auto w-[98%] md:w-full md:max-w-6xl px-4 sm:px-6 md:px-6 xl:px-12 relative z-10">
+                <div className="px-2 py-10 md:px-8 xl:px-12 md:py-14">
                     <RevealOnScroll>
                         <div className="mb-12">
                             <div className="flex items-center gap-3 sm:gap-4 mb-4">
@@ -65,7 +65,7 @@ export const ExploreRoles = () => {
                                     What I Do
                                 </p>
                             </div>
-                            <h2 className="display-heading text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-semibold tracking-tight text-[var(--foreground)]">
+                            <h2 className="display-heading text-[clamp(1.6rem,7.5vw,1.875rem)] sm:text-4xl md:text-5xl lg:text-7xl font-semibold tracking-tight text-[var(--foreground)]">
                                 Explore My Roles
                             </h2>
                         </div>
@@ -76,7 +76,7 @@ export const ExploreRoles = () => {
                             <RevealOnScroll key={role.id} delay={index * 100}>
                                 <Link href={role.href} className="group relative block w-full">
                                     {/* Unified Card Style (from ExploreRoles original) */}
-                                    <div className="relative w-full p-5 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl border border-[var(--border)] bg-[var(--card)]/30 backdrop-blur-sm overflow-hidden transition-all duration-700 hover:bg-[var(--card-hover-tint)] hover:border-[var(--accent)] hover:translate-y-[-4px] hover:shadow-2xl">
+                                    <div className="relative w-full p-5 sm:p-8 md:p-8 xl:p-10 rounded-2xl sm:rounded-3xl border border-[var(--border)] bg-[var(--card)]/30 backdrop-blur-sm overflow-hidden transition-all duration-700 hover:bg-[var(--card-hover-tint)] hover:border-[var(--accent)] hover:translate-y-[-4px] hover:shadow-2xl">
 
                                         {/* Glassy gradient hover overlay - Fade in/out */}
                                         <div
@@ -90,7 +90,7 @@ export const ExploreRoles = () => {
                                         </div>
 
                                         {/* Slide-in Drawer (Right Side - Matches Experience/Projects) */}
-                                        <div className="hidden md:flex absolute right-0 top-0 bottom-0 w-1/2 h-full bg-gradient-to-l from-[var(--card)] via-[var(--card)]/90 to-transparent opacity-80 group-hover:opacity-100 group-hover:-translate-x-2 transition-all duration-500 ease-out flex-col justify-center items-end pr-8 md:pr-12 pointer-events-none z-20">
+                                        <div className="hidden 2xl:flex absolute right-0 top-0 bottom-0 w-1/2 h-full bg-gradient-to-l from-[var(--card)] via-[var(--card)]/90 to-transparent opacity-80 group-hover:opacity-100 group-hover:-translate-x-2 transition-all duration-500 ease-out flex-col justify-center items-end pr-8 md:pr-12 pointer-events-none z-20">
                                             <div className="flex flex-col items-end gap-3 text-right">
                                                 <span className="p-3 rounded-full border border-[var(--accent)] bg-[var(--accent)]/10 text-[var(--accent)] group-hover:bg-[var(--accent)] group-hover:text-black transition-all duration-500 shadow-[0_0_15px_rgba(0,0,0,0.2)]">
                                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -109,10 +109,10 @@ export const ExploreRoles = () => {
                                         </div>
 
                                         <div className="relative z-10 grid grid-cols-1 items-start gap-4 md:grid-cols-2">
-                                            <div className="col-span-2 font-mono text-xl sm:text-2xl font-bold uppercase tracking-[0.22em] text-[var(--accent-dark)] opacity-80 group-hover:text-[var(--text-hover)] transition-colors duration-500">
+                                            <div className="col-span-1 md:col-span-2 font-mono text-xl sm:text-2xl font-bold uppercase tracking-[0.22em] text-[var(--accent-dark)] opacity-80 group-hover:text-[var(--text-hover)] transition-colors duration-500">
                                                 {role.index}
                                             </div>
-                                            <div className="col-span-2 mt-3 sm:mt-4 space-y-2">
+                                            <div className="col-span-1 md:col-span-2 mt-3 sm:mt-4 space-y-2">
                                                 <h3 className="display-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-[var(--foreground)] group-hover:text-[var(--text-hover)] transition-colors duration-500">
                                                     {role.title}
                                                 </h3>

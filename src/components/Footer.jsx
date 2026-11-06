@@ -46,11 +46,11 @@ export const Footer = () => {
 
         {/* Flex container: Added pb-4 for Bottom Space (above border) */}
         {/* Pulled up (-mt-1) per user request */}
-        <div className="flex flex-col md:flex-row items-end justify-between flex-1 w-full gap-8 md:gap-12 relative z-10 pb-4 -mt-1">
+        <div className="flex flex-col 2xl:flex-row items-end justify-between flex-1 w-full gap-8 md:gap-12 relative z-10 pb-4 -mt-1">
 
           {/* Left: Text Content - 70% (Widened) - Justify Center (Symmetry) */}
-          <div className="w-full md:w-[70%] flex flex-col justify-center h-full pl-6 sm:pl-10 md:pl-20 -translate-y-4 sm:-translate-y-9">
-            <h2 className="text-[11vw] sm:text-[14vw] md:text-[10vw] leading-[0.95] font-bold tracking-tighter text-[var(--foreground)] opacity-90 text-left mb-6 sm:mb-10">
+          <div className="w-full 2xl:w-[70%] flex flex-col justify-center h-full pl-6 sm:pl-10 2xl:pl-20 -translate-y-4 sm:-translate-y-4 2xl:-translate-y-9">
+            <h2 className="text-[clamp(2.5rem,10vw,5rem)] md:text-[10vw] leading-[0.95] font-bold tracking-tighter text-[var(--foreground)] opacity-90 text-left mb-6 sm:mb-10">
               LET&apos;S <br />
               CONNECT
             </h2>
@@ -78,12 +78,12 @@ export const Footer = () => {
           </div>
 
           {/* Right: Me Image - 30% (Reduced to fit text) */}
-          <div className="hidden md:flex w-full md:w-[30%] justify-end items-end relative -mb-2">
-            <div className="relative w-full h-full flex items-end justify-end">
+          <div className="hidden md:flex w-full 2xl:w-[30%] justify-center 2xl:justify-end items-end relative -mb-2">
+            <div className="relative w-full h-[min(43vh,26rem)] 2xl:h-full flex items-end justify-center 2xl:justify-end">
               <img
                 src="/me2.png"
                 alt="Let's Connect"
-                className="w-auto h-full max-h-full object-contain scale-[1] origin-bottom-right -translate-y-[0.7rem] -translate-x-6"
+                className="w-auto h-full max-h-full max-w-full object-contain scale-[1] origin-bottom-right -translate-y-[0.7rem] 2xl:-translate-x-6"
                 style={{
                   maskImage: maskGradient,
                   WebkitMaskImage: maskGradient
@@ -96,13 +96,13 @@ export const Footer = () => {
 
         {/* Full width border below both Text and Image */}
         {/* Divider Line */}
-        <div className="w-full h-[1px] bg-[var(--border)]/30 z-10 relative -mt-5"></div>
+        <div className="w-full h-[1px] bg-[var(--border)]/30 z-10 relative 2xl:-mt-5"></div>
 
         {/* Bottom Section: Clean & Minimal (Transparent) */}
         <div className="relative w-full overflow-hidden rounded-b-[2rem]">
 
           {/* Content Layer */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 px-6 sm:px-10 md:px-20 py-6 text-[10px] sm:text-xs font-medium uppercase tracking-[0.15em] text-[var(--muted)] relative z-10">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 px-6 sm:px-10 md:px-10 2xl:px-20 py-6 text-[10px] sm:text-xs font-medium uppercase tracking-[0.15em] text-[var(--muted)] relative z-10">
 
             {/* Left: Copyright */}
             <div className="flex items-center gap-2 opacity-80">

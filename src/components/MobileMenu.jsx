@@ -63,14 +63,14 @@ export const MobileMenu = ({ isOpen, onClose }) => {
         <>
             {/* Backdrop */}
             <div
-                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
+                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 xl:hidden"
                 onClick={onClose}
                 aria-hidden="true"
             />
 
             {/* Menu Panel */}
             <div
-                className="fixed top-0 right-0 h-full w-[60%] sm:w-[45%] md:w-[40%] max-w-md bg-[var(--panel)]/80 backdrop-blur-xl border-l border-[var(--border)] rounded-l-3xl z-50 lg:hidden transform transition-transform duration-300 ease-out flex flex-col shadow-2xl"
+                className="fixed top-0 right-0 h-full w-[min(88vw,22rem)] sm:w-[min(80vw,24rem)] md:w-[min(55vw,26rem)] max-w-md bg-[var(--panel)]/80 backdrop-blur-xl border-l border-[var(--border)] rounded-l-3xl z-50 xl:hidden overflow-y-auto overscroll-contain transform transition-transform duration-300 ease-out flex flex-col shadow-2xl"
                 role="dialog"
                 aria-modal="true"
                 aria-label="Mobile navigation"
@@ -87,13 +87,13 @@ export const MobileMenu = ({ isOpen, onClose }) => {
                 </button>
 
                 {/* Navigation Links */}
-                <nav className="flex flex-col gap-2 px-6 pt-28 pb-6">
+                <nav className="flex flex-col gap-2 px-4 sm:px-6 pt-28 pb-6">
                     {navLinks.map((link, index) => (
                         <Link
                             key={link.href}
                             href={link.href}
                             onClick={onClose}
-                            className="group relative block w-fit py-2 text-base font-semibold tracking-widest text-white transition-all duration-300 hover:text-[var(--accent)]"
+                            className="group relative block w-fit py-2 text-sm sm:text-base font-semibold tracking-widest text-white transition-all duration-300 hover:text-[var(--accent)]"
                             style={{ animationDelay: `${index * 50}ms` }}
                         >
                             <span className="relative z-10">{link.label}</span>
@@ -103,14 +103,14 @@ export const MobileMenu = ({ isOpen, onClose }) => {
                 </nav>
 
                 {/* Roles Links */}
-                <div className="px-6 pb-6 flex flex-col gap-3 border-t border-white/10 pt-6">
+                <div className="px-4 sm:px-6 pb-6 flex flex-col gap-3 border-t border-white/10 pt-6">
                     <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gray-500 mb-1">Roles</p>
                     {roles.map((role) => (
                         <Link
                             key={role.href}
                             href={role.href}
                             onClick={onClose}
-                            className="group relative block w-fit text-base font-medium text-gray-300 hover:text-[var(--accent)] transition-colors duration-300"
+                            className="group relative block w-fit text-sm sm:text-base font-medium text-gray-300 hover:text-[var(--accent)] transition-colors duration-300"
                         >
                             <span className="relative z-10">{role.label}</span>
                             <span className="absolute inset-x-0 -bottom-1 h-px scale-x-0 bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent transition-transform duration-500 group-hover:scale-x-100" />
