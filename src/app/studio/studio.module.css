@@ -6,7 +6,7 @@
   position: relative;
   isolation: isolate;
   min-height: 100vh;
-  padding: 0 24px 48px;
+  padding: 112px 24px 48px;
   color: var(--ink);
   background:
     radial-gradient(ellipse at 83% 4%, rgba(127, 110, 184, .15), transparent 37%),
@@ -201,7 +201,7 @@
   .world { min-height: 280px; }
 }
 @media (max-width: 700px) {
-  .studio { padding: 0 13px 35px; }
+  .studio { padding: 98px 13px 35px; }
   .navline { min-height: 67px; font-size: 9px; letter-spacing: .03em; }
   .navline span { display: none; }
   .hero { padding-top: 44px; }
