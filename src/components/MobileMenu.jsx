@@ -66,7 +66,7 @@ export const MobileMenu = ({ isOpen, onClose }) => {
             />
 
             <div
-                className="fixed right-0 top-0 z-50 flex h-[100dvh] w-[min(90vw,23rem)] max-w-full flex-col overflow-y-auto overscroll-contain rounded-l-3xl border-l border-[var(--border)]/25 bg-[var(--panel)]/95 text-[var(--foreground)] shadow-2xl backdrop-blur-xl xl:hidden"
+                className="fixed right-0 top-0 z-50 flex h-[100dvh] w-[min(90vw,23rem)] max-w-full flex-col overflow-hidden rounded-l-3xl border-l border-[var(--border)]/25 bg-[var(--panel)]/95 text-[var(--foreground)] shadow-2xl backdrop-blur-xl xl:hidden"
                 role="dialog"
                 aria-modal="true"
                 aria-label="Portfolio navigation"
@@ -88,7 +88,8 @@ export const MobileMenu = ({ isOpen, onClose }) => {
                     </button>
                 </div>
 
-                <nav aria-label="Page sections" className="px-3 pb-2.5 pt-2.5 sm:px-5">
+                <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain pb-[max(env(safe-area-inset-bottom),0.75rem)]" tabIndex={0} aria-label="Menu sections">
+                <nav aria-label="Page sections" className="px-3 pb-1.5 pt-1.5 sm:px-5">
                     <p className="mb-1 font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-[var(--muted)]">
                         Discover
                     </p>
@@ -98,7 +99,7 @@ export const MobileMenu = ({ isOpen, onClose }) => {
                                 key={href}
                                 href={href}
                                 onClick={onClose}
-                                className="group relative flex min-h-[58px] min-w-0 flex-col justify-between overflow-hidden rounded-lg border border-[var(--border)]/20 bg-[var(--accent)]/10 px-2.5 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--accent)] hover:bg-[var(--accent)]/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+                                className="group relative flex min-h-[50px] min-w-0 flex-col justify-between overflow-hidden rounded-lg border border-[var(--border)]/20 bg-[var(--accent)]/10 px-2 py-1.5 transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--accent)] hover:bg-[var(--accent)]/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
                             >
                                 <span className="flex items-center justify-between gap-1">
                                     <Icon className="h-4 w-4 shrink-0 text-[var(--accent-dark)]" aria-hidden="true" />
@@ -115,7 +116,7 @@ export const MobileMenu = ({ isOpen, onClose }) => {
 
                 <MobileThemePicker />
 
-                <section className="border-t border-[var(--border)]/15 px-3 pb-2.5 pt-2.5 sm:px-5" aria-labelledby="mobile-roles-heading">
+                <section className="border-t border-[var(--border)]/15 px-3 pb-1.5 pt-1.5 sm:px-5" aria-labelledby="mobile-roles-heading">
                     <div className="mb-2 flex items-center gap-2">
                         <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[var(--accent)]/10 text-[var(--accent-dark)]">
                             <Sparkles className="h-4 w-4" aria-hidden="true" />
@@ -131,7 +132,7 @@ export const MobileMenu = ({ isOpen, onClose }) => {
                                 key={href}
                                 href={href}
                                 onClick={onClose}
-                                className="group flex min-h-[42px] min-w-0 items-center gap-1.5 rounded-lg border border-[var(--border)]/20 bg-[var(--card)]/60 px-2 py-1.5 transition-all hover:border-[var(--accent)] hover:bg-[var(--accent)]/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+                                className="group flex min-h-[40px] min-w-0 items-center gap-1.5 rounded-lg border border-[var(--border)]/20 bg-[var(--card)]/60 px-2 py-1 transition-all hover:border-[var(--accent)] hover:bg-[var(--accent)]/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
                             >
                                 <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-[var(--accent)]/15 text-[var(--accent-dark)]">
                                     <Icon className="h-4 w-4" aria-hidden="true" />
@@ -143,7 +144,7 @@ export const MobileMenu = ({ isOpen, onClose }) => {
                     </div>
                 </section>
 
-                <section className="border-t border-[var(--border)]/15 px-3 pb-3 pt-2.5 sm:px-5" aria-labelledby="mobile-contact-heading">
+                <section className="border-t border-[var(--border)]/15 px-3 pb-1.5 pt-1.5 sm:px-5" aria-labelledby="mobile-contact-heading">
                     <div className="mb-1.5">
                         <p className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--muted)]">Let's connect</p>
                         <h3 id="mobile-contact-heading" className="text-sm font-bold">Get in touch</h3>
@@ -156,7 +157,7 @@ export const MobileMenu = ({ isOpen, onClose }) => {
                                 target={href.startsWith("mailto:") ? undefined : "_blank"}
                                 rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
                                 onClick={onClose}
-                                className="group flex min-h-[42px] min-w-0 flex-row items-center justify-center gap-1 rounded-lg border border-[var(--border)]/20 bg-[var(--accent)]/10 px-1 py-1.5 text-center transition-all hover:border-[var(--accent)] hover:bg-[var(--accent)]/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+                                className="group flex min-h-[40px] min-w-0 flex-row items-center justify-center gap-1 rounded-lg border border-[var(--border)]/20 bg-[var(--accent)]/10 px-1 py-1.5 text-center transition-all hover:border-[var(--accent)] hover:bg-[var(--accent)]/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
                             >
                                 <Icon className="h-3.5 w-3.5 shrink-0 text-[var(--accent-dark)]" aria-hidden="true" />
                                 <span className="text-[9px] font-bold">{label}</span>
@@ -166,12 +167,13 @@ export const MobileMenu = ({ isOpen, onClose }) => {
                     <Link
                         href="/#footer"
                         onClick={onClose}
-                        className="mt-2 flex items-center justify-between rounded-lg border border-[var(--border)]/20 px-2.5 py-1.5 text-[10px] font-semibold transition-colors hover:border-[var(--accent)] hover:bg-[var(--accent)]/10"
+                        className="mt-1 flex items-center justify-between rounded-lg border border-[var(--border)]/20 px-2.5 py-1.5 text-[10px] font-semibold transition-colors hover:border-[var(--accent)] hover:bg-[var(--accent)]/10"
                     >
                         View the Let's Connect section
                         <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" />
                     </Link>
                 </section>
+                </div>
             </div>
         </>
     );

@@ -47,7 +47,7 @@ export const MobileThemePicker = () => {
     const selected = mobileThemes.find((theme) => theme.id === season);
 
     return (
-        <section className="border-t border-[var(--border)]/20 px-3 pb-2.5 pt-2.5 sm:px-5" aria-labelledby="mobile-theme-heading">
+        <section className="border-t border-[var(--border)]/20 px-3 pb-1.5 pt-1.5 sm:px-5" aria-labelledby="mobile-theme-heading">
             <div className="mb-1.5 flex items-center gap-2">
                 <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-[var(--border)]/20 bg-[var(--accent)]/10 text-[var(--foreground)]">
                     <Palette className="h-4 w-4" aria-hidden="true" />
@@ -62,7 +62,7 @@ export const MobileThemePicker = () => {
                 </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-1.5">
+            <div className="grid grid-cols-4 gap-1">
                 {mobileThemes.map((theme) => {
                     const Icon = theme.Icon;
                     const active = season === theme.id;
@@ -74,23 +74,23 @@ export const MobileThemePicker = () => {
                             onClick={() => setSeason(theme.id)}
                             aria-pressed={active}
                             aria-label={`${theme.season}: ${theme.name} theme`}
-                            className={`group relative flex min-h-[59px] min-w-0 flex-col justify-between overflow-hidden rounded-lg border px-2.5 py-1.5 text-left text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] ${active ? "border-white/90 ring-2 ring-[var(--accent)] ring-offset-2 ring-offset-[var(--panel)]" : "border-white/15 hover:border-white/60"}`}
+                            className={`group relative flex min-h-[70px] min-w-0 flex-col justify-between overflow-hidden rounded-lg border px-1.5 py-1.5 text-left text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] ${active ? "border-white/90 ring-2 ring-[var(--accent)] ring-offset-2 ring-offset-[var(--panel)]" : "border-white/15 hover:border-white/60"}`}
                             style={{ background: theme.background }}
                         >
                             <span className="pointer-events-none absolute -right-5 -top-6 h-24 w-24 rounded-full bg-white/10 blur-2xl" aria-hidden="true" />
-                            <span className="relative z-10 flex w-full items-start justify-between gap-2">
-                                <Icon className="h-4 w-4 shrink-0" style={{ color: theme.glow }} aria-hidden="true" />
+                            <span className="relative z-10 flex w-full items-start justify-between gap-0.5">
+                                <Icon className="h-3.5 w-3.5 shrink-0" style={{ color: theme.glow }} aria-hidden="true" />
                                 {active && (
-                                    <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-slate-900" aria-hidden="true">
-                                        <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                                    <span className="flex h-4 w-4 items-center justify-center rounded-full bg-white text-slate-900" aria-hidden="true">
+                                        <Check className="h-2.5 w-2.5" strokeWidth={3} />
                                     </span>
                                 )}
                             </span>
                             <span className="relative z-10 mt-1 flex min-w-0 flex-col gap-0">
-                                <span className="text-[9px] font-bold uppercase tracking-[0.16em] text-white/75">
+                                <span className="text-[8px] font-bold uppercase tracking-[0.03em] sm:tracking-[0.1em] text-white/75">
                                     {theme.season}
                                 </span>
-                                <span className="break-words text-xs font-bold leading-tight">
+                                <span className="break-words text-[10px] font-bold leading-tight sm:text-xs">
                                     {theme.name}
                                 </span>
                             </span>
@@ -99,7 +99,7 @@ export const MobileThemePicker = () => {
                 })}
             </div>
 
-            <p className="mt-1.5 text-center text-[10px] font-medium text-[var(--muted)]" aria-live="polite">
+            <p className="mt-1 text-center text-[9px] font-medium text-[var(--muted)]" aria-live="polite">
                 {selected ? `Selected: ${selected.name} · ${selected.season}` : "Select a season to change the look."}
             </p>
         </section>
