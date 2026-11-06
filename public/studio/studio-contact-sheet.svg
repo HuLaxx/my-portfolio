@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 485" role="img" aria-labelledby="title desc">
+<title id="title">HuLaX Studio — Notes from the Making Of</title>
+<desc id="desc">Original animated editorial design contact sheet with four studies: typography and space, motion and depth, content and context, and model responses. It is conceptual artwork rather than a screenshot.</desc>
+<defs>
+<linearGradient id="base" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0c161c"/><stop offset=".64" stop-color="#1a202d"/><stop offset="1" stop-color="#222230"/></linearGradient>
+<linearGradient id="line"><stop stop-color="#e6f6aa"/><stop offset=".52" stop-color="#f7b4a2"/><stop offset="1" stop-color="#dcc4f1"/></linearGradient>
+<radialGradient id="glow"><stop stop-color="#98a3dc" stop-opacity=".17"/><stop offset="1" stop-color="#98a3dc" stop-opacity="0"/></radialGradient>
+<clipPath id="frame"><rect width="1200" height="485" rx="19"/></clipPath>
+</defs>
+<g clip-path="url(#frame)">
+<rect width="1200" height="485" fill="url(#base)"/>
+<circle cx="865" cy="190" r="343" fill="url(#glow)"><animate attributeName="r" values="300;365;300" dur="11s" repeatCount="indefinite"/></circle>
+<g><circle cx="758.6" cy="44.9" r="0.9" fill="#dceadf" opacity="0.14"/><circle cx="337.6" cy="296.0" r="0.6" fill="#dceadf" opacity="0.25"/><circle cx="323.6" cy="27.2" r="0.9" fill="#dceadf" opacity="0.08"/><circle cx="884.1" cy="272.5" r="0.9" fill="#dceadf" opacity="0.11"/><circle cx="374.2" cy="112.9" r="1.1" fill="#dceadf" opacity="0.27"/><circle cx="904.1" cy="72.3" r="0.6" fill="#dceadf" opacity="0.19"/><circle cx="55.1" cy="404.8" r="0.7" fill="#dceadf" opacity="0.29"/><circle cx="279.5" cy="270.1" r="0.8" fill="#dceadf" opacity="0.15"/><circle cx="1122.0" cy="325.9" r="1.0" fill="#dceadf" opacity="0.14"/><circle cx="531.5" cy="176.2" r="1.0" fill="#dceadf" opacity="0.28"/><circle cx="238.7" cy="145.3" r="1.0" fill="#dceadf" opacity="0.28"/><circle cx="1101.8" cy="385.6" r="1.2" fill="#dceadf" opacity="0.13"/><circle cx="359.3" cy="293.8" r="0.7" fill="#dceadf" opacity="0.26"/><circle cx="680.6" cy="426.5" r="0.5" fill="#dceadf" opacity="0.24"/><circle cx="245.8" cy="258.4" r="0.4" fill="#dceadf" opacity="0.25"/><circle cx="70.2" cy="469.7" r="0.5" fill="#dceadf" opacity="0.12"/><circle cx="732.3" cy="193.7" r="1.1" fill="#dceadf" opacity="0.20"/><circle cx="733.6" cy="376.7" r="1.2" fill="#dceadf" opacity="0.23"/><circle cx="824.1" cy="319.8" r="1.0" fill="#dceadf" opacity="0.14"/><circle cx="198.9" cy="121.5" r="0.8" fill="#dceadf" opacity="0.22"/><circle cx="1182.1" cy="350.2" r="1.2" fill="#dceadf" opacity="0.16"/><circle cx="699.9" cy="238.7" r="1.1" fill="#dceadf" opacity="0.25"/><circle cx="954.0" cy="290.2" r="0.9" fill="#dceadf" opacity="0.21"/><circle cx="631.7" cy="60.8" r="0.7" fill="#dceadf" opacity="0.21"/><circle cx="819.8" cy="367.5" r="0.4" fill="#dceadf" opacity="0.13"/><circle cx="412.0" cy="462.8" r="0.6" fill="#dceadf" opacity="0.30"/><circle cx="553.9" cy="95.9" r="0.6" fill="#dceadf" opacity="0.22"/><circle cx="518.4" cy="363.4" r="0.5" fill="#dceadf" opacity="0.14"/><circle cx="462.3" cy="53.1" r="0.4" fill="#dceadf" opacity="0.29"/><circle cx="1060.9" cy="421.7" r="1.1" fill="#dceadf" opacity="0.26"/><circle cx="845.8" cy="104.6" r="0.9" fill="#dceadf" opacity="0.31"/><circle cx="550.1" cy="41.9" r="0.8" fill="#dceadf" opacity="0.29"/><circle cx="658.3" cy="341.8" r="1.2" fill="#dceadf" opacity="0.19"/><circle cx="881.6" cy="230.6" r="0.5" fill="#dceadf" opacity="0.26"/><circle cx="41.2" cy="257.5" r="0.9" fill="#dceadf" opacity="0.18"/><circle cx="984.8" cy="209.2" r="1.1" fill="#dceadf" opacity="0.26"/><circle cx="883.4" cy="188.1" r="1.0" fill="#dceadf" opacity="0.27"/><circle cx="199.0" cy="327.1" r="1.0" fill="#dceadf" opacity="0.11"/><circle cx="726.4" cy="97.2" r="1.2" fill="#dceadf" opacity="0.12"/><circle cx="843.2" cy="74.5" r="1.0" fill="#dceadf" opacity="0.16"/><circle cx="1075.9" cy="177.8" r="0.7" fill="#dceadf" opacity="0.14"/><circle cx="623.3" cy="155.2" r="0.8" fill="#dceadf" opacity="0.13"/><circle cx="868.2" cy="139.8" r="0.7" fill="#dceadf" opacity="0.27"/><circle cx="613.9" cy="107.6" r="1.0" fill="#dceadf" opacity="0.17"/><circle cx="832.7" cy="316.2" r="0.7" fill="#dceadf" opacity="0.13"/><circle cx="735.9" cy="433.5" r="0.7" fill="#dceadf" opacity="0.13"/><circle cx="29.7" cy="110.6" r="0.4" fill="#dceadf" opacity="0.22"/><circle cx="279.8" cy="274.9" r="0.8" fill="#dceadf" opacity="0.26"/><circle cx="944.4" cy="55.9" r="1.1" fill="#dceadf" opacity="0.21"/><circle cx="1134.7" cy="46.9" r="1.3" fill="#dceadf" opacity="0.22"/><circle cx="905.8" cy="316.7" r="0.9" fill="#dceadf" opacity="0.13"/><circle cx="852.9" cy="66.8" r="0.7" fill="#dceadf" opacity="0.30"/><circle cx="251.5" cy="117.0" r="1.2" fill="#dceadf" opacity="0.14"/><circle cx="119.9" cy="106.7" r="0.9" fill="#dceadf" opacity="0.24"/><circle cx="328.7" cy="330.4" r="0.9" fill="#dceadf" opacity="0.11"/><circle cx="60.5" cy="318.6" r="1.1" fill="#dceadf" opacity="0.20"/><circle cx="689.6" cy="275.2" r="0.5" fill="#dceadf" opacity="0.09"/><circle cx="1079.7" cy="394.8" r="0.5" fill="#dceadf" opacity="0.14"/><circle cx="163.8" cy="361.4" r="1.2" fill="#dceadf" opacity="0.17"/><circle cx="900.4" cy="101.6" r="0.6" fill="#dceadf" opacity="0.30"/><circle cx="635.1" cy="285.5" r="1.0" fill="#dceadf" opacity="0.28"/><circle cx="1155.6" cy="287.4" r="0.4" fill="#dceadf" opacity="0.13"/><circle cx="655.1" cy="389.1" r="0.4" fill="#dceadf" opacity="0.32"/><circle cx="307.0" cy="335.9" r="0.9" fill="#dceadf" opacity="0.26"/><circle cx="1121.1" cy="358.2" r="0.9" fill="#dceadf" opacity="0.18"/></g>
+<path d="M0 52H1200M0 451H1200" fill="none" stroke="#d6dcda" stroke-opacity=".24"/>
+<path d="M622 52V451" fill="none" stroke="#d3e2d4" stroke-opacity=".25" stroke-dasharray="3 10"/>
+<g font-family="Arial,Helvetica,sans-serif">
+<rect x="42" y="80" width="268" height="28" rx="14" fill="#e3f1b2" fill-opacity=".12" stroke="#e3f1b2" stroke-opacity=".44"/>
+<text x="56" y="98" fill="#e5f2b5" font-family="monospace" font-size="11" letter-spacing="1.4">HULAX LABS / FIELD JOURNAL 005</text>
+<text x="41" y="199" fill="#fff9ed" font-size="76" font-weight="800" letter-spacing="-3.5">THE</text>
+<text x="41" y="278" fill="#fff9ed" font-size="88" font-weight="800" letter-spacing="-4">MAKING-OF</text>
+<path d="M45 300H562" stroke="url(#line)" stroke-width="3"/>
+<text x="44" y="343" fill="#e7efca" font-size="22" font-weight="700" letter-spacing="3">HULAX STUDIO</text>
+<text x="45" y="377" fill="#b5c9cf" font-size="17">Where code, research and motion meet.</text>
+<text x="45" y="402" fill="#b5c9cf" font-size="17">An annotated field guide to the portfolio.</text>
+<text x="44" y="469" fill="#91a7a8" font-family="monospace" font-size="10.5" letter-spacing=".3">THE FOUR STUDIES / ORIGINAL CONCEPT ART</text>
+<text x="1153" y="469" text-anchor="end" fill="#b6b3bc" font-family="monospace" font-size="10.5">BUILD · LEARN · REVISE</text>
+</g>
+<g><g transform="translate(660 95)">
+<rect x="0" y="0" width="234" height="149" rx="8" fill="#f1eee3" stroke="#faf4db" stroke-opacity=".5"/>
+<path d="M0 30H234" stroke="#b3bdad" stroke-width=".8"/>
+<circle cx="15" cy="15" r="4" fill="#ff9d84"/><circle cx="28" cy="15" r="4" fill="#f6d893"/><circle cx="41" cy="15" r="4" fill="#a7c9b1"/>
+<text x="14" y="52" font-size="11" font-family="monospace" font-weight="bold" fill="#58646b">STUDY 01</text>
+<text x="14" y="75" font-size="14" font-family="monospace" font-weight="bold" fill="#26323c">TYPE / SPACE</text>
+<rect x="13" y="89" width="202" height="43" rx="4" fill="#d2f486" fill-opacity=".24"/>
+<path d="M29 101H195M29 110H125M29 119H179" stroke="#466558" stroke-width="4" stroke-linecap="round"/>
+</g><g transform="translate(911 95)">
+<rect x="0" y="0" width="234" height="149" rx="8" fill="#f1eee3" stroke="#faf4db" stroke-opacity=".5"/>
+<path d="M0 30H234" stroke="#b3bdad" stroke-width=".8"/>
+<circle cx="15" cy="15" r="4" fill="#ff9d84"/><circle cx="28" cy="15" r="4" fill="#f6d893"/><circle cx="41" cy="15" r="4" fill="#a7c9b1"/>
+<text x="14" y="52" font-size="11" font-family="monospace" font-weight="bold" fill="#58646b">STUDY 02</text>
+<text x="14" y="75" font-size="14" font-family="monospace" font-weight="bold" fill="#26323c">MOTION / DEPTH</text>
+<rect x="13" y="89" width="202" height="43" rx="4" fill="#faa891" fill-opacity=".24"/>
+<circle cx="113" cy="110" r="15" fill="none" stroke="#ae5a56" stroke-width="2"/><circle cx="113" cy="110" r="23" fill="none" stroke="#b56568" stroke-dasharray="3 7"><animateTransform attributeName="transform" type="rotate" from="0 113 110" to="360 113 110" dur="30s" repeatCount="indefinite"/></circle>
+</g><g transform="translate(660 266)">
+<rect x="0" y="0" width="234" height="149" rx="8" fill="#f1eee3" stroke="#faf4db" stroke-opacity=".5"/>
+<path d="M0 30H234" stroke="#b3bdad" stroke-width=".8"/>
+<circle cx="15" cy="15" r="4" fill="#ff9d84"/><circle cx="28" cy="15" r="4" fill="#f6d893"/><circle cx="41" cy="15" r="4" fill="#a7c9b1"/>
+<text x="14" y="52" font-size="11" font-family="monospace" font-weight="bold" fill="#58646b">STUDY 03</text>
+<text x="14" y="75" font-size="14" font-family="monospace" font-weight="bold" fill="#26323c">CONTENT / CONTEXT</text>
+<rect x="13" y="89" width="202" height="43" rx="4" fill="#a9bde5" fill-opacity=".24"/>
+<rect x="28" y="99" width="54" height="23" rx="4" fill="#6789ad"/><rect x="92" y="99" width="54" height="23" rx="4" fill="#a7bed2"/><rect x="157" y="99" width="39" height="23" rx="4" fill="#496b88"/>
+</g><g transform="translate(911 266)">
+<rect x="0" y="0" width="234" height="149" rx="8" fill="#f1eee3" stroke="#faf4db" stroke-opacity=".5"/>
+<path d="M0 30H234" stroke="#b3bdad" stroke-width=".8"/>
+<circle cx="15" cy="15" r="4" fill="#ff9d84"/><circle cx="28" cy="15" r="4" fill="#f6d893"/><circle cx="41" cy="15" r="4" fill="#a7c9b1"/>
+<text x="14" y="52" font-size="11" font-family="monospace" font-weight="bold" fill="#58646b">STUDY 04</text>
+<text x="14" y="75" font-size="14" font-family="monospace" font-weight="bold" fill="#26323c">MODEL / RESPONSE</text>
+<rect x="13" y="89" width="202" height="43" rx="4" fill="#e7aff0" fill-opacity=".24"/>
+<path d="M29 120L60 102L92 117L126 101L164 113L198 98" fill="none" stroke="#9256a8" stroke-width="3"/><circle cx="198" cy="98" r="5" fill="#8f55a9"/>
+</g></g>
+<path d="M657 82l7-12M668 80l8-15" stroke="#d6e3a6" stroke-width="1.5"/>
+<path d="M1154 401l-16 19M1157 410l-11 13" stroke="#edb3ac" stroke-width="1.5"/>
+</g></svg>
