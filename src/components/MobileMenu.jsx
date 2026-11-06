@@ -70,7 +70,7 @@ export const MobileMenu = ({ isOpen, onClose }) => {
 
             {/* Menu Panel */}
             <div
-                className="fixed top-0 right-0 h-full w-[min(88vw,22rem)] sm:w-[min(80vw,24rem)] md:w-[min(55vw,26rem)] max-w-md bg-[var(--panel)]/80 backdrop-blur-xl border-l border-[var(--border)] rounded-l-3xl z-50 xl:hidden overflow-y-auto overscroll-contain transform transition-transform duration-300 ease-out flex flex-col shadow-2xl"
+                className="fixed top-0 right-0 h-[100dvh] w-[min(88vw,22rem)] sm:w-[min(80vw,24rem)] md:w-[min(55vw,26rem)] max-w-md bg-[var(--panel)]/80 backdrop-blur-xl border-l border-[var(--border)] rounded-l-3xl z-50 xl:hidden overflow-y-auto overscroll-contain transform transition-transform duration-300 ease-out flex flex-col shadow-2xl"
                 role="dialog"
                 aria-modal="true"
                 aria-label="Mobile navigation"
@@ -87,13 +87,13 @@ export const MobileMenu = ({ isOpen, onClose }) => {
                 </button>
 
                 {/* Navigation Links */}
-                <nav className="flex flex-col gap-2 px-4 sm:px-6 pt-28 pb-6">
+                <nav className="flex flex-col gap-1 px-4 sm:px-6 pt-24 pb-3">
                     {navLinks.map((link, index) => (
                         <Link
                             key={link.href}
                             href={link.href}
                             onClick={onClose}
-                            className="group relative block w-fit py-2 text-sm sm:text-base font-semibold tracking-widest text-white transition-all duration-300 hover:text-[var(--accent)]"
+                            className="group relative block w-fit py-1.5 text-sm sm:text-base font-semibold tracking-widest text-white transition-all duration-300 hover:text-[var(--accent)]"
                             style={{ animationDelay: `${index * 50}ms` }}
                         >
                             <span className="relative z-10">{link.label}</span>
@@ -101,6 +101,9 @@ export const MobileMenu = ({ isOpen, onClose }) => {
                         </Link>
                     ))}
                 </nav>
+
+                {/* Keep seasonal themes in the first visible portion of the scrollable drawer. */}
+                <MobileThemePicker />
 
                 {/* Roles Links */}
                 <div className="px-4 sm:px-6 pb-6 flex flex-col gap-3 border-t border-white/10 pt-6">
@@ -125,8 +128,6 @@ export const MobileMenu = ({ isOpen, onClose }) => {
                     <SocialIcon href="https://kaggle.com" label="Kaggle" path="M18.825 23.859c-.022.092-.117.141-.281.141h-3.139c-.187 0-.351-.082-.492-.248l-5.178-6.589-1.448 1.373v5.128c0 .246-.128.369-.386.369h-3.084c-.258 0-.386-.123-.386-.369v-23.31c0-.246.128-.369.386-.369h3.084c.258 0 .386.123.386.369v14.557l6.549-6.846c.14-.153.304-.229.492-.229h3.314c.152 0 .24.047.264.141.023.082-.012.176-.105.281l-5.688 5.688 6.021 9.242c.094.141.117.258.07.352z" />
                 </div>
 
-                {/* Named, visual season themes are exclusive to the mobile side panel. */}
-                <MobileThemePicker />
             </div>
         </>
     );

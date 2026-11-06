@@ -47,25 +47,22 @@ export const MobileThemePicker = () => {
     const selected = mobileThemes.find((theme) => theme.id === season);
 
     return (
-        <section className="border-t border-[var(--border)]/20 px-4 pb-7 pt-6 sm:px-6" aria-labelledby="mobile-theme-heading">
-            <div className="mb-4 flex items-start gap-3">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[var(--border)]/20 bg-[var(--accent)]/10 text-[var(--foreground)]">
-                    <Palette className="h-5 w-5" aria-hidden="true" />
+        <section className="border-t border-[var(--border)]/20 px-4 pb-4 pt-3 sm:px-6" aria-labelledby="mobile-theme-heading">
+            <div className="mb-2.5 flex items-center gap-2.5">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-[var(--border)]/20 bg-[var(--accent)]/10 text-[var(--foreground)]">
+                    <Palette className="h-4 w-4" aria-hidden="true" />
                 </div>
                 <div className="min-w-0">
                     <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--muted)]">
                         Make it yours
                     </p>
-                    <h3 id="mobile-theme-heading" className="text-base font-bold leading-tight text-[var(--foreground)]">
+                    <h3 id="mobile-theme-heading" className="text-sm font-bold leading-tight text-[var(--foreground)]">
                         Choose your atmosphere
                     </h3>
-                    <p className="mt-1 text-xs leading-relaxed text-[var(--muted)]">
-                        Four seasons. Four different moods.
-                    </p>
                 </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-2.5">
+            <div className="grid grid-cols-2 gap-2">
                 {mobileThemes.map((theme) => {
                     const Icon = theme.Icon;
                     const active = season === theme.id;
@@ -77,27 +74,24 @@ export const MobileThemePicker = () => {
                             onClick={() => setSeason(theme.id)}
                             aria-pressed={active}
                             aria-label={`${theme.season}: ${theme.name} theme`}
-                            className={`group relative flex min-h-[130px] min-w-0 flex-col justify-between overflow-hidden rounded-2xl border p-3 text-left text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] ${active ? "border-white/90 ring-2 ring-[var(--accent)] ring-offset-2 ring-offset-[var(--panel)]" : "border-white/15 hover:border-white/60"}`}
+                            className={`group relative flex min-h-[79px] min-w-0 flex-col justify-between overflow-hidden rounded-xl border p-2.5 text-left text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] ${active ? "border-white/90 ring-2 ring-[var(--accent)] ring-offset-2 ring-offset-[var(--panel)]" : "border-white/15 hover:border-white/60"}`}
                             style={{ background: theme.background }}
                         >
                             <span className="pointer-events-none absolute -right-5 -top-6 h-24 w-24 rounded-full bg-white/10 blur-2xl" aria-hidden="true" />
                             <span className="relative z-10 flex w-full items-start justify-between gap-2">
-                                <Icon className="h-5 w-5 shrink-0" style={{ color: theme.glow }} aria-hidden="true" />
+                                <Icon className="h-4 w-4 shrink-0" style={{ color: theme.glow }} aria-hidden="true" />
                                 {active && (
                                     <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-slate-900" aria-hidden="true">
                                         <Check className="h-3.5 w-3.5" strokeWidth={3} />
                                     </span>
                                 )}
                             </span>
-                            <span className="relative z-10 mt-3 flex min-w-0 flex-col gap-0.5">
+                            <span className="relative z-10 mt-1 flex min-w-0 flex-col gap-0">
                                 <span className="text-[9px] font-bold uppercase tracking-[0.16em] text-white/75">
                                     {theme.season}
                                 </span>
-                                <span className="break-words text-sm font-bold leading-tight">
+                                <span className="break-words text-xs font-bold leading-tight">
                                     {theme.name}
-                                </span>
-                                <span className="text-[10px] leading-snug text-white/80">
-                                    {theme.description}
                                 </span>
                             </span>
                         </button>
@@ -105,7 +99,7 @@ export const MobileThemePicker = () => {
                 })}
             </div>
 
-            <p className="mt-4 text-center text-[11px] font-medium text-[var(--muted)]" aria-live="polite">
+            <p className="mt-2.5 text-center text-[10px] font-medium text-[var(--muted)]" aria-live="polite">
                 {selected ? `Selected: ${selected.name} · ${selected.season}` : "Select a season to change the look."}
             </p>
         </section>

@@ -39,12 +39,11 @@ export const Hero = ({ resume }) => {
               <RevealOnScroll delay={200}>
                 <div className="font-semibold leading-[1.1] tracking-tight text-[var(--foreground)]">
                   <h1 className="text-[clamp(1.45rem,7vw,6.5rem)] md:text-[clamp(3rem,7.2vw,7.5rem)] 2xl:text-9xl mb-0 flex flex-col gap-0">
-                    {/* Narrow phones use a staggered four-line name beside the portrait. */}
-                    <span className="flex w-full min-w-0 flex-col items-end gap-0 leading-[1.06] text-right md:hidden">
-                      <span className="mr-[12%]">I</span>
-                      <span className="mr-[7%]">am</span>
-                      <span className="mr-[2%]">Rahul</span>
-                      <span className="text-stroke text-[var(--foreground)]/10" style={{ WebkitTextStrokeWidth: "1.3px" }}>Khanke</span>
+                    {/* On phones, a staggered three-line name follows the portrait without moving it. */}
+                    <span className="flex w-full min-w-0 flex-col items-end gap-0 leading-[1.08] text-right md:hidden">
+                      <span className="mr-[10%] whitespace-nowrap">I am</span>
+                      <span className="mr-[4%] whitespace-nowrap">Rahul</span>
+                      <span className="text-stroke whitespace-nowrap text-[var(--foreground)]/10" style={{ WebkitTextStrokeWidth: "1.3px" }}>Khanke</span>
                     </span>
                     {/* Restore the original two-line composition at tablet/laptop and desktop widths. */}
                     <span className="hidden md:inline-block whitespace-nowrap transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_35px_var(--accent)] hover:brightness-125 origin-left w-fit py-1">
