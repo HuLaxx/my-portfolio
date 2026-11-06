@@ -138,7 +138,7 @@ export const AIChatWidget = () => {
                 initial={{ width: '2.5rem' }}
                 animate={{ width: isOpen ? 'auto' : '2.5rem' }}
                 transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                className={`fixed bottom-6 right-6 z-50 h-10 rounded-full backdrop-blur-2xl border overflow-hidden flex items-center group ${getButtonStyle()}`}
+                className={`fixed bottom-6 right-4 sm:right-6 z-50 h-10 rounded-full backdrop-blur-2xl border overflow-hidden flex items-center group ${getButtonStyle()}`}
                 aria-label={isOpen ? 'Close AI chat' : 'Open AI chat'}
             >
                 {isOpen && (
@@ -211,7 +211,7 @@ export const AIChatWidget = () => {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
                         transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-                        className="fixed bottom-[4.5rem] right-6 z-50 w-[320px] max-w-[calc(100vw-3rem)] rounded-2xl overflow-hidden shadow-2xl border border-[var(--border)] backdrop-blur-2xl"
+                        className="fixed bottom-[4.5rem] right-4 sm:right-6 z-50 w-[320px] max-w-[calc(100vw-2rem)] max-h-[calc(100dvh-6rem)] flex flex-col rounded-2xl overflow-hidden shadow-2xl border border-[var(--border)] backdrop-blur-2xl"
                         style={{ background: isLightMode ? 'radial-gradient(circle at top left, var(--accent) -20%, white 80%)' : 'var(--card)' }}
                     >
                         {/* Header */}
@@ -238,7 +238,7 @@ export const AIChatWidget = () => {
 
                         {/* Messages */}
                         <div
-                            className="h-[280px] overflow-y-auto p-3 space-y-3 scrollbar-thin scrollbar-thumb-[var(--accent)]/20 scrollbar-track-transparent overscroll-contain"
+                            className="h-[min(280px,40dvh)] min-h-0 overflow-y-auto p-3 space-y-3 scrollbar-thin scrollbar-thumb-[var(--accent)]/20 scrollbar-track-transparent overscroll-contain"
                             onWheel={(e) => e.stopPropagation()}
                         >
                             {messages.length === 0 && (

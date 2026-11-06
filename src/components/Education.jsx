@@ -4,8 +4,8 @@ import { RevealOnScroll } from "./RevealOnScroll";
 export const Education = ({ resume }) => {
     return (
         <section id="education" className="relative z-10 py-10 md:py-12">
-            <div className="mx-auto w-[98%] md:w-full md:max-w-6xl px-4 sm:px-6 md:px-12">
-                <div className="p-4 sm:p-8 md:p-12">
+            <div className="mx-auto w-[98%] md:w-full md:max-w-6xl px-4 sm:px-6 md:px-6 xl:px-12">
+                <div className="p-4 sm:p-8 md:p-8 xl:p-12">
                     <RevealOnScroll>
                         <div className="mb-12">
                             <div className="flex items-center gap-3 sm:gap-4 mb-4">
@@ -59,7 +59,7 @@ export const Education = ({ resume }) => {
                                                     <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]"></span>
                                                     Dissertation Project
                                                 </span>
-                                                <p className="text-[var(--foreground)] font-medium text-lg leading-relaxed group-hover:text-[var(--text-hover)] transition-colors duration-500 max-w-[80%] sm:max-w-[65%]">
+                                                <p className="text-[var(--foreground)] font-medium text-lg leading-relaxed group-hover:text-[var(--text-hover)] transition-colors duration-500 max-w-full 2xl:max-w-[65%]">
                                                     {study.dissertation}
                                                 </p>
                                             </div>
@@ -93,7 +93,7 @@ export const Education = ({ resume }) => {
 
                                     {/* Right-Side Hover Expansion - Slide-in Drawer */}
                                     {study.slug && (
-                                        <div className="hidden md:flex absolute right-0 top-0 bottom-0 w-1/3 h-full bg-gradient-to-l from-[var(--card)] via-[var(--card)]/90 to-transparent opacity-80 group-hover:opacity-100 group-hover:-translate-x-2 transition-all duration-500 ease-out flex-col justify-center items-end pr-8 md:pr-12 pointer-events-none z-20">
+                                        <div className="hidden 2xl:flex absolute right-0 top-0 bottom-0 w-1/3 h-full bg-gradient-to-l from-[var(--card)] via-[var(--card)]/90 to-transparent opacity-80 group-hover:opacity-100 group-hover:-translate-x-2 transition-all duration-500 ease-out flex-col justify-center items-end pr-8 md:pr-12 pointer-events-none z-20">
                                             <div className="flex flex-col items-end gap-3 text-right">
                                                 <span className="p-3 rounded-full border border-[var(--accent)] bg-[var(--accent)]/10 text-[var(--accent)] group-hover:bg-[var(--accent)] group-hover:text-black transition-all duration-500 shadow-[0_0_15px_rgba(0,0,0,0.2)]">
                                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

@@ -45,7 +45,7 @@ export const AudioPlayer = () => {
     };
 
     return (
-        <div className="fixed bottom-6 left-8 z-50 flex items-center">
+        <div className="fixed bottom-6 left-4 sm:left-8 z-50 flex items-center">
             <audio ref={audioRef} src="/audio/Cold_Neffex.mp3" loop />
 
             <motion.button

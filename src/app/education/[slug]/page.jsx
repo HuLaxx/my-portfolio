@@ -37,9 +37,9 @@ export default async function EducationPage({ params }) {
     <div className="relative min-h-screen w-full overflow-hidden text-[var(--foreground)]">
       <Navbar />
 
-      <main className="relative z-10 mx-auto w-full max-w-7xl px-4 md:px-12 pt-32 pb-24">
+      <main className="relative z-10 mx-auto w-full max-w-7xl px-4 md:px-6 xl:px-12 pt-32 pb-24">
         <RevealOnScroll>
-          <div className="mb-24">
+          <div className="mb-12 2xl:mb-24">
             <Link
               href="/#education"
               className="group inline-flex items-center gap-3 text-sm font-bold tracking-[0.2em] uppercase text-[var(--muted)] hover:text-[var(--foreground)] mb-12 transition-all duration-300"
@@ -66,7 +66,7 @@ export default async function EducationPage({ params }) {
               <span className="font-mono text-sm font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
                 {study.year}
               </span>
-              <h1 className="display-heading text-6xl md:text-9xl font-bold text-[var(--foreground)] tracking-tighter">
+              <h1 className="display-heading text-[clamp(2.4rem,9vw,3.75rem)] md:text-[clamp(3.5rem,5.6vw,6rem)] 2xl:text-9xl break-words font-bold text-[var(--foreground)] tracking-tighter">
                 {study.degree}
               </h1>
               <h2 className="text-2xl md:text-4xl font-medium text-[var(--muted)] mt-2">
@@ -79,7 +79,7 @@ export default async function EducationPage({ params }) {
         <div className="flex flex-col gap-12">
           {/* Dissertation Section - Priority 1 */}
           <RevealOnScroll delay={100}>
-            <div className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8 md:p-10 backdrop-blur-xl relative overflow-hidden">
+            <div className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-5 sm:p-8 md:p-8 xl:p-10 backdrop-blur-xl relative overflow-hidden">
               <div className="absolute top-0 right-0 p-32 bg-[var(--accent)]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
               <p className="font-mono text-sm uppercase tracking-[0.25em] text-[var(--accent)] mb-6 flex items-center gap-3">
                 <span className="h-[1px] w-8 bg-[var(--accent)]"></span>
@@ -96,7 +96,7 @@ export default async function EducationPage({ params }) {
 
           {/* Modules Section */}
           <RevealOnScroll delay={200}>
-            <div className="rounded-3xl border border-[var(--border)] bg-[var(--card)]/50 p-8">
+            <div className="rounded-3xl border border-[var(--border)] bg-[var(--card)]/50 p-5 sm:p-8">
               <p className="font-mono text-xs uppercase tracking-[0.25em] text-[var(--muted)] mb-8">
                 Key Modules
               </p>
@@ -118,7 +118,7 @@ export default async function EducationPage({ params }) {
             <RevealOnScroll delay={300}>
               <div className="grid md:grid-cols-2 gap-8">
                 {study.skills && (
-                  <div className="rounded-3xl border border-[var(--border)] bg-[var(--card)]/50 p-8">
+                  <div className="rounded-3xl border border-[var(--border)] bg-[var(--card)]/50 p-5 sm:p-8">
                     <p className="font-mono text-xs uppercase tracking-[0.25em] text-[var(--muted)] mb-6">
                       Skills
                     </p>
@@ -134,7 +134,7 @@ export default async function EducationPage({ params }) {
                 )}
 
                 {study.tools && (
-                  <div className="rounded-3xl border border-[var(--border)] bg-[var(--card)]/50 p-8">
+                  <div className="rounded-3xl border border-[var(--border)] bg-[var(--card)]/50 p-5 sm:p-8">
                     <p className="font-mono text-xs uppercase tracking-[0.25em] text-[var(--muted)] mb-6">
                       Tools & Tech
                     </p>

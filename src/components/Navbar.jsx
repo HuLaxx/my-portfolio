@@ -83,7 +83,7 @@ export const Navbar = () => {
         <SignatureLogo />
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex lg:flex-1 items-center justify-end gap-6">
+        <div className="hidden xl:flex xl:flex-1 items-center justify-end gap-6">
           {/* Center block: nav links */}
           <div className="flex">
             <ul
@@ -134,7 +134,7 @@ export const Navbar = () => {
 
         {/* Mobile Menu Toggle */}
         <button
-          className="lg:hidden p-2 text-[var(--foreground)]"
+          className="xl:hidden p-2 text-[var(--foreground)]"
           onClick={openMenu}
           aria-label="Menu"
         >

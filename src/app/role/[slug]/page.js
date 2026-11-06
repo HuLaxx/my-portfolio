@@ -24,10 +24,10 @@ export default async function RolePage({ params }) {
         <div className="relative min-h-screen w-full overflow-hidden text-[var(--foreground)]">
             <Navbar />
 
-            <main className="relative z-10 mx-auto w-full max-w-7xl px-4 md:px-12 pt-32 pb-24">
+            <main className="relative z-10 mx-auto w-full max-w-7xl px-4 md:px-6 xl:px-12 pt-32 pb-24">
                 {/* Hero Section */}
                 <RevealOnScroll>
-                    <div className="mb-24">
+                    <div className="mb-12 2xl:mb-24">
                         <Link href="/" className="group inline-flex items-center gap-3 text-sm font-bold tracking-[0.2em] uppercase text-[var(--muted)] hover:text-[var(--foreground)] mb-12 transition-all duration-300">
                             <span className="p-2 rounded-full border border-[var(--border)] bg-[var(--card)] group-hover:bg-[var(--accent)] group-hover:border-[var(--accent)] transition-colors duration-300">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:text-black transition-colors duration-300">
@@ -36,7 +36,7 @@ export default async function RolePage({ params }) {
                             </span>
                             Back to Home
                         </Link>
-                        <h1 className="display-heading text-6xl md:text-9xl font-bold text-[var(--foreground)] mb-8 tracking-tighter">
+                        <h1 className="display-heading text-[clamp(2.4rem,9vw,3.75rem)] md:text-[clamp(3.5rem,5.6vw,6rem)] 2xl:text-9xl break-words font-bold text-[var(--foreground)] mb-8 tracking-tighter">
                             {role.title}
                         </h1>
                         <p className="text-xl md:text-2xl text-[var(--muted)] max-w-3xl leading-relaxed border-l-2 border-[var(--accent)] pl-6">
@@ -47,7 +47,7 @@ export default async function RolePage({ params }) {
 
                 {/* Stats Grid */}
                 <RevealOnScroll delay={100}>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-32">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-16 2xl:mb-32">
                         {role.stats.map((stat, index) => (
                             <div key={index} className="p-8 rounded-3xl bg-[var(--card)] border border-[var(--border)] backdrop-blur-sm hover:border-[var(--accent)] transition-all duration-500 group">
                                 <p className="text-4xl md:text-5xl font-bold text-[var(--foreground)] mb-2 group-hover:scale-110 transition-transform origin-left">
@@ -62,9 +62,9 @@ export default async function RolePage({ params }) {
                 </RevealOnScroll>
 
                 {/* Skills & Projects Split */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 xl:gap-16">
                     {/* Skills Sidebar */}
-                    <div className="lg:col-span-4">
+                    <div className="xl:col-span-4">
                         <RevealOnScroll delay={200}>
                             <h3 className="font-mono text-sm uppercase tracking-[0.2em] text-[var(--muted)] mb-8">
                                 Core Competencies
@@ -83,7 +83,7 @@ export default async function RolePage({ params }) {
                     </div>
 
                     {/* Projects List */}
-                    <div className="lg:col-span-8">
+                    <div className="xl:col-span-8">
                         <RevealOnScroll delay={300}>
                             <h3 className="font-mono text-sm uppercase tracking-[0.2em] text-[var(--muted)] mb-8">
                                 Selected Work
@@ -101,13 +101,13 @@ export default async function RolePage({ params }) {
                                             </h4>
                                             <span className="font-mono text-xs text-[var(--muted)]">{project.year}</span>
                                         </div>
-                                        <p className="text-[var(--muted)] mb-6 max-w-xl md:max-w-[60%]">
+                                        <p className="text-[var(--muted)] mb-6 max-w-xl 2xl:max-w-[60%]">
                                             {project.summary}
                                         </p>
 
                                         {/* GitHub-style Language Bar */}
                                         {project.languages && (
-                                            <div className="mb-6 md:max-w-[60%]">
+                                            <div className="mb-6 2xl:max-w-[60%]">
                                                 <div className="flex h-2 w-full overflow-hidden rounded-full bg-[var(--card)] mb-2">
                                                     {Object.entries(project.languages).map(([lang, pct], i) => (
                                                         <div
@@ -128,7 +128,7 @@ export default async function RolePage({ params }) {
                                             </div>
                                         )}
 
-                                        <div className="hidden md:flex absolute right-0 top-0 bottom-0 w-1/3 h-full bg-gradient-to-l from-[var(--card)] via-[var(--card)]/90 to-transparent opacity-80 group-hover:opacity-100 group-hover:-translate-x-2 transition-all duration-500 ease-out flex-col justify-center items-end pr-8 pointer-events-none">
+                                        <div className="hidden 2xl:flex absolute right-0 top-0 bottom-0 w-1/3 h-full bg-gradient-to-l from-[var(--card)] via-[var(--card)]/90 to-transparent opacity-80 group-hover:opacity-100 group-hover:-translate-x-2 transition-all duration-500 ease-out flex-col justify-center items-end pr-8 pointer-events-none">
                                             <div className="flex flex-col items-end gap-3 text-right">
                                                 <span className="p-3 rounded-full border border-[var(--accent)] bg-[var(--accent)]/10 text-[var(--accent)] group-hover:bg-[var(--accent)] group-hover:text-black transition-all duration-500 shadow-[0_0_15px_rgba(0,0,0,0.2)]">
                                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
