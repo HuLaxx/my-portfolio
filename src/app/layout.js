@@ -66,8 +66,8 @@ export const stripExtensionAttrs = `
 export const metadata = {
   title: "Rahul Khanke",
   description:
-    "Next.js 15 + React 19 portfolio showcasing data science projects, ML models, and AI engineering work.",
-  metadataBase: new URL("https://rahulkhanke.dev"),
+    "An interactive portfolio by Rahul Khanke featuring AI engineering, data science, creative web interfaces, and source-backed project stories.",
+  metadataBase: new URL("https://portfolio.hulax.uk"),
   icons: {
     icon: "/icon.ico",
     shortcut: "/icon.ico",
@@ -76,8 +76,8 @@ export const metadata = {
   openGraph: {
     title: "Rahul Khanke",
     description:
-      "Building robust data pipelines, training state-of-the-art ML models, and deploying scalable AI solutions.",
-    url: "https://rahulkhanke.dev",
+      "Explore AI, data engineering and creative frontend projects, with case studies, an interactive constellation and an open making-of studio.",
+    url: "https://portfolio.hulax.uk/",
     siteName: "Rahul Khanke Portfolio",
   },
 };
