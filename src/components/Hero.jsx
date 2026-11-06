@@ -16,7 +16,7 @@ export const Hero = ({ resume }) => {
       <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] rounded-full bg-[var(--secondary)]/10 blur-[140px] pointer-events-none mix-blend-screen" />
 
       {/* Increased width to max-w-[95%] */}
-      <div className="mx-auto w-full max-w-[95%] px-4 md:px-6 xl:px-8 pt-28 sm:pt-32 lg:pt-28 relative z-10">
+      <div className="mx-auto w-full max-w-[95%] px-4 md:px-6 xl:px-8 pt-24 sm:pt-28 lg:pt-28 relative z-10">
 
         {/* Main Content Row */}
         <div className="grid grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] items-center gap-x-2 gap-y-8 sm:gap-x-4 sm:gap-y-10 md:gap-x-6 md:gap-y-12 lg:flex lg:flex-row lg:items-stretch lg:justify-between lg:gap-6 xl:gap-8 2xl:gap-12 lg:min-h-[85vh]">
@@ -26,7 +26,7 @@ export const Hero = ({ resume }) => {
             className="contents lg:flex lg:w-[60%] xl:w-[55%] lg:min-w-0 lg:flex-col lg:justify-start lg:gap-5 lg:py-6 lg:px-4 lg:pl-8 xl:pl-16 2xl:pl-32 lg:pr-4 lg:relative lg:z-10"
           >
             {/* Top Group: Label + Name */}
-            <div className="col-start-1 row-start-1 min-w-0 flex flex-col justify-center lg:justify-start gap-4 sm:gap-6 md:gap-8 lg:gap-1 px-1 sm:px-3 lg:px-0 py-4 sm:py-6 md:py-8 lg:py-0 relative z-10">
+            <div className="col-start-1 row-start-1 min-w-0 flex flex-col justify-center lg:justify-start gap-8 sm:gap-10 md:gap-12 lg:gap-3 xl:gap-4 2xl:gap-1 px-1 sm:px-3 lg:px-0 py-1 sm:py-2 md:py-3 lg:py-0 relative z-10">
               <RevealOnScroll delay={100}>
                 <div className="flex items-center gap-3 sm:gap-4">
                   <div className="h-[2px] sm:h-[3px] w-10 sm:w-14 bg-[var(--accent)]"></div>
@@ -38,7 +38,7 @@ export const Hero = ({ resume }) => {
 
               <RevealOnScroll delay={200}>
                 <div className="font-semibold leading-[1.1] tracking-tight text-[var(--foreground)]">
-                  <h1 className="text-[clamp(1.9rem,8.5vw,6rem)] lg:text-[clamp(3.1rem,5.4vw,5.5rem)] xl:text-[clamp(3.6rem,5.5vw,6.25rem)] 2xl:text-9xl mb-0 flex flex-col gap-0">
+                  <h1 className="text-[clamp(1.9rem,10vw,6.8rem)] lg:text-[clamp(3.5rem,6.2vw,6rem)] xl:text-[clamp(4.2rem,6vw,6.5rem)] 2xl:text-9xl mb-0 flex flex-col gap-0">
                     {/* On phones and tablets, the staggered three-line name fits beside the portrait. */}
                     <span className="flex w-full min-w-0 flex-col items-end gap-0 leading-[1.08] text-right lg:hidden">
                       <span className="mr-[10%] whitespace-nowrap">I am</span>
