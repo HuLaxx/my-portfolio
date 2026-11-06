@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 486" role="img" aria-labelledby="t d">
+<title id="t">HuLaX Studio — an exploded view of the portfolio's actual systems</title>
+<desc id="d">An editorial architectural map of four distinct source-level layers: Next.js and 3D UI, optional Sanity content with built-in fallbacks, configurable Groq and Gemini AI chat, and GitHub signals with Vercel observability. These are code connections, not a statement that optional third-party services are currently active.</desc>
+<defs>
+ <pattern id="pencil" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#526d67" stroke-width=".6" stroke-opacity=".11"/></pattern>
+ <clipPath id="clip"><rect width="1200" height="486" rx="17"/></clipPath>
+</defs>
+<g clip-path="url(#clip)">
+ <rect width="1200" height="486" fill="#f2f0e9"/>
+ <rect width="1200" height="486" fill="url(#pencil)"/>
+ <rect width="1200" height="11" fill="#293e40"/>
+ <text x="35" y="47" fill="#24393d" font-family="Arial,Helvetica,sans-serif" font-size="29" font-weight="800" letter-spacing="-.7">EXPLORING THE EXPERIENCE</text>
+ <text x="35" y="71" fill="#6d827f" font-family="monospace" font-size="12" letter-spacing=".7">AN EXPLODED VIEW OF THE SOURCE — CODE PATHS, CONTENT AND OPTIONAL SERVICES</text>
+ <path d="M35 90H1165" fill="none" stroke="#b5b9ac"/>
+ <g transform="translate(34,123)">
+<rect width="268" height="257" rx="11" fill="#fffdfa" stroke="#b7b7b3" stroke-width="1"/>
+<rect x="0" y="0" width="268" height="73" rx="11" fill="#cce8a0"/><path d="M0 60H268V73H0Z" fill="#cce8a0"/>
+<rect x="15" y="13" width="36" height="33" rx="7" fill="#456456" fill-opacity=".13"/>
+<text x="33" y="36" fill="#456456" text-anchor="middle" font-family="monospace" font-weight="700" font-size="16">01</text>
+<text x="62" y="36" fill="#2a353a" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="19">THE STAGE</text>
+<text x="15" y="101" fill="#6f8385" font-size="11" font-family="monospace" letter-spacing=".5">REPO SOURCE</text>
+<path d="M14 112H250" stroke="#cfccc6"/>
+<g font-family="monospace" font-size="13" fill="#4a565b">
+ <text x="16" y="142">React / Next.js 16</text>
+ <text x="16" y="176">Framer Motion</text>
+ <text x="16" y="210">Three.js background</text>
+</g>
+<g fill="#456456"><circle cx="243" cy="139" r="3"/><circle cx="243" cy="173" r="3"/><circle cx="243" cy="207" r="3"/></g>
+<rect x="13" y="228" width="242" height="16" rx="4" fill="#cce8a0" fill-opacity=".55"/>
+</g><g transform="translate(327,123)">
+<rect width="268" height="257" rx="11" fill="#fffdfa" stroke="#b7b7b3" stroke-width="1"/>
+<rect x="0" y="0" width="268" height="73" rx="11" fill="#ecd6fa"/><path d="M0 60H268V73H0Z" fill="#ecd6fa"/>
+<rect x="15" y="13" width="36" height="33" rx="7" fill="#7b558a" fill-opacity=".13"/>
+<text x="33" y="36" fill="#7b558a" text-anchor="middle" font-family="monospace" font-weight="700" font-size="16">02</text>
+<text x="62" y="36" fill="#2a353a" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="19">THE STORIES</text>
+<text x="15" y="101" fill="#6f8385" font-size="11" font-family="monospace" letter-spacing=".5">REPO SOURCE</text>
+<path d="M14 112H250" stroke="#cfccc6"/>
+<g font-family="monospace" font-size="13" fill="#4a565b">
+ <text x="16" y="142">Fallback content</text>
+ <text x="16" y="176">Sanity when configured</text>
+ <text x="16" y="210">Case studies + roles</text>
+</g>
+<g fill="#7b558a"><circle cx="243" cy="139" r="3"/><circle cx="243" cy="173" r="3"/><circle cx="243" cy="207" r="3"/></g>
+<rect x="13" y="228" width="242" height="16" rx="4" fill="#ecd6fa" fill-opacity=".55"/>
+</g><g transform="translate(620,123)">
+<rect width="268" height="257" rx="11" fill="#fffdfa" stroke="#b7b7b3" stroke-width="1"/>
+<rect x="0" y="0" width="268" height="73" rx="11" fill="#ffd8c8"/><path d="M0 60H268V73H0Z" fill="#ffd8c8"/>
+<rect x="15" y="13" width="36" height="33" rx="7" fill="#905e55" fill-opacity=".13"/>
+<text x="33" y="36" fill="#905e55" text-anchor="middle" font-family="monospace" font-weight="700" font-size="16">03</text>
+<text x="62" y="36" fill="#2a353a" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="19">THE VOICE</text>
+<text x="15" y="101" fill="#6f8385" font-size="11" font-family="monospace" letter-spacing=".5">REPO SOURCE</text>
+<path d="M14 112H250" stroke="#cfccc6"/>
+<g font-family="monospace" font-size="13" fill="#4a565b">
+ <text x="16" y="142">Edge chat endpoint</text>
+ <text x="16" y="176">Groq · if configured</text>
+ <text x="16" y="210">Gemini fallback</text>
+</g>
+<g fill="#905e55"><circle cx="243" cy="139" r="3"/><circle cx="243" cy="173" r="3"/><circle cx="243" cy="207" r="3"/></g>
+<rect x="13" y="228" width="242" height="16" rx="4" fill="#ffd8c8" fill-opacity=".55"/>
+</g><g transform="translate(913,123)">
+<rect width="268" height="257" rx="11" fill="#fffdfa" stroke="#b7b7b3" stroke-width="1"/>
+<rect x="0" y="0" width="268" height="73" rx="11" fill="#cee1f6"/><path d="M0 60H268V73H0Z" fill="#cee1f6"/>
+<rect x="15" y="13" width="36" height="33" rx="7" fill="#4c6892" fill-opacity=".13"/>
+<text x="33" y="36" fill="#4c6892" text-anchor="middle" font-family="monospace" font-weight="700" font-size="16">04</text>
+<text x="62" y="36" fill="#2a353a" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="19">THE SIGNAL</text>
+<text x="15" y="101" fill="#6f8385" font-size="11" font-family="monospace" letter-spacing=".5">REPO SOURCE</text>
+<path d="M14 112H250" stroke="#cfccc6"/>
+<g font-family="monospace" font-size="13" fill="#4a565b">
+ <text x="16" y="142">GitHub repo metadata</text>
+ <text x="16" y="176">Vercel analytics</text>
+ <text x="16" y="210">Verification still needed</text>
+</g>
+<g fill="#4c6892"><circle cx="243" cy="139" r="3"/><circle cx="243" cy="173" r="3"/><circle cx="243" cy="207" r="3"/></g>
+<rect x="13" y="228" width="242" height="16" rx="4" fill="#cee1f6" fill-opacity=".55"/>
+</g>
+ <g stroke="#697b77" stroke-width="1.5" stroke-dasharray="5 5" fill="none">
+ <path d="M300 245H325"/><path d="M593 245H618"/><path d="M886 245H911"/>
+ </g>
+ <g fill="#6d8b75"><path d="M326 239l9 6-9 6z"/><path d="M619 239l9 6-9 6z"/><path d="M912 239l9 6-9 6z"/></g>
+ <path d="M35 398H1165" stroke="#aab4aa" stroke-width="1"/>
+ <text x="37" y="425" fill="#355a5c" font-family="monospace" font-size="12">CLIENT INTERACTION ↔ SERVER CONTENT/API ↔ EXTERNAL PROVIDERS, WHEN CONFIGURED</text>
+ <text x="37" y="451" fill="#915a54" font-family="monospace" font-size="12">BOUNDARIES: NO AUTOMATIC GUARANTEE OF LIVE AI, SANITY OR METADATA ON DEPLOYMENT.</text>
+ <text x="1154" y="472" text-anchor="end" fill="#9a8f80" font-family="monospace" font-size="10">FIELD NOTES 005 / ORIGINAL ARCHITECTURAL STUDY</text>
+</g></svg>
