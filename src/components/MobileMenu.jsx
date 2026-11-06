@@ -44,14 +44,7 @@ const contacts = [
 ];
 
 export const MobileMenu = ({ isOpen, onClose }) => {
-    useEffect(() => {
-        if (!isOpen) return undefined;
-        const previousOverflow = document.body.style.overflow;
-        document.body.style.overflow = "hidden";
-        return () => {
-            document.body.style.overflow = previousOverflow;
-        };
-    }, [isOpen]);
+    // MenuProvider owns body-scroll locking, so this drawer doesn't apply a second lock.
 
     useEffect(() => {
         if (!isOpen) return undefined;
@@ -162,6 +155,7 @@ export const MobileMenu = ({ isOpen, onClose }) => {
                                 href={href}
                                 target={href.startsWith("mailto:") ? undefined : "_blank"}
                                 rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+                                onClick={onClose}
                                 className="group flex min-w-0 flex-col items-center justify-center gap-1.5 rounded-xl border border-[var(--border)]/20 bg-[var(--accent)]/10 px-1 py-3 text-center transition-all hover:border-[var(--accent)] hover:bg-[var(--accent)]/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
                             >
                                 <Icon className="h-4 w-4 text-[var(--accent-dark)]" aria-hidden="true" />
