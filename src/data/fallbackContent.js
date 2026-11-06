@@ -181,7 +181,7 @@ export const fallbackResume = {
   knowledgeBase: `
     RESUME DATA FOR RAHUL KHANKE:
     - Role: Data Scientist, AI Engineer.
-    - Projects: Sentinance (real-time crypto intelligence), GraphGuard (graph ML fraud detection), FleetFlow (delivery optimization).
+    - Projects: Sentinance (real-time crypto intelligence), GraphGuard (graph ML fraud detection), FleetFlow (delivery optimization), Shiftify (music-library import/review/CSV reporting and experimental YouTube Music account actions; cookie-based account actions send credentials through the app server).
     - Education: MSc Data Science (University of Glasgow), B.E Computer Science (G.H. Raisoni).
     - Experience: 
       1. Company A (AI & Data Solution Engineer)
@@ -536,7 +536,7 @@ export const fallbackRoles = {
     title: "Software Engineer",
     description: "Delivering robust full-stack applications and owning the complete feature lifecycle—from database schema design to responsive, animated frontend UIs and real-time WebSocket layers.",
     skills: ["Next.js 16", "TypeScript", "React 19", "Tailwind 4", "FastAPI", "PostgreSQL", "Redis", "tRPC", "GraphQL", "Framer Motion", "D3.js", "Docker"],
-    projects: ["sentinance", "graphguard", "fleetflow"],
+    projects: ["sentinance", "graphguard", "fleetflow", "shiftify"],
     stats: [
       { label: "Frontend", value: "Next.js 16 + React 19" },
       { label: "Realtime", value: "WebSockets + Streaming" },
