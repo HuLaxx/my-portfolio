@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect } from "react";
-import { ThemeToggle } from "./ThemeToggle";
+import { MobileThemePicker } from "./MobileThemePicker";
 
 const navLinks = [
     { href: "#roles", label: "EXPLORE" },
@@ -125,12 +125,8 @@ export const MobileMenu = ({ isOpen, onClose }) => {
                     <SocialIcon href="https://kaggle.com" label="Kaggle" path="M18.825 23.859c-.022.092-.117.141-.281.141h-3.139c-.187 0-.351-.082-.492-.248l-5.178-6.589-1.448 1.373v5.128c0 .246-.128.369-.386.369h-3.084c-.258 0-.386-.123-.386-.369v-23.31c0-.246.128-.369.386-.369h3.084c.258 0 .386.123.386.369v14.557l6.549-6.846c.14-.153.304-.229.492-.229h3.314c.152 0 .24.047.264.141.023.082-.012.176-.105.281l-5.688 5.688 6.021 9.242c.094.141.117.258.07.352z" />
                 </div>
 
-                {/* Theme Toggle */}
-                <div className="px-6 py-6 border-t border-white/10 flex justify-center">
-                    <div className="scale-[0.85] origin-center">
-                        <ThemeToggle />
-                    </div>
-                </div>
+                {/* Named, visual season themes are exclusive to the mobile side panel. */}
+                <MobileThemePicker />
             </div>
         </>
     );
