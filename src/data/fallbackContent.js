@@ -5,7 +5,7 @@ export const fallbackProjects = [
     role: "All Roles",
     slug: "sentinance",
     summary:
-      "Real-time crypto market intelligence with LangGraph AI agents, LSTM forecasting, and live multi-exchange streaming.",
+      "Market-intelligence research combining exchange-data adapters, LangGraph investigation paths and optional LSTM forecasting with documented provider fallbacks.",
     live: "https://sentinance.hulax.vercel.app",
     github: "https://github.com/HuLaxx/Sentinance",
     languages: {
@@ -20,7 +20,7 @@ export const fallbackProjects = [
     role: "All Roles",
     slug: "graphguard",
     summary:
-      "Fraud detection platform blending Neo4j graph analytics, explainable XGBoost ML models, and a GraphQL API.",
+      "Fraud-investigation prototype exploring Neo4j relationships, XGBoost/SHAP explanations and a GraphQL interface, with clearly labeled sample cases.",
     live: "https://graphguard.hulax.vercel.app",
     github: "https://github.com/HuLaxx/GraphGuard",
     languages: {
@@ -35,7 +35,7 @@ export const fallbackProjects = [
     role: "All Roles",
     slug: "fleetflow",
     summary:
-      "Real-time delivery optimization using OR-Tools, React 19 + Tailwind 4, and reactive Kafka event streaming.",
+      "Logistics control-room prototype: OR-Tools route proposals, operational event modules and a map interface that includes sample fleet geometry.",
     live: "https://fleetflow.hulax.vercel.app",
     github: "https://github.com/HuLaxx/FleetFlow",
     languages: {
@@ -238,12 +238,12 @@ export const fallbackCaseStudies = [
     title: "Real-Time Crypto Market Intelligence",
     year: "2026",
     summary:
-      "A real-time crypto analytics platform featuring live multi-exchange WebSocket streaming, LSTM-powered price forecasting, and an autonomous LangGraph agent for market analysis.",
+      "A market-data intelligence experiment with exchange connectors, FastAPI WebSocket routes, optional LSTM forecasting and LangGraph-assisted research paths.",
     scenario: {
       challenge:
         "Traders struggle with fragmented data sources and lack verifiable, AI-driven insights for volatile crypto markets.",
       solution:
-        "Built a streaming architecture using Kafka and WebSocket for sub-second updates, integrated LSTM models for 24h price prediction, and deployed a multi-agent RAG system (LangGraph + Qdrant) to answer market queries with citation-backed reasoning.",
+        "Developed FastAPI and WebSocket market-data modules and explored Kafka, LSTM forecasting and LangGraph agent orchestration. Provider connections, trained models and some retrieval functions depend on configuration or fallbacks.",
     },
     role: [
       "Data Engineering",
@@ -252,9 +252,9 @@ export const fallbackCaseStudies = [
       "System Architecture"
     ],
     metrics: [
-      { label: "Assets", value: "10+ Live Streams" },
-      { label: "Latency", value: "<100ms Inference" },
-      { label: "Coverage", value: "96% Test Coverage" },
+      { label: "Data", value: "API / WebSocket" },
+      { label: "Agent", value: "LangGraph Paths" },
+      { label: "Forecast", value: "LSTM (Optional)" },
     ],
     languages: {
       "Next.js": 40,
@@ -265,21 +265,24 @@ export const fallbackCaseStudies = [
       {
         title: "Streaming Pipeline",
         detail:
-          "Engineered a high-throughput pipeline using `aiokafka` and FastAPI WebSockets to aggregate and broadcast real-time price feeds from Binance, Coinbase, and Kraken.",
+          "Built multi-exchange adapter modules and FastAPI WebSocket interfaces. Availability and throughput depend on working providers and local services and have not been re-benchmarked.",
       },
       {
         title: "Agentic AI System",
         detail:
-          "Developed a multi-agent system with LangGraph and Gemini/Groq, enabling autonomous research and structured market analysis with fallback resilience.",
+          "Explored LangGraph orchestration and Gemini/Groq integrations with provider-dependent and mocked fallback paths; production autonomous behaviour remains unverified.",
       },
       {
         title: "Predictive Modeling",
         detail:
-          "Trained and deployed PyTorch LSTM models for time-series forecasting, served via FastAPI with comprehensive backtesting and MLflow tracking.",
+          "Created optional PyTorch LSTM prediction pathways and supporting model/research modules. An independently validated deployed model and forecast accuracy are not established here.",
       },
     ],
     media: {
-      poster: "/projects/sentinance-poster.png", // Placeholder - improved path
+      poster: "/projects/sentinance-signal-atlas.svg",
+      showPoster: true,
+      alt: "Original Sentinance market observatory artwork, conceptual and not a live market-data screenshot",
+      caption: "Original animated project artwork — not live financial data or a performance report.",
       video: "",
     },
     links: {
@@ -304,12 +307,12 @@ export const fallbackCaseStudies = [
     title: "Network Fraud Detection Platform",
     year: "2026",
     summary:
-      "A fraud detection system combining graph analytics (Neo4j), explainable ML (XGBoost + SHAP), and a GraphQL API to uncover hidden transaction rings and money laundering patterns.",
+      "A graph-informed fraud-investigation project combining Neo4j relationship modeling, XGBoost scoring, SHAP explanations and a case-review interface with some demo fixtures.",
     scenario: {
       challenge:
         "Traditional fraud rules miss complex network patterns like circular transactions and mule accounts used in money laundering.",
       solution:
-        "Implemented a graph-first approach using Neo4j to detect cycles and community structures, paired with an XGBoost classifier and SHAP explainability to provide transparent risk scores to investigators via a GraphQL dashboard.",
+        "Implemented graph, model and investigation modules based on Neo4j, XGBoost, SHAP and GraphQL. The local stack needs configuration and the case UI includes sample records, so integration status should be verified separately.",
     },
     role: [
       "Data Engineering",
@@ -331,21 +334,24 @@ export const fallbackCaseStudies = [
       {
         title: "Graph Data Engineering",
         detail:
-          "Designed a Neo4j graph schema to model Users, Accounts, and Transactions, ingestion streams from Kafka to surface 2nd and 3rd-degree connections in real-time.",
+          "Developed graph modeling and stream-ingestion modules using Neo4j and Kafka-oriented sources. Complete low-latency integration remains to be validated.",
       },
       {
         title: "Explainable ML",
         detail:
-          "Trained XGBoost models on graph-engineered features (PageRank, Community ID) and integrated SHAP values to explain valid reasons behind every fraud flag.",
+          "Explored XGBoost scoring and SHAP explanations with graph-engineered features. Explanations describe model contributions, not causal proof of fraud.",
       },
       {
         title: "Investigator Interface",
         detail:
-          "Built a Next.js + D3.js dashboard consuming a Strawberry GraphQL API, creating an interactive visual exploration tool for compliance teams.",
+          "Built a Next.js investigation interface with graph visualization and GraphQL-backed source modules; mock cases demonstrate the intended review experience.",
       },
     ],
     media: {
-      poster: "/projects/graphguard-poster.png", // Placeholder - improved path
+      poster: "/projects/graphguard-evidence-graph.svg",
+      showPoster: true,
+      alt: "Original illustrative GraphGuard casefile artwork showing fictional graph relationships around a transaction",
+      caption: "Animated forensic concept — fictional entities, not real cases or measured fraud outcomes.",
       video: "",
     },
     links: {
@@ -369,12 +375,12 @@ export const fallbackCaseStudies = [
     title: "Real-Time Delivery Optimization",
     year: "2026",
     summary:
-      "A next-gen logistics platform leveraging React 19, Tailwind 4, and OR-Tools to provide real-time reactive route optimization and live fleet tracking.",
+      "A dispatch-optimization project exploring constrained OR-Tools route proposals, event modules and a visual fleet map that also contains sample route geometry.",
     scenario: {
       challenge:
         "Last-mile delivery efficiency collapses when static routes meet real-world chaos (traffic, cancellations, new high-priority orders).",
       solution:
-        "Architected a reactive optimization engine using Google OR-Tools and Kafka to re-calculate routes on the fly, pushing updates instantly to a Next.js dashboard via WebSockets and tRPC.",
+        "Built an OR-Tools route solver and FastAPI endpoint returning candidate route plans, with event-streaming source modules and Next.js/tRPC/WebSocket interfaces. Automatic live re-dispatch is not yet independently verified.",
     },
     role: [
       "Full Stack Development",
@@ -385,7 +391,7 @@ export const fallbackCaseStudies = [
     metrics: [
       { label: "Frontend", value: "React 19 + TW4" },
       { label: "Optimization", value: "Google OR-Tools" },
-      { label: "Updates", value: "Real-time Socket.IO" },
+      { label: "Telemetry", value: "WebSocket Modules" },
     ],
     languages: {
       "Next.js": 50,
@@ -396,21 +402,24 @@ export const fallbackCaseStudies = [
       {
         title: "Modern Frontend Architecture",
         detail:
-          "Built a cutting-edge UI using Next.js 16 (App Router), React 19, and Tailwind 4, integrated with Deck.gl for high-performance map visualizations of fleet movements.",
+          "Built a Next.js 16 and React 19 dashboard integrating deck.gl/MapLibre-style map layers, sample stops and a WebSocket hook for vehicle locations.",
       },
       {
         title: "Optimization Engine",
         detail:
-          "Implemented the Vehicle Routing Problem (VRP) solver using Google OR-Tools in Python, exposed via FastAPI to dynamically re-assign stops based on capacity and time windows.",
+          "Implemented an OR-Tools VRP solver and FastAPI optimization endpoint to propose stop sequences under capacity and time-window constraints; it does not automatically persist approved dispatches.",
       },
       {
         title: "Event-Driven Backbone",
         detail:
-          "Orchestrated order ingestion and GPS telemetry streams using Confluent Kafka, ensuring data integrity and allowing for replayability of delivery scenarios.",
+          "Added Kafka event and GPS consumer modules plus WebSocket interfaces. End-to-end event delivery, reliability and replay still require recorded validation.",
       },
     ],
     media: {
-      poster: "/projects/fleetflow-poster.png", // Placeholder - improved path
+      poster: "/projects/fleetflow-dispatch-atlas.svg",
+      showPoster: true,
+      alt: "Original schematic FleetFlow city-grid artwork with illustrative delivery routes and a dispatch depot",
+      caption: "Animated dispatch illustration — not live GPS, actual routing results or measured efficiency.",
       video: "",
     },
     links: {
@@ -422,7 +431,7 @@ export const fallbackCaseStudies = [
       "React 19",
       "Tailwind 4",
       "tRPC",
-      "Socket.IO",
+      "WebSocket",
       "OR-Tools",
       "Kafka",
       "PostGIS",
