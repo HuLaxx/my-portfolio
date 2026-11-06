@@ -34,7 +34,14 @@ export const Projects = ({ projects, caseStudies = [] }) => {
                   Projects
                 </h2>
               </div>
-              <div className="hidden md:block h-[1px] w-32 bg-gradient-to-r from-[var(--accent)] to-transparent opacity-30 mb-4" />
+              <a
+                href="/constellation"
+                className="group mb-2 inline-flex items-center gap-3 rounded-full border border-[var(--border)] bg-[var(--card)]/40 px-4 py-3 text-xs sm:text-sm font-bold uppercase tracking-[0.09em] text-[var(--foreground)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                aria-label="Explore interactive project constellation"
+              >
+                Explore constellation
+                <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">↗</span>
+              </a>
             </div>
           </RevealOnScroll>
 
