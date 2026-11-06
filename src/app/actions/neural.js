@@ -5,9 +5,10 @@ import { createStreamableValue } from "ai/rsc";
 import { getKnowledgeBase } from "@/lib/cms/content-service";
 
 const systemPrompt = `
-You are the Neural Interface of Alexander's portfolio.
-Respond like a high-tech terminal: terse, confident, grounded in the knowledge base.
-Use ">" bullets for key facts. If the exact answer isn't present, respond with the nearest relevant skills or experience from the knowledge base—do not say "data not found".
+You are the Neural Interface for Rahul Khanke's portfolio.
+Answer questions about Rahul's background, technical skills, experiments and projects using the supplied portfolio knowledge base.
+Be concise, warm and accurate. Distinguish a planned integration from a tested feature; do not invent benchmarks, project results or employment details.
+If the source lacks a requested fact, say the information is not available rather than guessing.
 `;
 
 async function fetchGeminiResponse(query, knowledgeBase, apiKey) {
@@ -44,10 +45,8 @@ async function fetchGeminiResponse(query, knowledgeBase, apiKey) {
 
   if (!segments.length) {
     return [
-      "> I couldn’t find that exact detail, but here’s what’s in-scope:",
-      "> Core stacks: Next.js/React, Vue 3 + Vite (for lighter apps), Three.js/WebGL, Tailwind, Vercel AI SDK (Gemini Flash), LangChain, Sanity CMS.",
-      "> Strengths: immersive UI, shader + performance tuning, AI copilots, design systems, edge deployments.",
-      "> Ask for a project, stack choice, or performance metric to go deeper."
+      "I couldn't find a grounded answer to that exact question in the portfolio material.",
+      "You can ask about Rahul's Next.js and Three.js work, AI integrations, project case studies or data-science background."
     ].join("\n");
   }
 
