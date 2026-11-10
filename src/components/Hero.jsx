@@ -73,7 +73,7 @@ export const Hero = ({ resume }) => {
           >
             <div className="relative w-full h-[clamp(12rem,52vw,22rem)] sm:h-[min(50vh,25rem)] md:h-[min(50vh,26rem)] xl:h-[min(82vh,55rem)] 2xl:h-[86vh] flex items-end justify-end">
               <img
-                src="/me.png"
+                src="/me-hero.png"
                 alt="Rahul Khanke"
                 className="w-full h-full max-w-full max-h-full object-contain scale-[1.0] origin-bottom-right"
                 style={{

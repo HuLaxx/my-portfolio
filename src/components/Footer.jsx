@@ -1,9 +1,22 @@
 'use client';
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { useSeason } from "./SeasonContext";
 
+const footerImages = ["/me2.png", "/me-footer.png"];
+
 export const Footer = () => {
+  const [activeFooterImage, setActiveFooterImage] = useState(0);
+
+  // Random starting portrait each visit, then alternate every nine seconds.
+  useEffect(() => {
+    setActiveFooterImage(Math.floor(Math.random() * footerImages.length));
+    const interval = window.setInterval(() => {
+      setActiveFooterImage((current) => (current + 1) % footerImages.length);
+    }, 9000);
+    return () => window.clearInterval(interval);
+  }, []);
   const currentYear = new Date().getFullYear();
   // "Normal Dark Blend" for all themes
   const maskGradient = 'radial-gradient(ellipse at center, black 40%, transparent 90%)';
@@ -80,15 +93,24 @@ export const Footer = () => {
           {/* Right: Me Image - 30% (Reduced to fit text) */}
           <div className="flex col-start-2 row-start-1 min-w-0 w-full 2xl:w-[30%] justify-end items-end relative -mb-2">
             <div className="relative w-full h-[clamp(9rem,40vw,17rem)] md:h-full md:min-h-[12rem] 2xl:min-h-0 flex items-end justify-end">
-              <img
-                src="/me-footer.png"
-                alt="Let's Connect"
-                className="w-auto h-full max-h-full max-w-full object-contain scale-[1] origin-bottom-right md:-translate-y-[0.7rem] 2xl:-translate-x-6"
-                style={{
-                  maskImage: maskGradient,
-                  WebkitMaskImage: maskGradient
-                }}
-              />
+              <AnimatePresence initial={false}>
+                <motion.img
+                  key={footerImages[activeFooterImage]}
+                  src={footerImages[activeFooterImage]}
+                  alt="Rahul Khanke portrait"
+                  className="absolute bottom-0 right-0 w-auto h-full max-h-full max-w-full object-contain scale-[1] origin-bottom-right md:-translate-y-[0.7rem] 2xl:-translate-x-6"
+                  loading="lazy"
+                  decoding="async"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.9, ease: "easeInOut" }}
+                  style={{
+                    maskImage: maskGradient,
+                    WebkitMaskImage: maskGradient
+                  }}
+                />
+              </AnimatePresence>
             </div>
           </div>
 
