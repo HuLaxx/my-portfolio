@@ -81,7 +81,7 @@ export const Footer = () => {
           <div className="flex col-start-2 row-start-1 min-w-0 w-full 2xl:w-[30%] justify-end items-end relative -mb-2">
             <div className="relative w-full h-[clamp(9rem,40vw,17rem)] md:h-full md:min-h-[12rem] 2xl:min-h-0 flex items-end justify-end">
               <img
-                src="/me2.png"
+                src="/me-footer.png"
                 alt="Let's Connect"
                 className="w-auto h-full max-h-full max-w-full object-contain scale-[1] origin-bottom-right md:-translate-y-[0.7rem] 2xl:-translate-x-6"
                 style={{
