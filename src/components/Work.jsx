@@ -34,24 +34,6 @@ export const Projects = ({ projects, caseStudies = [] }) => {
                   Projects
                 </h2>
               </div>
-              <div className="mb-2 flex flex-wrap items-center gap-3">
-                <a
-                  href="/studio"
-                  className="group inline-flex items-center gap-2 rounded-full border border-[var(--accent)] bg-[var(--accent)]/10 px-4 py-3 text-xs sm:text-sm font-bold tracking-[0.04em] text-[var(--foreground)] transition-all duration-300 hover:-translate-y-1 hover:bg-[var(--accent)]/20"
-                  aria-label="Read the making-of studio journal"
-                >
-                  Behind the build
-                  <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">↗</span>
-                </a>
-                <a
-                  href="/constellation"
-                  className="group inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)]/40 px-4 py-3 text-xs sm:text-sm font-bold tracking-[0.04em] text-[var(--foreground)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent)]"
-                  aria-label="Explore interactive project constellation"
-                >
-                  Project constellation
-                  <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">↗</span>
-                </a>
-              </div>
             </div>
           </RevealOnScroll>
 
