@@ -58,7 +58,7 @@ export const Hero = ({ resume }) => {
             </div>
 
             {/* Bottom Group: Summary */}
-            <RevealOnScroll delay={300} className="col-span-2 row-start-2 min-w-0 px-2 sm:px-3 xl:px-0 relative z-10">
+            <RevealOnScroll delay={300} className="col-span-2 row-start-2 min-w-0 px-2 sm:px-3 md:w-full md:max-w-[34rem] md:mx-auto md:px-5 lg:max-w-[38rem] lg:px-6 xl:max-w-none xl:mx-0 xl:px-0 relative z-10">
               <div className="flex flex-col gap-4">
                 <p className="max-w-full break-words xl:max-w-2xl text-lg sm:text-xl xl:text-2xl leading-relaxed text-[var(--foreground)] font-medium opacity-100">
                   {resume.summary}
@@ -75,7 +75,7 @@ export const Hero = ({ resume }) => {
               <img
                 src="/me-hero.png"
                 alt="Rahul Khanke"
-                className="w-full h-full max-w-full max-h-full object-contain scale-[1.0] origin-bottom-right"
+                className="w-full h-full max-w-full max-h-full object-contain object-top scale-[1.1] sm:scale-[1.14] md:scale-[1.12] xl:scale-[1.1] origin-top-right"
                 style={{
                   maskImage: maskGradient,
                   WebkitMaskImage: maskGradient
