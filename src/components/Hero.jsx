@@ -5,8 +5,8 @@ import { RevealOnScroll } from "./RevealOnScroll";
 import { useSeason } from "./SeasonContext";
 
 export const Hero = ({ resume }) => {
-  // Keep the portrait fully visible at the top and fade it into the background at the bottom.
-  const maskGradient = 'linear-gradient(to bottom, black 0%, black 70%, transparent 100%)';
+  // Mask the actual rendered portrait (not the empty object-contain box) so its lower half fades out.
+  const maskGradient = "linear-gradient(to bottom, black 0%, black 40%, rgba(0, 0, 0, 0.78) 55%, transparent 90%)";
 
   return (
     <section id="hero" className="relative min-h-0 xl:min-h-[95vh] flex flex-col justify-center overflow-hidden border-0 outline-none">
@@ -71,11 +71,11 @@ export const Hero = ({ resume }) => {
           <motion.div
             className="flex col-start-2 row-start-1 min-w-0 w-full items-end justify-end relative pt-7 sm:pt-9 md:pt-12 xl:pt-0 xl:col-auto xl:row-auto xl:w-[45%] 2xl:translate-x-[10%] z-5"
           >
-            <div className="relative w-full h-[clamp(12rem,52vw,22rem)] sm:h-[min(50vh,25rem)] md:h-[min(50vh,26rem)] xl:h-[min(82vh,55rem)] 2xl:h-[86vh] flex items-end justify-end">
+            <div className="relative w-full h-[clamp(12rem,52vw,22rem)] sm:h-[min(50vh,25rem)] md:h-[min(50vh,26rem)] xl:h-[min(82vh,55rem)] 2xl:h-[86vh] flex items-start justify-end">
               <img
                 src="/me-hero.png"
                 alt="Rahul Khanke"
-                className="w-full h-full max-w-full max-h-full object-contain object-top scale-[1.1] sm:scale-[1.14] md:scale-[1.12] xl:scale-[1.1] origin-top-right"
+                className="block w-auto h-auto max-w-full max-h-full object-contain object-top scale-[1.1] sm:scale-[1.14] md:scale-[1.12] xl:scale-[1.1] origin-top-right"
                 style={{
                   maskImage: maskGradient,
                   WebkitMaskImage: maskGradient
