@@ -1,22 +1,6 @@
 'use client';
 
-import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { useSeason } from "./SeasonContext";
-
-const footerImages = ["/me2.png", "/me-footer.png"];
-
 export const Footer = () => {
-  const [activeFooterImage, setActiveFooterImage] = useState(0);
-
-  // Random starting portrait each visit, then alternate every nine seconds.
-  useEffect(() => {
-    setActiveFooterImage(Math.floor(Math.random() * footerImages.length));
-    const interval = window.setInterval(() => {
-      setActiveFooterImage((current) => (current + 1) % footerImages.length);
-    }, 9000);
-    return () => window.clearInterval(interval);
-  }, []);
   const currentYear = new Date().getFullYear();
   // "Normal Dark Blend" for all themes
   const maskGradient = 'radial-gradient(ellipse at center, black 40%, transparent 90%)';
@@ -93,24 +77,17 @@ export const Footer = () => {
           {/* Right: Me Image - 30% (Reduced to fit text) */}
           <div className="flex col-start-2 row-start-1 min-w-0 w-full 2xl:w-[38%] 2xl:shrink-0 justify-end items-start relative -mb-2">
             <div className="relative w-full h-[clamp(11rem,48vw,19rem)] sm:h-[clamp(15rem,43vw,24rem)] md:h-[clamp(21rem,40vw,29rem)] xl:h-[clamp(24rem,34vw,34rem)] 2xl:h-[clamp(32rem,68vh,47rem)] flex items-start justify-end">
-              <AnimatePresence initial={false}>
-                <motion.img
-                  key={footerImages[activeFooterImage]}
-                  src={footerImages[activeFooterImage]}
-                  alt="Rahul Khanke portrait"
-                  className="absolute top-0 right-0 w-full h-full max-h-full max-w-full object-contain object-top scale-[1] origin-top-right 2xl:-translate-x-6"
-                  loading="lazy"
-                  decoding="async"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.9, ease: "easeInOut" }}
-                  style={{
-                    maskImage: maskGradient,
-                    WebkitMaskImage: maskGradient
-                  }}
-                />
-              </AnimatePresence>
+              <img
+                src="/me.png"
+                alt="Rahul Khanke portrait"
+                className="absolute top-0 right-0 w-full h-full max-h-full max-w-full object-contain object-top scale-[1] origin-top-right 2xl:-translate-x-6"
+                loading="lazy"
+                decoding="async"
+                style={{
+                  maskImage: maskGradient,
+                  WebkitMaskImage: maskGradient
+                }}
+              />
             </div>
           </div>
 
