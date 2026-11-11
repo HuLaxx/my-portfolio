@@ -5,8 +5,8 @@ import { RevealOnScroll } from "./RevealOnScroll";
 import { useSeason } from "./SeasonContext";
 
 export const Hero = ({ resume }) => {
-  // "Normal Dark Blend" for all themes as requested
-  const maskGradient = 'radial-gradient(ellipse at center, black 40%, transparent 90%)';
+  // Keep the portrait fully visible at the top and fade it into the background at the bottom.
+  const maskGradient = 'linear-gradient(to bottom, black 0%, black 70%, transparent 100%)';
 
   return (
     <section id="hero" className="relative min-h-0 xl:min-h-[95vh] flex flex-col justify-center overflow-hidden border-0 outline-none">
