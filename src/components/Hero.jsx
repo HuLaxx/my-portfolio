@@ -5,8 +5,8 @@ import { RevealOnScroll } from "./RevealOnScroll";
 import { useSeason } from "./SeasonContext";
 
 export const Hero = ({ resume }) => {
-  // "Normal Dark Blend" for all themes as requested
-  const maskGradient = 'radial-gradient(ellipse at center, black 40%, transparent 90%)';
+  // Mask the actual rendered portrait (not the empty object-contain box) so its lower half fades out.
+  const maskGradient = "linear-gradient(to bottom, black 0%, black 40%, rgba(0, 0, 0, 0.78) 55%, transparent 90%)";
 
   return (
     <section id="hero" className="relative min-h-0 xl:min-h-[95vh] flex flex-col justify-center overflow-hidden border-0 outline-none">
@@ -58,7 +58,7 @@ export const Hero = ({ resume }) => {
             </div>
 
             {/* Bottom Group: Summary */}
-            <RevealOnScroll delay={300} className="col-span-2 row-start-2 min-w-0 px-2 sm:px-3 xl:px-0 relative z-10">
+            <RevealOnScroll delay={300} className="col-span-2 row-start-2 min-w-0 px-2 sm:px-3 md:w-full md:max-w-[34rem] md:mx-auto md:px-5 lg:max-w-[38rem] lg:px-6 xl:max-w-none xl:mx-0 xl:px-0 relative z-10">
               <div className="flex flex-col gap-4">
                 <p className="max-w-full break-words xl:max-w-2xl text-lg sm:text-xl xl:text-2xl leading-relaxed text-[var(--foreground)] font-medium opacity-100">
                   {resume.summary}
@@ -71,11 +71,11 @@ export const Hero = ({ resume }) => {
           <motion.div
             className="flex col-start-2 row-start-1 min-w-0 w-full items-end justify-end relative pt-7 sm:pt-9 md:pt-12 xl:pt-0 xl:col-auto xl:row-auto xl:w-[45%] 2xl:translate-x-[10%] z-5"
           >
-            <div className="relative w-full h-[clamp(12rem,52vw,22rem)] sm:h-[min(50vh,25rem)] md:h-[min(50vh,26rem)] xl:h-[min(82vh,55rem)] 2xl:h-[86vh] flex items-end justify-end">
+            <div className="relative w-full h-[clamp(12rem,52vw,22rem)] sm:h-[min(50vh,25rem)] md:h-[min(50vh,26rem)] xl:h-[min(82vh,55rem)] 2xl:h-[86vh] flex items-start justify-end">
               <img
                 src="/me-hero.png"
                 alt="Rahul Khanke"
-                className="w-full h-full max-w-full max-h-full object-contain scale-[1.0] origin-bottom-right"
+                className="block w-auto h-auto max-w-full max-h-full object-contain object-top scale-[1.1] sm:scale-[1.14] md:scale-[1.12] xl:scale-[1.1] origin-top-right"
                 style={{
                   maskImage: maskGradient,
                   WebkitMaskImage: maskGradient
