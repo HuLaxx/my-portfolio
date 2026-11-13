@@ -64,9 +64,9 @@ export const stripExtensionAttrs = `
 `;
 
 export const metadata = {
-  title: "Rahul Khanke",
+  title: "Rahul Khanke | Data Engineer & AI/ML Engineering",
   description:
-    "An interactive portfolio by Rahul Khanke featuring AI engineering, data science, creative web interfaces, and source-backed project stories.",
+    "Rahul Khanke: data engineering, Python, SQL and AI/ML application projects. Explore data pipelines, APIs, research and engineering case studies.",
   metadataBase: new URL("https://portfolio.hulax.uk"),
   icons: {
     icon: "/icon.ico",
@@ -74,9 +74,9 @@ export const metadata = {
     apple: "/icon.ico",
   },
   openGraph: {
-    title: "Rahul Khanke",
+    title: "Rahul Khanke | Data Engineer & AI/ML Engineering",
     description:
-      "Explore AI, data engineering and creative frontend projects, with case studies, an interactive constellation and an open making-of studio.",
+      "Explore Rahul Khanke's data engineering and AI/ML work, with source-backed case studies covering streaming, graph analytics and optimization.",
     url: "https://portfolio.hulax.uk/",
     siteName: "Rahul Khanke Portfolio",
   },
