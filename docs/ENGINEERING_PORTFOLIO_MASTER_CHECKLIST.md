@@ -10,7 +10,7 @@ This is a working execution checklist, **not** a declaration of 10/10. A checked
 | --- | --- | --- | --- |
 | FleetFlow — Data Engineering flagship | [P0–P4 Engineering Release Checklist](https://github.com/HuLaxx/FleetFlow/blob/feature/approved-dispatch-and-honest-kpis-2026-11-13/docs/ENGINEERING_RELEASE_CHECKLIST.md) | [PR #4](https://github.com/HuLaxx/FleetFlow/pull/4), stacked on #3 → #2 → #1 | Local replay, approval and partial API integrity verified; real dispatch gold path missing |
 | GraphGuard — Applied ML/MLOps flagship | [P0–P4 Engineering Release Checklist](https://github.com/HuLaxx/GraphGuard/blob/feature/graphguard-at-least-once-recovery-2026-11-13/docs/ENGINEERING_RELEASE_CHECKLIST.md) | [PR #2](https://github.com/HuLaxx/GraphGuard/pull/2), stacked on #1 | Focused replay/DLQ policy tested; Kafka→graph→model→case missing |
-| Sentinance — AI Systems flagship | [P0–P4 Engineering Release Checklist](https://github.com/HuLaxx/Sentinance/blob/fix/sentinance-p0-quality-2026-11-13/docs/ENGINEERING_RELEASE_CHECKLIST.md) | [PR #2](https://github.com/HuLaxx/Sentinance/pull/2), stacked on #1 | 139 API tests pass but 165 strict Ruff findings; full CI red |
+| Sentinance — AI Systems flagship | [P0–P4 Engineering Release Checklist](https://github.com/HuLaxx/Sentinance/blob/fix/utc-anomaly-contracts-2026-11-13/docs/ENGINEERING_RELEASE_CHECKLIST.md) | [PR #3](https://github.com/HuLaxx/Sentinance/pull/3), stacked on #2 → #1 | 151 API tests and UTC alert cases pass; 155 strict Ruff findings remain; full CI red |
 
 ## Universal 10/10 engineering release gates (every project)
 
@@ -33,7 +33,8 @@ This is a working execution checklist, **not** a declaration of 10/10. A checked
 ### Milestone A — P0 reliability
 - [x] FleetFlow draft branch has full passing CI on tested code. [Run 43429154935](https://github.com/HuLaxx/FleetFlow/actions/runs/43429154935).
 - [x] GraphGuard draft branch has full passing focused CI. [Run 43428457363](https://github.com/HuLaxx/GraphGuard/actions/runs/43428457363).
-- [ ] Sentinance clear strict Ruff and pass both entire CI workflows on identical latest head. [Failing check 43428370907](https://github.com/HuLaxx/Sentinance/actions/runs/43428370907).
+- [x] Sentinance 12 timezone/cooldown regression cases passed and legacy UTC parsing corrected on review branch. [CI 43433535905](https://github.com/HuLaxx/Sentinance/actions/runs/43433535905).
+- [ ] Sentinance clear the remaining 155 strict Ruff findings and pass both complete CI workflows at identical latest head. [Failing strict check 43433851215](https://github.com/HuLaxx/Sentinance/actions/runs/43433851215).
 - [ ] Review/merge existing stacked PRs only after approvals, compatibility tests and documented merge order.
 
 ### Milestone B — One integrated golden path per repository
