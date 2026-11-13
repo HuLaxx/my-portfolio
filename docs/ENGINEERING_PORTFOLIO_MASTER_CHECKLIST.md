@@ -1,0 +1,75 @@
+# HuLaX — 10/10 Engineering Portfolio Master Checklist
+
+**Updated:** 13 November 2026 | **Status:** EVIDENCE-GATED, NOT YET RELEASE READY
+
+This is a working execution checklist, **not** a declaration of 10/10. A checked item means one specifically testable limited claim is supported by a linked artifact on a **draft branch**, unless otherwise stated. Everything else remains unchecked. Review before merge; avoid rewriting public portfolio or LinkedIn claims before evidence is established. No AWS apply, paid services, deletion, main-branch merge or production change without explicit approval.
+
+## Source-of-truth checklists and review branches
+
+| Project | Checklist | Draft PR | Current release status |
+| --- | --- | --- | --- |
+| FleetFlow — Data Engineering flagship | [P0–P4 Engineering Release Checklist](https://github.com/HuLaxx/FleetFlow/blob/feature/approved-dispatch-and-honest-kpis-2026-11-13/docs/ENGINEERING_RELEASE_CHECKLIST.md) | [PR #4](https://github.com/HuLaxx/FleetFlow/pull/4), stacked on #3 → #2 → #1 | Local replay, approval and partial API integrity verified; real dispatch gold path missing |
+| GraphGuard — Applied ML/MLOps flagship | [P0–P4 Engineering Release Checklist](https://github.com/HuLaxx/GraphGuard/blob/feature/graphguard-at-least-once-recovery-2026-11-13/docs/ENGINEERING_RELEASE_CHECKLIST.md) | [PR #2](https://github.com/HuLaxx/GraphGuard/pull/2), stacked on #1 | Focused replay/DLQ policy tested; Kafka→graph→model→case missing |
+| Sentinance — AI Systems flagship | [P0–P4 Engineering Release Checklist](https://github.com/HuLaxx/Sentinance/blob/fix/sentinance-p0-quality-2026-11-13/docs/ENGINEERING_RELEASE_CHECKLIST.md) | [PR #2](https://github.com/HuLaxx/Sentinance/pull/2), stacked on #1 | 139 API tests pass but 165 strict Ruff findings; full CI red |
+
+## Universal 10/10 engineering release gates (every project)
+
+- [ ] **1. Real end-to-end journey:** source → validated ingest → persisted state → API/model → UI proven with reproducible seeded data and fault injection.
+- [ ] **2. Data engineering:** versioned schemas, lineage, time semantics, deduplication, replay/backfill, durable reconciliation and correct batch/stream contracts.
+- [ ] **3. Testing/CI:** latest exact commit passes lint, format, types, deterministic unit/integration/e2e and blocking dependency/security scans.
+- [ ] **4. Cloud reproducibility:** costed least-privilege Terraform with OIDC, isolated settings, explicit apply/destroy review; deployed state separate from templates.
+- [ ] **5. Security:** no secrets in code, secure key handling, authn/authz, validated inputs, minimal access and ethical data treatment.
+- [ ] **6. Reliability:** structured logs, relevant metrics/traces, retries/DLQ, failure/recovery tests, actionable alarms and runbooks.
+- [ ] **7. Measured performance/cost:** reproducible baseline and load measurements, credible cost assumptions and limits.
+- [ ] **8. AI/ML evidence:** where applicable, licensed and documented data, leakage-free validation, baselines, calibrated/uncertain outputs, model artifacts and monitoring.
+- [ ] **9. Credible UI:** responsive, accessible, operational states working; real/derived/simulated/LLM-generated content labelled, no misleading demo.
+- [ ] **10. Explainable engineering:** truthful README, implementation-matched architecture diagram, ADRs, limitation notes, reproducible outputs and interview walkthrough.
+- [ ] An independent reviewer reruns the golden path and checks meaningful failure assertions, not only exit codes.
+- [ ] `docs/EVIDENCE_REGISTER.md` links every claim to current workflow, test, dataset, model, commit, benchmark or verified deployment.
+- [ ] All three show **real integration evidence** before any project receives a 10/10 label.
+
+## Execution milestones, in strict order
+
+### Milestone A — P0 reliability
+- [x] FleetFlow draft branch has full passing CI on tested code. [Run 43429154935](https://github.com/HuLaxx/FleetFlow/actions/runs/43429154935).
+- [x] GraphGuard draft branch has full passing focused CI. [Run 43428457363](https://github.com/HuLaxx/GraphGuard/actions/runs/43428457363).
+- [ ] Sentinance clear strict Ruff and pass both entire CI workflows on identical latest head. [Failing check 43428370907](https://github.com/HuLaxx/Sentinance/actions/runs/43428370907).
+- [ ] Review/merge existing stacked PRs only after approvals, compatibility tests and documented merge order.
+
+### Milestone B — One integrated golden path per repository
+- [ ] FleetFlow: order → event → persisted optimiser candidate → explicit approved dispatch → GPS map update → analytical KPI.
+- [ ] GraphGuard: transaction → validated store → Neo4j → past-only features → actual trained model → explanation → persisted reviewer decision.
+- [ ] Sentinance: licensed/historical market source → validated curated data → indicators/baseline → evidence-traceable agent → UI.
+- [ ] Test and document duplicate, out-of-order, provider/broker/DB outage and replay cases for all relevant paths.
+
+### Milestone C — Analytical depth
+- [ ] FleetFlow: dbt data quality and OR-Tools vs deterministic routing baselines, reproducible fixture sets.
+- [ ] GraphGuard: chrono-split logistic/XGBoost baselines, leakage tests, PR-AUC/recall at FPR/precision@K/calibration, honest case limitations.
+- [ ] Sentinance: walk-forward last-price/SMA baselines, uncertainty, realistic trading fees/slippage and no unsupported profit prediction.
+- [ ] Save measured results (good **and** bad), exact scripts, time, hardware, seeds, dataset/model hashes.
+
+### Milestone D — Cloud (separate human approval)
+- [ ] Costed AWS architecture and IaC exist with least privilege, region/separate environment and budget alarms; budgets are **not** spending caps.
+- [ ] User explicitly approves paid resources/apply and spending scope.
+- [ ] Provision only minimal justified workload, verify logs/alarms and destroy path; record actual expenditure.
+- [ ] Prefer Vercel/frontend and local services where cost-effective; no default EKS/MSK/NAT/GPU stack.
+
+## Portfolio + GitHub + LinkedIn P4 publication checklist
+
+- [ ] **Truthful position:** primary UK-facing theme Data Engineering; secondary Applied ML/MLOps and Python Backend/AI Systems.
+- [ ] **Factual timeline:** Accenture Oct 2022–Sept 2024, Cognizant internship Jan–Apr 2022, MSc Data Science University of Glasgow; preserve subsequent non-engineering work accurately without implying ongoing commercial engineering employment.
+- [ ] **Per project:** one recruiter tagline, ~120-word LinkedIn Featured description, ~250-word human first-person case study, code/tests/CI/demo evidence links, honest caveats and a technical interview story.
+- [ ] Show FleetFlow first for DE jobs, GraphGuard first for MLOps jobs, Sentinance first for AI systems jobs.
+- [ ] AWS, Flink, Kafka, production, user and benchmark statements match **real verified use**, not import statements or marketing claims.
+- [ ] Audit [portfolio.hulax.uk](https://portfolio.hulax.uk/): desktop/tablet/mobile, loading states, broken images/domains, keyboard access, accessibility, sample/live boundaries, empty/error states.
+- [ ] Confirm portfolio case pages link to current README, PR/CI/benchmark and valid project demos; note fallback/mock boundaries.
+- [ ] Compare before/after content credibility (not only design), collect real screenshots and corroborated measurements.
+- [ ] Review GitHub profile README, pinned project order and consistent human-written language.
+- [ ] Review LinkedIn Featured/About/headline updates **only after** each project has passing evidence and working links.
+- [ ] Independently validate all published URLs and live integrations before marking publication complete.
+
+## Evidence and handoff protocol
+
+After **each PR**, add its branch/base, URL, exact changed paths, impact, test command and exit outcome, dataset licence, model/version/metrics, screenshots/trace or log artifact, deployed vs planned cloud resources, measured or assumed monthly cost, remaining limitations and **next smallest PR**. Never check a box from code existence alone. Current work uses synthetic data and no new provisioned AWS infrastructure.
+
+**Release decision today:** none of the three applications has independently verified all ten universal gates. Publishing their architecture as a **tested local prototype** where evidence supports it is appropriate; claiming a production 10/10 system is not.
