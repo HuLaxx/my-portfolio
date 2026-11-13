@@ -10,7 +10,7 @@ This is a working execution checklist, **not** a declaration of 10/10. A checked
 | --- | --- | --- | --- |
 | FleetFlow — Data Engineering flagship | [P0–P4 Engineering Release Checklist](https://github.com/HuLaxx/FleetFlow/blob/feature/approved-dispatch-and-honest-kpis-2026-11-13/docs/ENGINEERING_RELEASE_CHECKLIST.md) | [PR #4](https://github.com/HuLaxx/FleetFlow/pull/4), stacked on #3 → #2 → #1 | Local replay, approval and partial API integrity verified; real dispatch gold path missing |
 | GraphGuard — Applied ML/MLOps flagship | [P0–P4 Engineering Release Checklist](https://github.com/HuLaxx/GraphGuard/blob/feature/graphguard-at-least-once-recovery-2026-11-13/docs/ENGINEERING_RELEASE_CHECKLIST.md) | [PR #2](https://github.com/HuLaxx/GraphGuard/pull/2), stacked on #1 | Focused replay/DLQ policy tested; Kafka→graph→model→case missing |
-| Sentinance — AI Systems flagship | [P0–P4 Engineering Release Checklist](https://github.com/HuLaxx/Sentinance/blob/fix/p0-utc-event-boundaries-2026-11-13/docs/ENGINEERING_RELEASE_CHECKLIST.md) | [PR #8](https://github.com/HuLaxx/Sentinance/pull/8), stacked on #7 → #6 → #5 → #4 → #3 → #2 → #1 | 201 API tests passed, MyPy/web passed; 77 Python files formatted; 82 strict Ruff findings remain; full CI red |
+| Sentinance — AI Systems flagship | [P0–P4 Engineering Release Checklist](https://github.com/HuLaxx/Sentinance/blob/fix/p0-rss-failure-visibility-2026-11-13/docs/ENGINEERING_RELEASE_CHECKLIST.md) | [PR #9](https://github.com/HuLaxx/Sentinance/pull/9), stacked on #8 → #7 → #6 → #5 → #4 → #3 → #2 → #1 | 207 API tests passed on code SHA, MyPy/web passed; 78 Python files formatted on later code SHA; 80 strict Ruff findings remain; full CI red |
 
 ## Universal 10/10 engineering release gates (every project)
 
@@ -44,6 +44,8 @@ This is a working execution checklist, **not** a declaration of 10/10. A checked
 - [x] **77/77 Python files Ruff format-clean** on revised source SHA `72801cfcf6aedb61beee5dddcd2b5dae5cd976b8`; strict lint reduced from 95 to **82 findings** (70 BLE001, 12 DTZ003), no blanket suppressions. [PR Checks 43455287738](https://github.com/HuLaxx/Sentinance/actions/runs/43455287738). Overall CI still red.
 - [ ] Test trusted-proxy attribution, shared-IP/NAT fairness and Redis failover/load; reconcile frontend npm audit findings; clear **82 strict Ruff errors** (70 BLE001, 12 DTZ003) before claiming full CI green.
 - [ ] Review/merge existing stacked PRs only after approvals, compatibility tests and documented merge order.
+
+- [x] **Sentinance draft PR #9 — limited RSS fault transparency:** [API CI 43460271229](https://github.com/HuLaxx/Sentinance/actions/runs/43460271229) on source SHA `2e280503b7f9195ab2a3308cc4c077e55de88cdd`: **207 tests passed (five warnings)**, MyPy/web passed; six synthetic RSS failure tests added, and two blanket exception handlers eliminated. [PR quality 43460702032](https://github.com/HuLaxx/Sentinance/actions/runs/43460702032) on Ruff-corrected SHA `39047847e1db996b71146e59ebdea22168a59961`: **78 formatted Python files**, **80 remaining Ruff violations**, security/web/commit checks pass. **Overall CI still red**; complete feed provenance and outage UX are not verified. [Draft PR #9](https://github.com/HuLaxx/Sentinance/pull/9).
 
 ### Milestone B — One integrated golden path per repository
 - [ ] FleetFlow: order → event → persisted optimiser candidate → explicit approved dispatch → GPS map update → analytical KPI.
