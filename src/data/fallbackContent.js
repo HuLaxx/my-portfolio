@@ -65,7 +65,7 @@ export const fallbackResume = {
   label: "DATA ENGINEER | AI/ML ENGINEERING",
   title: "RAHUL KHANKE",
   summary:
-    "Data Engineer working across Python, SQL, data pipelines and AI/ML systems. My background combines software engineering at Accenture, a data engineering and ML internship at Cognizant, and an MSc in Data Science from the University of Glasgow.",
+    "I build practical data and software systems. My background combines software engineering at Accenture, hands-on data-engineering and applied AI/ML responsibilities supporting internal financial operations at a small business, and an MSc in Data Science from the University of Glasgow.",
   neuralSummary:
     "Explore my work on event-driven data pipelines, ML-enabled APIs and AI-assisted applications, alongside my research in Bayesian change-point detection. Project case studies explain implemented features, optional integrations and demo data.",
   studies: [
@@ -107,6 +107,17 @@ export const fallbackResume = {
     },
   ],
   experience: [
+    // REVIEW GATE: publish after employer confirms title, employment arrangement and responsibility scope.
+    {
+      company: "SHARP INVESCO REVOLUTIONS",
+      slug: null,
+      role: "Data Engineering (proposed title: Data Engineer)",
+      period: "Dec 2024 - Nov 2026",
+      description: "Worked remotely from the UK supporting a small part of the business's internal financial operations, with substantial individual involvement in data-engineering responsibilities and some applied AI/ML work. Specific systems and the official title remain subject to employer confirmation.",
+      stack: [],
+      stats: [],
+      highlights: [],
+    },
     {
       company: "Accenture",
       slug: "accenture",
@@ -159,10 +170,12 @@ export const fallbackResume = {
     - Project status: Portfolio projects contain implemented modules, optional integrations and demo/sample data. They are not evidence of commercial employment or verified production scale.
     - Education: MSc Data Science, University of Glasgow (2025); B.E. Computer Science, G.H. Raisoni College of Engineering (2022).
     - Dissertations: Bayesian Change Point Detection in Financial Time Series; Xchange - Online Book Rental and Exchange Platform.
-    - Listed employment:
+    - Employment reported by candidate (official designation, hours and detailed duties not yet externally verified): SHARP INVESCO REVOLUTIONS, Nagpur, remote from the UK, 9 Dec 2024 - 6 Nov 2026; data engineering with some AI/ML tasks supporting a small internal financial-operations function. The proposed title is Data Engineer. Do not infer tools, algorithms, products, clients, production metrics, team leadership or employment type.
+    - Listed earlier employment:
       1. Accenture - Custom Software Engineering Associate, Oct 2022 - Sep 2024.
       2. Cognizant - Intern (data engineering and machine learning), Jan 2022 - Apr 2022.
-    - Only describe employment entries supplied here. Do not infer additional employers, completed future dates or years of commercial experience from project activity.
+    - Clearly distinguish candidate-reported SHARP INVESCO REVOLUTIONS dates and scope from externally verified employer documentation. Experience certificate and relieving letter drafts are not issued documents. Do not infer work hours or UK immigration compliance.
+    - Only describe listed employment. Do not infer additional employers, completed future dates or years of commercial experience from project activity.
     - Location: Glasgow, UK.
     - Contact: rahulkhanke786@gmail.com
   `,
