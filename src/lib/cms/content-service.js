@@ -68,7 +68,17 @@ export const getPortfolioContent = cache(async () => {
 
     return {
       projects: visibleProjects,
-      resume: { ...fallbackResume, ...resume },
+      // Career copy is reviewed in code. Keep it consistent with the experience
+      // entries and chatbot until the separate Sanity content is reconciled.
+      // Other CMS-controlled fields (e.g. title) continue to work as before.
+      resume: {
+        ...fallbackResume,
+        ...resume,
+        label: fallbackResume.label,
+        summary: fallbackResume.summary,
+        neuralSummary: fallbackResume.neuralSummary,
+        knowledgeBase: fallbackResume.knowledgeBase,
+      },
       stackComparisons: stackComparisons.length
         ? stackComparisons
         : fallbackStackComparisons,
