@@ -62,12 +62,12 @@ export const fallbackProjects = [
 ];
 
 export const fallbackResume = {
-  label: "DATA SCIENTIST & AI ENGINEER",
+  label: "DATA ENGINEERING · AI/ML · BACKEND",
   title: "RAHUL KHANKE",
   summary:
-    "Data Scientist & AI Engineer building high-performance systems where data meets scale. I architect resilient streaming pipelines, train predictive ML models, and deploy autonomous AI agents—backed by a robust full-stack engineering foundation.",
+    "Software engineer with experience in enterprise application delivery and hands-on data engineering for a small financial-sector business. At SHARP INVESCO REVOLUTIONS, I supported internal financial operations through data engineering and some applied AI/ML work, with substantial individual ownership. My MSc in Data Science and independent projects extend this foundation into backend systems, applied machine learning and data-intensive software.",
   neuralSummary:
-    "Ask about my dissertation on Bayesian Change Point Detection, my work with LangGraph agents and RAG systems, or my experience building real-time event-driven architectures.",
+    "I enjoy translating business needs into practical software. Explore my Bayesian change-point research, graph-based fraud investigation prototype, market-data experiments and route-optimisation project.",
   studies: [
     {
       slug: "msc-data-science",
@@ -75,7 +75,7 @@ export const fallbackResume = {
       degree: "MSc in Data Science",
       year: "2025",
       dissertation: "BCPD (Bayesian Change Point Detection) using ML for indexes and crypto time series.",
-      dissertationDetail: "Investigated Bayesian methods for detecting structural breaks in high-volatility financial time series. Developed a custom probabilistic model in Python (PyMC3/NumPy) to identify market regime changes in real-time, outperforming traditional sliding-window variance metrics by 35%. Validated on 5 years of crypto and S&P 500 index data.",
+      dissertationDetail: "Investigated Bayesian methods for identifying structural changes in financial time series. Explored market-regime interpretation, methodological assumptions and sensitivity to modelling choices. Quantitative outperformance is not claimed without reproducible evidence.",
       skills: ["Bayesian Statistics", "Time Series Analysis", "Deep Learning", "Big Data Analytics", "Information Retrieval", "Text Mining"],
       tools: ["Python", "PyTorch", "PyMC3", "Hadoop/Spark", "MongoDB", "Linux"],
       modules: [
@@ -99,7 +99,7 @@ export const fallbackResume = {
       degree: "B.E in Computer Science",
       year: "2022",
       dissertation: "Xchange: Online Library Book Rental & Payment Platform",
-      dissertationDetail: "Built a localized full-stack marketplace for students to rent and exchange textbooks. Integrated Stripe for secure deposits and a real-time inventory system using Firebase Realtime Database to prevent double-booking.",
+      dissertationDetail: "Developed Xchange as a student-focused book-rental and exchange software project. The original CV identifies it as a final-year project; its exact academic title and deployed integrations require confirmation.",
       skills: ["Full Stack Development", "Database Design", "API Integration", "UI/UX Design"],
       tools: ["Android/Java", "Firebase", "Stripe API", "XML"],
       modules: ["Data Structures", "Algorithms", "DBMS", "Operating Systems"],
@@ -107,88 +107,73 @@ export const fallbackResume = {
     },
   ],
   experience: [
-    // {
-    //   company: "Enterprise AI Consultancy",
-    //   slug: "enterprise-ai",
-    //   role: "AI & Data Solution Engineer",
-    //   period: "Sep 2024 - Dec 2025",
-    //   description: "Engineering advanced AI and data solutions, focusing on scalable architecture, RAG systems, and ML integration for enterprise clients.",
-    //   image: "/generated/exp-tech.png",
-    //   stack: ["Python", "AWS", "LLMs", "RAG", "Data Pipelines"],
-    //   stats: [
-    //     { label: "Projects", value: "Multiple" },
-    //     { label: "Impact", value: "High" },
-    //     { label: "Team", value: "Engineering" }
-    //   ]
-    // },
+    {
+      company: "SHARP INVESCO REVOLUTIONS",
+      slug: "sharp-invesco-revolutions",
+      role: "Data Engineer",
+      period: "9 Dec 2024 – 6 Nov 2026",
+      location: "Nagpur, India · Remote from Glasgow, UK",
+      description: "Worked across data engineering and selected applied AI/ML responsibilities for a small part of the company's own financial operations. In a lean team, I took substantial hands-on ownership of the technical work and its ongoing evolution, rather than delivering technology services to external clients.",
+      image: "/generated/exp-tech.png",
+      // No employer-specific tool list or performance statistics until supported by work evidence.
+      stack: [],
+      focusAreas: [
+        "Internal financial operations",
+        "Data engineering",
+        "Applied AI/ML",
+        "Individual end-to-end ownership"
+      ],
+      highlightsTitle: "Scope & Contributions",
+      highlights: [
+        "Supported financial-operation data needs inside the business, not customer-facing consulting engagements.",
+        "Worked hands-on across Data Engineering responsibilities and some AI/ML-related work as the company's internal needs developed.",
+        "Took substantial individual ownership in a very small organisation with limited specialised engineering resources.",
+        "Developed practical engineering capability through independent learning and implementation while supporting the business's changing requirements.",
+        "Collaborated remotely from Glasgow with the India-based business; the exact systems, tools, models and measured business results still require employer-backed detail."
+      ]
+    },
     {
       company: "Accenture",
       slug: "accenture",
       role: "Custom Software Engineering Associate",
-      period: "Oct 2022 - Sept 2024",
-      description: "Engineered scalable end-to-end ML systems and data pipelines, integrating AI solutions with legacy architecture. Built predictive models for claims analytics and automated production workflows.",
+      period: "Oct 2022 - Sep 2024",
+      description: "Worked on enterprise application and data/analytics integration. The existing CV reports Java, Python, SQL, ETL and ML-related work; exact production scope and numerical results require corroboration.",
       image: "/generated/exp-corp.png",
-      stack: ["Java", "Spring Boot", "React", "Kafka", "AWS", "Docker", "Kubernetes", "Airflow", "Python", "SQL"],
-      stats: [
-        { label: "Data Scale", value: "TB+" },
-        { label: "Accuracy", value: "+30%" },
-        { label: "Users", value: "Global" }
-      ],
+      stack: ["Java", "Python", "SQL", "Software Integration"],
+      stats: [],
       highlights: [
-        "Built end‑to‑end ML models for claims analytics, improving accuracy by 30% and reducing processing time by 50%.",
-        "Designed ETL/data pipelines with Python, SQL, and Airflow, improving data availability and reliability.",
-        "Built feature engineering and model evaluation workflows to improve model quality and business usability.",
-        "Deployed containerized ML services with Docker + Kubernetes, and set up CI/CD for production delivery.",
-        "Integrated AI solutions with legacy systems to deliver real‑time insights for underwriters and product teams.",
-        "Collaborated with cross‑functional teams to align data architecture and production requirements."
+        "Contributed to software integration and analytics workflows involving Python, SQL and enterprise applications, as described in the original CV.",
+        "The original CV reports work involving ETL, data validation, model workflows and Java/Spring Boot integration; the specific depth and technologies require confirmation.",
+        "Removed unverified percentage improvements, data-scale and global-user claims pending supporting evidence."
       ]
     },
     {
       company: "Cognizant",
       slug: "cognizant",
-      role: "Intern",
+      role: "Data Engineering & ML Intern (role scope to confirm)",
       period: "Jan 2022 - Apr 2022",
-      description: "Developed fundamental data engineering and ML solutions, focusing on real-time analytics pipelines, sentiment analysis models, and production-grade visualizations.",
+      description: "Supported data preparation, exploratory ML and reporting tasks during an internship, based on candidate-provided CV information.",
       image: "/generated/exp-corp.png",
-      stack: ["Python", "SQL", "Spark", "Tableau", "Power BI", "Docker", "Kubernetes", "Java"],
-      stats: [
-        { label: "Pipelines", value: "Real-time" },
-        { label: "ML Ops", value: "Docker/K8s" },
-        { label: "Focus", value: "DE & ML" }
-      ],
+      stack: ["Python", "SQL", "Data Preparation", "Exploratory ML"],
+      stats: [],
       highlights: [
-        "Engineered ETL pipelines using Python, SQL, and Apache Spark to integrate multi‑source data for real‑time analytics.",
-        "Built ML modules for sentiment analysis and topic modeling on customer reviews and social data.",
-        "Contributed to DevOps/MLOps workflows using Docker + Kubernetes for containerized services.",
-        "Developed Tableau/Power BI dashboards to visualize KPIs and support stakeholder decisions.",
-        "Assisted with data cleaning/validation and documentation to support analytics reporting."
+        "The existing CV reports Python/SQL data processing, exploratory sentiment analysis, data cleaning and reporting.",
+        "Specific Spark, BI and deployment responsibilities should be checked against internship records."
       ]
     },
-    // {
-    //   company: "Company A (Intern)",
-    //   slug: "company-a-intern",
-    //   role: "Data Engineering Intern",
-    //   period: "Aug 2020 - Dec 2021",
-    //   description: "Assisted in building data pipelines and processing large datasets.",
-    //   image: "/generated/exp-tech.png",
-    //   stack: ["Python", "SQL", "ETL"],
-    //   stats: [
-    //     { label: "Duration", value: "1.5 Years" },
-    //     { label: "Focus", value: "Data Eng" }
-    //   ]
-    // },
   ],
   knowledgeBase: `
-    RESUME DATA FOR RAHUL KHANKE:
-    - Role: Data Scientist, AI Engineer.
-    - Projects: Sentinance (real-time crypto intelligence), GraphGuard (graph ML fraud detection), FleetFlow (delivery optimization), Shiftify (music-library import/review/CSV reporting and experimental YouTube Music account actions; cookie-based account actions send credentials through the app server).
-    - Education: MSc Data Science (University of Glasgow), B.E Computer Science (G.H. Raisoni).
-    - Experience: 
-      1. Company A (AI & Data Solution Engineer)
-      2. Accenture (Software Engineer)
-      3. Cognizant (Intern)
+    PUBLIC-PORTFOLIO PROFILE FOR RAHUL KHANKE:
+    - Positioning: Software engineering with focus on data engineering, AI/ML projects and backend systems.
+    - Employment: Accenture Custom Software Engineering Associate (Oct 2022-Sep 2024); Cognizant internship (Jan-Apr 2022).
+    - Candidate-reported experience pending validation: SHARP INVESCO REVOLUTIONS, 9 December 2024 to 6 November 2026, Nagpur, India, performed remotely from Glasgow, UK. Proposed role label: Data Engineer (official employer designation pending confirmation). Small business / internal financial-operations scope, not external client delivery. Hands-on data engineering and some applied AI/ML work; substantial individual ownership and independent learning/implementation in a resource-limited environment. Do not equate broad ownership with an official senior title. Exact systems, tools, tasks, model deployment, employment type, hours and measurable outcomes remain unverified.
+    - Independent projects: Sentinance (market-data and AI research prototype), GraphGuard (fraud investigation prototype), FleetFlow (dispatch and optimisation prototype), Shiftify (music-library portability).
+    - Education: MSc Data Science, University of Glasgow, 2025; BE Computer Science, G.H. Raisoni College, 2022.
+    - MSc dissertation: Bayesian Change Point Detection for Financial Time Series.
+    - Undergraduate final-year project: Xchange online book-rental and exchange platform.
+    - Never invent employer-specific data pipelines, model accuracy, scale, revenue or headcount. Distinguish project code from production systems.
     - Location: Glasgow, UK.
-    - Contact: +44 07584251036, rahulkhanke786@gmail.com
+    - Contact: rahulkhanke786@gmail.com
   `,
 };
 
@@ -510,7 +495,7 @@ export const fallbackCaseStudies = [
 export const fallbackRoles = {
   "data-scientist": {
     title: "Data Scientist",
-    description: "Designing LSTM forecasting models, graph neural networks (GAT), and predictive optimization systems for high-stakes domains.",
+    description: "Exploring time-series forecasting, graph-informed ML and optimisation methods through research and independent projects.",
     skills: ["Python", "Pandas", "PyTorch", "LSTM/Prophet", "XGBoost", "Graph ML", "SHAP/LIME", "OR-Tools"],
     projects: ["sentinance", "graphguard", "fleetflow"],
     stats: [
@@ -521,7 +506,7 @@ export const fallbackRoles = {
   },
   "data-engineer": {
     title: "Data Engineer",
-    description: "Building resilient streaming (Kafka) and batch (Airflow/dbt) pipelines, persisting data to specialized stores like TimescaleDB and Neo4j.",
+    description: "Developing data-processing and integration skills across Python, SQL, pipeline design and project-based streaming and graph data components.",
     skills: ["Kafka", "Airflow", "dbt", "PostgreSQL", "TimescaleDB", "Neo4j", "Redis", "Docker"],
     projects: ["sentinance", "graphguard", "fleetflow"],
     stats: [
@@ -532,7 +517,7 @@ export const fallbackRoles = {
   },
   "ai-ml-engineer": {
     title: "AI/ML Engineer",
-    description: "Deploying production-grade AI systems, from LangGraph multi-agent RAG pipelines to scalable model serving APIs.",
+    description: "Exploring explainable ML, agentic workflows and model-serving interfaces in independent engineering projects; production readiness is assessed separately.",
     skills: ["LangGraph", "RAG", "Qdrant", "FastAPI", "LLMs (Gemini/Groq)", "MLflow", "Model Serving", "Vector Search"],
     projects: ["sentinance", "graphguard", "fleetflow"],
     stats: [

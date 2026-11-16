@@ -57,6 +57,11 @@ export default async function CompanyPage({ params }) {
                             <h2 className="text-2xl md:text-4xl font-medium text-[var(--muted)] mt-2">
                                 {company.role}
                             </h2>
+                            {company.location && (
+                                <p className="font-mono text-sm md:text-base text-[var(--muted)] mt-2">
+                                    {company.location}
+                                </p>
+                            )}
                         </div>
 
                         <p className="text-xl md:text-2xl text-[var(--foreground)] opacity-80 max-w-3xl leading-relaxed mt-12 border-l-2 border-[var(--accent)] pl-6">
@@ -64,11 +69,27 @@ export default async function CompanyPage({ params }) {
                         </p>
                     </div>
 
+                    {/* Role scope — separates broad ownership from unsupported tool claims. */}
+                    {company.focusAreas?.length > 0 && (
+                        <div className="mb-12">
+                            <h3 className="font-mono text-sm uppercase tracking-[0.2em] text-[var(--muted)] mb-5">
+                                Areas of Work
+                            </h3>
+                            <div className="flex flex-wrap gap-3">
+                                {company.focusAreas.map((area) => (
+                                    <span key={area} className="rounded-xl border border-[var(--border)] bg-[var(--card)]/50 px-4 py-3 text-sm md:text-base text-[var(--foreground)]">
+                                        {area}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
                     {/* Highlights / Responsibilities Section */}
-                    {company.highlights && (
+                    {company.highlights?.length > 0 && (
                         <div className="mb-12 2xl:mb-24">
                             <h3 className="font-mono text-sm uppercase tracking-[0.2em] text-[var(--muted)] mb-8">
-                                Key Achievements
+                                {company.highlightsTitle || "Key Achievements"}
                             </h3>
                             <ul className="grid gap-4 max-w-4xl">
                                 {company.highlights.map((item, i) => (
@@ -103,7 +124,7 @@ export default async function CompanyPage({ params }) {
                 )}
 
                 {/* Tech Stack Visualization */}
-                {company.stack && (
+                {company.stack?.length > 0 && (
                     <RevealOnScroll delay={200}>
                         <div className="mb-16 2xl:mb-32">
                             <h3 className="font-mono text-sm uppercase tracking-[0.2em] text-[var(--muted)] mb-12 flex items-center gap-4">
