@@ -65,7 +65,7 @@ export const fallbackResume = {
   label: "DATA ENGINEERING · AI/ML · BACKEND",
   title: "RAHUL KHANKE",
   summary:
-    "Software engineer focused on data engineering, applied AI/ML and backend systems. My background combines enterprise software delivery at Accenture, an MSc in Data Science from the University of Glasgow, and independently built financial-data and engineering projects.",
+    "Software engineer with experience in enterprise application delivery and hands-on data engineering for a small financial-sector business. At SHARP INVESCO REVOLUTIONS, I supported internal financial operations through data engineering and some applied AI/ML work, with substantial individual ownership. My MSc in Data Science and independent projects extend this foundation into backend systems, applied machine learning and data-intensive software.",
   neuralSummary:
     "I enjoy translating business needs into practical software. Explore my Bayesian change-point research, graph-based fraud investigation prototype, market-data experiments and route-optimisation project.",
   studies: [
@@ -109,15 +109,27 @@ export const fallbackResume = {
   experience: [
     {
       company: "SHARP INVESCO REVOLUTIONS",
-      role: "Data Engineer (title subject to employer confirmation)",
-      period: "Dec 2024 - Nov 2026",
-      description: "Candidate-reported remote work from the UK supporting a small part of the company's internal financial operations, with hands-on data-engineering responsibilities and some applied AI/ML work. Exact technologies, outcomes, employment type and work hours remain under verification.",
+      slug: "sharp-invesco-revolutions",
+      role: "Data Engineer",
+      period: "9 Dec 2024 – 6 Nov 2026",
+      location: "Nagpur, India · Remote from Glasgow, UK",
+      description: "Worked across data engineering and selected applied AI/ML responsibilities for a small part of the company's own financial operations. In a lean team, I took substantial hands-on ownership of the technical work and its ongoing evolution, rather than delivering technology services to external clients.",
       image: "/generated/exp-tech.png",
+      // No employer-specific tool list or performance statistics until supported by work evidence.
       stack: [],
+      focusAreas: [
+        "Internal financial operations",
+        "Data engineering",
+        "Applied AI/ML",
+        "Individual end-to-end ownership"
+      ],
+      highlightsTitle: "Scope & Contributions",
       highlights: [
-        "Supported the internal financial-operations function rather than client-delivered technology services.",
-        "Reported significant individual engineering ownership within a small, resource-constrained operating function.",
-        "Specific systems, data sources, model uses, verification records and employment arrangements require confirmation before publishing detailed achievements."
+        "Supported financial-operation data needs inside the business, not customer-facing consulting engagements.",
+        "Worked hands-on across Data Engineering responsibilities and some AI/ML-related work as the company's internal needs developed.",
+        "Took substantial individual ownership in a very small organisation with limited specialised engineering resources.",
+        "Developed practical engineering capability through independent learning and implementation while supporting the business's changing requirements.",
+        "Collaborated remotely from Glasgow with the India-based business; the exact systems, tools, models and measured business results still require employer-backed detail."
       ]
     },
     {
@@ -154,7 +166,7 @@ export const fallbackResume = {
     PUBLIC-PORTFOLIO PROFILE FOR RAHUL KHANKE:
     - Positioning: Software engineering with focus on data engineering, AI/ML projects and backend systems.
     - Employment: Accenture Custom Software Engineering Associate (Oct 2022-Sep 2024); Cognizant internship (Jan-Apr 2022).
-    - Candidate-reported experience pending validation: SHARP INVESCO REVOLUTIONS (Dec 2024-Nov 2026), internal financial operations, UK-remote, data engineering and some AI/ML responsibilities. Official title, employment type, hours, specific tools and measured outcomes are not verified.
+    - Candidate-reported experience pending validation: SHARP INVESCO REVOLUTIONS, 9 December 2024 to 6 November 2026, Nagpur, India, performed remotely from Glasgow, UK. Proposed role label: Data Engineer (official employer designation pending confirmation). Small business / internal financial-operations scope, not external client delivery. Hands-on data engineering and some applied AI/ML work; substantial individual ownership and independent learning/implementation in a resource-limited environment. Do not equate broad ownership with an official senior title. Exact systems, tools, tasks, model deployment, employment type, hours and measurable outcomes remain unverified.
     - Independent projects: Sentinance (market-data and AI research prototype), GraphGuard (fraud investigation prototype), FleetFlow (dispatch and optimisation prototype), Shiftify (music-library portability).
     - Education: MSc Data Science, University of Glasgow, 2025; BE Computer Science, G.H. Raisoni College, 2022.
     - MSc dissertation: Bayesian Change Point Detection for Financial Time Series.
