@@ -493,48 +493,37 @@ export const fallbackCaseStudies = [
 ];
 
 export const fallbackRoles = {
-  "data-scientist": {
-    title: "Data Scientist",
-    description: "Exploring time-series forecasting, graph-informed ML and optimisation methods through research and independent projects.",
-    skills: ["Python", "Pandas", "PyTorch", "LSTM/Prophet", "XGBoost", "Graph ML", "SHAP/LIME", "OR-Tools"],
-    projects: ["sentinance", "graphguard", "fleetflow"],
-    stats: [
-      { label: "Forecasting", value: "LSTM + Prophet" },
-      { label: "Graph ML", value: "GAT + XGBoost" },
-      { label: "Optimization", value: "OR-Tools" },
-    ]
-  },
   "data-engineer": {
     title: "Data Engineer",
-    description: "Developing data-processing and integration skills across Python, SQL, pipeline design and project-based streaming and graph data components.",
-    skills: ["Kafka", "Airflow", "dbt", "PostgreSQL", "TimescaleDB", "Neo4j", "Redis", "Docker"],
+    description: "Supporting practical data engineering for internal financial operations, with Python and SQL workflows and independent projects exploring orchestration, streaming and graph data.",
+    skills: ["Python", "SQL", "Pandas", "Data Preparation", "Data Quality", "Airflow", "Kafka", "dbt", "PostgreSQL", "TimescaleDB", "Neo4j", "Redis", "Docker"],
     projects: ["sentinance", "graphguard", "fleetflow"],
     stats: [
-      { label: "Streaming", value: "Kafka backbone" },
-      { label: "Pipelines", value: "Airflow + dbt" },
-      { label: "Stores", value: "Postgres + Neo4j" },
+      { label: "Pipelines", value: "Python + SQL" },
+      { label: "Streaming", value: "Kafka Modules" },
+      { label: "Data Stores", value: "SQL + Neo4j" },
     ]
   },
   "ai-ml-engineer": {
     title: "AI/ML Engineer",
-    description: "Exploring explainable ML, agentic workflows and model-serving interfaces in independent engineering projects; production readiness is assessed separately.",
-    skills: ["LangGraph", "RAG", "Qdrant", "FastAPI", "LLMs (Gemini/Groq)", "MLflow", "Model Serving", "Vector Search"],
+    description: "Exploring predictive modelling, time-series research, graph ML, explainability and agentic AI through research and independent engineering projects. Production readiness is assessed separately.",
+    skills: ["Python", "scikit-learn", "PyTorch", "XGBoost", "Time-Series Forecasting", "Bayesian Change Point Detection", "Graph ML", "SHAP", "Model Evaluation", "LangGraph", "RAG", "Qdrant", "FastAPI", "MLflow"],
     projects: ["sentinance", "graphguard", "fleetflow"],
     stats: [
-      { label: "Agents", value: "LangGraph Multi-Agent" },
-      { label: "Models", value: "GenAI + Predictive" },
-      { label: "Serving", value: "FastAPI Production" },
+      { label: "Forecasting", value: "Time-Series / LSTM" },
+      { label: "Explainability", value: "XGBoost + SHAP" },
+      { label: "Agents", value: "LangGraph + RAG" },
     ]
   },
   "software-engineer": {
     title: "Software Engineer",
-    description: "Delivering robust full-stack applications and owning the complete feature lifecycle—from database schema design to responsive, animated frontend UIs and real-time WebSocket layers.",
-    skills: ["Next.js 16", "TypeScript", "React 19", "Tailwind 4", "FastAPI", "PostgreSQL", "Redis", "tRPC", "GraphQL", "Framer Motion", "D3.js", "Docker"],
+    description: "Designing and building backend and full-stack software, integrating data-intensive services and exploring route optimisation in independent projects.",
+    skills: ["Python", "SQL", "Next.js 16", "TypeScript", "React 19", "Tailwind 4", "FastAPI", "PostgreSQL", "Redis", "tRPC", "GraphQL", "WebSockets", "Framer Motion", "D3.js", "OR-Tools", "Docker"],
     projects: ["sentinance", "graphguard", "fleetflow", "shiftify"],
     stats: [
-      { label: "Frontend", value: "Next.js 16 + React 19" },
-      { label: "Realtime", value: "WebSockets + Streaming" },
-      { label: "Visuals", value: "D3.js + Deck.gl" },
+      { label: "Frontend", value: "Next.js + React" },
+      { label: "Realtime", value: "WebSockets" },
+      { label: "Optimization", value: "OR-Tools" },
     ]
   },
 
