@@ -4,12 +4,14 @@ import { Footer } from "@/components/Footer";
 import { MobileDock } from "@/components/MobileDock";
 import { RevealOnScroll } from "@/components/RevealOnScroll";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 export const runtime = "edge";
 
 export default async function RolePage({ params }) {
     const { slug } = await params;
+    // Preserve deep links without retaining a separate Data Scientist role page.
+    if (slug === "data-scientist") redirect("/role/ai-ml-engineer");
     const content = await getPortfolioContent();
     const role = content.roles?.[slug];
 

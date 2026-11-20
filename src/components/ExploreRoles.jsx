@@ -3,27 +3,16 @@
 import Link from "next/link";
 import { RevealOnScroll } from "./RevealOnScroll";
 import { Watermark } from "./Watermark";
-import { Activity, Server, BrainCircuit, Terminal, Layout } from "lucide-react";
+import { Server, BrainCircuit, Terminal } from "lucide-react";
 
 const roles = [
     {
-        id: "data-scientist",
-        title: "Data Scientist",
-        description: "Designing LSTM forecasting models, graph neural networks (GAT), and predictive optimization systems for high-stakes domains.",
-        href: "/role/data-scientist",
-        gradient: "from-blue-400 to-cyan-300",
-        index: "01",
-        image: "/generated/role-ds.png",
-        icon: Activity,
-        watermarkType: "wireframe"
-    },
-    {
         id: "data-engineer",
         title: "Data Engineer",
-        description: "Building resilient streaming (Kafka) and batch (Airflow/dbt) pipelines, persisting data to specialized stores like TimescaleDB and Neo4j.",
+        description: "Working across Python and SQL data pipelines, preparation and validation, with project-based exploration of streaming, orchestration and graph data systems.",
         href: "/role/data-engineer",
         gradient: "from-emerald-400 to-teal-300",
-        index: "02",
+        index: "01",
         image: "/generated/role-de.png",
         icon: Server,
         watermarkType: "wireframe"
@@ -31,10 +20,10 @@ const roles = [
     {
         id: "ai-ml-engineer",
         title: "AI/ML Engineer",
-        description: "Deploying production-grade AI systems, from LangGraph multi-agent RAG pipelines to scalable model serving APIs.",
+        description: "Exploring forecasting, graph ML and explainability alongside LangGraph, retrieval and model-serving interfaces in independent AI/ML projects.",
         href: "/role/ai-ml-engineer",
         gradient: "from-purple-400 to-pink-300",
-        index: "03",
+        index: "02",
         image: "/generated/role-ai.png",
         icon: BrainCircuit,
         watermarkType: "neon"
@@ -45,7 +34,7 @@ const roles = [
         description: "Delivering robust full-stack applications and owning the complete feature lifecycle—from database schema design to responsive, animated frontend UIs and real-time WebSocket layers.",
         href: "/role/software-engineer",
         gradient: "from-orange-400 to-amber-300",
-        index: "04",
+        index: "03",
         image: "/generated/role-se.png",
         icon: Terminal,
         watermarkType: "engraved"

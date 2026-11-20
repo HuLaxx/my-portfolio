@@ -10,13 +10,11 @@ import {
     Code2,
     Compass,
     Database,
-    FlaskConical,
     FolderKanban,
     Github,
     GraduationCap,
     Linkedin,
     Mail,
-    PanelsTopLeft,
     Sparkles,
     X,
 } from "lucide-react";
@@ -30,11 +28,9 @@ const sections = [
 ];
 
 const roles = [
-    { label: "Data Scientist", href: "/role/data-scientist", Icon: FlaskConical },
     { label: "Data Engineer", href: "/role/data-engineer", Icon: Database },
     { label: "AI/ML Engineer", href: "/role/ai-ml-engineer", Icon: BrainCircuit },
     { label: "Software Engineer", href: "/role/software-engineer", Icon: Code2 },
-    { label: "Full Stack Developer", href: "/role/full-stack-developer", Icon: PanelsTopLeft },
 ];
 
 const contacts = [
