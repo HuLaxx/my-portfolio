@@ -78,12 +78,12 @@ export const Footer = () => {
 
           {/* Right: Me Image - 30% (Reduced to fit text) */}
           <div className="flex col-start-2 row-start-1 min-w-0 w-full 2xl:w-[30%] justify-end items-end relative -mb-2">
-            <div className="relative w-full h-[clamp(9rem,40vw,17rem)] md:h-full md:min-h-[12rem] 2xl:min-h-0 flex items-end justify-end">
+            <div className="relative w-full h-[clamp(12rem,50vw,18rem)] sm:h-[clamp(14rem,40vw,22rem)] md:h-[clamp(19rem,38vw,28rem)] xl:h-[clamp(23rem,30vw,32rem)] 2xl:h-[clamp(30rem,39vw,42rem)] flex items-end justify-end">
               <Image
-                src="/me.png"
+                src="/me-footer.png"
                 alt="Rahul Khanke portrait"
                 fill
-                sizes="(min-width: 1536px) 30vw, (min-width: 768px) 30vw, 50vw"
+                sizes="(min-width: 1536px) 30vw, (min-width: 768px) 30vw, 45vw"
                 className="object-contain object-bottom 2xl:-translate-x-6"
                 loading="lazy"
                 style={{
