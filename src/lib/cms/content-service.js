@@ -83,6 +83,8 @@ export const getPortfolioContent = cache(async () => {
         ? stackComparisons
         : fallbackStackComparisons,
       caseStudies: fallbackCaseStudies,
+      // Role pages use the same reviewed fallback role definitions even with Sanity enabled.
+      roles: fallbackRoles,
     };
   } catch (error) {
     console.error("Sanity content fetch failed:", error);
