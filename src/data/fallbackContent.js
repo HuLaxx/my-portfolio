@@ -135,7 +135,7 @@ export const fallbackResume = {
     {
       company: "Accenture",
       slug: "accenture",
-      role: "Custom Software Engineering Associate",
+      role: "Custom Software Engineer",
       period: "Oct 2022 - Sep 2024",
       description: "Worked on enterprise application and data/analytics integration. The existing CV reports Java, Python, SQL, ETL and ML-related work; exact production scope and numerical results require corroboration.",
       image: "/generated/exp-corp.png",
@@ -150,7 +150,7 @@ export const fallbackResume = {
     {
       company: "Cognizant",
       slug: "cognizant",
-      role: "Data Engineering & ML Intern (role scope to confirm)",
+      role: "Intern",
       period: "Jan 2022 - Apr 2022",
       description: "Supported data preparation, exploratory ML and reporting tasks during an internship, based on candidate-provided CV information.",
       image: "/generated/exp-corp.png",
@@ -165,7 +165,7 @@ export const fallbackResume = {
   knowledgeBase: `
     PUBLIC-PORTFOLIO PROFILE FOR RAHUL KHANKE:
     - Positioning: Software engineering with focus on data engineering, AI/ML projects and backend systems.
-    - Employment: Accenture Custom Software Engineering Associate (Oct 2022-Sep 2024); Cognizant internship (Jan-Apr 2022).
+    - Employment: Accenture Custom Software Engineer (Oct 2022-Sep 2024); Cognizant Intern (Jan-Apr 2022).
     - Candidate-reported experience pending validation: SHARP INVESCO REVOLUTIONS, 9 December 2024 to 6 November 2026, Nagpur, India, performed remotely from Glasgow, UK. Proposed role label: Data Engineer (official employer designation pending confirmation). Small business / internal financial-operations scope, not external client delivery. Hands-on data engineering and some applied AI/ML work; substantial individual ownership and independent learning/implementation in a resource-limited environment. Do not equate broad ownership with an official senior title. Exact systems, tools, tasks, model deployment, employment type, hours and measurable outcomes remain unverified.
     - Independent projects: Sentinance (market-data and AI research prototype), GraphGuard (fraud investigation prototype), FleetFlow (dispatch and optimisation prototype), Shiftify (music-library portability).
     - Education: MSc Data Science, University of Glasgow, 2025; BE Computer Science, G.H. Raisoni College, 2022.
