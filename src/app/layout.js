@@ -66,7 +66,7 @@ export const stripExtensionAttrs = `
 export const metadata = {
   title: "Rahul Khanke",
   description:
-    "An interactive portfolio by Rahul Khanke featuring AI engineering, data science, creative web interfaces, and source-backed project stories.",
+    "An interactive portfolio featuring software engineering, data engineering, applied AI/ML and research-backed project stories.",
   metadataBase: new URL("https://portfolio.hulax.uk"),
   icons: {
     icon: "/icon.ico",
