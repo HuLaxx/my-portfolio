@@ -129,24 +129,6 @@ export const Loader = () => {
                 ))}
             </div>
 
-            {/* Grid Background - Appears with Theme */}
-            <motion.div
-                className="absolute inset-0"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: showColor ? 0.1 : 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1.5, ease: "easeInOut" }}
-            >
-                <svg width="100%" height="100%">
-                    <defs>
-                        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                            <path d="M 40 0 L 0 0 0 40" fill="none" stroke={activeTheme.text} strokeWidth="0.5" className="transition-colors duration-1000" />
-                        </pattern>
-                    </defs>
-                    <rect width="100%" height="100%" fill="url(#grid)" />
-                </svg>
-            </motion.div>
-
             {/* Global Particles - Full Screen Wind */}
             <AnimatePresence>
                 {orbitalParticles.map((p, i) => (
