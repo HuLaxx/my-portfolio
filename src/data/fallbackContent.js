@@ -507,11 +507,11 @@ export const fallbackRoles = {
   "ai-ml-engineer": {
     title: "AI/ML Engineer",
     description: "Exploring predictive modelling, time-series research, graph ML, explainability and agentic AI through research and independent engineering projects. Production readiness is assessed separately.",
-    skills: ["Python", "scikit-learn", "PyTorch", "XGBoost", "Time-Series Forecasting", "Bayesian Change Point Detection", "Graph ML", "SHAP", "Model Evaluation", "LangGraph", "RAG", "Qdrant", "FastAPI", "MLflow"],
+    skills: ["Python", "scikit-learn", "PyTorch", "XGBoost", "Time-Series Forecasting", "LSTM / Prophet (research)", "Bayesian Change Point Detection", "Graph ML (GAT exploration)", "SHAP / LIME", "Model Evaluation", "LangGraph", "RAG", "Qdrant", "FastAPI", "MLflow"],
     projects: ["sentinance", "graphguard", "fleetflow"],
     stats: [
-      { label: "Forecasting", value: "Time-Series / LSTM" },
-      { label: "Explainability", value: "XGBoost + SHAP" },
+      { label: "Forecasting", value: "LSTM / Prophet" },
+      { label: "Graph ML", value: "GAT / XGBoost" },
       { label: "Agents", value: "LangGraph + RAG" },
     ]
   },
