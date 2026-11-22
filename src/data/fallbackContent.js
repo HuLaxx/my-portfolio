@@ -6,7 +6,7 @@ export const fallbackProjects = [
     slug: "sentinance",
     summary:
       "Market-intelligence research combining exchange-data adapters, LangGraph investigation paths and optional LSTM forecasting with documented provider fallbacks.",
-    live: "https://sentinance.hulax.vercel.app",
+    live: "https://sentinance.hulax.uk",
     github: "https://github.com/HuLaxx/Sentinance",
     languages: {
       "Next.js": 40,
@@ -21,7 +21,7 @@ export const fallbackProjects = [
     slug: "graphguard",
     summary:
       "Fraud-investigation prototype exploring Neo4j relationships, XGBoost/SHAP explanations and a GraphQL interface, with clearly labeled sample cases.",
-    live: "https://graphguard.hulax.vercel.app",
+    live: "https://graphguard.hulax.uk",
     github: "https://github.com/HuLaxx/GraphGuard",
     languages: {
       Python: 50,
@@ -36,7 +36,7 @@ export const fallbackProjects = [
     slug: "fleetflow",
     summary:
       "Logistics control-room prototype: OR-Tools route proposals, operational event modules and a map interface that includes sample fleet geometry.",
-    live: "https://fleetflow.hulax.vercel.app",
+    live: "https://fleetflow.hulax.uk",
     github: "https://github.com/HuLaxx/FleetFlow",
     languages: {
       "Next.js": 50,
@@ -59,13 +59,23 @@ export const fallbackProjects = [
       SQL: 5,
     },
   },
+  {
+    year: "2026",
+    client: "BCPD One",
+    role: "Bayesian Research",
+    slug: "",
+    summary: "Bayesian change-point research for financial time series, including sensitivity analysis, provider attribution and reproducible CSV exports.",
+    live: "",
+    github: "https://github.com/HuLaxx/BCPD",
+    languages: { TypeScript: 60, "Next.js": 30, Statistics: 10 },
+  },
 ];
 
 export const fallbackResume = {
-  label: "DATA ENGINEERING · AI/ML · BACKEND",
+  label: "DATA & ML ENGINEER · PYTHON · SQL · APPLIED AI",
   title: "RAHUL KHANKE",
   summary:
-    "Software engineer with experience in enterprise application delivery and hands-on data engineering for a small financial-sector business. At SHARP INVESCO REVOLUTIONS, I supported internal financial operations through data engineering and some applied AI/ML work, with substantial individual ownership. My MSc in Data Science and independent projects extend this foundation into backend systems, applied machine learning and data-intensive software.",
+    "I am a Data & ML Engineer with experience in financial-data pipelines, applied machine learning and enterprise software delivery. At Sharp Invesco Revolutions, I worked on Python/SQL data preparation and applied AI/ML responsibilities for internal financial operations. Previously I delivered Java, Python and SQL integrations at Accenture. I hold an MSc in Data Science from the University of Glasgow and build evidence-led systems across streaming, explainable ML and APIs. Based in Glasgow, open to UK and European opportunities.",
   neuralSummary:
     "I enjoy translating business needs into practical software. Explore my Bayesian change-point research, graph-based fraud investigation prototype, market-data experiments and route-optimisation project.",
   studies: [
@@ -74,7 +84,7 @@ export const fallbackResume = {
       institution: "University of Glasgow",
       degree: "MSc in Data Science",
       year: "2025",
-      dissertation: "BCPD (Bayesian Change Point Detection) using ML for indexes and crypto time series.",
+      dissertation: "Bayesian Change Point Detection for Financial Time Series",
       dissertationDetail: "Investigated Bayesian methods for identifying structural changes in financial time series. Explored market-regime interpretation, methodological assumptions and sensitivity to modelling choices. Quantitative outperformance is not claimed without reproducible evidence.",
       skills: ["Bayesian Statistics", "Time Series Analysis", "Deep Learning", "Big Data Analytics", "Information Retrieval", "Text Mining"],
       tools: ["Python", "PyTorch", "PyMC3", "Hadoop/Spark", "MongoDB", "Linux"],
@@ -113,7 +123,7 @@ export const fallbackResume = {
       role: "Data Engineer",
       period: "9 Dec 2024 – 6 Nov 2026",
       location: "Nagpur, India · Remote from Glasgow, UK",
-      description: "Worked across data engineering and selected applied AI/ML responsibilities for a small part of the company's own financial operations. In a lean team, I took substantial hands-on ownership of the technical work and its ongoing evolution, rather than delivering technology services to external clients.",
+      description: "Owned Python and SQL data preparation, pipeline maintenance and selected applied AI/ML tasks supporting the company\'s internal financial operations in a small team.",
       image: "/generated/exp-tech.png",
       // No employer-specific tool list or performance statistics until supported by work evidence.
       stack: [],
@@ -125,55 +135,56 @@ export const fallbackResume = {
       ],
       highlightsTitle: "Scope & Contributions",
       highlights: [
-        "Supported financial-operation data needs inside the business, not customer-facing consulting engagements.",
-        "Worked hands-on across Data Engineering responsibilities and some AI/ML-related work as the company's internal needs developed.",
-        "Took substantial individual ownership in a very small organisation with limited specialised engineering resources.",
-        "Developed practical engineering capability through independent learning and implementation while supporting the business's changing requirements.",
-        "Collaborated remotely from Glasgow with the India-based business; the exact systems, tools, models and measured business results still require employer-backed detail."
+        "Built and maintained Python and SQL data pipelines preparing financial records for analysis and model-ready datasets.",
+        "Delivered applied ML and AI tasks alongside data engineering, including data preparation and features for downstream models.",
+        "Owned requirements through implementation, testing and support for financial-data workflows.",
+        "Maintained and improved internal data processing as business needs changed.",
+        "Collaborated with business stakeholders and documented changes for ongoing support."
       ]
     },
     {
       company: "Accenture",
       slug: "accenture",
-      role: "Custom Software Engineer",
+      role: "Custom Software Engineering Associate",
       period: "Oct 2022 - Sep 2024",
-      description: "Worked on enterprise application and data/analytics integration. The existing CV reports Java, Python, SQL, ETL and ML-related work; exact production scope and numerical results require corroboration.",
+      description: "Built and supported enterprise software integrations and claims-data ETL components using Java, Python and SQL, working with testing, code review and production release processes.",
       image: "/generated/exp-corp.png",
       stack: ["Java", "Python", "SQL", "Software Integration"],
       stats: [],
       highlights: [
-        "Contributed to software integration and analytics workflows involving Python, SQL and enterprise applications, as described in the original CV.",
-        "The original CV reports work involving ETL, data validation, model workflows and Java/Spring Boot integration; the specific depth and technologies require confirmation.",
-        "Removed unverified percentage improvements, data-scale and global-user claims pending supporting evidence."
+        "Built and maintained Java, Python and SQL service integrations for enterprise applications.",
+        "Prepared claims-data ETL transformations and supported analytics and model-evaluation workflows.",
+        "Worked through testing, troubleshooting, code review and releases with larger engineering teams."
       ]
     },
     {
       company: "Cognizant",
       slug: "cognizant",
-      role: "Intern",
+      role: "Data Engineering & Machine Learning Intern",
       period: "Jan 2022 - Apr 2022",
-      description: "Supported data preparation, exploratory ML and reporting tasks during an internship, based on candidate-provided CV information.",
+      description: "Prepared and cleaned datasets with Python and SQL, explored machine-learning approaches and contributed analytical reports during an internship.",
       image: "/generated/exp-corp.png",
       stack: ["Python", "SQL", "Data Preparation", "Exploratory ML"],
       stats: [],
       highlights: [
-        "The existing CV reports Python/SQL data processing, exploratory sentiment analysis, data cleaning and reporting.",
-        "Specific Spark, BI and deployment responsibilities should be checked against internship records."
+        "Prepared datasets for analysis with Python and SQL and explored machine-learning experiments.",
+        "Contributed to exploratory analysis and reporting outputs for the internship team."
       ]
     },
   ],
   knowledgeBase: `
-    PUBLIC-PORTFOLIO PROFILE FOR RAHUL KHANKE:
-    - Positioning: Software engineering with focus on data engineering, AI/ML projects and backend systems.
-    - Employment: Accenture Custom Software Engineer (Oct 2022-Sep 2024); Cognizant Intern (Jan-Apr 2022).
-    - Candidate-reported experience pending validation: SHARP INVESCO REVOLUTIONS, 9 December 2024 to 6 November 2026, Nagpur, India, performed remotely from Glasgow, UK. Proposed role label: Data Engineer (official employer designation pending confirmation). Small business / internal financial-operations scope, not external client delivery. Hands-on data engineering and some applied AI/ML work; substantial individual ownership and independent learning/implementation in a resource-limited environment. Do not equate broad ownership with an official senior title. Exact systems, tools, tasks, model deployment, employment type, hours and measurable outcomes remain unverified.
-    - Independent projects: Sentinance (market-data and AI research prototype), GraphGuard (fraud investigation prototype), FleetFlow (dispatch and optimisation prototype), Shiftify (music-library portability).
-    - Education: MSc Data Science, University of Glasgow, 2025; BE Computer Science, G.H. Raisoni College, 2022.
-    - MSc dissertation: Bayesian Change Point Detection for Financial Time Series.
-    - Undergraduate final-year project: Xchange online book-rental and exchange platform.
-    - Never invent employer-specific data pipelines, model accuracy, scale, revenue or headcount. Distinguish project code from production systems.
-    - Location: Glasgow, UK.
-    - Contact: rahulkhanke786@gmail.com
+    PUBLIC PORTFOLIO PROFILE FOR RAHUL KHANKE:
+    - Professional identity: Data & ML Engineer with enterprise software engineering and applied ML experience.
+    - Sharp Invesco Revolutions: Data Engineer, 9 Dec 2024 to 6 Nov 2026. Part-time alongside MSc (Dec 2024 to Sep 2025); full-time since Sep 2025. Remote work from Glasgow for India-based internal financial operations. Owned Python and SQL data pipelines, data preparation, model-ready features, applied AI/ML tasks and ongoing support in a small team. No external client delivery.
+    - Accenture: Custom Software Engineering Associate, Oct 2022 to Sep 2024. Java, Python, SQL, service integration, claims-related ETL, testing and releases.
+    - Cognizant: Data Engineering & Machine Learning Intern, Jan 2022 to Apr 2022. Python/SQL data preparation, exploratory ML and reports.
+    - Independent projects: GraphGuard (Neo4j, XGBoost and SHAP fraud-investigation prototype; some mock data and unverified full-stack integration), FleetFlow (OR-Tools dispatch and event-processing research with simulated data), Sentinance (market research, LangGraph and optional LSTM forecasting), Shiftify (music portability); BCPD One (Bayesian change-point research application).
+    - Education: MSc Data Science, University of Glasgow (2025); BE Computer Science, G.H. Raisoni College of Engineering (2022).
+    - Dissertation: Bayesian Change Point Detection for Financial Time Series.
+    - Report employment metrics only when supported by source records; never infer production scale or deployment from independent project prototypes. Distinguish implemented, simulated and experimental features.
+    - Location: Glasgow, UK. Open to UK and European roles; available now.
+    - Links: portfolio.hulax.uk, github.com/HuLaxx, linkedin.com/in/rahulkhanke.
+    - Contact: rahulkhanke786@gmail.com.
   `,
 };
 
@@ -271,7 +282,7 @@ export const fallbackCaseStudies = [
       video: "",
     },
     links: {
-      live: "https://sentinance.hulax.vercel.app",
+      live: "https://sentinance.hulax.uk",
       github: "https://github.com/HuLaxx/Sentinance",
     },
     tech: [
@@ -340,7 +351,7 @@ export const fallbackCaseStudies = [
       video: "",
     },
     links: {
-      live: "https://graphguard.hulax.vercel.app",
+      live: "https://graphguard.hulax.uk",
       github: "https://github.com/HuLaxx/GraphGuard",
     },
     tech: [
@@ -408,7 +419,7 @@ export const fallbackCaseStudies = [
       video: "",
     },
     links: {
-      live: "https://fleetflow.hulax.vercel.app",
+      live: "https://fleetflow.hulax.uk",
       github: "https://github.com/HuLaxx/FleetFlow",
     },
     tech: [
