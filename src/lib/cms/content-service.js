@@ -9,7 +9,7 @@ const projectSchema = z.object({
   year: z.union([z.string(), z.number()]).transform((value) => value.toString()),
   client: z.string(),
   role: z.string(),
-});
+}).passthrough();
 
 const resumeSchema = z.object({
   label: z.string().optional(),
@@ -56,15 +56,19 @@ export const getPortfolioContent = cache(async () => {
     const stackComparisons =
       stackSchema.array().safeParse(stackRaw).data ?? fallbackStackComparisons;
 
-    // Keep the curated Shiftify case study visible even when Sanity is configured.
-    // Avoid duplicating it if the CMS already contains a Shiftify project.
-    const curatedShiftify = fallbackProjects.find((project) => project.slug === "shiftify");
-    const cmsProjects = projects.length ? projects : fallbackProjects;
-    const visibleProjects =
-      curatedShiftify &&
-      !cmsProjects.some((project) => project.client?.toLowerCase() === "shiftify")
-        ? [...cmsProjects, curatedShiftify]
-        : cmsProjects;
+    // Treat reviewed flagship cards as the source of truth for public demo URLs
+    // and case routes. CMS-only projects are preserved without duplicates.
+    // This also guarantees the BCPD research card appears with Sanity enabled.
+    const cmsProjects = projects.length ? projects : [];
+    const reviewedNames = new Set(
+      fallbackProjects.map((project) => project.client.toLowerCase()),
+    );
+    const visibleProjects = [
+      ...fallbackProjects,
+      ...cmsProjects.filter(
+        (project) => !reviewedNames.has(project.client?.toLowerCase()),
+      ),
+    ];
 
     return {
       projects: visibleProjects,
