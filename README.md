@@ -166,7 +166,7 @@ These commands are provided for reproduction. **Current lint/build status has no
 
 ### DESIGN IS THE DOOR. ENGINEERING IS WHAT OPENS IT.
 
-**Rahul Khanke / HuLaX** · [Portfolio](https://portfolio.hulax.uk/) · [GitHub](https://github.com/HuLaxx) · [LinkedIn](https://www.linkedin.com/in/rahul-khanke-853717218/) · [Email](mailto:rahulkhanke786@gmail.com)
+**Rahul Khanke / HuLaX** · [Portfolio](https://portfolio.hulax.uk/) · [GitHub](https://github.com/HuLaxx) · [LinkedIn](https://www.linkedin.com/in/rahulkhanke/) · [Email](mailto:rahulkhanke786@gmail.com)
 
 <sub>Four projects, four visual dialects, one studio learning in public.</sub>
 

@@ -1,5 +1,9 @@
 const groups = [
   {
+    name: "Cloud and big data",
+    items: ["AWS", "Azure", "Databricks", "Apache Spark", "Kubernetes"],
+  },
+  {
     name: "Data engineering",
     items: ["Python", "SQL", "Data pipelines", "ETL / ELT", "Apache Airflow", "Apache Kafka", "PostgreSQL", "Data modelling"],
   },
@@ -20,7 +24,7 @@ export const Skills = () => (
         <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.25em] text-[var(--accent)]">Engineering toolkit</p>
         <h2 id="skills-heading" className="mb-5 display-heading text-3xl sm:text-4xl font-semibold text-[var(--foreground)]">Core skills</h2>
         <p className="mb-8 max-w-3xl text-sm sm:text-base leading-relaxed text-[var(--muted)]">Professional experience and independent project tools are shown together; individual case studies distinguish deployed, local-only and experimental integrations.</p>
-        <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {groups.map((group) => (
             <div key={group.name} className="rounded-2xl border border-[var(--border)] bg-[var(--background)]/30 p-5">
               <h3 className="mb-4 text-lg font-semibold text-[var(--foreground)]">{group.name}</h3>
