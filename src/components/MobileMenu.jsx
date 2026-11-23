@@ -35,7 +35,7 @@ const roles = [
 
 const contacts = [
     { label: "Email", href: "mailto:rahulkhanke786@gmail.com", Icon: Mail },
-    { label: "LinkedIn", href: "https://linkedin.com/in/rahul-khanke-853717218", Icon: Linkedin },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/rahulkhanke/", Icon: Linkedin },
     { label: "GitHub", href: "https://github.com/HuLaxx", Icon: Github },
 ];
 
